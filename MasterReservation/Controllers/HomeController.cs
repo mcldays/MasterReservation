@@ -16,7 +16,7 @@ namespace MasterReservation.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewBag.hgfhgfh = "vhgvhg";
             return View();
         }
 
