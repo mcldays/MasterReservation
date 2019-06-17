@@ -8,6 +8,7 @@ namespace MasterReservation.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -17,6 +18,7 @@ namespace MasterReservation.Controllers
         {
             ViewBag.Message = "Your application description page.";
             ViewBag.hgfhgfh = "vhgvhg";
+            ViewBag.Test = "";
             return View();
         }
 

@@ -4,6 +4,21 @@
 <link rel="stylesheet" href="css/style.css">
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+@ViewBag.Test
+<input type="button" value="qweewq" id="button1" onclick="" />
+<asp:Button ID="button2" runat="server" Text="but" OnClick="Button_Click"></asp:Button>
+
+@using (Html.BeginForm("SignUp", "Test", FormMethod.Post))
+{
+    <!-- form goes here -->
+    <input type="text" name="textbox1"/>
+    <input type="submit" value="Sign Up" />
+}
 
 
 <p>Use this area to provide additional information.</p>
+
+<script type="text/javascript">
+    alert("ebal")
+
+</script>
