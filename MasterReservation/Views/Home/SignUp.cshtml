@@ -1,0 +1,50 @@
+﻿@using MasterReservation.Models
+@model List<ResidentModel>
+@{
+    ViewBag.Title = "SignUp";
+}
+
+
+
+<link rel="stylesheet" href="css/style.css">
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+@ViewBag.Test
+
+@using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+{
+    <!-- form goes here -->
+
+    <span>Введите фамилию резидента</span><input type="text" name="surname" />
+    <span>Введите имя резидента</span><input type="text" name="firstname" />
+    <span>Введите отчество резидента</span><input type="text" name="patronymic" />
+    <span>Введите телефон резидента</span><input type="text" name="phone" />
+    <span>Введите email резидента</span><input type="text" name="email" />
+    <span>Введите айди специальностей резидента</span><input type="text" name="servicesids" />
+    <span>Введите место обучения резидента</span><input type="text" name="studyplace"/>
+    <span>Введите опыт резидента</span><input type="text" name="experience" />
+    <span>Введите награды резидента</span><input type="text" name="awards" />
+
+    <input type="submit" value="Sign Up" />
+}
+<table>
+    @if (Model != null)
+    {
+        foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Surname</td>
+                <td>@i.Name</td>
+                <td>@i.Patronymic</td>
+                <td>@i.Phone</td>
+                <td>@i.Email</td>
+                <td>@i.ServicesIds</td>
+                <td>@i.StudyPlace</td>
+                <td>@i.Experience</td>
+                <td>@i.Awards</td>
+
+            </tr>
+        }
+    }
+</table>
+
