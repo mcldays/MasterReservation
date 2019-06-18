@@ -13,6 +13,22 @@ namespace MasterReservation.Controllers
 {
     public class TestController : Controller
     {
-        
+        public ActionResult SignUp(string textbox1)
+        {
+            ViewBag.Test = "ebat_sobak";
+            return View("../Home/About");
+            //using (UserContext db = new UserContext())
+            //{
+            //    db.UsersModel.Add(new UserModel()
+            //    {
+            //        Name = "1234"
+            //    });
+
+            //    db.SaveChanges();
+            //}
+            //return "hyek";
+
+            //poashe
+        }
     }
 }
