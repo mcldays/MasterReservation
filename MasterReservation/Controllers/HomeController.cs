@@ -26,7 +26,7 @@ namespace MasterReservation.Controllers
 
         public ActionResult SignUp(string surname, string firstname,
             string patronymic, string phone, string email, string servicesids,
-            string studyplace, string experience, string awards)
+            string studyplace, string experience, string awards, string pass)
         {
             ViewBag.Test = "ebat_sobak";
 
@@ -42,7 +42,8 @@ namespace MasterReservation.Controllers
                     ServicesIds = servicesids,
                     StudyPlace = studyplace,
                     Experience = experience,
-                    Awards = awards
+                    Awards = awards,
+                    Password = pass
                 });
                 db.SaveChanges();
             }
