@@ -20,5 +20,6 @@ namespace MasterReservation.Models
         public string StudyPlace { get; set; }
         public string Experience { get; set; }
         public string Awards { get; set; }
+        public string Password { get; set; }
     }
 }

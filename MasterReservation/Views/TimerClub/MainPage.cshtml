@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Главная страница";
+}
+
+@Styles.Render("~/Content/MainPageStyles.css")
+
+@Scripts.Render("~/Scripts/MainPageScripts.js")
+
+<div class="header">
+    <div class="city-wrap">
+        <span class="town">Город</span>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Москва
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Питер</a>
+                <a class="dropdown-item" href="#">Ижевск</a>
+                <a class="dropdown-item" href="#">Казань</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icons-wrap">
+        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+        <div class="cocialicons">
+            <a href="#"><img src="~/Resources/img/MainPage/instagram.png" alt=""></a>
+            <a href="#"><img src="~/Resources/img/MainPage/facebook.png" alt=""></a>
+            <a href="#"><img src="~/Resources/img/MainPage/vk.png" alt=""></a>
+        </div>
+    </div>
+</div>
+<div id="body-wrap">
+    <img class="logo" src="~/Resources/svg/MainPage/logo.svg" alt="">
+    <span class="rent">Аренда мест в лучших салонах города</span>
+
+    <div class="master">
+        <span>Beauty-мастерам</span>
+        <button id="register-master">Зарегистрироваться</button>
+        <button id="login-master">Войти</button>
+        <span>Салонам</span>
+        <button id="register-salon">Зарегистрировать салон красоты</button>
+    </div>
+</div>
+
+<!-- регистрация мастера -->
+<div id="overlay-modal">	</div>
+<div class="modal-window" id="window-register-master">
+    <span class="modal-title">Регистрация</span>
+    <div id="photo">
+        <img src="~/Resources/img/MainPage/avatar-default.png">
+        <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
+    </div>
+    <div id="fields-wrap">
+        <div id="main-fields">
+            <input class="field" type="text" placeholder="Имя*">
+            <input class="field" type="text" placeholder="Фамилия">
+            <input class="field" type="text" placeholder="Отчество">
+            <input class="field" type="text" placeholder="E-mail*">
+            <input class="field" type="text" placeholder="Номер телефона*">
+            <input class="field" type="text" placeholder="Город">
+        </div>
+
+        <div id="offers-container">
+            <span id="offers-title">Предоставляемые услуги</span>
+            <div id="offers-wrap">
+            </div>
+        </div>
+
+        <div id="sub-fields">
+            <div id="input-offers-wrap">
+                <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
+                <img src="~/Resources/svg/MainPage/down-arrow.svg">
+                <div id="itemss" class="dropdown-menu">
+                    <div><span>Парикмахерские услуги</span></div>
+                    <div><span>Педикюр</span></div>
+                    <div><span>Массаж</span></div>
+                    <div><span>Визаж</span></div>
+                    <div><span>Шугаринг</span></div>
+                </div>
+            </div>
+            <input id="input-experience" class="field" type="text" placeholder="Стаж работы">
+        </div>
+
+        <input id="rewards" class="field" type="text" placeholder="Имеющиеся награды">
+
+        <div id="pass-wrap">
+            <input class="field" type="password" placeholder="Пароль*">
+            <input class="field" type="password" placeholder="Повторите пароль*">
+        </div>
+        <div id="checkbox-wrap">
+            <input type="checkbox" id="process-personal-data">
+            <label for="process-personal-data">Согласен на обработку персональных данных</label>
+        </div>
+
+        <button class="send-button">Зарегистрироваться</button>
+    </div>
+
+    <div class="close-modal">
+        <img src="~/Resources/img/MainPage/close-modal.png">
+    </div>
+</div>
+
+<!-- вход лля мастера -->
+<div class="modal-window" id="window-login-master">
+    <span class="modal-title">Вход</span>
+
+
+    <div id="login-wrap">
+        <input class="field" type="email" placeholder="E-mail">
+        <input class="field" type="password" placeholder="Пароль">
+    </div>
+
+    <button class="send-button" id="login-button">Войти</button>
+
+
+    <div class="close-modal">
+        <img src="~/Resources/img/MainPage/close-modal.png">
+    </div>
+</div>
+
+<!-- регистрация салона -->
+<div class="modal-window" id="window-register-salon">
+    <span id="adaptive-title" class="modal-title">Отправление заявки на добавление салона красоты в систему Timer Club</span>
+
+
+    <div id="form-request">
+        <div id="top-inputs">
+            <input class="field" type="text" placeholder="Имя контактного лица">
+            <input class="field" type="text" placeholder="Номер телефона">
+            <input class="field" type="email" placeholder="E-mail*">
+            <input class="field" type="email" placeholder="Город">
+        </div>
+        <textarea class="field" id="additional-info" placeholder="Дополнительная информация"></textarea>
+    </div>
+
+    <button class="send-button" id="login-button">Отправить заявку</button>
+
+
+    <div class="close-modal">
+        <img src="~/Resources/img/MainPage/close-modal.png">
+    </div>
+</div>
+
+<div id="hidden-offers">
+    <div>Парикмахерские услуги</div>
+    <div>Педикюр</div>
+    <div>Массаж</div>
+    <div>Визаж</div>
+    <div>Шугаринг</div>
+</div>
+
