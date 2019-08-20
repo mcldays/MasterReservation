@@ -1,24 +1,29 @@
-﻿* {
+﻿*{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
 
-a {
+a{
     color: white;
 }
 
-    a:hover {
-        text-decoration: none;
-        color: unset;
-    }
+a:hover{
+    text-decoration: none;
+    color: unset;
+}
 
 
-@font-face {
-    font-family: 'Proxima Nova';
-    src: url('Proxima Nova.ttf');
-    font-weight: normal;
-    font-style: normal;
+@font-face{
+
+font-family: 'Proxima Nova';
+
+src: url('Proxima Nova.ttf');
+
+font-weight: normal;
+
+font-style: normal;
+
 }
 
 
@@ -33,7 +38,7 @@ body {
 }
 
 
-.header {
+.header{
     width: 100%;
     height: 60px;
     background-color: #333333;
@@ -42,30 +47,31 @@ body {
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.city-wrap {
+.city-wrap{
     display: flex;
     align-items: center;
 }
 
-#head-logo {
+#head-logo{
     width: 71px;
     margin-right: 58px;
 }
 
-.icons-wrap {
+.icons-wrap{
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
-.town {
+.town{
     color: #fff;
     margin-right: 25px;
+    
 }
-
-.townbutton {
+.townbutton{
     width: 101px;
     height: 24px;
     border-radius: 5px;
@@ -81,29 +87,28 @@ body {
     margin-top: 12px;
     float: left;
 }
+.cocialicons{
 
-.cocialicons {
 }
-
-.number {
+.number{
     color: #fff;
     display: block;
     margin-right: 15px;
 }
 
-.dropdown-toggle {
-    border-radius: 5px;
+.dropdown-toggle{
+        border-radius: 5px;
     background-color: #0a9ad1;
 }
 
-#Logo {
-    width: 92px;
-    height: 80px;
+#Logo{
+width: 92px;
+height: 80px;
     margin-left: 19px;
 }
 
-#HeaderText {
-    height: 16px;
+#HeaderText{
+height: 16px;
     color: #ffffff;
     font-family: "OpenSans";
     font-size: 18px;
@@ -114,65 +119,88 @@ body {
     width: auto;
 }
 
-#CityButton {
-    width: 101px;
-    height: 24px;
-    border-radius: 5px;
-    background-color: #0a9ad1;
-    border: 0px;
-    cursor: pointer;
-    margin-left: 23px;
-    display: block;
-    margin-top: -17px;
-    margin-left: 245px;
-    color: #ffffff;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 400;
+#CityButton
+{
+width: 101px;
+height: 24px;
+border-radius: 5px;
+background-color: #0a9ad1;
+border:0px;
+cursor:pointer;
+margin-left: 23px;
+display: block;
+margin-top: -17px;
+margin-left: 245px;
+
+color: #ffffff;
+font-family: "Open Sans";
+font-size: 14px;
+font-weight: 400;
+
 }
 
 
-#PhoneStyle {
-    width: 110px;
-    height: 20px;
-    color: #fefefe;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 700;
-    margin-left: 55%;
-    display: block;
-    margin-top: -20px;
+#PhoneStyle
+{
+width: 110px;
+height: 20px;
+color: #fefefe;
+font-family: "Open Sans";
+font-size: 14px;
+font-weight: 700;
+margin-left: 55%;
+display: block;
+margin-top: -20px;
 }
 
-#iconstyle {
-    padding-left: 65%;
-    display: block;
-    margin-top: -24px;
+#iconstyle
+{
+ padding-left: 65%;
+display: block;
+margin-top: -24px;
 }
 
 
 
-#insticon {
-    width: 27px;
-    height: 27px;
-    margin-left: 5px;
+#insticon
+{
+width: 27px;
+height: 27px;
+margin-left:5px;
+
+
+
 }
 
-#userblock {
+#userblock
+{
     margin-left: 49px;
     height: -webkit-max-content;
     height: -moz-max-content;
     height: max-content;
     display: flex;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 30px;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
+}
+
+#userblock:hover{
+    background-color: #555555;
+
 }
 
 
-#faceicon {
-    width: 25px;
-    height: 25px;
+#faceicon
+{
+width: 25px;
+height: 25px;
+
 }
 
-#residentname {
+#residentname{
     color: #ffffff;
     font-family: "Proxima Nova", sans-serif;
     font-size: 16px;
@@ -182,7 +210,8 @@ body {
 }
 
 
-#down-arrowstyle {
+#down-arrowstyle
+{
     width: 20px;
     height: 12px;
     display: block;
@@ -192,41 +221,50 @@ body {
 }
 
 
-#MainBlock {
+#MainBlock
+{
     display: flex;
+
 }
 
 
-#BlockOne {
+#BlockOne{
     margin-top: 20px;
     margin-left: 10%;
     max-width: 20%;
+
+
 }
 
-#avatar {
+#avatar{
     width: 240px;
     height: 240px;
     cursor: pointer;
+
 }
 
-#textboxes {
-    display: block
+#textboxes{
+
+display: block
 }
 
-.areastyle {
+.areastyle{
+
     width: 240px;
     height: 50px;
     border: 2px solid #0a9ad1;
     background-color: #ffffff;
-    margin-top: 8px;
+    margin-top:8px;
     resize: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: 400;
     padding-left: 15px;
+
+
 }
 
-.editbutton {
+.editbutton{
     display: block;
     width: 15px;
     height: 15px;
@@ -237,17 +275,20 @@ body {
 }
 
 
-.input-wrap {
-    position: relative;
+.input-wrap
+{
+position: relative;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+
+
 }
 
 
 
 
-#BlockTwo {
+#BlockTwo{
     max-width: 80%;
 }
 
@@ -255,7 +296,7 @@ body {
 
 
 
-#headertwo {
+#headertwo{
     display: block;
     margin-top: 40px;
     margin-left: auto;
@@ -263,21 +304,25 @@ body {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+
 }
 
 
-#personitems {
-    width: 190px;
-    height: 24px;
-    color: #414141;
-    font-family: "Open Sans";
-    font-size: 25px;
-    font-weight: 400;
-    /* Text style for "Личные дан" */
-    letter-spacing: -0.15px;
+#personitems
+{
+width: 190px;
+height: 24px;
+color: #414141;
+font-family: "Open Sans";
+font-size: 25px;
+font-weight: 400;
+/* Text style for "Личные дан" */
+letter-spacing: -0.15px;
+
+
 }
 
-#WrongPass {
+#WrongPass{
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
@@ -289,15 +334,16 @@ body {
     margin-left: auto;
     margin-right: auto;
     display: block;
+
 }
 
 
-#BlockTwoContent {
-    margin-top: 20px;
+#BlockTwoContent{
+        margin-top: 20px;
 }
 
 
-#AddedStyle {
+#AddedStyle{
     color: #333333;
     font-family: "OpenSans", sans-serif;
     font-size: 20px;
@@ -306,50 +352,65 @@ body {
     margin-left: 41px;
 }
 
-#AddedOffers {
+#AddedOffers{
+
+
 }
 
 
-.OffersStyle {
-    width: auto;
-    display: flex;
-    height: 32px;
-    color: #333333;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 400;
+.OffersStyle
+{
+
+
+width: auto;
+display: flex;
+height: 32px;
+color: #333333;
+font-family: "Open Sans";
+font-size: 14px;
+font-weight: 400;
+
+
 }
 
 
-.FontStyle {
+.FontStyle{
     display: block;
     font-size: 13px;
 }
 
-.crossstyle {
-    border: 0;
-    background-color: #ffffff;
-    cursor: pointer;
-    margin-left: 5px;
+.crossstyle
+{
+border:0;
+background-color: #ffffff;
+cursor: pointer;
+
+margin-left:5px;
 }
 
 
-.offerbutton {
-    display: flex;
-    margin-left: 10px;
-    border-radius: 5px;
-    border: 2px solid #d2d2d2;
-    padding: 4px 10px;
-    background-color: #ffffff;
+.offerbutton
+{
+display: flex;
+margin-left:10px;
+border-radius: 5px;
+border: 2px solid #d2d2d2;
+padding: 4px 10px;
+
+background-color: #ffffff;
+
 }
 
 
-.childone {
-    display: flex
+.childone
+{
+display: flex
+
+
 }
 
 
-.contextmenu {
+.contextmenu{
     width: 470px;
     height: 45px;
     border: 2px solid #d2d2d2;
@@ -357,10 +418,14 @@ body {
     margin-left: 35px;
     display: flex;
     position: relative;
+
+
+
 }
 
 
-.contextfont {
+.contextfont
+{
     height: 42px;
     color: #262626;
     font-family: "Open Sans";
@@ -368,10 +433,11 @@ body {
     font-weight: 400;
     display: block;
     padding: 12px;
+
 }
 
 
-.jobscore {
+.jobscore{
     width: 350px;
     height: 45px;
     border: 2px solid #d2d2d2;
@@ -379,24 +445,32 @@ body {
     margin-left: 6px;
     padding-left: 10px;
     font-size: 14px;
+
+
+
 }
 
-#arrowbutton {
+#arrowbutton{
     border: 0;
     background-color: #ffffff;
     display: block;
     position: absolute;
     right: 5px;
     top: 9px;
+
+
 }
 
-#parentarrow {
-    width: 20px;
-    height: 11px;
+#parentarrow
+{
+
+width: 20px;
+height: 11px;
+
 }
 
 
-#childarea {
+#childarea{
     width: -webkit-fill-available;
     height: 90px;
     border: 2px solid #d2d2d2;
@@ -405,73 +479,87 @@ body {
     font-family: "Open Sans";
     font-size: 13px;
     font-weight: 400;
-    padding: 10px;
+    padding :10px;
     margin-top: 13px;
-    margin-left: 35px;
+    margin-left:35px;
     resize: none;
 }
 
-.childtwo {
+.childtwo
+{
+
+
+
 }
 
-#orientationChildTwo {
+#orientationChildTwo{
     margin-top: 22px;
     margin-left: 5px;
+
+
 }
 
 
 
-#ChosePass {
-    width: 117px;
-    height: 18px;
-    color: #414141;
-    font-family: "Open Sans";
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: -0.36px;
-    margin-top: 35px;
-    margin-left: 35px;
+#ChosePass
+{
+width: 117px;
+height: 18px;
+color: #414141;
+font-family: "Open Sans";
+font-size: 18px;
+font-weight: 400;
+letter-spacing: -0.36px;
+margin-top:35px;
+margin-left:35px;
 }
 
-.ChildTwoOffers {
+.ChildTwoOffers{
     display: flex;
-    margin-left: 35px;
+    margin-left:35px;
 }
 
 
-.input-wrap-twoOrient {
-    position: relative;
+.input-wrap-twoOrient
+{
+position: relative;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    margin-left: 38px;
+    margin-left:38px;
+
+
 }
 
 
 
-.input-wrap-two {
-    position: relative;
+.input-wrap-two
+{
+position: relative;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+
+
 }
 
 
 
-.areastyle-two {
-    width: 240px;
-    height: 50px;
-    border: 2px;
-    background-color: #ffffff;
-    margin-top: 20px;
-    resize: none;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    padding-left: 15px;
+.areastyle-two
+{
+width: 240px;
+height: 50px;
+border: 2px; 
+background-color: #ffffff;
+margin-top:20px;
+resize: none;
+font-family: 'Open Sans', sans-serif;
+font-size: 14px;
+font-weight: 400;
+padding-left: 15px;
 }
 
-#SaveButton {
+#SaveButton{
     color: #ffffff;
     font-family: "Open Sans - Semibold";
     font-size: 15px;
@@ -480,9 +568,11 @@ body {
     margin-top: 26px;
     display: flex;
     justify-content: center;
+
+
 }
 
-#input-offers-wrap img {
+#input-offers-wrap img{
     position: absolute;
     right: 2px;
     padding: 6px;
@@ -495,24 +585,24 @@ body {
 
 
 
-#savebut {
+#savebut{
     width: 192px;
     height: 42px;
     border-radius: 5px;
     background-color: #0a9ad1;
     cursor: pointer;
     color: white;
-    font-family: sans-serif;
+    font-family: "Open Sans";
     border: 0;
 }
 
-#input-offers {
+#input-offers{
     width: 100%;
     border: 0;
     padding-left: 10px;
 }
 
-#offers-wrap {
+#offers-wrap{
     display: flex;
     flex-wrap: wrap;
     margin-top: 15px;
@@ -520,7 +610,7 @@ body {
 }
 
 
-.offer {
+.offer{
     border: 2px solid #d2d2d2;
     border-radius: 2px;
     margin: 0px 7px 10px 7px;
@@ -528,22 +618,22 @@ body {
     background-color: #fff;
 }
 
-    .offer span {
-        color: #333333;
-        letter-spacing: 1px;
-        font-size: 14px;
-    }
+.offer span{
+    color: #333333;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
 
-    .offer img {
-        margin-left: 5px;
-        cursor: pointer;
-    }
+.offer img{
+    margin-left: 5px;
+    cursor: pointer;
+}
 
-#hidden-offers {
+#hidden-offers{
     display: none;
 }
 
-#itemss {
+#itemss{
     top: 100%;
     left: 1px;
     padding: 0px;
@@ -552,23 +642,65 @@ body {
     width: 100%;
 }
 
-    #itemss div {
-        height: 45px;
-        display: flex;
-        align-items: center;
-        font-size: 17px;
-        padding-left: 19px;
-        cursor: pointer;
-    }
+#itemss div{
+    height: 45px;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding-left: 19px;
+    cursor: pointer;
+}
 
-        #itemss div:hover {
-            background-color: #cfcecf;
-        }
+#itemss div:hover{
+    background-color: #cfcecf;
 
-        #itemss div span {
-            color: #333333;
-        }
+}
 
-#picField {
+#itemss div span{
+    color: #333333;
+}
+
+#picField{
     display: none;
+}
+
+#user-dropdown{
+    position: absolute;
+    background-color: white;
+    top: 60px;
+    right: 0;
+    box-shadow: 0 3px 7px rgba(0, 1, 1, 0.17);
+    padding: 26px;
+    cursor: default;
+}
+
+.dropdown-img{
+    width: 20px;
+    margin-right: 13px;
+}
+
+hr{
+    margin: 7px 0px;
+}
+
+.dropdown-row{
+    display: flex;
+}
+
+.dropdown-row span{
+    color: #333333;
+    font-family: "Open Sans";
+    font-size: 15px;
+}
+
+#go-out{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    cursor: pointer;
+    color: white;
+    font-family: "Open Sans";
+    border: 0;
+    margin-top: 20px;
 }

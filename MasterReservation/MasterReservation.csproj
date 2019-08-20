@@ -214,8 +214,11 @@
     <Content Include="Resources\img\instagram.png" />
     <Content Include="Resources\img\keyboard_back.png" />
     <Content Include="Resources\img\vk.png" />
+    <Content Include="Resources\svg\business-card-blue.svg" />
+    <Content Include="Resources\svg\clock-blue.svg" />
     <Content Include="Resources\svg\down-arrow-white.svg" />
     <Content Include="Resources\svg\down-arrow.svg" />
+    <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\logo-white.svg" />
     <Content Include="Resources\svg\logo.svg" />
     <Content Include="Resources\svg\pencil.svg" />
