@@ -157,19 +157,25 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PersonalDataStyles.css" />
     <Content Include="Content\MainPageStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Resources\img\MainPage\avatar-default.png" />
-    <Content Include="Resources\img\MainPage\background.png" />
-    <Content Include="Resources\img\MainPage\close-modal.png" />
-    <Content Include="Resources\img\MainPage\cross.png" />
-    <Content Include="Resources\img\MainPage\facebook.png" />
-    <Content Include="Resources\img\MainPage\instagram.png" />
-    <Content Include="Resources\img\MainPage\vk.png" />
-    <Content Include="Resources\svg\MainPage\down-arrow.svg" />
-    <Content Include="Resources\svg\MainPage\logo.svg" />
+    <Content Include="Resources\img\avatar-default.png" />
+    <Content Include="Resources\img\background.png" />
+    <Content Include="Resources\img\close-modal.png" />
+    <Content Include="Resources\img\cross.png" />
+    <Content Include="Resources\img\facebook.png" />
+    <Content Include="Resources\img\instagram.png" />
+    <Content Include="Resources\img\keyboard_back.png" />
+    <Content Include="Resources\img\vk.png" />
+    <Content Include="Resources\svg\down-arrow-white.svg" />
+    <Content Include="Resources\svg\down-arrow.svg" />
+    <Content Include="Resources\svg\logo-white.svg" />
+    <Content Include="Resources\svg\logo.svg" />
+    <Content Include="Resources\svg\pencil.svg" />
+    <Content Include="Resources\svg\user.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -202,6 +208,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\PersonalDataScripts.js" />
     <Content Include="Scripts\MainPageScripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -239,6 +246,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\TimerClub\PersonalData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
