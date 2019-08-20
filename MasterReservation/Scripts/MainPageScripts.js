@@ -56,10 +56,17 @@
         $("#photo input").click();
     });
 
-    // нажатие на крастик выбранной услуги
+    // нажатие на крестик выбранной услуги
     $(document).on("click", ".offer img", function () {
         this.parentElement.remove();
-
+        var offers = $("#hiddenInput").val().split(";").slice(0, -1);
+        var changedOffers = "";
+        for (var offer of offers) {
+            if (offer != this.parentElement.getElementsByTagName("span")[0].innerText) {
+                changedOffers += offer + ";";
+            }
+        }
+        $("#hiddenInput").val(changedOffers);
         $("#input-offers").trigger("keyup");
     });
 
@@ -101,7 +108,8 @@
             this.parentElement.classList.remove("show");
         }
         if (!$("#offers-wrap").is("div:contains(" + this.innerText + ")")) {
-            $("#offers-wrap").append('<div class="offer"><span>' + this.innerText + '</span><img src="cross.png" alt=""></div>');
+            $("#offers-wrap").append('<div class="offer"><span>' + this.innerText + '</span><img src="/Resources/img/cross.png" alt=""></div>');
+            $("#hiddenInput").val($("#hiddenInput").val() + this.innerText + ";");
         }
         $("#input-offers").trigger("keyup");
     });
