@@ -30,6 +30,8 @@ namespace MasterReservation.Models
 
         public string City { get; set; }
 
+
+
         [Required(ErrorMessage = "Выберите услуги")]
         public string Offers { get; set; }
 
