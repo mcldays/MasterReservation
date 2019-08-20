@@ -309,9 +309,11 @@ body {
     #photo img {
         border-radius: 208px;
         width: 110px;
+        height: 110px;
         border: 3px solid white;
         margin: 14px 0 28px;
         cursor: pointer;
+        object-fit: contain;
     }
 
     #photo input {
@@ -425,4 +427,24 @@ body {
     color: #ffffff;
     font-family: "Open Sans";
     font-size: 14px;
+}
+
+.ui-menu {
+    background: white;
+    border-radius: 2px;
+    width: max-content;
+    opacity: 0.9;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.ui-menu-item {
+    list-style-type: none;
+    padding: 5px 20px;
+    background: white;
+    
+}
+
+.ui-menu-item:hover {
+    background: #cfcecf;
 }
