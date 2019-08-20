@@ -15,11 +15,16 @@ namespace MasterReservation.Models
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
+
         public string Email { get; set; }
         public string ServicesIds { get; set; }
         public string StudyPlace { get; set; }
         public string Experience { get; set; }
         public string Awards { get; set; }
         public string Password { get; set; }
+
+        public string City { get; set; }
+
+        public string Offers { get; set; }
     }
 }

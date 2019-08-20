@@ -10,6 +10,9 @@ namespace MasterReservation.Models
 {
     public class RegisterMasterModel
     {
+
+
+
         [Required(ErrorMessage = "Введите имя")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Введите Фамилию")]
@@ -28,7 +31,7 @@ namespace MasterReservation.Models
         public string City { get; set; }
 
         [Required(ErrorMessage = "Выберите услуги")]
-        public string[] Offers { get; set; }
+        public string Offers { get; set; }
 
 
         [Range(0, 50, ErrorMessage = "Недопустимый стаж")]
