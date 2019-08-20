@@ -69,7 +69,7 @@
 
         <div id="offers-container">
             <span id="offers-title">Предоставляемые услуги</span>
-            @Html.HiddenFor(model => model.Offers, new{ htmlAttributes = new { @id="hiddenInput"}})
+            @Html.EditorFor(model => model.Offers, new{ htmlAttributes = new { @id = "hiddenInput", @style="width:0px;height:0px;opacity:0;"} })
             <div id="offers-wrap">
             </div>
         </div>
