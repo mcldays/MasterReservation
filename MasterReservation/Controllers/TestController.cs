@@ -13,6 +13,19 @@ namespace MasterReservation.Controllers
 {
     public class TestController : Controller
     {
+
+        public ActionResult TestMethod(string term)
+        {
+
+
+
+
+            return null;
+        }
+
+
+
+
         public ActionResult SignUp(string textbox1)
         {
             ViewBag.Test = "ebat_sobak";
@@ -29,6 +42,12 @@ namespace MasterReservation.Controllers
             //return "hyek";
 
             //poashe
+
+
+            
         }
+
+
+
     }
 }
