@@ -13,7 +13,13 @@ namespace MasterReservation.Controllers
         [HttpPost]
         public ActionResult RegisterMaster(RegisterMasterModel model)
         {
-            return View();
+
+
+            Utilities.ResidentSend.Send(model);
+
+
+
+            return RedirectToAction("MainPage", "TimerClub");
 
 
 
