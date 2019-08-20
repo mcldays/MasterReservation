@@ -355,6 +355,7 @@ body {
     background-color: #0a9ad1;
     color: white;
     padding: 12px 50px;
+    margin-top: 12px;
 }
 
 #hidden-offers {
@@ -418,4 +419,10 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     position: fixed;
+}
+
+.messageerror {
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
 }
