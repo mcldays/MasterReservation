@@ -1,11 +1,14 @@
-﻿
+﻿@using System.Web.UI.WebControls
+@model MasterReservation.Models.RegisterMasterModel
 @{
     ViewBag.Title = "Главная страница";
 }
 
 @Styles.Render("~/Content/MainPageStyles.css")
-
+@Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/MainPageScripts.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+@Scripts.Render("~/Scripts/MainPage.js")
 
 <div class="header">
     <div class="city-wrap">
@@ -47,7 +50,8 @@
 
 <!-- регистрация мастера -->
 <div id="overlay-modal">	</div>
-<div class="modal-window" id="window-register-master">
+@using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-register-master" }))
+{
     <span class="modal-title">Регистрация</span>
     <div id="photo">
         <img src="~/Resources/img/avatar-default.png">
@@ -55,12 +59,36 @@
     </div>
     <div id="fields-wrap">
         <div id="main-fields">
-            <input class="field" type="text" placeholder="Имя*">
-            <input class="field" type="text" placeholder="Фамилия">
-            <input class="field" type="text" placeholder="Отчество">
-            <input class="field" type="text" placeholder="E-mail*">
-            <input class="field" type="text" placeholder="Номер телефона*">
-            <input class="field" type="text" placeholder="Город">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "field", PlaceHolder="Имя" } })
+            @Html.ValidationMessageFor(model => model.Name, null, new { @class = "messageerror" })
+
+            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "field", PlaceHolder="Фамилия" } })
+            @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "messageerror" })
+
+
+            @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder="Отчество" } })
+            @Html.ValidationMessageFor(model => model.Patronymic, null, new { @class = "messageerror" })
+
+
+  
+
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "field", PlaceHolder="E-mail*" } })
+            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "messageerror" })
+
+
+
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "field", PlaceHolder="Номер Телефона*" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "messageerror" })
+
+
+
+
+
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "field", PlaceHolder="Город" } })
+            @Html.ValidationMessageFor(model => model.City, null, new { @class = "messageerror" })
+
+
+
         </div>
 
         <div id="offers-container">
@@ -80,15 +108,30 @@
                     <div><span>Визаж</span></div>
                     <div><span>Шугаринг</span></div>
                 </div>
+                
+                
+
             </div>
-            <input id="input-experience" class="field" type="text" placeholder="Стаж работы">
+
+            
+            @Html.EditorFor(model => model.Expirience, new { htmlAttributes = new { @class = "field", placeholder="Стаж работы" } })
+            @Html.ValidationMessageFor(model => model.Expirience, null, new { @class = "messageerror" })
+
         </div>
 
-        <input id="rewards" class="field" type="text" placeholder="Имеющиеся награды">
+  
+        
+        @Html.EditorFor(model => model.Awards, new { htmlAttributes = new { @class = "field", PlaceHolder="Имеющиеся награды" , @id="rewards"} })
+        @Html.ValidationMessageFor(model => model.Awards, null, new { @class = "messageerror" })
 
         <div id="pass-wrap">
-            <input class="field" type="password" placeholder="Пароль*">
-            <input class="field" type="password" placeholder="Повторите пароль*">
+
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "field", PlaceHolder="Пароль*" } })
+            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "messageerror" })
+
+
+            @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder="Повторите пароль" } })
+            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { @class = "messageerror" })
         </div>
         <div id="checkbox-wrap">
             <input type="checkbox" id="process-personal-data">
@@ -101,7 +144,9 @@
     <div class="close-modal">
         <img src="~/Resources/img/close-modal.png">
     </div>
-</div>
+
+}
+
 
 <!-- вход лля мастера -->
 <div class="modal-window" id="window-login-master">
@@ -151,4 +196,5 @@
     <div>Визаж</div>
     <div>Шугаринг</div>
 </div>
+
 
