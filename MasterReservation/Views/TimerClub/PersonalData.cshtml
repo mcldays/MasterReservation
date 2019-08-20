@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Личные данные";
+}
+
+@Styles.Render("~/Content/PersonalDataStyles.css")
+
+@Scripts.Render("~/Scripts/PersonalDataScripts.js")
+
+<div class="header">
+    <div class="city-wrap">
+        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+        <span class="town">Город</span>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Москва
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Питер</a>
+                <a class="dropdown-item" href="#">Ижевск</a>
+                <a class="dropdown-item" href="#">Казань</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icons-wrap">
+        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+        <div class="cocialicons">
+            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
+            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
+            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
+        </div>
+
+        <div id="userblock">
+            <img src="~/Resources/svg/user.svg" id="faceicon">
+            <span id="residentname">Татьяна Меньшикова</span>
+            <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
+
+        </div>
+    </div>
+</div>
+
+<div id="MainBlock">
+    <div id="BlockOne">
+        <div>
+            <img src="~/Resources/img/avatar-default.png" id="avatar">
+            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
+        </div>
+
+        <div id="textboxes">
+            <div class="input-wrap">
+                <input type="text" class="areastyle" value="Татьяна" disabled="true">
+                <img src="~/Resources/svg/pencil.svg" class="editbutton">
+            </div>
+
+            <div class="input-wrap">
+                <input type="text" class="areastyle" value="Меньшикова" disabled="true">
+                <img src="~/Resources/svg/pencil.svg" class="editbutton">
+            </div>
+
+            <div class="input-wrap">
+                <input type="text" class="areastyle" value="menshikova@mail.ru" disabled="true">
+                <img src="~/Resources/svg/pencil.svg" class="editbutton">
+            </div>
+
+
+            <div class="input-wrap">
+                <input type="text" class="areastyle" value="8 919 456 78 26" disabled="true">
+                <img src="~/Resources/svg/pencil.svg" class="editbutton">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="BlockTwo">
+        <div id="headertwo">
+            <span id="personitems">Личные данные</span>
+
+        </div>
+        <div>
+            <span id="WrongPass">Не правильно введен текущий пароль</span>
+        </div>
+
+        <div id="BlockTwoContent">
+            <span id="AddedStyle">Предоставляемые услуги</span>
+            <div id="AddedOffers">
+
+                <div id="offers-wrap"></div>
+
+            </div>
+
+            <div class="childone">
+                <div id="input-offers-wrap" class="contextmenu">
+                    <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
+                    <img src="~/Resources/svg/down-arrow.svg">
+                    <div id="itemss" class="dropdown-menu">
+                        <div><span>Парикмахерские услуги</span></div>
+                        <div><span>Педикюр</span></div>
+                        <div><span>Массаж</span></div>
+                        <div><span>Визаж</span></div>
+                        <div><span>Шугаринг</span></div>
+                    </div>
+                </div>
+                <input class="jobscore" type="text" placeholder="Стаж работы">
+            </div>
+
+            <div class="childtwo">
+
+                <div>
+                    <textarea id="childarea" cols="30" rows="10" placeholder="Имеющиеся награды"></textarea>
+                </div>
+
+                <div id="orientationChildTwo">
+                    <span id="ChosePass">Смена пароля</span>
+                </div>
+
+                <div class="ChildTwoOffers">
+
+                    <div class="input-wrap-two">
+                        <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
+                    </div>
+
+
+                    <div class="input-wrap-twoOrient">
+                        <input type="text" class="areastyle-two" placeholder="Новый пароль">
+                    </div>
+
+
+                    <div class="input-wrap-twoOrient">
+                        <input type="text" class="areastyle-two" placeholder="Повторите пароль">
+                    </div>
+                </div>
+
+                <div id="SaveButton">
+                    <button id="savebut">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hidden-offers">
+    <div>Парикмахерские услуги</div>
+    <div>Педикюр</div>
+    <div>Массаж</div>
+    <div>Визаж</div>
+    <div>Шугаринг</div>
+</div>

@@ -13,5 +13,10 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+        public ActionResult PersonalData()
+        {
+            return View();
+        }
     }
 }

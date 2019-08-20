@@ -1,0 +1,574 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+a {
+    color: white;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: unset;
+    }
+
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('Proxima Nova.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+body {
+    height: 100%;
+    background-image: url(../Resources/img/keyboard_back.png);
+    background-repeat: no-repeat;
+    background-position: 0 -255px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    margin: 0;
+    float: left;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.city-wrap {
+    display: flex;
+    align-items: center;
+}
+
+#head-logo {
+    width: 71px;
+    margin-right: 58px;
+}
+
+.icons-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.town {
+    color: #fff;
+    margin-right: 25px;
+}
+
+.townbutton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 24px;
+    display: block;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 12px;
+    float: left;
+}
+
+.cocialicons {
+}
+
+.number {
+    color: #fff;
+    display: block;
+    margin-right: 15px;
+}
+
+.dropdown-toggle {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+}
+
+#Logo {
+    width: 92px;
+    height: 80px;
+    margin-left: 19px;
+}
+
+#HeaderText {
+    height: 16px;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -56px;
+    display: block;
+    margin-left: 177px;
+    width: auto;
+}
+
+#CityButton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 23px;
+    display: block;
+    margin-top: -17px;
+    margin-left: 245px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+#PhoneStyle {
+    width: 110px;
+    height: 20px;
+    color: #fefefe;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 55%;
+    display: block;
+    margin-top: -20px;
+}
+
+#iconstyle {
+    padding-left: 65%;
+    display: block;
+    margin-top: -24px;
+}
+
+
+
+#insticon {
+    width: 27px;
+    height: 27px;
+    margin-left: 5px;
+}
+
+#userblock {
+    margin-left: 49px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    display: flex;
+}
+
+
+#faceicon {
+    width: 25px;
+    height: 25px;
+}
+
+#residentname {
+    color: #ffffff;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 13px;
+    display: block;
+}
+
+
+#down-arrowstyle {
+    width: 20px;
+    height: 12px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+
+#MainBlock {
+    display: flex;
+}
+
+
+#BlockOne {
+    margin-top: 20px;
+    margin-left: 10%;
+    max-width: 20%;
+}
+
+#avatar {
+    width: 240px;
+    height: 240px;
+    cursor: pointer;
+}
+
+#textboxes {
+    display: block
+}
+
+.areastyle {
+    width: 240px;
+    height: 50px;
+    border: 2px solid #0a9ad1;
+    background-color: #ffffff;
+    margin-top: 8px;
+    resize: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 15px;
+}
+
+.editbutton {
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 12px;
+    top: 26px;
+    cursor: pointer;
+}
+
+
+.input-wrap {
+    position: relative;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+}
+
+
+
+
+#BlockTwo {
+    max-width: 80%;
+}
+
+
+
+
+
+#headertwo {
+    display: block;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+}
+
+
+#personitems {
+    width: 190px;
+    height: 24px;
+    color: #414141;
+    font-family: "Open Sans";
+    font-size: 25px;
+    font-weight: 400;
+    /* Text style for "Личные дан" */
+    letter-spacing: -0.15px;
+}
+
+#WrongPass {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    color: #ff3535;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.09px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+#BlockTwoContent {
+    margin-top: 20px;
+}
+
+
+#AddedStyle {
+    color: #333333;
+    font-family: "OpenSans", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    display: block;
+    margin-left: 41px;
+}
+
+#AddedOffers {
+}
+
+
+.OffersStyle {
+    width: auto;
+    display: flex;
+    height: 32px;
+    color: #333333;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.FontStyle {
+    display: block;
+    font-size: 13px;
+}
+
+.crossstyle {
+    border: 0;
+    background-color: #ffffff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+.offerbutton {
+    display: flex;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 2px solid #d2d2d2;
+    padding: 4px 10px;
+    background-color: #ffffff;
+}
+
+
+.childone {
+    display: flex
+}
+
+
+.contextmenu {
+    width: 470px;
+    height: 45px;
+    border: 2px solid #d2d2d2;
+    background-color: #ffffff;
+    margin-left: 35px;
+    display: flex;
+    position: relative;
+}
+
+
+.contextfont {
+    height: 42px;
+    color: #262626;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+    padding: 12px;
+}
+
+
+.jobscore {
+    width: 350px;
+    height: 45px;
+    border: 2px solid #d2d2d2;
+    background-color: #ffffff;
+    margin-left: 6px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+#arrowbutton {
+    border: 0;
+    background-color: #ffffff;
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 9px;
+}
+
+#parentarrow {
+    width: 20px;
+    height: 11px;
+}
+
+
+#childarea {
+    width: -webkit-fill-available;
+    height: 90px;
+    border: 2px solid #d2d2d2;
+    background-color: #ffffff;
+    color: #494949;
+    font-family: "Open Sans";
+    font-size: 13px;
+    font-weight: 400;
+    padding: 10px;
+    margin-top: 13px;
+    margin-left: 35px;
+    resize: none;
+}
+
+.childtwo {
+}
+
+#orientationChildTwo {
+    margin-top: 22px;
+    margin-left: 5px;
+}
+
+
+
+#ChosePass {
+    width: 117px;
+    height: 18px;
+    color: #414141;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.36px;
+    margin-top: 35px;
+    margin-left: 35px;
+}
+
+.ChildTwoOffers {
+    display: flex;
+    margin-left: 35px;
+}
+
+
+.input-wrap-twoOrient {
+    position: relative;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin-left: 38px;
+}
+
+
+
+.input-wrap-two {
+    position: relative;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+}
+
+
+
+.areastyle-two {
+    width: 240px;
+    height: 50px;
+    border: 2px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    resize: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 15px;
+}
+
+#SaveButton {
+    color: #ffffff;
+    font-family: "Open Sans - Semibold";
+    font-size: 15px;
+    font-weight: 400;
+    border: 0;
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+}
+
+#input-offers-wrap img {
+    position: absolute;
+    right: 2px;
+    padding: 6px;
+    top: 10px;
+    cursor: pointer;
+    width: 29px;
+}
+
+
+
+
+
+#savebut {
+    width: 192px;
+    height: 42px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    cursor: pointer;
+    color: white;
+    font-family: sans-serif;
+    border: 0;
+}
+
+#input-offers {
+    width: 100%;
+    border: 0;
+    padding-left: 10px;
+}
+
+#offers-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding-left: 28px;
+}
+
+
+.offer {
+    border: 2px solid #d2d2d2;
+    border-radius: 2px;
+    margin: 0px 7px 10px 7px;
+    padding: 6px 9px;
+    background-color: #fff;
+}
+
+    .offer span {
+        color: #333333;
+        letter-spacing: 1px;
+        font-size: 14px;
+    }
+
+    .offer img {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+#hidden-offers {
+    display: none;
+}
+
+#itemss {
+    top: 100%;
+    left: 1px;
+    padding: 0px;
+    margin: 0px;
+    opacity: 0.9;
+    width: 100%;
+}
+
+    #itemss div {
+        height: 45px;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        padding-left: 19px;
+        cursor: pointer;
+    }
+
+        #itemss div:hover {
+            background-color: #cfcecf;
+        }
+
+        #itemss div span {
+            color: #333333;
+        }
+
+#picField {
+    display: none;
+}
