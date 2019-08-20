@@ -9,9 +9,9 @@ using Newtonsoft.Json;
 
 namespace MasterReservation.Utilities
 {
-    public class RequestCity
+    public static class RequestCity
     {
-        private async Task<CitiesModel> Request(string term)
+        public static async Task<CitiesModel> Request(string term)
         {
             HttpClient request =
                 new HttpClient();

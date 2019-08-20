@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -14,13 +15,17 @@ namespace MasterReservation.Controllers
     public class TestController : Controller
     {
 
-        public ActionResult TestMethod(string term)
-        {
+       public async Task<ActionResult> TestMethod(string term)
+       {
+          List<string> Cities = new List<string>();
 
+         var x = await Utilities.RequestCity.Request(term);
+         var res = x.result.Where(t=>t.id!="Free").ToList().Select(t => new
+         {
+             value = t.name
+         });
 
-
-
-            return null;
+            return Json(res,JsonRequestBehavior.AllowGet);
         }
 
 
