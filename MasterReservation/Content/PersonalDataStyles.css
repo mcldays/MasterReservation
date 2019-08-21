@@ -237,11 +237,11 @@ height: 25px;
 
 }
 
-#avatar{
+#avatar {
     width: 240px;
     height: 240px;
     cursor: pointer;
-
+    object-fit: contain;
 }
 
 #textboxes{
@@ -716,3 +716,7 @@ hr{
     #go-out:hover {
         background-color: #097fac;
     }
+
+#photo-wrap {
+    background-color: white;
+}

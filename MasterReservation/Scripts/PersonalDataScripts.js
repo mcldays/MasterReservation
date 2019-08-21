@@ -56,11 +56,10 @@
         $("#input-offers").trigger("keyup");
     });
 
+    //редактирование полей личной информации
     $(".editbutton").on("click", function () {
         this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");
     });
-
-
     $(document).on('click', function (e) {
         if (!$(e.target).closest(".input-wrap").length) {
             $(".areastyle").attr("disabled", "true");
@@ -78,9 +77,29 @@
             $("#user-dropdown").slideDown(300);
         }
     });
-
     $('#user-dropdown').click(function (e) {
         e.stopPropagation();
     });
+
+    //загрузка фотографии
+    document.getElementById('picField').onchange = function (evt) {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById("avatar").src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+
+        // Not supported
+        else {
+            // fallback -- perhaps submit the input to an iframe and temporarily store
+            // them on the server until the user's session ends.
+        }
+    }
 
 });
