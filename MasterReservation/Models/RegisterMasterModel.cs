@@ -28,7 +28,7 @@ namespace MasterReservation.Models
         [Required(ErrorMessage = "Введите город")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Выберите услуги")]
+        [Required(ErrorMessage = "Выберите предоставляемые услуги услуги")]
         public string Offers { get; set; }
 
         [Range(0, 50, ErrorMessage = "Недопустимый стаж")]
@@ -37,6 +37,7 @@ namespace MasterReservation.Models
         public string Awards { get; set; }
 
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
 
         [System.Web.Mvc.Compare("Password",ErrorMessage = "Пароли не совпадают")]

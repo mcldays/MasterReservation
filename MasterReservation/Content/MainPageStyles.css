@@ -448,3 +448,7 @@ body {
 .ui-menu-item:hover {
     background: #cfcecf;
 }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}

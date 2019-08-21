@@ -58,12 +58,12 @@
     </div>
     <div id="fields-wrap">
         <div id="main-fields">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя" } })
-            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия" } })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя*" } })
+            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
             @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail" } })
             @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "field", PlaceHolder = "Номер Телефона*" } })
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город" } })
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
         </div>
 
         <div id="offers-container">
@@ -91,7 +91,7 @@
 
         <div id="pass-wrap">
             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "field", PlaceHolder = "Пароль*" } })
-            @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder = "Повторите пароль" } })
+            @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder = "Повторите пароль*" } })
         </div>
         <div id="checkbox-wrap">
             <input type="checkbox" id="process-personal-data">
