@@ -20,6 +20,7 @@ namespace MasterReservation.Controllers
           List<string> Cities = new List<string>();
 
          var x = await Utilities.RequestCity.Request(term);
+         x.result.Any();
          var res = x.result.Where(t=>t.id!="Free").ToList().Select(t => new
          {
              value = t.name

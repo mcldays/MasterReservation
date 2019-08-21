@@ -146,12 +146,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CitiesModel.cs" />
+    <Compile Include="Models\LoginMaster.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
+    <Compile Include="Models\RegisterSalonModel.cs" />
     <Compile Include="Models\SalonModel.cs" />
     <Compile Include="Models\ResidentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\RequestCity.cs" />
-    <Compile Include="Utilities\ResidentSend.cs" />
+    <Compile Include="Utilities\SendDbUtility.cs" />
     <Compile Include="Utilities\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>

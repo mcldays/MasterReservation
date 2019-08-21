@@ -4,14 +4,16 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
+using System.Web.Http;
+using System.Web.UI.WebControls;
 using MasterReservation.Models;
 
 
 namespace MasterReservation.Utilities
 {
-    public static class ResidentSend
+    public static class SendDbUtility
     {
-        public static bool Send (RegisterMasterModel model)
+        public static bool SendMaster (RegisterMasterModel model)
         {
                 
 
@@ -63,6 +65,32 @@ namespace MasterReservation.Utilities
         }
 
 
+        [HttpGet]
+        public static bool CompareAut(LoginMaster model)
+        {
+            
+            
+                using (UserContext dbUse = new UserContext())
+                {
+
+                    ResidentModel user = new ResidentModel();
+
+
+                    if (model.Email == user.Email && model.Password == user.Password)
+                    {
+                        return true;
+
+                    }
+                   
+
+                    return false;
+
+                    // dbUse.SaveChanges();
+                }
+
+
+            
+    }
 
     }
 }
