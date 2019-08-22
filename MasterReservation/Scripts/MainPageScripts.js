@@ -121,7 +121,7 @@
         });
     });
 
-
+    //загрузка фотографии
     document.getElementById('picField').onchange = function (evt) {
         var tgt = evt.target || window.event.srcElement,
             files = tgt.files;
