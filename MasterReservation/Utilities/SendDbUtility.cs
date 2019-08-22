@@ -65,7 +65,6 @@ namespace MasterReservation.Utilities
         }
 
 
-        [HttpGet]
         public static bool CompareAut(LoginMaster model)
         {
             
@@ -73,24 +72,67 @@ namespace MasterReservation.Utilities
                 using (UserContext dbUse = new UserContext())
                 {
 
-                    ResidentModel user = new ResidentModel();
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == model.Email && t.Password == model.Password);
 
+                    if (user == null) return false;
+                    return true;
+               
 
-                    if (model.Email == user.Email && model.Password == user.Password)
-                    {
-                        return true;
-
-                    }
-                   
-
-                    return false;
-
-                    // dbUse.SaveChanges();
                 }
 
 
             
-    }
+        }
 
-    }
+
+        public static bool SendSalon(RegisterSalonModel model)
+        {
+
+            try
+            {
+                using (UserContext DbUse = new UserContext())
+                {
+
+
+
+                    DbUse.SalonModels.Add(new SalonModel()
+                    {
+                      ContactPerson = model.Name,
+                      Phone = model.Phone,
+                      City = model.City,
+                      Email = model.Email,
+                      Information = model.Information
+
+
+
+                    });
+
+                    DbUse.SaveChanges();
+
+                }
+
+
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                return true;
+
+
+            }
+
+
+
+            return true;
+        }
+
+
+
+        }
+
+
+
 }

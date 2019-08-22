@@ -145,6 +145,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908201251521_InitialCreate.cs" />
+    <Compile Include="Migrations\201908201251521_InitialCreate.Designer.cs">
+      <DependentUpon>201908201251521_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908221414310_YOUR_FIRST_MIGRATION.cs" />
+    <Compile Include="Migrations\201908221414310_YOUR_FIRST_MIGRATION.Designer.cs">
+      <DependentUpon>201908221414310_YOUR_FIRST_MIGRATION.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CitiesModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
@@ -315,6 +324,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908201251521_InitialCreate.resx">
+      <DependentUpon>201908201251521_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908221414310_YOUR_FIRST_MIGRATION.resx">
+      <DependentUpon>201908221414310_YOUR_FIRST_MIGRATION.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

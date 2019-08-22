@@ -28,8 +28,8 @@ namespace MasterReservation.Controllers
 
 
         }
-
-
+        [AllowAnonymous]
+        [HttpPost]
         public ActionResult LoginMaster(LoginMaster model)
         {
 
@@ -38,8 +38,17 @@ namespace MasterReservation.Controllers
                 FormsAuthentication.SetAuthCookie(model.Email, true);
             }
 
+            return RedirectToAction("PersonalData", "TimerClub");
+        }
+
+
+        public ActionResult RegisterSalon(RegisterSalonModel model)
+        {
+            Utilities.SendDbUtility.SendSalon(model);
+
             return RedirectToAction("MainPage", "TimerClub");
         }
+
 
     }
 }

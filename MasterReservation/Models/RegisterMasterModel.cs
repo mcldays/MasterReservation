@@ -8,6 +8,12 @@ using System.Web.Mvc;
 
 namespace MasterReservation.Models
 {
+
+
+
+ 
+    
+
     public class RegisterMasterModel
     {
         [Required(ErrorMessage = "Введите имя")]
@@ -21,7 +27,7 @@ namespace MasterReservation.Models
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
         public string Email { get; set; }
 
-        [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Некоректный номер телефона")]
+        [RegularExpression(@"^\+\d{1,3}\s?\(\d{3}\)\s?\d{3}(\d{2}){2}$", ErrorMessage = "Некоректный номер телефона")]
         [Required(ErrorMessage = "Введите Номер телефона")]
         public string PhoneNumber { get; set; }
 
@@ -37,6 +43,7 @@ namespace MasterReservation.Models
         public string Awards { get; set; }
 
         [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки должна быть от 6 до 50 символов")]
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
 

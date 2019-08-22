@@ -7,10 +7,11 @@ using MasterReservation.Models;
 
 namespace MasterReservation.Controllers
 {
-    [AllowAnonymous]
+   
     public class TimerClubController : Controller
     {
         // GET: TimerClub
+        [AllowAnonymous]
         public ActionResult MainPage()
         {
             ViewBag.LoginModel = new LoginMaster();
@@ -29,3 +30,5 @@ namespace MasterReservation.Controllers
         }
     }
 }
+
+/*TODO huy*/

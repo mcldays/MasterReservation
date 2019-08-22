@@ -49,6 +49,8 @@
     </div>
 </div>
 
+@*TODO 1) Сделать поле в бд для картинки*@ 
+@*TODO 2) Присваивать ID пользователя к имени картинки*@
 
 <!-- регистрация мастера -->
 <div id="overlay-modal">	</div>
@@ -61,12 +63,12 @@
     </div>
     <div id="fields-wrap">
         <div id="main-fields">
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия" } })
+            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя*" } })
+            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field", PlaceHolder = "Номер Телефона*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город" } })
+            @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
         </div>
 
         <div id="offers-container">
@@ -125,16 +127,14 @@
 
 <!-- вход лля мастера -->
 
-<div class="modal-window" id="window-login-master">
-
-    @using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-login-master" }))
+    @using (Html.BeginForm("LoginMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-login-master" }))
     {
         <span class="modal-title">Вход</span>
 
 
         <div id="login-wrap">
-            @Html.EditorFor(model => (model[0] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя" } })
-            @Html.EditorFor(model => (model[0] as RegisterMasterModel).Password, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия" } })
+            @Html.EditorFor(model => (model[0] as LoginMaster).Email, new { htmlAttributes = new { @class = "field",id="loginemail", PlaceHolder = "Email" } })
+            @Html.EditorFor(model => (model[0] as LoginMaster).Password, new { htmlAttributes = new { @class = "field",id="loginpass", PlaceHolder = "Пароль" } })
           
 
         </div>
@@ -146,30 +146,39 @@
             <img src="~/Resources/img/close-modal.png">
         </div>
     }
-</div>
-
-<!-- регистрация салона -->
-<div class="modal-window" id="window-register-salon">
-    <span id="adaptive-title" class="modal-title">Отправление заявки на добавление салона красоты в систему Timer Club</span>
 
 
-    <div id="form-request">
-        <div id="top-inputs">
-            <input class="field" type="text" placeholder="Имя контактного лица">
-            <input class="field" type="text" placeholder="Номер телефона">
-            <input class="field" type="email" placeholder="E-mail*">
-            <input class="field" type="email" placeholder="Город">
+
+<!--TODO 1) Прикрутить регистрацию салона-->
+@*TODO 2) Сделать отправку заявки на мыло*@
+
+@using (Html.BeginForm("RegisterSalon", "Authentication", FormMethod.Post, new {@class = "modal-window", @id = "window-register-salon"}))
+{
+    <!-- регистрация салона -->
+
+        <span id="adaptive-title" class="modal-title">Отправление заявки на добавление салона красоты в систему Timer Club</span>
+
+
+        <div id="form-request">
+            <div id="top-inputs">
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Name, new {htmlAttributes = new {@class = "field", PlaceHolder = "Имя контактного лица*", id="SendCont"}})
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Phone, new {htmlAttributes = new {@class = "field", PlaceHolder = "Номер телефона*", id="SendPhone"}})
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Email, new {htmlAttributes = new {@class = "field", PlaceHolder = "Email", id="SendMail"}})
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).City, new {htmlAttributes = new {@class = "field", PlaceHolder = "Город*", id="SendCity"}})
+
+            </div>
+            @Html.EditorFor(model => (model[2] as RegisterSalonModel).Information, new {htmlAttributes = new {@class = "field", PlaceHolder = "Дополнительная информация*", id="additional-info"}})
+          
         </div>
-        <textarea class="field" id="additional-info" placeholder="Дополнительная информация"></textarea>
-    </div>
 
-    <button class="send-button" id="login-button">Отправить заявку</button>
+        <button class="send-button" id="login-button">Отправить заявку</button>
 
 
-    <div class="close-modal">
-        <img src="~/Resources/img/close-modal.png">
-    </div>
-</div>
+        <div class="close-modal">
+            <img src="~/Resources/img/close-modal.png">
+        </div>
+
+}
 
 <div id="hidden-offers">
     <div>Парикмахерские услуги</div>
