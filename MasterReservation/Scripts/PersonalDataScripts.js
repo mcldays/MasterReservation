@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $("#input-offers").trigger("keyup");
+    
     // нажатие на аватар
     $("#avatar").on("click", function () {
         $("#picField").click();
@@ -101,5 +101,8 @@
             // them on the server until the user's session ends.
         }
     }
+
+    $("#input-offers").trigger("keyup");
+    $(".dropdown-menu").removeClass("show");
 
 });
