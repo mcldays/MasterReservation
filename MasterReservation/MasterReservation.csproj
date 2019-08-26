@@ -161,8 +161,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\FindWorkPlacesStyles.css" />
     <Content Include="Content\PersonalDataStyles.css" />
     <Content Include="Content\MainPageStyles.css" />
+    <Content Include="Content\slick\ajax-loader.gif" />
+    <Content Include="Content\slick\fonts\slick.svg" />
+    <Content Include="Content\slick\slick-theme.css" />
+    <Content Include="Content\slick\slick.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -211,6 +217,7 @@
     <Content Include="Resources\img\background.png" />
     <Content Include="Resources\img\close-modal.png" />
     <Content Include="Resources\img\cross.png" />
+    <Content Include="Resources\img\default-card-img.png" />
     <Content Include="Resources\img\facebook.png" />
     <Content Include="Resources\img\instagram.png" />
     <Content Include="Resources\img\keyboard_back.png" />
@@ -219,7 +226,9 @@
     <Content Include="Resources\svg\clock-blue.svg" />
     <Content Include="Resources\svg\down-arrow-white.svg" />
     <Content Include="Resources\svg\down-arrow.svg" />
+    <Content Include="Resources\svg\gray-arrow.svg" />
     <Content Include="Resources\svg\heart-blue.svg" />
+    <Content Include="Resources\svg\heart-gray.svg" />
     <Content Include="Resources\svg\logo-white.svg" />
     <Content Include="Resources\svg\logo.svg" />
     <Content Include="Resources\svg\pencil.svg" />
@@ -238,6 +247,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -246,6 +256,10 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\slick\config.rb" />
+    <Content Include="Content\slick\fonts\slick.eot" />
+    <Content Include="Content\slick\fonts\slick.ttf" />
+    <Content Include="Content\slick\fonts\slick.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -258,6 +272,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\FindWorkPlacesScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
     <Content Include="Scripts\MainPageScripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -265,6 +280,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\slick.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -297,6 +313,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\TimerClub\PersonalData.cshtml" />
+    <Content Include="Views\TimerClub\FindWorkPlaces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

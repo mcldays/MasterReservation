@@ -18,5 +18,10 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+        public ActionResult FindWorkPlaces()
+        {
+            return View();
+        }
     }
 }

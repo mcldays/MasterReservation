@@ -1,0 +1,606 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-family: "Open Sans";
+}
+
+a {
+    color: white;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: unset;
+    }
+
+
+
+body {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    margin: 0;
+    float: left;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.city-wrap {
+    display: flex;
+    align-items: center;
+    margin-left: 11%;
+}
+
+#head-logo {
+    width: 71px;
+    margin-right: 58px;
+    cursor: pointer;
+}
+
+.icons-wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.town {
+    color: #fff;
+    margin-right: 25px;
+}
+
+.townbutton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 24px;
+    display: block;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 12px;
+    float: left;
+}
+
+.cocialicons {
+}
+
+.number {
+    color: #fff;
+    display: block;
+    margin-right: 15px;
+}
+
+.dropdown-toggle {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+}
+
+#Logo {
+    width: 92px;
+    height: 80px;
+    margin-left: 19px;
+}
+
+#HeaderText {
+    height: 16px;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -56px;
+    display: block;
+    margin-left: 177px;
+    width: auto;
+}
+
+#CityButton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 23px;
+    display: block;
+    margin-top: -17px;
+    margin-left: 245px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+#PhoneStyle {
+    width: 110px;
+    height: 20px;
+    color: #fefefe;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 55%;
+    display: block;
+    margin-top: -20px;
+}
+
+#iconstyle {
+    padding-left: 65%;
+    display: block;
+    margin-top: -24px;
+}
+
+
+
+#insticon {
+    width: 27px;
+    height: 27px;
+    margin-left: 5px;
+}
+
+#userblock {
+    margin-left: 49px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    display: flex;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 30px;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
+}
+
+    #userblock:hover {
+        background-color: #555555;
+    }
+
+
+#faceicon {
+    width: 25px;
+    height: 25px;
+}
+
+#residentname {
+    color: #ffffff;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 13px;
+    display: block;
+}
+
+#down-arrowstyle {
+    width: 20px;
+    height: 12px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+#user-dropdown {
+    position: absolute;
+    background-color: white;
+    top: 60px;
+    right: 0;
+    box-shadow: 0 3px 7px rgba(0, 1, 1, 0.17);
+    cursor: default;
+    border-radius: 0 0 7px 7px;
+    z-index: 999;
+}
+
+.dropdown-img {
+    width: 20px;
+    margin-right: 13px;
+}
+
+hr {
+    margin: 0px;
+}
+
+.dropdown-row {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 0 20px;
+}
+
+    .dropdown-row:hover {
+        cursor: pointer;
+        background: #cfcecf;
+    }
+
+    .dropdown-row span {
+        color: #333333;
+        font-family: "Open Sans";
+        font-size: 15px;
+    }
+
+#go-out {
+    width: 100%;
+    height: 38px;
+    border-radius: 0 0 7px 7px;
+    background-color: #0a9ad1;
+    cursor: pointer;
+    color: white;
+    font-family: "Open Sans";
+    border: 0;
+}
+
+    #go-out:hover {
+        background-color: #097fac;
+    }
+
+#body-container {
+    display: flex;
+}
+
+#filter-wrap {
+    background-color: #e1e1e1;
+    padding: 10px 30px 0px 30px;
+    width: 379px;
+}
+
+#filter-title {
+    color: #414141;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 700;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+}
+
+.sub-title {
+    color: #414141;
+    font-family: "Open Sans";
+    font-size: 12px;
+    margin: 12px 0px 0px 0;
+    display: block;
+}
+
+.datepicker {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    width: 220px;
+}
+
+.datepicker--nav {
+    background: #0a9ad1;
+    color: white;
+    height: 32px;
+}
+
+.datepicker--nav-title:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-title i {
+    color: white;
+}
+
+.datepicker--nav-action:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-action path {
+    stroke: #ffffff;
+}
+
+.datepicker--day-name {
+    color: #0a9ad1;
+}
+
+.datepicker--days-names {
+    margin: 0px;
+}
+
+.datepicker--cell {
+    border-radius: 0px;
+    height: 20px;
+}
+
+.input-time {
+    width: 90px;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    height: 33px;
+    text-align: center;
+    color: #414141;
+    font-family: "Open Sans";
+}
+
+.checkbox-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 14px;
+}
+
+#checkbox-label {
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.checkbox-label-radio {
+    font-size: 12px;
+}
+
+.offers-dropdown {
+    position: relative;
+    width: 100%;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.offers-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 100%;
+    box-shadow: 0 3px 7px rgba(0, 1, 1, 0.17);
+    cursor: default;
+    border-radius: 0 0 7px 7px;
+    display: none;
+    z-index: 9;
+}
+
+.dropdown-option {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+    .dropdown-option:hover {
+        cursor: pointer;
+        background: #cfcecf;
+    }
+
+.active-option {
+    background-color: #0a9ad1;
+    color: white;
+}
+
+    .active-option:hover {
+        background-color: #0a9ad1;
+    }
+
+.offers-arrow {
+    position: absolute;
+    right: 11px;
+    top: 12px;
+}
+
+.offers-selected-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.offers-selected {
+    padding-left: 18px;
+}
+
+#input-city {
+    width: 100%;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.button {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    color: white;
+    padding: 4px 60px;
+    font-family: "Open Sans";
+    font-size: 14px;
+    margin-top: 20px;
+    border: 0;
+    margin-bottom: 14px;
+}
+
+#main-wrap {
+    width: calc(100% - 5px);
+    display: block;
+    margin-left: 5px;
+}
+
+#results {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+#results-line {
+    margin-bottom: 13px;
+}
+
+#query-line {
+    margin-left: 10px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.result-button {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    color: white;
+    font-size: 12px;
+    padding: 4px 18px;
+    border: 0;
+}
+
+.active-button {
+    border: 2px solid #0a9ad1;
+    background-color: transparent;
+    color: #333333;
+}
+
+#results-list {
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #e1e1e1;
+    display: flex;
+    flex-direction: row;
+    border: 0;
+    margin: 5px 0;
+}
+
+.photos-place {
+    max-width: 210px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+}
+
+
+    .photos-place img {
+        width: 210px;
+        height: 216px;
+        -o-object-fit: contain;
+        object-fit: contain;
+    }
+
+.card-description {
+    background-color: #e1e1e1;
+    margin: 10px 0px 0px 17px;
+}
+
+.card-title {
+    margin-bottom: 4px;
+}
+
+.card-title-text {
+    font-size: 15px;
+}
+
+.card-title img {
+    width: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.address {
+    display: block;
+    font-size: 11px;
+}
+
+.tariffs-title {
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin: 12px 0px 8px 0px;
+}
+
+.tariff-line {
+    display: flex;
+}
+
+.tariff {
+    width: 100px;
+    height: 27px;
+    background-color: #ffffff;
+    margin: 1px 1px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slick-dots {
+    bottom: 5px;
+}
+
+    .slick-dots li {
+        margin: 0px;
+    }
+
+        .slick-dots li button:before {
+            opacity: 1;
+            color: white;
+        }
+
+        .slick-dots li.slick-active button:before {
+            opacity: 1;
+            color: #00aeef;
+        }
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-prev {
+    left: 0px;
+    z-index: 1;
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0px;
+}
+
+.hidden-input {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+}
+
+.ui-menu {
+    background: white;
+    border-radius: 2px;
+    width: max-content;
+    opacity: 0.9;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.ui-menu-item {
+    list-style-type: none;
+    padding: 5px 20px;
+    background: white;
+}
+
+    .ui-menu-item:hover {
+        background: #cfcecf;
+    }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}

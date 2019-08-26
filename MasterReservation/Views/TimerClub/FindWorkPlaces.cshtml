@@ -1,0 +1,208 @@
+﻿@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Поиск рабочих мест";
+}
+@Styles.Render("~/Content/datepicker.css")
+@Styles.Render("~/Content/slick/slick.css")
+@Styles.Render("~/Content/slick/slick-theme.css")
+@Styles.Render("~/Content/FindWorkPlacesStyles.css")
+
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+@Scripts.Render("~/Scripts/datepicker.js")
+@Scripts.Render("~/Scripts/slick.min.js")
+@Scripts.Render("~/Scripts/FindWorkPlacesScripts.js")
+
+
+<div class="header">
+    <div class="city-wrap">
+        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+        <span class="town">Город</span>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Москва
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Питер</a>
+                <a class="dropdown-item" href="#">Ижевск</a>
+                <a class="dropdown-item" href="#">Казань</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icons-wrap">
+        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+        <div class="cocialicons">
+            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
+            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
+            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
+        </div>
+
+        <div id="userblock">
+            <img src="~/Resources/svg/user.svg" id="faceicon">
+            <span id="residentname">Татьяна Меньшикова</span>
+            <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
+            <div id="user-dropdown">
+                <div class="dropdown-row" id="personal-data-page">
+                    <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
+                    <span>Личные данные</span>
+                </div>
+                <hr>
+                <div class="dropdown-row" id="show-booked-page">
+                    <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
+                    <span>Просмотр забронированного времени</span>
+                </div>
+                <hr>
+
+                <div class="dropdown-row" id="favorites-page">
+                    <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
+                    <span>Избранное</span>
+                </div>
+                <button id="go-out">Выйти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="body-container">
+    <div id="filter-wrap">
+        <span id="filter-title">Фильтр поиска Рабочих Мест</span>
+        <div id="calendar-wrap">
+            <span class="sub-title">
+                Выберите дату:
+            </span>
+            <div id="calendar" class="calendar"></div>
+            <!-- инпут для даты -->
+            <input type="text" class="hidden-input">
+        </div>
+        <div id="input-time-wrap">
+            <span class="sub-title">
+                Выберите время
+            </span>
+            <div id="input-time-sub-wrap">
+                <span class="time-lable">С</span>
+                <input type="text" class="input-time" value="13:00">
+                <span class="time-lable">до</span>
+                <input type="text" class="input-time" value="16:00">
+            </div>
+            <div class="checkbox-wrap">
+                <input type="checkbox" class="checkbox" id="full-day">
+                <span class="sub-title" id="checkbox-label">Полный рабочий день</span>
+            </div>
+
+        </div>
+        <span class="sub-title">Оказываемая услуга</span>
+        <div class="offers-dropdown">
+            <div class="offers-selected-wrap">
+                <span class="offers-selected">Выберите несколько</span>
+                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+            </div>
+            <div class="offers-options">
+                <div class="dropdown-option">Парикмахерские услуги</div>
+                <div class="dropdown-option">Маникюр</div>
+                <div class="dropdown-option">Педикюр</div>
+                <div class="dropdown-option">Массаж</div>
+                <div class="dropdown-option">Визаж</div>
+                <div class="dropdown-option">Шугаринг</div>
+                <div class="dropdown-option">Оформление бровей</div>
+                <div class="dropdown-option">Наращивание ресниц</div>
+                <div class="dropdown-option">Перманентный макияж</div>
+                <div class="dropdown-option">Косметологические услуги</div>
+            </div>
+            <input type="text" class="hidden-input"/>
+        </div>
+
+        <span class="sub-title">Город для поиска</span>
+        <input type="text" id="input-city">
+
+        <div id="type-place">
+            <span class="sub-title">Тип Рабочего Места</span>
+            <div class="checkbox-wrap">
+                <input type="checkbox" class="checkbox">
+                <span class="checkbox-label-radio">отдельный кабинет;</span>
+            </div>
+            <div class="checkbox-wrap">
+                <input type="checkbox" class="checkbox">
+                <span class="checkbox-label-radio">общее пространство;</span>
+            </div>
+        </div>
+        <span class="sub-title">Дополнительные условия</span>
+        <div class="offers-dropdown">
+            <div class="offers-selected-wrap">
+                <span class="offers-selected">Выберите несколько</span>
+                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+            </div>
+            <div class="offers-options">
+                <div class="dropdown-option">Бесплатный чай/кофе</div>
+                <div class="dropdown-option">Расходные материалы</div>
+                <div class="dropdown-option">Камера хранения</div>
+                <div class="dropdown-option">Парковка</div>
+                <div class="dropdown-option">Комната отдыха</div>
+                <div class="dropdown-option">Детская комната</div>
+            </div>
+            <input type="text" class="hidden-input"/>
+        </div>
+        <button class="button">Поиск</button>
+    </div>
+    <div id="main-wrap">
+        <div id="results">
+            <div id="results-line">
+                <span id="results-title">Результаты поиска:</span>
+                <div id="query-line"><span id="city">г.Москва,</span> <span id="date">21 Июля,</span> <span id="time">16:00,</span> <span id="offers">Парикмахерские услуги</span></div>
+            </div>
+            <div id="results-buttons">
+                <button class="result-button active-button" id="show-list">Показать список</button>
+                <button class="result-button" id="show-map">Показать результаты поиска на карте</button>
+            </div>
+        </div>
+        <div id="results-list">
+            <div class="card">
+                <div class="photos-place">
+                    <div class="img-wrap">
+                        <img src="~/Resources/img/default-card-img.png">
+                    </div>
+                    <div class="img-wrap">
+                        <img src="~/Resources/img/default-card-img.png">
+                    </div>
+                    <div class="img-wrap">
+                        <img src="~/Resources/img/default-card-img.png">
+                    </div>
+                    <div class="img-wrap">
+                        <img src="~/Resources/img/default-card-img.png">
+                    </div>
+                    <div class="img-wrap">
+                        <img src="~/Resources/img/default-card-img.png">
+                    </div>
+
+                </div>
+                <div class="card-description">
+                    <div class="card-title">
+                        <span class="card-title-text">Студия красоты Beauty Forest</span>
+                        <img src="~/Resources/svg/heart-gray.svg">
+                    </div>
+                    <span class="address">Пушкинская, 239</span>
+                    <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                    <div class="tariffs-wrap">
+                        <div class="tariff-line">
+                            <div class="tariff">1 час</div>
+                            <div class="tariff">День</div>
+                            <div class="tariff">15 смен</div>
+                            <div class="tariff">Месяц</div>
+                        </div>
+                        <div class="tariff-line">
+                            <div class="tariff">500 р</div>
+                            <div class="tariff">1500 р</div>
+                            <div class="tariff">5500 р</div>
+                            <div class="tariff">16000 р</div>
+                        </div>
+                    </div>
+                    <button class="button">Подробнее</button>
+                </div>
+            </div>
+           
+
+        </div>
+        <div id="results-map" style="display: none;"></div>
+    </div>
+</div>
