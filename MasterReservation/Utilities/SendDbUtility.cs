@@ -151,14 +151,14 @@ namespace MasterReservation.Utilities
         }
 
 
-        public static bool ComparePassword(ResidentModel model)
+        public static bool ComparePassword(string Password)
         {
 
 
             using (UserContext dbUse = new UserContext())
             {
 
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Password == model.ComparePass);
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Password == Password);
 
 
 

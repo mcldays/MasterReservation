@@ -115,7 +115,35 @@
             <span id="AddedStyle">Предоставляемые услуги</span>
             <div id="AddedOffers">
 
-                <div id="offers-wrap"></div>
+                <div id="offers-wrap">
+                    @{
+                        string[] mas = new string[] { };
+
+                        try
+                        {
+                            mas = Model.Offers.Split(';');
+                            for (int i = 0; i < mas.Length - 1; i++)
+                            {
+                                <div class="offer">
+                                    <span>@mas[i]</span>
+                                    <img src="cross-black.png" />
+                                </div>
+                            }
+
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+
+
+
+
+
+
+
+                    }
+                </div>
 
             </div>
 
@@ -125,23 +153,7 @@
                     <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
                         
-                        @{
-                            string[] mas = new string[] {};
-                            
-                            mas = Model.Offers.Split(',');
-                            
-
-                            
-                            <div><span>@mas[0]</span></div>
-                            <div><span>@mas[1]</span></div>
-                            <div><span>@mas[2]</span></div>
-                            <div><span>@mas[3]</span></div>
-                            <div><span>@mas[4]</span></div>
-
-
-
-
-                        }
+                    
 
                     </div>
                 </div>
@@ -162,12 +174,13 @@
                 <div class="ChildTwoOffers">
 
                     <div class="input-wrap-two">
-                      <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
+                        @Html.HiddenFor(model => model.Password, new {  @class = "areastyle-two", PlaceHolder = "Текущий пароль*"  })
+                        <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
-                        @Html.HiddenFor(model => model.Password, new {  @class = "areastyle-two", PlaceHolder = "Текущий пароль*"  })
+                      
                         <input type="text" class="areastyle-two" placeholder="Новый пароль">
                     </div>
 

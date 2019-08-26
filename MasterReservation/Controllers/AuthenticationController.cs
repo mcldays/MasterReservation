@@ -63,18 +63,15 @@ namespace MasterReservation.Controllers
 
         public ActionResult UpdateResident(ResidentModel model)
         {
-            if (Utilities.SendDbUtility.ComparePassword(model) == true)
+            if (Utilities.SendDbUtility.ComparePassword(model.Password) == true)
             {
 
+
                 Utilities.SendDbUtility.ChangeResident(model);
-
-
             }
 
             return RedirectToAction("PersonalData", "TimerClub");
-            
-         
-
+           
         }
       
 

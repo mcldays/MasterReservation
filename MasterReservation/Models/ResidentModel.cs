@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MasterReservation.Models
 {
@@ -21,6 +22,8 @@ namespace MasterReservation.Models
         public string StudyPlace { get; set; }
         public string Experience { get; set; }
         public string Awards { get; set; }
+
+        [Remote("UpdateResident", "Authentication")]
         public string Password { get; set; }
 
         public string ComparePass { get; set; }
