@@ -31,6 +31,11 @@ namespace MasterReservation.Controllers
 
             return View(Utilities.GetData.GetDataResident(User.Identity.Name));
         }
+
+        public ActionResult FindWorkPlaces()
+        {
+            return View();
+        }
     }
 }
 

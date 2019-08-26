@@ -114,7 +114,7 @@
         $("#input-offers").trigger("keyup");
     });
 
-    //автокомплит
+    //автокомплит города
     $("input[name='City']").each(function () {
         $(this).autocomplete({
             source: '/Test/TestMethod'
