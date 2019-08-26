@@ -7,13 +7,13 @@ namespace MasterReservation.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class YOUR_FIRST_MIGRATION : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(YOUR_FIRST_MIGRATION));
         
         string IMigrationMetadata.Id
         {
-            get { return "201908201251521_InitialCreate"; }
+            get { return "201908261345234_YOUR_FIRST_MIGRATION"; }
         }
         
         string IMigrationMetadata.Source

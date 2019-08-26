@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,9 +27,10 @@ namespace MasterReservation.Controllers
 
         public ActionResult PersonalData()
         {
-            return View();
+
+
+            return View(Utilities.GetData.GetDataResident(User.Identity.Name));
         }
     }
 }
 
-/*TODO huy*/

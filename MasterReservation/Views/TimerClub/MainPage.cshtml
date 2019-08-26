@@ -165,6 +165,10 @@
                 @Html.EditorFor(model => (model[2] as RegisterSalonModel).Phone, new {htmlAttributes = new {@class = "field", PlaceHolder = "Номер телефона*", id="SendPhone"}})
                 @Html.EditorFor(model => (model[2] as RegisterSalonModel).Email, new {htmlAttributes = new {@class = "field", PlaceHolder = "Email", id="SendMail"}})
                 @Html.EditorFor(model => (model[2] as RegisterSalonModel).City, new {htmlAttributes = new {@class = "field", PlaceHolder = "Город*", id="SendCity"}})
+                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Name, null, new { @class = "messageerror" })
+                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Phone, null, new { @class = "messageerror" })
+                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Email, null, new { @class = "messageerror" })
+                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).City, null, new { @class = "messageerror" })
 
             </div>
             @Html.EditorFor(model => (model[2] as RegisterSalonModel).Information, new {htmlAttributes = new {@class = "field", PlaceHolder = "Дополнительная информация*", id="additional-info"}})

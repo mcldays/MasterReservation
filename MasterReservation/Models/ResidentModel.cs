@@ -23,6 +23,8 @@ namespace MasterReservation.Models
         public string Awards { get; set; }
         public string Password { get; set; }
 
+        public string ComparePass { get; set; }
+
         public string City { get; set; }
 
         public string Offers { get; set; }

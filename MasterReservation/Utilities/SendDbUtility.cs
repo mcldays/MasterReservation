@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -74,6 +75,8 @@ namespace MasterReservation.Utilities
 
                     ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == model.Email && t.Password == model.Password);
 
+                   
+
                     if (user == null) return false;
                     return true;
                
@@ -130,8 +133,48 @@ namespace MasterReservation.Utilities
         }
 
 
+        public static bool ChangeResident(ResidentModel model)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                dbUse.ResidentModels.AddOrUpdate(model);
+
+                dbUse.SaveChanges();
+
+                return true;
+
+                
+            }
+
+            
 
         }
+
+
+        public static bool ComparePassword(ResidentModel model)
+        {
+
+
+            using (UserContext dbUse = new UserContext())
+            {
+
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Password == model.ComparePass);
+
+
+
+                if (user == null) return false;
+                return true;
+
+
+            }
+
+
+
+        }
+
+
+
+    }
 
 
 

@@ -7,12 +7,12 @@ namespace MasterReservation.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.SalonModels", "Information", c => c.String());
+            AddColumn("dbo.ResidentModels", "ComparePass", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.SalonModels", "Information");
+            DropColumn("dbo.ResidentModels", "ComparePass");
         }
     }
 }

@@ -1,6 +1,12 @@
-﻿
+﻿@using System.Web.UI.WebControls
+@using MasterReservation.Models
+@using MasterReservation.Utilities
+@model ResidentModel
+
+
 @{
     ViewBag.Title = "Личные данные";
+
 }
 
 @Styles.Render("~/Content/PersonalDataStyles.css")
@@ -34,53 +40,60 @@
 
         <div id="userblock">
             <img src="~/Resources/svg/user.svg" id="faceicon" class="dpd-js">
-            <span id="residentname" class="dpd-js">Татьяна Меньшикова</span>
+            <span id="residentname" class="dpd-js">@(Model.Surname + " " + Model.Name)</span>
+
             <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle" class="dpd-js">
             <div id="user-dropdown">
-                <div class="dropdown-row"><img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
                     <span>Личные данные</span>
                 </div>
                 <hr>
-                <div class="dropdown-row"><img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
                     <span>Просмотр забронированного времени</span>
                 </div>
                 <hr>
 
-                <div class="dropdown-row"><img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
                     <span>Избранное</span>
                 </div>
-                <button id="go-out">Выйти</button>
+                <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
             </div>
         </div>
     </div>
 </div>
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new {@id = "MainBlock"}))
+{
+    @Html.HiddenFor(model=>model.Id)
 
-<div id="MainBlock">
     <div id="BlockOne">
         <div id="photo-wrap">
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
+            <input type="file" name="picField" id="picField" size="24" onchange="" alt=""/>
         </div>
 
         <div id="textboxes">
             <div class="input-wrap">
-                <input type="text" class="areastyle" value="Татьяна" disabled="true">
+
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Имя*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                <input type="text" class="areastyle" value="Меньшикова" disabled="true">
+            @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Лялин*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                <input type="text" class="areastyle" value="menshikova@mail.ru" disabled="true">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Email*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
 
             <div class="input-wrap">
-                <input type="text" class="areastyle" value="8 919 456 78 26" disabled="true">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -94,7 +107,8 @@
 
         </div>
         <div>
-            <span id="WrongPass">Не правильно введен текущий пароль</span>
+           
+            @Html.ValidationMessageFor(model => model.Password, null, new { id="WrongPass" })
         </div>
 
         <div id="BlockTwoContent">
@@ -110,20 +124,35 @@
                     <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
                     <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
-                        <div><span>Парикмахерские услуги</span></div>
-                        <div><span>Педикюр</span></div>
-                        <div><span>Массаж</span></div>
-                        <div><span>Визаж</span></div>
-                        <div><span>Шугаринг</span></div>
+                        
+                        @{
+                            string[] mas = new string[] {};
+                            
+                            mas = Model.Offers.Split(',');
+                            
+
+                            
+                            <div><span>@mas[0]</span></div>
+                            <div><span>@mas[1]</span></div>
+                            <div><span>@mas[2]</span></div>
+                            <div><span>@mas[3]</span></div>
+                            <div><span>@mas[4]</span></div>
+
+
+
+
+                        }
+
                     </div>
                 </div>
-                <input class="jobscore" type="text" placeholder="Стаж работы">
+                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы*" } })
             </div>
 
             <div class="childtwo">
 
                 <div>
-                    <textarea id="childarea" cols="30" rows="10" placeholder="Имеющиеся награды"></textarea>
+                   
+                    @Html.TextAreaFor(model => model.Awards, new {  id = "childarea", PlaceHolder = "Стаж Работы*"  })
                 </div>
 
                 <div id="orientationChildTwo">
@@ -133,11 +162,12 @@
                 <div class="ChildTwoOffers">
 
                     <div class="input-wrap-two">
-                        <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
+                      <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
+                        @Html.HiddenFor(model => model.Password, new {  @class = "areastyle-two", PlaceHolder = "Текущий пароль*"  })
                         <input type="text" class="areastyle-two" placeholder="Новый пароль">
                     </div>
 
@@ -153,12 +183,12 @@
             </div>
         </div>
     </div>
-</div>
+}
 
-<div id="hidden-offers">
-    <div>Парикмахерские услуги</div>
-    <div>Педикюр</div>
-    <div>Массаж</div>
-    <div>Визаж</div>
-    <div>Шугаринг</div>
-</div>
+    <div id="hidden-offers">
+        <div>Парикмахерские услуги</div>
+        <div>Педикюр</div>
+        <div>Массаж</div>
+        <div>Визаж</div>
+        <div>Шугаринг</div>
+    </div>

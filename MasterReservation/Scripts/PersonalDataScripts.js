@@ -57,15 +57,15 @@
     });
 
     //редактирование полей личной информации
-    $(".editbutton").on("click", function () {
-        this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");
-    });
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest(".input-wrap").length) {
-            $(".areastyle").attr("disabled", "true");
-        }
-        e.stopPropagation();
-    });
+    //$(".editbutton").on("click", function () {
+    //    this.parentElement.getElementsByTagName("input")[0].removeAttribute("disabled");
+    //});
+    //$(document).on('click', function (e) {
+    //    if (!$(e.target).closest(".input-wrap").length) {
+    //        $(".areastyle").attr("disabled", "true");
+    //    }
+    //    e.stopPropagation();
+    //});
 
     // Открытие дропдовна в шапке
     $("#user-dropdown").slideUp(0);

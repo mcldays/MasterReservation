@@ -33,12 +33,16 @@ namespace MasterReservation.Controllers
         public ActionResult LoginMaster(LoginMaster model)
         {
 
+
             if (SendDbUtility.CompareAut(model) == true)
             {
                 FormsAuthentication.SetAuthCookie(model.Email, true);
+                return RedirectToAction("PersonalData", "TimerClub");
+
+
             }
 
-            return RedirectToAction("PersonalData", "TimerClub");
+            return View();
         }
 
 
@@ -49,6 +53,30 @@ namespace MasterReservation.Controllers
             return RedirectToAction("MainPage", "TimerClub");
         }
 
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("MainPage", "TimerClub");
+        }
+
+        public ActionResult UpdateResident(ResidentModel model)
+        {
+            if (Utilities.SendDbUtility.ComparePassword(model) == true)
+            {
+
+                Utilities.SendDbUtility.ChangeResident(model);
+
+
+            }
+
+            return RedirectToAction("PersonalData", "TimerClub");
+            
+         
+
+        }
+      
 
     }
 }

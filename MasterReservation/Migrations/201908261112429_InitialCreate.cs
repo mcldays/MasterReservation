@@ -38,6 +38,7 @@ namespace MasterReservation.Migrations
                         Email = c.String(),
                         Message = c.String(),
                         Password = c.String(),
+                        Information = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
