@@ -9,6 +9,7 @@
 
 @Styles.Render("~/Content/MainPageStyles.css")
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/Scripts/MainPageScripts.js")
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 
@@ -67,7 +68,7 @@
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field", PlaceHolder = "Номер Телефона*" } })
+            @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field", PlaceHolder = "Номер Телефона*", id="phone-mask" } })
             @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
         </div>
 
@@ -192,4 +193,4 @@
     <div>Шугаринг</div>
 </div>
 
-
+<script>$("#phone-mask").mask("+7(999)9999999");</script>
