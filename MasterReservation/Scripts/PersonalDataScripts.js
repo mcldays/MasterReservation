@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-
+    $("#input-offers").trigger("keyup");
     // нажатие на аватар
     $("#avatar").on("click", function () {
         $("#picField").click();
@@ -51,7 +51,7 @@
             this.parentElement.classList.remove("show");
         }
         if (!$("#offers-wrap").is("div:contains(" + this.innerText + ")")) {
-            $("#offers-wrap").append('<div class="offer"><span>' + this.innerText + '</span><img src="cross-black.png" alt=""></div>');
+            $("#offers-wrap").append('<div class="offer"><span>' + this.innerText + '</span><img src="../Resources/img/cross-black.png" alt=""></div>');
         }
         $("#input-offers").trigger("keyup");
     });

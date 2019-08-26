@@ -228,6 +228,7 @@
     <Content Include="Resources\img\avatar-default.png" />
     <Content Include="Resources\img\background.png" />
     <Content Include="Resources\img\close-modal.png" />
+    <Content Include="Resources\img\cross-black.png" />
     <Content Include="Resources\img\cross.png" />
     <Content Include="Resources\img\default-card-img.png" />
     <Content Include="Resources\img\facebook.png" />
