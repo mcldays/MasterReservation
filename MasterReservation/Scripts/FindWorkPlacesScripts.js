@@ -46,7 +46,10 @@
         onSelect: function onSelect(fd, date, inst) {
             var currentDate = date.getDate();
             monthA = 'Января,Февраля,Марта,Апреля,Мая,Июня,Июля,Августа,Сентября,Октября,Ноября,Декабря'.split(',');
-            $("#date").text(currentDate + " " + monthA[date.getMonth()] + ",");
+
+            $("#input-for-date").val(fd);
+
+            //$("#date").text(currentDate + " " + monthA[date.getMonth()] + ",");
         }
     }).data('datepicker');
 
@@ -60,11 +63,14 @@
         }
     });
     $(".dropdown-option").on("click", function () {
+        var value_input = $(this).parent().parent().find(".hidden-input").val();
         if ($(this).is(".active-option")) {
             $(this).removeClass("active-option");
+            $(this).parent().parent().find(".hidden-input").val(value_input.replace(this.innerText + ",", ""));
         }
         else {
             $(this).addClass("active-option");
+            $(this).parent().parent().find(".hidden-input").val(value_input + this.innerText + ",");
         }
 
         // $(this).parent().prev().find($("span")).text(this.innerText);
@@ -107,14 +113,12 @@
         }
     });
 
-     //автокомплит города
-     $("#input-city").each(function () {
+    //автокомплит города
+    $("#input-city").each(function () {
          $(this).autocomplete({
              source: '/test/testmethod'
          });
-     });
-
-
+    });
 
 
 
