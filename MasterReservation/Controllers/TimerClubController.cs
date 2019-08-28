@@ -19,7 +19,7 @@ namespace MasterReservation.Controllers
             object[] x = new object[]
             {
                 new LoginMaster(),
-                new RegisterMasterModel(),
+                new RegisterMasterModel(null),
                 new RegisterSalonModel()
             };
             return View(x);
@@ -27,9 +27,7 @@ namespace MasterReservation.Controllers
 
         public ActionResult PersonalData()
         {
-
-
-            return View(Utilities.GetData.GetDataResident(User.Identity.Name));
+            return View(new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)));
         }
 
         public ActionResult FindWorkPlaces()

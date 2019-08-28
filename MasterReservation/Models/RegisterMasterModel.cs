@@ -16,6 +16,32 @@ namespace MasterReservation.Models
 
     public class RegisterMasterModel
     {
+        public RegisterMasterModel(ResidentModel res = null)
+        {
+            if (res != null)
+            {
+                Name = res.Name;
+                Surname = res.Surname;
+                Patronymic = res.Patronymic;
+                Email = res.Email;
+                PhoneNumber = res.Phone;
+                City = res.City;
+                Offers = res.Offers;
+                Expirience = res.Experience;
+                Awards = res.Awards;
+                Password = res.Password;
+                id = res.Id;
+
+            }
+        }
+
+        public RegisterMasterModel()
+        {
+
+        }
+      
+        public int id { get; set; }
+
         [Required(ErrorMessage = "Введите имя")]
         public string Name { get; set; }
 
@@ -42,6 +68,10 @@ namespace MasterReservation.Models
 
         public string Awards { get; set; }
 
+
+       
+        
+       
         [DataType(DataType.Password)]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки должна быть от 6 до 50 символов")]
         [Required(ErrorMessage = "Введите пароль")]

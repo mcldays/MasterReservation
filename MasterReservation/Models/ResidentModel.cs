@@ -23,10 +23,7 @@ namespace MasterReservation.Models
         public string Experience { get; set; }
         public string Awards { get; set; }
 
-        [Remote("UpdateResident", "Authentication")]
         public string Password { get; set; }
-
-        public string ComparePass { get; set; }
 
         public string City { get; set; }
 

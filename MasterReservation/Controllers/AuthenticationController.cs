@@ -61,19 +61,28 @@ namespace MasterReservation.Controllers
             return RedirectToAction("MainPage", "TimerClub");
         }
 
-        public ActionResult UpdateResident(ResidentModel model)
+        public ActionResult UpdateResident(RegisterMasterModel model)
         {
-            if (Utilities.SendDbUtility.ComparePassword(model.Password) == true)
-            {
-
-
+          
                 Utilities.SendDbUtility.ChangeResident(model);
-            }
+            
 
             return RedirectToAction("PersonalData", "TimerClub");
            
         }
-      
+
+        
+        public JsonResult CheckPassword(string Password)
+        {
+            var result = Utilities.SendDbUtility.ComparePassword(Password, User.Identity.Name);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ChangePasswordModel ChangePassword(ChangePasswordModel model)
+        {
+            return null;
+        }
 
     }
 }

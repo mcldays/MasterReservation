@@ -1,7 +1,7 @@
 ﻿@using System.Web.UI.WebControls
 @using MasterReservation.Models
 @using MasterReservation.Utilities
-@model ResidentModel
+@model RegisterMasterModel
 
 
 @{
@@ -10,7 +10,7 @@
 }
 
 @Styles.Render("~/Content/PersonalDataStyles.css")
-
+@Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
 
 <div class="header">
@@ -66,7 +66,7 @@
 </div>
 @using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new {@id = "MainBlock"}))
 {
-    @Html.HiddenFor(model=>model.Id)
+    @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
         <div id="photo-wrap">
@@ -93,7 +93,7 @@
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Телефон*" } })
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -108,9 +108,12 @@
         </div>
         <div>
            
-            @Html.ValidationMessageFor(model => model.Password, null, new { id="WrongPass" })
+         
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id="WrongPass" })
+            @Html.ValidationMessageFor(model => model.Expirience, null, new { id="WrongPass" })
+            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id="WrongPass" })
         </div>
-
+                  
         <div id="BlockTwoContent">
             <span id="AddedStyle">Предоставляемые услуги</span>
             <div id="AddedOffers">
@@ -126,7 +129,7 @@
                             {
                                 <div class="offer">
                                     <span>@mas[i]</span>
-                                    <img src="cross-black.png" />
+                                    <img src="~/Resources/img/cross-black.png" />
                                 </div>
                             }
 
@@ -157,7 +160,7 @@
 
                     </div>
                 </div>
-                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы*" } })
+                @Html.EditorFor(model => model.Expirience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы*" } })
             </div>
 
             <div class="childtwo">
@@ -174,19 +177,19 @@
                 <div class="ChildTwoOffers">
 
                     <div class="input-wrap-two">
-                        @Html.HiddenFor(model => model.Password, new {  @class = "areastyle-two", PlaceHolder = "Текущий пароль*"  })
-                        <input type="text" class="areastyle-two" placeholder="Текущий пароль*">
+                        @*@Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})*@
+                        @*<input type="text" class="areastyle-two" placeholder="Текущий пароль*">*@
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
                       
-                        <input type="text" class="areastyle-two" placeholder="Новый пароль">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
-                        <input type="text" class="areastyle-two" placeholder="Повторите пароль">
+                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
                     </div>
                 </div>
 

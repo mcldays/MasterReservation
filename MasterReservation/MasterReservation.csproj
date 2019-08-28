@@ -154,7 +154,32 @@
     <Compile Include="Migrations\201908261345234_YOUR_FIRST_MIGRATION.Designer.cs">
       <DependentUpon>201908261345234_YOUR_FIRST_MIGRATION.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908271026595_migration_two.cs" />
+    <Compile Include="Migrations\201908271026595_migration_two.Designer.cs">
+      <DependentUpon>201908271026595_migration_two.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908271048559_migration_three.cs" />
+    <Compile Include="Migrations\201908271048559_migration_three.Designer.cs">
+      <DependentUpon>201908271048559_migration_three.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908271254210_ShadowDieTwice.cs" />
+    <Compile Include="Migrations\201908271254210_ShadowDieTwice.Designer.cs">
+      <DependentUpon>201908271254210_ShadowDieTwice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908271313025_ShadowDieThree.cs" />
+    <Compile Include="Migrations\201908271313025_ShadowDieThree.Designer.cs">
+      <DependentUpon>201908271313025_ShadowDieThree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908271332454_ShadowDieFour.cs" />
+    <Compile Include="Migrations\201908271332454_ShadowDieFour.Designer.cs">
+      <DependentUpon>201908271332454_ShadowDieFour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281330346_PoshelNahui.cs" />
+    <Compile Include="Migrations\201908281330346_PoshelNahui.Designer.cs">
+      <DependentUpon>201908281330346_PoshelNahui.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
@@ -278,6 +303,7 @@
     <Content Include="Content\slick\fonts\slick.eot" />
     <Content Include="Content\slick\fonts\slick.ttf" />
     <Content Include="Content\slick\fonts\slick.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -361,6 +387,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908261345234_YOUR_FIRST_MIGRATION.resx">
       <DependentUpon>201908261345234_YOUR_FIRST_MIGRATION.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271026595_migration_two.resx">
+      <DependentUpon>201908271026595_migration_two.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271048559_migration_three.resx">
+      <DependentUpon>201908271048559_migration_three.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271254210_ShadowDieTwice.resx">
+      <DependentUpon>201908271254210_ShadowDieTwice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271313025_ShadowDieThree.resx">
+      <DependentUpon>201908271313025_ShadowDieThree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271332454_ShadowDieFour.resx">
+      <DependentUpon>201908271332454_ShadowDieFour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281330346_PoshelNahui.resx">
+      <DependentUpon>201908281330346_PoshelNahui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

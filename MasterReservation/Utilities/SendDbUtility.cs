@@ -133,17 +133,29 @@ namespace MasterReservation.Utilities
         }
 
 
-        public static bool ChangeResident(ResidentModel model)
+        public static bool ChangeResident(RegisterMasterModel model)
         {
             using (UserContext dbUse = new UserContext())
             {
-                dbUse.ResidentModels.AddOrUpdate(model);
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == model.id);
 
+                if (user == null) return false;
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.Password = model.Password;
+                user.Awards = model.Awards;
+                user.Offers = model.Offers;
+                user.Phone = model.PhoneNumber;
+                user.Patronymic = model.Patronymic;
+                user.Experience = model.Expirience;
+
+                dbUse.ResidentModels.AddOrUpdate(user);
                 dbUse.SaveChanges();
 
                 return true;
 
-                
+
+
             }
 
             
@@ -151,14 +163,14 @@ namespace MasterReservation.Utilities
         }
 
 
-        public static bool ComparePassword(string Password)
+        public static bool ComparePassword(string Password, string Email)
         {
 
 
             using (UserContext dbUse = new UserContext())
             {
 
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Password == Password);
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Email == Email && t.Password == Password);
 
 
 
