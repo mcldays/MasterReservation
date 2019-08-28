@@ -14,7 +14,7 @@ namespace MasterReservation.Controllers
 {
     public class TestController : Controller
     {
-
+        [AllowAnonymous]
        public async Task<ActionResult> TestMethod(string term)
        {
           List<string> Cities = new List<string>();
