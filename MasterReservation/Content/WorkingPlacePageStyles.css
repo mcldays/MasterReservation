@@ -1,0 +1,582 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-family: "Open Sans";
+}
+
+a {
+    color: white;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: unset;
+    }
+
+
+
+body {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    margin: 0;
+    float: left;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.city-wrap {
+    display: flex;
+    align-items: center;
+    margin-left: 11%;
+}
+
+#head-logo {
+    width: 71px;
+    margin-right: 58px;
+    cursor: pointer;
+}
+
+.icons-wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.town {
+    color: #fff;
+    margin-right: 25px;
+}
+
+.townbutton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 24px;
+    display: block;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 12px;
+    float: left;
+}
+
+.cocialicons {
+}
+
+.number {
+    color: #fff;
+    display: block;
+    margin-right: 15px;
+}
+
+.dropdown-toggle {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+}
+
+#Logo {
+    width: 92px;
+    height: 80px;
+    margin-left: 19px;
+}
+
+#HeaderText {
+    height: 16px;
+    color: #ffffff;
+    font-family: "OpenSans";
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -56px;
+    display: block;
+    margin-left: 177px;
+    width: auto;
+}
+
+#CityButton {
+    width: 101px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 0px;
+    cursor: pointer;
+    margin-left: 23px;
+    display: block;
+    margin-top: -17px;
+    margin-left: 245px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+#PhoneStyle {
+    width: 110px;
+    height: 20px;
+    color: #fefefe;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 55%;
+    display: block;
+    margin-top: -20px;
+}
+
+#iconstyle {
+    padding-left: 65%;
+    display: block;
+    margin-top: -24px;
+}
+
+
+
+#insticon {
+    width: 27px;
+    height: 27px;
+    margin-left: 5px;
+}
+
+#userblock {
+    margin-left: 49px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    display: flex;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 30px;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
+}
+
+    #userblock:hover {
+        background-color: #555555;
+    }
+
+
+#faceicon {
+    width: 25px;
+    height: 25px;
+}
+
+#residentname {
+    color: #ffffff;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 13px;
+    display: block;
+}
+
+#down-arrowstyle {
+    width: 20px;
+    height: 12px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+#user-dropdown {
+    position: absolute;
+    background-color: white;
+    top: 60px;
+    right: 0;
+    box-shadow: 0 3px 7px rgba(0, 1, 1, 0.17);
+    cursor: default;
+    border-radius: 0 0 7px 7px;
+    z-index: 999;
+}
+
+.dropdown-img {
+    width: 20px;
+    margin-right: 13px;
+}
+
+hr {
+    margin: 0px;
+}
+
+.dropdown-row {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 0 20px;
+}
+
+    .dropdown-row:hover {
+        cursor: pointer;
+        background: #cfcecf;
+    }
+
+    .dropdown-row span {
+        color: #333333;
+        font-family: "Open Sans";
+        font-size: 15px;
+    }
+
+#go-out {
+    width: 100%;
+    height: 38px;
+    border-radius: 0 0 7px 7px;
+    background-color: #0a9ad1;
+    cursor: pointer;
+    color: white;
+    font-family: "Open Sans";
+    border: 0;
+}
+
+    #go-out:hover {
+        background-color: #097fac;
+    }
+
+#body-container {
+    display: flex;
+    margin-top: 11px;
+}
+
+.hidden-input {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+}
+
+.card-description {
+}
+
+.card-title {
+    margin-bottom: 4px;
+}
+
+.card-title-text {
+    font-size: 19px;
+    margin-right: 13px;
+}
+
+.card-title img {
+    width: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.address {
+    display: block;
+    font-size: 13px;
+}
+
+.tariffs-title {
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    margin: 12px 0px 8px 0px;
+}
+
+.tariff-line {
+    display: flex;
+}
+
+.tariff {
+    width: 100px;
+    height: 27px;
+    background-color: #ffffff;
+    margin: 1px 1px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-bar {
+    width: 30%;
+    /* margin-top: 16px; */
+}
+
+#right-bar {
+    width: 70%;
+    padding-left: 2%;
+}
+
+#slider-photo {
+    width: 95%;
+    float: right;
+}
+
+.img-wrap img {
+    width: 100%;
+}
+
+#main-description {
+    width: 95%;
+    float: right;
+    margin-top: 17px;
+}
+
+#destription-title {
+    display: block;
+    color: #414141;
+    margin-bottom: 15px;
+}
+
+.description-line {
+    list-style-type: none;
+    font-size: 15px;
+}
+
+    .description-line:before {
+        content: "- ";
+    }
+
+    .description-line:after {
+        content: ";";
+    }
+
+.slick-dots {
+    bottom: 5px;
+}
+
+    .slick-dots li {
+        margin: 0px;
+    }
+
+        .slick-dots li button:before {
+            opacity: 1;
+            color: white;
+        }
+
+        .slick-dots li.slick-active button:before {
+            opacity: 1;
+            color: #00aeef;
+        }
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-prev {
+    left: 0px;
+    z-index: 1;
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0px;
+}
+
+.button-time {
+    border-radius: 5px;
+    background-color: #e1e1e1;
+    border: 2px solid #e1e1e1;
+    color: black;
+    font-size: 13px;
+    padding: 6px 21px;
+    margin: 3px;
+    font-size: 12px;
+}
+
+.blue-button {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 2px solid #0a9ad1;
+    color: white;
+    padding: 6px 21px;
+}
+
+.active-button {
+    border-radius: 5px;
+    background-color: #0a9ad1;
+    border: 2px solid #0a9ad1;
+    color: white;
+    padding: 6px 21px;
+}
+
+.white-button {
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: black;
+    border: 2px solid #88d4f1;
+    padding: 6px 21px;
+}
+
+#show-map-btn {
+    margin-left: 32px;
+}
+
+.bold-line {
+    font-weight: bold;
+}
+
+.tariff:hover {
+    background-color: #ecebf5;
+}
+
+div#record-day {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#record-day span {
+    font-size: 14px;
+}
+
+div#input-date-wrap {
+    margin: 0px 30px;
+}
+
+span#input-date {
+    margin: 0 20px;
+    font-weight: bold;
+}
+
+
+
+
+div#checkbox-wrap {
+    margin-top: 18px;
+    margin-bottom: 17px;
+    display: flex;
+    align-items: center;
+}
+
+span#checkbox-label {
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+#textarea {
+    resize: none;
+    width: 65%;
+    height: 119px;
+    min-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    padding: 8px;
+    font-size: 14px;
+}
+
+div#total-time {
+    margin-top: 13px;
+    margin-bottom: 10px;
+}
+
+span.total-label {
+    font-size: 15px;
+}
+
+span#total-bold {
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+span#total-sum {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+button#booked-btn {
+    margin-top: 20px;
+}
+
+div#input-time-wrap {
+    max-width: 80%;
+}
+
+div#calendar-wrap {
+    position: absolute;
+    background: gray;
+    top: 108%;
+    left: -36%;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    display: none;
+    border: 1px solid #0f88b6;
+}
+
+#calendar-btn {
+    position: relative;
+}
+
+.datepicker {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    width: 220px;
+}
+
+.datepicker--nav {
+    background: #0a9ad1;
+    color: white;
+    height: 32px;
+}
+
+.datepicker--nav-title:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-title i {
+    color: white;
+}
+
+.datepicker--nav-action:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-action path {
+    stroke: #ffffff;
+}
+
+.datepicker--day-name {
+    color: #0a9ad1;
+}
+
+.datepicker--days-names {
+    margin: 0px;
+}
+
+.datepicker--cell {
+    border-radius: 0px;
+    height: 20px;
+}
+
+button#calendar-btn:focus {
+    outline: none;
+}
+
+button.button-time:focus {
+    outline: none;
+}
+
+
+
+.heart {
+    fill: #e1e1e1;
+    stroke: #000000;
+    stroke-width: 3%;
+    cursor: pointer;
+}
+
+.red-heart {
+    fill: #ff2323;
+    stroke: #ff2323;
+    stroke-width: 3%;
+}

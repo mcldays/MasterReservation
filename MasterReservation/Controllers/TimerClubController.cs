@@ -36,6 +36,16 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+        public ActionResult WorkingPlacePage()
+        {
+            return View();
+        }
+
+        public ActionResult ViewBookedTime()
+        {
+            return View();
+        }
     }
 }
 
