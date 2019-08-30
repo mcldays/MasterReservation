@@ -88,7 +88,7 @@
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Email*" } })
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -121,7 +121,7 @@
 
                 <div id="offers-wrap">
                     @{
-                        string[] mas = new string[] { };
+                        string[] mas = new string[] {};
 
                         try
                         {
@@ -130,7 +130,7 @@
                             {
                                 <div class="offer">
                                     <span>@mas[i]</span>
-                                    <img src="~/Resources/img/cross-black.png" />
+                                    <img src="~/Resources/img/cross-black.png"/>
                                 </div>
                             }
 
@@ -161,7 +161,7 @@
 
                     </div>
                 </div>
-                @Html.EditorFor(model => model.Expirience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы*" } })
+                @Html.EditorFor(model => model.Expirience, new {htmlAttributes = new {@class = "jobscore", PlaceHolder = "Стаж Работы*"}})
             </div>
 
             <div class="childtwo">
@@ -197,9 +197,21 @@
                 <div id="SaveButton">
                     <button id="savebut">Сохранить</button>
                 </div>
+
+               
+
+
             </div>
+
         </div>
     </div>
+}
+
+@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new {@id = "SaveButton"}))
+{
+
+    <button id="savebut">Изменить пароль</button>
+
 }
 
 <div id="hidden-offers">

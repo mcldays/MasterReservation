@@ -181,6 +181,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
+    <Compile Include="Models\DateModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
     <Compile Include="Models\RegisterSalonModel.cs" />
@@ -362,6 +363,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\TimerClub\PersonalData.cshtml" />
     <Content Include="Views\TimerClub\FindWorkPlaces.cshtml" />
+    <Content Include="Views\TimerClub\PasswordView.cshtml" />
     <Content Include="Views\TimerClub\WorkingPlacePage.cshtml" />
     <Content Include="Views\TimerClub\ViewBookedTime.cshtml" />
     <Content Include="Views\TimerClub\ViewFavorites.cshtml" />

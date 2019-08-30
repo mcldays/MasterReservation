@@ -84,5 +84,26 @@ namespace MasterReservation.Controllers
             return null;
         }
 
+
+        [HttpPost]
+        public ActionResult PasswordChange()
+        {
+            ChangePasswordModel model = new ChangePasswordModel();
+            if (Utilities.SendDbUtility.ChangePassword(User.Identity.Name, model) == true)
+            {
+               return RedirectToAction("PersonalData", "TimerClub");
+            }
+            else return RedirectToAction("MainPage", "TimerClub");
+
+        }
+
+
+        public ActionResult RedirectToPassword()
+        {
+
+            return RedirectToAction("PasswordView", "TimerClub");
+        }
+
+
     }
 }
