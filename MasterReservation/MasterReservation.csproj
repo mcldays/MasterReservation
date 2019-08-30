@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TimerClubController.cs" />
+    <Compile Include="Controllers\WorkingPlacePageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +201,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\ViewBookedTimeStyles.css" />
+    <Content Include="Content\WorkingPlacePageStyles.css" />
     <Content Include="Content\FindWorkPlacesStyles.css" />
     <Content Include="Content\PersonalDataStyles.css" />
     <Content Include="Content\MainPageStyles.css" />
@@ -268,9 +271,11 @@
     <Content Include="Resources\svg\gray-arrow.svg" />
     <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\heart-gray.svg" />
+    <Content Include="Resources\svg\left-arrow.svg" />
     <Content Include="Resources\svg\logo-white.svg" />
     <Content Include="Resources\svg\logo.svg" />
     <Content Include="Resources\svg\pencil.svg" />
+    <Content Include="Resources\svg\right-arrow.svg" />
     <Content Include="Resources\svg\user.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -314,6 +319,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
+    <Content Include="Scripts\ViewBookedTimeScripts.js" />
+    <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
     <Content Include="Scripts\MainPageScripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -356,11 +363,14 @@
     <Content Include="Views\TimerClub\PersonalData.cshtml" />
     <Content Include="Views\TimerClub\FindWorkPlaces.cshtml" />
     <Content Include="Views\TimerClub\PasswordView.cshtml" />
+    <Content Include="Views\TimerClub\WorkingPlacePage.cshtml" />
+    <Content Include="Views\TimerClub\ViewBookedTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Authentication\" />
     <Folder Include="Views\Db\" />
+    <Folder Include="Views\WorkingPlacePage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
