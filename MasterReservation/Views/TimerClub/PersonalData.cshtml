@@ -10,6 +10,7 @@
 }
 
 @Styles.Render("~/Content/PersonalDataStyles.css")
+@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
 
@@ -64,25 +65,25 @@
         </div>
     </div>
 </div>
-@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new {@id = "MainBlock"}))
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
 {
     @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
         <div id="photo-wrap">
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="picField" id="picField" size="24" onchange="" alt=""/>
+            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
         </div>
 
         <div id="textboxes">
             <div class="input-wrap">
 
-                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Имя*"}})
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Имя*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-            @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Лялин*"}})
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Лялин*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -93,7 +94,7 @@
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Телефон*" } })
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle phone-mask", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -107,13 +108,13 @@
 
         </div>
         <div>
-           
-         
-            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id="WrongPass" })
-            @Html.ValidationMessageFor(model => model.Expirience, null, new { id="WrongPass" })
-            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id="WrongPass" })
+
+
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Expirience, null, new { id = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id = "WrongPass" })
         </div>
-                  
+
         <div id="BlockTwoContent">
             <span id="AddedStyle">Предоставляемые услуги</span>
             <div id="AddedOffers">
@@ -155,8 +156,8 @@
                     <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
                     <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
-                        
-                    
+
+
 
                     </div>
                 </div>
@@ -166,8 +167,8 @@
             <div class="childtwo">
 
                 <div>
-                   
-                    @Html.TextAreaFor(model => model.Awards, new {  id = "childarea", PlaceHolder = "Стаж Работы*"  })
+
+                    @Html.TextAreaFor(model => model.Awards, new { id = "childarea", PlaceHolder = "Стаж Работы*" })
                 </div>
 
                 <div id="orientationChildTwo">
@@ -183,13 +184,13 @@
 
 
                     <div class="input-wrap-twoOrient">
-                      
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
+
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
-                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
+                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
                 </div>
 
@@ -201,10 +202,12 @@
     </div>
 }
 
-    <div id="hidden-offers">
-        <div>Парикмахерские услуги</div>
-        <div>Педикюр</div>
-        <div>Массаж</div>
-        <div>Визаж</div>
-        <div>Шугаринг</div>
-    </div>
+<div id="hidden-offers">
+    <div>Парикмахерские услуги</div>
+    <div>Педикюр</div>
+    <div>Массаж</div>
+    <div>Визаж</div>
+    <div>Шугаринг</div>
+</div>
+
+<script>$(".phone-mask").mask("+7(999)9999999");</script>

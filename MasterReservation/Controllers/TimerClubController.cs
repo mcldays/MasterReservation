@@ -44,6 +44,11 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewFavorites()
+        {
+            return View();
+        }
     }
 }
 

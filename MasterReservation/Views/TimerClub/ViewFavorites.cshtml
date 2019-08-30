@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Избранное";
+}
+
+@Styles.Render("~/Content/ViewFavoritesStyles.css")
+
+@Scripts.Render("~/Scripts/ViewBookedTimeScripts.js")
+
+<div class="header">
+    <div class="city-wrap">
+        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+        <span class="town">Город</span>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Москва
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Питер</a>
+                <a class="dropdown-item" href="#">Ижевск</a>
+                <a class="dropdown-item" href="#">Казань</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icons-wrap">
+        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+        <div class="cocialicons">
+            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
+            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
+            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
+        </div>
+
+        <div id="userblock">
+            <img src="~/Resources/svg/user.svg" id="faceicon">
+            <span id="residentname">Татьяна Меньшикова</span>
+            <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
+            <div id="user-dropdown">
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
+                    <span>Личные данные</span>
+                </div>
+                <hr>
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
+                    <span>Просмотр забронированного времени</span>
+                </div>
+                <hr>
+
+                <div class="dropdown-row">
+                    <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
+                    <span>Избранное</span>
+                </div>
+                <button id="go-out">Выйти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="background-overlay"></div>
+
+<div id="body-container">
+    <div id="page-title">
+        <span id="main-title">Избранное</span>
+        <span id="sub-title">Здесь отображается список ваших любимых студий</span>
+    </div>
+    <div class="cards-wrap">
+        <div class="favorite-card">
+            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
+            <div class="card-description">
+                <span class="card-title">Студия красоты Beauty Forest</span>
+                <span class="adress">Пушкинская, 234</span>
+                <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                <div class="table-wrap">
+                    <div class="first-line">
+                        <span class="bold-text">1 час</span>
+                        <span class="bold-text">День</span>
+                        <span class="bold-text">15 смен</span>
+                        <span class="bold-text">Месяц</span>
+                    </div>
+                    <div class="second-line">
+                        <span class="bold-text">500 р</span>
+                        <span class="bold-text">1500 р</span>
+                        <span class="bold-text">5500 р</span>
+                        <span class="bold-text">16000 р</span>
+                    </div>
+                </div>
+                <button class="detail-btn">Подробнее</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
