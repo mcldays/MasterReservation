@@ -185,6 +185,23 @@ namespace MasterReservation.Utilities
         }
 
 
+        public static bool ChangePassword(string Email, ChangePasswordModel model)
+        {
+
+            using (UserContext dbUse= new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                if (user == null) return false;
+                user.Password = model.NewPassword;
+
+                dbUse.ResidentModels.AddOrUpdate(user);
+                dbUse.SaveChanges();
+
+                return true;
+            }
+
+        }
+
 
     }
 

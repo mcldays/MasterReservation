@@ -82,18 +82,18 @@
             </div>
 
             <div class="input-wrap">
-            @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Лялин*"}})
+                @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Лялин*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Email*" } })
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Телефон*" } })
+                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Телефон*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -107,20 +107,20 @@
 
         </div>
         <div>
-           
-         
-            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id="WrongPass" })
-            @Html.ValidationMessageFor(model => model.Expirience, null, new { id="WrongPass" })
-            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id="WrongPass" })
+
+
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new {id = "WrongPass"})
+            @Html.ValidationMessageFor(model => model.Expirience, null, new {id = "WrongPass"})
+            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new {id = "WrongPass"})
         </div>
-                  
+
         <div id="BlockTwoContent">
             <span id="AddedStyle">Предоставляемые услуги</span>
             <div id="AddedOffers">
 
                 <div id="offers-wrap">
                     @{
-                        string[] mas = new string[] { };
+                        string[] mas = new string[] {};
 
                         try
                         {
@@ -129,7 +129,7 @@
                             {
                                 <div class="offer">
                                     <span>@mas[i]</span>
-                                    <img src="~/Resources/img/cross-black.png" />
+                                    <img src="~/Resources/img/cross-black.png"/>
                                 </div>
                             }
 
@@ -155,19 +155,19 @@
                     <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
                     <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
-                        
-                    
+
+
 
                     </div>
                 </div>
-                @Html.EditorFor(model => model.Expirience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы*" } })
+                @Html.EditorFor(model => model.Expirience, new {htmlAttributes = new {@class = "jobscore", PlaceHolder = "Стаж Работы*"}})
             </div>
 
             <div class="childtwo">
 
                 <div>
-                   
-                    @Html.TextAreaFor(model => model.Awards, new {  id = "childarea", PlaceHolder = "Стаж Работы*"  })
+
+                    @Html.TextAreaFor(model => model.Awards, new {id = "childarea", PlaceHolder = "Стаж Работы*"})
                 </div>
 
                 <div id="orientationChildTwo">
@@ -183,25 +183,39 @@
 
 
                     <div class="input-wrap-twoOrient">
-                      
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
+
+                        @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "areastyle-two", PlaceHolder = "Текущий пароль*"}})
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
-                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})
+                        @Html.EditorFor(model => model.SumbitPassword, new {htmlAttributes = new {@class = "areastyle-two", PlaceHolder = "Текущий пароль*"}})
                     </div>
                 </div>
 
                 <div id="SaveButton">
                     <button id="savebut">Сохранить</button>
                 </div>
+
+               
+
+
             </div>
+
         </div>
     </div>
 }
 
-    <div id="hidden-offers">
+@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new {@id = "SaveButton"}))
+{
+
+    <button id="savebut">Изменить пароль</button>
+
+}
+
+
+
+<div id="hidden-offers">
         <div>Парикмахерские услуги</div>
         <div>Педикюр</div>
         <div>Массаж</div>

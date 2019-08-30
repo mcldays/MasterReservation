@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MasterReservation.Models;
 
 namespace MasterReservation.Controllers
@@ -34,6 +35,16 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+       
+        public ActionResult PasswordView()
+        {
+            return View();
+        }
+
+       
+
+
     }
 }
 
