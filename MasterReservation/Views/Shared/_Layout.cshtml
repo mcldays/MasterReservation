@@ -46,7 +46,17 @@
 
             <div id="userblock">
                 <img src="~/Resources/svg/user.svg" id="faceicon">
-                <span id="residentname">@(Model.Surname + " " + Model.Name)</span>
+                @{
+                    try
+                    {
+                        <span id="residentname">@(Model.Surname + " " + Model.Name)</span>
+                    }
+
+                    catch (Exception e)
+                    {
+                        <span id="residentname">@(Model[0].Surname+" " + Model[0].Name)</span>
+                    }
+                }
                 <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
                 <div id="user-dropdown">
                     <div class="dropdown-row" id="to-personal-data-btn">
@@ -73,6 +83,6 @@
     @RenderBody()
 
 
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>

@@ -36,6 +36,7 @@ namespace MasterReservation.Controllers
             
             object[] x = new object[]
             {
+                new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)),
                 new DateModel()
             };
             return View(x);
