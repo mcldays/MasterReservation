@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Избранное";
+}
+
+@Styles.Render("~/Content/ViewFavoritesStyles.css")
+
+
+<div id="background-overlay"></div>
+
+<div id="body-container">
+    <div id="page-title">
+        <span id="main-title">Избранное</span>
+        <span id="sub-title">Здесь отображается список ваших любимых студий</span>
+    </div>
+    <div class="cards-wrap">
+        <div class="favorite-card">
+            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
+            <div class="card-description">
+                <span class="card-title">Студия красоты Beauty Forest</span>
+                <span class="adress">Пушкинская, 234</span>
+                <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                <div class="table-wrap">
+                    <div class="first-line">
+                        <span class="bold-text">1 час</span>
+                        <span class="bold-text">День</span>
+                        <span class="bold-text">15 смен</span>
+                        <span class="bold-text">Месяц</span>
+                    </div>
+                    <div class="second-line">
+                        <span class="bold-text">500 р</span>
+                        <span class="bold-text">1500 р</span>
+                        <span class="bold-text">5500 р</span>
+                        <span class="bold-text">16000 р</span>
+                    </div>
+                </div>
+                <button class="detail-btn">Подробнее</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

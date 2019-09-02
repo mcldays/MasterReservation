@@ -10,79 +10,30 @@
 }
 
 @Styles.Render("~/Content/PersonalDataStyles.css")
+@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
 
-<div class="header">
-    <div class="city-wrap">
-        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
-        <span class="town">Город</span>
 
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Москва
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Питер</a>
-                <a class="dropdown-item" href="#">Ижевск</a>
-                <a class="dropdown-item" href="#">Казань</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="icons-wrap">
-        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
-        <div class="cocialicons">
-            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
-            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
-            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
-        </div>
-
-        <div id="userblock">
-            <img src="~/Resources/svg/user.svg" id="faceicon" class="dpd-js">
-            <span id="residentname" class="dpd-js">@(Model.Surname + " " + Model.Name)</span>
-
-            <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle" class="dpd-js">
-            <div id="user-dropdown">
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
-                    <span>Личные данные</span>
-                </div>
-                <hr>
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
-                    <span>Просмотр забронированного времени</span>
-                </div>
-                <hr>
-
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
-                    <span>Избранное</span>
-                </div>
-                <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
-            </div>
-        </div>
-    </div>
-</div>
-@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new {@id = "MainBlock"}))
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
 {
     @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
         <div id="photo-wrap">
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="picField" id="picField" size="24" onchange="" alt=""/>
+            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
         </div>
 
         <div id="textboxes">
             <div class="input-wrap">
 
-                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Имя*"}})
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Имя*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Лялин*"}})
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Лялин*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -93,7 +44,7 @@
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Телефон*"}})
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle phone-mask", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -109,9 +60,9 @@
         <div>
 
 
-            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new {id = "WrongPass"})
-            @Html.ValidationMessageFor(model => model.Expirience, null, new {id = "WrongPass"})
-            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new {id = "WrongPass"})
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Expirience, null, new { id = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id = "WrongPass" })
         </div>
 
         <div id="BlockTwoContent">
@@ -167,7 +118,7 @@
 
                 <div>
 
-                    @Html.TextAreaFor(model => model.Awards, new {id = "childarea", PlaceHolder = "Стаж Работы*"})
+                    @Html.TextAreaFor(model => model.Awards, new { id = "childarea", PlaceHolder = "Стаж Работы*" })
                 </div>
 
                 <div id="orientationChildTwo">
@@ -184,12 +135,12 @@
 
                     <div class="input-wrap-twoOrient">
 
-                        @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "areastyle-two", PlaceHolder = "Текущий пароль*"}})
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
 
 
                     <div class="input-wrap-twoOrient">
-                        @Html.EditorFor(model => model.SumbitPassword, new {htmlAttributes = new {@class = "areastyle-two", PlaceHolder = "Текущий пароль*"}})
+                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
                 </div>
 
@@ -213,12 +164,12 @@
 
 }
 
-
-
 <div id="hidden-offers">
-        <div>Парикмахерские услуги</div>
-        <div>Педикюр</div>
-        <div>Массаж</div>
-        <div>Визаж</div>
-        <div>Шугаринг</div>
-    </div>
+    <div>Парикмахерские услуги</div>
+    <div>Педикюр</div>
+    <div>Массаж</div>
+    <div>Визаж</div>
+    <div>Шугаринг</div>
+</div>
+
+<script>$(".phone-mask").mask("+7(999)9999999");</script>

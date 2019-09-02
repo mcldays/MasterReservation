@@ -8,20 +8,6 @@
         infinite: true
     });
 
-  // Открытие дропдовна в шапке
-    $("#user-dropdown").slideUp(0);
-    $("#userblock").on("click", function (e) {
-    if ($("#user-dropdown").is(':visible')) {
-            $("#user-dropdown").slideUp(300);
-        }
-        else {
-            $("#user-dropdown").slideDown(300);
-        }
-    });
-    $('#user-dropdown').click(function (e) {
-        e.stopPropagation();
-    });
-
     //обработка календаря
     var calendar1 = $('#calendar-wrap').datepicker({
         minDate: new Date(),
@@ -39,11 +25,6 @@
             $("#chosen-date").val(fd);
         }
     }).data('datepicker');
-
-    //ереход на главную страницу при клике на лого
-    $("#head-logo").on("click", function(){
-        window.location = "WorkingPlacePage";
-    });
 
     //нажатие на кнопку Календарь
     $("#calendar-btn").on("click", function(){
@@ -111,6 +92,8 @@
         }
     });
 
+
+    //Нажатие на сердце
     $(".heart").on("click", function(){
         if($(this).hasClass("red-heart")){
             $.ajax({

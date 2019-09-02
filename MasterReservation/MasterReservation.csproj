@@ -205,6 +205,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\HeaderStyles.css" />
+    <Content Include="Content\ViewFavoritesStyles.css" />
     <Content Include="Content\ViewBookedTimeStyles.css" />
     <Content Include="Content\WorkingPlacePageStyles.css" />
     <Content Include="Content\FindWorkPlacesStyles.css" />
@@ -323,7 +325,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
-    <Content Include="Scripts\ViewBookedTimeScripts.js" />
+    <Content Include="Scripts\HeaderScripts.js" />
     <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
     <Content Include="Scripts\MainPageScripts.js" />
@@ -369,6 +371,7 @@
     <Content Include="Views\TimerClub\PasswordView.cshtml" />
     <Content Include="Views\TimerClub\WorkingPlacePage.cshtml" />
     <Content Include="Views\TimerClub\ViewBookedTime.cshtml" />
+    <Content Include="Views\TimerClub\ViewFavorites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
