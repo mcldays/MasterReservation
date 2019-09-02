@@ -1,24 +1,78 @@
 ﻿@using System.Drawing
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@ViewBag.Title – Timer Club</title>
+    <title>@ViewBag.Title – Timer Club</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/css-bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/HeaderStyles.css")
 
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/HeaderScripts.js")
 
 </head>
 <body>
+    <div class="header">
+        <div class="city-wrap">
+            <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+            <span class="town">Город</span>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Москва
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Питер</a>
+                    <a class="dropdown-item" href="#">Ижевск</a>
+                    <a class="dropdown-item" href="#">Казань</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="icons-wrap">
+            <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+            <div class="cocialicons">
+                <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
+                <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
+                <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
+            </div>
+
+            <div id="userblock">
+                <img src="~/Resources/svg/user.svg" id="faceicon">
+                <span id="residentname">@(Model.Surname + " " + Model.Name)</span>
+                <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
+                <div id="user-dropdown">
+                    <div class="dropdown-row" id="to-personal-data-btn">
+                        <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
+                        <span>Личные данные</span>
+                    </div>
+                    <hr>
+                    <div class="dropdown-row" id="to-booked-time-btn">
+                        <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
+                        <span>Просмотр забронированного времени</span>
+                    </div>
+                    <hr>
+
+                    <div class="dropdown-row" id="to-favorites-btn">
+                        <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
+                        <span>Избранное</span>
+                    </div>
+                    <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @RenderBody()
 
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

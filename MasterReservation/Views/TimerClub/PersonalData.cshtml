@@ -14,57 +14,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
 
-<div class="header">
-    <div class="city-wrap">
-        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
-        <span class="town">Город</span>
 
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Москва
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Питер</a>
-                <a class="dropdown-item" href="#">Ижевск</a>
-                <a class="dropdown-item" href="#">Казань</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="icons-wrap">
-        <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
-        <div class="cocialicons">
-            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
-            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
-            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
-        </div>
-
-        <div id="userblock">
-            <img src="~/Resources/svg/user.svg" id="faceicon" class="dpd-js">
-            <span id="residentname" class="dpd-js">@(Model.Surname + " " + Model.Name)</span>
-
-            <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle" class="dpd-js">
-            <div id="user-dropdown">
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
-                    <span>Личные данные</span>
-                </div>
-                <hr>
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
-                    <span>Просмотр забронированного времени</span>
-                </div>
-                <hr>
-
-                <div class="dropdown-row">
-                    <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
-                    <span>Избранное</span>
-                </div>
-                <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
-            </div>
-        </div>
-    </div>
-</div>
 @using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
 {
     @Html.HiddenFor(model => model.id)

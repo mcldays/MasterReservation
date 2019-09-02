@@ -3,18 +3,43 @@
 @model object[]
 
 @{
+    Layout = null;
     ViewBag.Title = "Главная страница";
     LoginMaster modelLogin = (LoginMaster)ViewBag.LoginMaster;
 }
 
-@Styles.Render("~/Content/MainPageStyles.css")
-@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
-@Scripts.Render("~/Scripts/MainPageScripts.js")
-@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – Timer Club</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    @Styles.Render("~/Content/css-bootstrap")
+    @Styles.Render("~/Content/HeaderStyles.css")
+    @Styles.Render("~/Content/MainPageStyles.css")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
+    @Scripts.Render("~/Scripts/MainPageScripts.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/HeaderScripts.js")
+
+</head>
+<body>
 <div class="header">
     <div class="city-wrap">
+        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
         <span class="town">Город</span>
 
         <div class="dropdown">
@@ -28,15 +53,18 @@
             </div>
         </div>
     </div>
+
     <div class="icons-wrap">
         <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
         <div class="cocialicons">
-            <a href="#"><img src="~/Resources/img/instagram.png" alt=""></a>
-            <a href="#"><img src="~/Resources/img/facebook.png" alt=""></a>
-            <a href="#"><img src="~/Resources/img/vk.png" alt=""></a>
+            <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
+            <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
+            <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
         </div>
+
     </div>
 </div>
+
 <div id="body-wrap">
     <img class="logo" src="~/Resources/svg/logo.svg" alt="">
     <span class="rent">Аренда мест в лучших салонах города</span>
@@ -50,83 +78,83 @@
     </div>
 </div>
 
-@*TODO 1) Сделать поле в бд для картинки*@ 
-@*TODO 2) Присваивать ID пользователя к имени картинки*@
+@*TODO 1) Сделать поле в бд для картинки*@
+    @*TODO 2) Присваивать ID пользователя к имени картинки*@
 
-<!-- регистрация мастера -->
-<div id="overlay-modal">	</div>
-@using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-register-master" }))
-{
-    <span class="modal-title">Регистрация</span>
-    <div id="photo">
-        <img id="pic" src="~/Resources/img/avatar-default.png">
-        <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
-    </div>
-    <div id="fields-wrap">
-        <div id="main-fields">
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field phone-mask", PlaceHolder = "Номер Телефона*"} })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
+    <!-- регистрация мастера -->
+    <div id="overlay-modal">	</div>
+    @using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-register-master" }))
+    {
+        <span class="modal-title">Регистрация</span>
+        <div id="photo">
+            <img id="pic" src="~/Resources/img/avatar-default.png">
+            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
         </div>
-
-        <div id="offers-container">
-            <span id="offers-title">Предоставляемые услуги</span>
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Offers, new { htmlAttributes = new { @id = "hiddenInput", @style = "width:0px;height:0px;opacity:0;" } })
-            <div id="offers-wrap">
+        <div id="fields-wrap">
+            <div id="main-fields">
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя*" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field phone-mask", PlaceHolder = "Номер Телефона*" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
             </div>
-        </div>
 
-        <div id="sub-fields">
-            <div id="input-offers-wrap">
-                <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
-                <img src="~/Resources/svg/down-arrow.svg">
-                <div id="itemss" class="dropdown-menu">
-                    <div><span>Парикмахерские услуги</span></div>
-                    <div><span>Педикюр</span></div>
-                    <div><span>Массаж</span></div>
-                    <div><span>Визаж</span></div>
-                    <div><span>Шугаринг</span></div>
+            <div id="offers-container">
+                <span id="offers-title">Предоставляемые услуги</span>
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Offers, new { htmlAttributes = new { @id = "hiddenInput", @style = "width:0px;height:0px;opacity:0;" } })
+                <div id="offers-wrap">
                 </div>
             </div>
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })
+
+            <div id="sub-fields">
+                <div id="input-offers-wrap">
+                    <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
+                    <img src="~/Resources/svg/down-arrow.svg">
+                    <div id="itemss" class="dropdown-menu">
+                        <div><span>Парикмахерские услуги</span></div>
+                        <div><span>Педикюр</span></div>
+                        <div><span>Массаж</span></div>
+                        <div><span>Визаж</span></div>
+                        <div><span>Шугаринг</span></div>
+                    </div>
+                </div>
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })
+            </div>
+            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Awards, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имеющиеся награды", @id = "rewards" } })
+
+            <div id="pass-wrap">
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Password, new { htmlAttributes = new { @class = "field", PlaceHolder = "Пароль*" } })
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder = "Повторите пароль" } })
+            </div>
+            <div id="checkbox-wrap">
+                <input type="checkbox" id="process-personal-data">
+                <label for="process-personal-data">Согласен на обработку персональных данных</label>
+            </div>
+
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Name, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Surname, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Patronymic, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Email, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).PhoneNumber, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).City, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Offers, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Expirience, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Awards, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Password, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).SumbitPassword, null, new { @class = "messageerror" })
+
+            <button class="send-button">Зарегистрироваться</button>
         </div>
-        @Html.EditorFor(model => (model[1] as RegisterMasterModel).Awards, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имеющиеся награды", @id = "rewards" } })
 
-        <div id="pass-wrap">
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Password, new { htmlAttributes = new { @class = "field", PlaceHolder = "Пароль*" } })
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder = "Повторите пароль" } })
-        </div>
-        <div id="checkbox-wrap">
-            <input type="checkbox" id="process-personal-data">
-            <label for="process-personal-data">Согласен на обработку персональных данных</label>
+        <div class="close-modal">
+            <img src="~/Resources/img/close-modal.png">
         </div>
 
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Name, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Surname, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Patronymic, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Email, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).PhoneNumber, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).City, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Offers, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Expirience, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Awards, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Password, null, new { @class = "messageerror" })
-        @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).SumbitPassword, null, new { @class = "messageerror" })
-
-        <button class="send-button">Зарегистрироваться</button>
-    </div>
-
-    <div class="close-modal">
-        <img src="~/Resources/img/close-modal.png">
-    </div>
-
-}
+    }
 
 
-<!-- вход лля мастера -->
+    <!-- вход лля мастера -->
 
     @using (Html.BeginForm("LoginMaster", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-login-master" }))
     {
@@ -134,9 +162,9 @@
 
 
         <div id="login-wrap">
-            @Html.EditorFor(model => (model[0] as LoginMaster).Email, new { htmlAttributes = new { @class = "field",id="loginemail", PlaceHolder = "Email" } })
-            @Html.EditorFor(model => (model[0] as LoginMaster).Password, new { htmlAttributes = new { @class = "field",id="loginpass", PlaceHolder = "Пароль" } })
-          
+            @Html.EditorFor(model => (model[0] as LoginMaster).Email, new { htmlAttributes = new { @class = "field", id = "loginemail", PlaceHolder = "Email" } })
+            @Html.EditorFor(model => (model[0] as LoginMaster).Password, new { htmlAttributes = new { @class = "field", id = "loginpass", PlaceHolder = "Пароль" } })
+
 
         </div>
 
@@ -150,32 +178,35 @@
 
 
 
-<!--TODO 1) Прикрутить регистрацию салона-->
-@*TODO 2) Сделать отправку заявки на мыло*@
+    <!--TODO 1) Прикрутить регистрацию салона-->
+    @*TODO 2) Сделать отправку заявки на мыло*@
 
-@using (Html.BeginForm("RegisterSalon", "Authentication", FormMethod.Post, new {@class = "modal-window", @id = "window-register-salon"}))
-{
-    <!-- регистрация салона -->
+    @using (Html.BeginForm("RegisterSalon", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-register-salon" }))
+    {
+        <!-- регистрация салона -->
 
         <span id="adaptive-title" class="modal-title">Отправление заявки на добавление салона красоты в систему Timer Club</span>
 
 
         <div id="form-request">
             <div id="top-inputs">
-                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Name, new {htmlAttributes = new {@class = "field", PlaceHolder = "Имя контактного лица*", id="SendCont"}})
-                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Phone, new {htmlAttributes = new {@class = "field phone-mask", PlaceHolder = "Номер телефона*", id="SendPhone"}})
-                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Email, new {htmlAttributes = new {@class = "field", PlaceHolder = "Email", id="SendMail"}})
-                @Html.EditorFor(model => (model[2] as RegisterSalonModel).City, new {htmlAttributes = new {@class = "field", PlaceHolder = "Город*", id="SendCity"}})
-                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Name, null, new { @class = "messageerror" })
-                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Phone, null, new { @class = "messageerror" })
-                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Email, null, new { @class = "messageerror" })
-                @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).City, null, new { @class = "messageerror" })
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя контактного лица*", id = "SendCont" } })
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Phone, new { htmlAttributes = new { @class = "field phone-mask", PlaceHolder = "Номер телефона*", id = "SendPhone" } })
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "Email", id = "SendMail" } })
+                @Html.EditorFor(model => (model[2] as RegisterSalonModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*", id = "SendCity" } })
+                
 
             </div>
-            @Html.EditorFor(model => (model[2] as RegisterSalonModel).Information, new {htmlAttributes = new {@class = "field", PlaceHolder = "Дополнительная информация*", id="additional-info"}})
-          
-        </div>
+            
+            @Html.TextAreaFor(model => (model[2] as RegisterSalonModel).Information, new {@class = "field", PlaceHolder = "Дополнительная информация*", id = "additional-info" })
 
+        </div>
+        <div class="error-message">
+            @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Name, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Phone, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).Email, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[2] as RegisterSalonModel).City, null, new { @class = "messageerror" })
+        </div>
         <button class="send-button" id="login-button">Отправить заявку</button>
 
 
@@ -183,14 +214,17 @@
             <img src="~/Resources/img/close-modal.png">
         </div>
 
-}
+    }
 
-<div id="hidden-offers">
-    <div>Парикмахерские услуги</div>
-    <div>Педикюр</div>
-    <div>Массаж</div>
-    <div>Визаж</div>
-    <div>Шугаринг</div>
-</div>
+    <div id="hidden-offers">
+        <div>Парикмахерские услуги</div>
+        <div>Педикюр</div>
+        <div>Массаж</div>
+        <div>Визаж</div>
+        <div>Шугаринг</div>
+    </div>
 
-<script>$(".phone-mask").mask("+7(999)9999999");</script>
+    <script>$(".phone-mask").mask("+7(999)9999999");</script>
+    
+</body>
+</html>

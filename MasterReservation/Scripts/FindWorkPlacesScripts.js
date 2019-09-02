@@ -6,20 +6,6 @@
         infinite: true
     });
 
-    // Открытие дропдовна в шапке
-    $("#user-dropdown").slideUp(0);
-    $("#userblock").on("click", function (e) {
-        if ($("#user-dropdown").is(':visible')) {
-            $("#user-dropdown").slideUp(300);
-        }
-        else {
-            $("#user-dropdown").slideDown(300);
-        }
-    });
-    $('#user-dropdown').click(function (e) {
-        e.stopPropagation();
-    });
-
 
     // календарь
     var freeDates = [{
@@ -75,16 +61,6 @@
 
         // $(this).parent().prev().find($("span")).text(this.innerText);
         // $(this).parent().slideUp('300');
-    });
-
-
-
-    $("#head-logo").on("click", function () {
-        window.location = "MainPage";
-    });
-
-    $("#personal-data-page").on("click", function() {
-        window.location = "PersonalData";
     });
 
 

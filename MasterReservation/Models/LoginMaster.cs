@@ -14,6 +14,7 @@ namespace MasterReservation.Models
         [Required(ErrorMessage = "Введите электронную почту")]
         public string Email { get; set; }
 
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
 

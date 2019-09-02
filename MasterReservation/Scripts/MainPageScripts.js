@@ -9,7 +9,8 @@
     // закрытие окна регистрации мастера
     $(".close-modal").on('click', function () {
         $("#overlay-modal").slideUp(300);
-        $("#window-login-master").slideUp(300);;
+        $("#window-login-master").slideUp(300)[0].reset();
+        $("#offers-wrap").empty();
     });
 
 
@@ -22,8 +23,21 @@
     // закрытие окна регистрации мастера
     $(".close-modal").on('click', function () {
         $("#overlay-modal").slideUp(300);
-        $("#window-register-salon").slideUp(300);;
+        $("#window-register-salon").slideUp(300)[0].reset();
     });
+
+    // открытие окна регистрации мастера
+    $("#register-master").on("click", function () {
+        $("#overlay-modal").slideDown(300);
+        $("#window-register-master").slideDown(300);
+    });
+
+    // закрытие окна регистрации мастера
+    $(".close-modal").on('click', function () {
+        $("#overlay-modal").slideUp(300);
+        $("#window-register-master").slideUp(300)[0].reset();
+    });
+
 
 
 
@@ -39,17 +53,6 @@
     // --------РЕГИСТРАЦИЯ МАСТЕРА-------
 
 
-    // открытие окна регистрации мастера
-    $("#register-master").on("click", function () {
-        $("#overlay-modal").slideDown(300);
-        $("#window-register-master").slideDown(300);
-    });
-
-    // закрытие окна регистрации мастера
-    $(".close-modal").on('click', function () {
-        $("#overlay-modal").slideUp(300);
-        $("#window-register-master").slideUp(300);;
-    });
 
     // нажатие на аватар
     $("#photo img").on("click", function () {

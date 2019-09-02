@@ -1,21 +1,9 @@
-﻿* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-}
-
-a{
-    color: white;
-}
-
-a:hover{
-    text-decoration: none;
-    color: unset;
-}
+﻿
 
 body {
     background: url(../Resources/img/background.png) no-repeat fixed;
     background-color: #dad2da;
+    align-items: unset;
 }
 
 .header {
@@ -31,45 +19,16 @@ body {
 }
 
 .city-wrap {
+    margin-left: 0;
+}
+
+.error-message {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
-
-.icons-wrap {
-    display: flex;
-    align-items: center;
 }
 
-.town {
-    color: #fff;
-    margin-right: 25px;
-}
-
-.townbutton {
-    width: 101px;
-    height: 24px;
-    border-radius: 5px;
-    background-color: #0a9ad1;
-    border: 0px;
-    cursor: pointer;
-    margin-left: 24px;
-    display: block;
-    color: #ffffff;
-    font-family: "OpenSans";
-    font-size: 12px;
-    font-weight: 400;
-    margin-top: 12px;
-    float: left;
-}
-
-.cocialicons {
-}
-
-.number {
-    color: #fff;
-    display: block;
-    margin-right: 15px;
-}
 
 .logo {
     width: 337px;
@@ -420,7 +379,8 @@ body {
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
-    position: fixed;
+    position: absolute;
+    top: 276px;
 }
 
 .messageerror {
