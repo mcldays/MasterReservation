@@ -15,5 +15,7 @@ namespace MasterReservation.Utilities
         }
         public DbSet<ResidentModel> ResidentModels { get; set; }
         public DbSet<SalonModel> SalonModels { get; set; }
+        
+        public DbSet<DateModel> DateModels { get; set; }
     }
 }

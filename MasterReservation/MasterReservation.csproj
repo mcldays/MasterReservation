@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201908281330346_PoshelNahui.Designer.cs">
       <DependentUpon>201908281330346_PoshelNahui.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909021438465_YooBeach.cs" />
+    <Compile Include="Migrations\201909021438465_YooBeach.Designer.cs">
+      <DependentUpon>201909021438465_YooBeach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
@@ -407,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908281330346_PoshelNahui.resx">
       <DependentUpon>201908281330346_PoshelNahui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909021438465_YooBeach.resx">
+      <DependentUpon>201909021438465_YooBeach.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

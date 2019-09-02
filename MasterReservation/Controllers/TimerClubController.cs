@@ -33,7 +33,13 @@ namespace MasterReservation.Controllers
 
         public ActionResult FindWorkPlaces()
         {
-            return View();
+            
+            object[] x = new object[]
+            {
+                new DateModel()
+            };
+            return View(x);
+
         }
 
         public ActionResult WorkingPlacePage()

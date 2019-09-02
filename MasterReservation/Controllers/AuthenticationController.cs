@@ -104,6 +104,14 @@ namespace MasterReservation.Controllers
             return RedirectToAction("PasswordView", "TimerClub");
         }
 
+        public ActionResult SendDate(DateModel model)
+        {
+            Utilities.SendDbUtility.SendDate(model);
+
+            return RedirectToAction("FindWorkPlaces", "TimerClub");
+        }
+
+
 
     }
 }

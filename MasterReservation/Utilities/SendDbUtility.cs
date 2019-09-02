@@ -14,9 +14,9 @@ namespace MasterReservation.Utilities
 {
     public static class SendDbUtility
     {
-        public static bool SendMaster (RegisterMasterModel model)
+        public static bool SendMaster(RegisterMasterModel model)
         {
-                
+
 
 
             try
@@ -24,7 +24,7 @@ namespace MasterReservation.Utilities
                 using (UserContext DbUse = new UserContext())
                 {
 
-                    
+
 
                     DbUse.ResidentModels.Add(new ResidentModel()
                     {
@@ -68,23 +68,24 @@ namespace MasterReservation.Utilities
 
         public static bool CompareAut(LoginMaster model)
         {
-            
-            
-                using (UserContext dbUse = new UserContext())
-                {
-
-                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == model.Email && t.Password == model.Password);
-
-                   
-
-                    if (user == null) return false;
-                    return true;
-               
-
-                }
 
 
-            
+            using (UserContext dbUse = new UserContext())
+            {
+
+                ResidentModel user =
+                    dbUse.ResidentModels.FirstOrDefault(t => t.Email == model.Email && t.Password == model.Password);
+
+
+
+                if (user == null) return false;
+                return true;
+
+
+            }
+
+
+
         }
 
 
@@ -100,11 +101,11 @@ namespace MasterReservation.Utilities
 
                     DbUse.SalonModels.Add(new SalonModel()
                     {
-                      ContactPerson = model.Name,
-                      Phone = model.Phone,
-                      City = model.City,
-                      Email = model.Email,
-                      Information = model.Information
+                        ContactPerson = model.Name,
+                        Phone = model.Phone,
+                        City = model.City,
+                        Email = model.Email,
+                        Information = model.Information
 
 
 
@@ -158,7 +159,7 @@ namespace MasterReservation.Utilities
 
             }
 
-            
+
 
         }
 
@@ -170,7 +171,8 @@ namespace MasterReservation.Utilities
             using (UserContext dbUse = new UserContext())
             {
 
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t =>  t.Email == Email && t.Password == Password);
+                ResidentModel user =
+                    dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
 
 
 
@@ -188,7 +190,7 @@ namespace MasterReservation.Utilities
         public static bool ChangePassword(string Email, ChangePasswordModel model)
         {
 
-            using (UserContext dbUse= new UserContext())
+            using (UserContext dbUse = new UserContext())
             {
                 ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
                 if (user == null) return false;
@@ -202,9 +204,32 @@ namespace MasterReservation.Utilities
 
         }
 
+        public static bool SendDate(DateModel model)
+        {
 
+
+
+            try
+            {
+                using (UserContext DbUse = new UserContext())
+                {
+                    DbUse.DateModels.AddOrUpdate(model);
+                     DbUse.SaveChanges();
+                    return true;
+                }
+            }
+
+            catch (Exception e)
+            {
+                return true;
+            }
+
+
+
+
+
+        }
     }
-
 
 
 }

@@ -1,5 +1,6 @@
 ﻿@using System.Web.UI.WebControls
-
+@using MasterReservation.Models
+@model Object[]
 @{
     ViewBag.Title = "Поиск рабочих мест";
 }
@@ -7,6 +8,7 @@
 @Styles.Render("~/Content/slick/slick.css")
 @Styles.Render("~/Content/slick/slick-theme.css")
 @Styles.Render("~/Content/FindWorkPlacesStyles.css")
+@Scripts.Render("~/bundles/jqueryval")
 
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
@@ -66,7 +68,9 @@
 </div>
 
 <div id="body-container">
-    <div id="filter-wrap">
+@using (Html.BeginForm("SendDate", "Authentication", FormMethod.Post, new {@id = "filter-wrap"}))
+{
+    @*<div id="filter-wrap">*@
         <span id="filter-title">Фильтр поиска Рабочих Мест</span>
         <div id="calendar-wrap">
             <span class="sub-title">
@@ -74,7 +78,8 @@
             </span>
             <div id="calendar" class="calendar"></div>
             <!-- инпут для даты -->
-            <input type="text" class="hidden-input" id="input-for-date">
+            @Html.EditorFor(model => (model[0] as DateModel).Date, new {htmlAttributes = new {@class = "hidden-input", id = "input-for-date"}})
+            @*<input type="text" class="hidden-input" id="input-for-date">*@
         </div>
         <div id="input-time-wrap">
             <span class="sub-title">
@@ -111,7 +116,7 @@
                 <div class="dropdown-option">Косметологические услуги</div>
             </div>
             <!-- инпут для услуг -->
-            <input type="text" class="hidden-input" id="input-for-offers" />
+            <input type="text" class="hidden-input" id="input-for-offers"/>
         </div>
 
         <span class="sub-title">Город для поиска</span>
@@ -146,7 +151,8 @@
             <input type="text" class="hidden-input"/>
         </div>
         <button class="button">Поиск</button>
-    </div>
+    @*</div>*@
+}
     <div id="main-wrap">
         <div id="results">
             <div id="results-line">
@@ -202,7 +208,7 @@
                     <button class="button">Подробнее</button>
                 </div>
             </div>
-           
+
 
         </div>
         <div id="results-map" style="display: none;"></div>
