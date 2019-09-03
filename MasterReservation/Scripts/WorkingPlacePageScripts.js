@@ -124,4 +124,30 @@
         }
         
     });
+
+    //карта
+    ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+            center: [56.846377, 53.255902],
+            zoom: 10
+        });
+
+        var myGeocoder = ymaps.geocode("Ижевск, Пушкинская, 239");
+        myGeocoder.then(function (res) {
+            //console.log(res.geoObjects);
+            map.geoObjects.add(res.geoObjects);
+        });
+    });
+
+    $("#show-map-btn").on("click", function () {
+        if ($("#map").is(":visible")) {
+            $("#map").slideUp(300);
+        } else {
+            $("#map").slideDown(300);
+        }
+    });
+
+    $("#map").on("click",function(e) {
+        e.stopPropagation();
+    });
 });

@@ -136,10 +136,15 @@
     border: 2px solid #e1e1e1;
     color: black;
     font-size: 13px;
-    padding: 6px 21px;
+    padding: 6px 0px;
     margin: 3px;
     font-size: 12px;
+    width: 112px;
 }
+
+    .button-time:hover {
+        cursor: default;
+    }
 
 .blue-button {
     border-radius: 5px;
@@ -157,6 +162,10 @@
     padding: 6px 21px;
 }
 
+    .active-button:hover {
+        cursor: pointer;
+    }
+
 .white-button {
     border-radius: 5px;
     background-color: #ffffff;
@@ -165,8 +174,13 @@
     padding: 6px 21px;
 }
 
+    .white-button:hover {
+        cursor: pointer;
+    }
+
 #show-map-btn {
     margin-left: 32px;
+    position: relative;
 }
 
 .bold-line {
@@ -329,4 +343,18 @@ button.button-time:focus {
     fill: #ff2323;
     stroke: #ff2323;
     stroke-width: 3%;
+}
+
+#map {
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 106%;
+    z-index: 9;
+    left: 0;
+    display: none;
+}
+
+.ymaps-2-1-74-map {
+    height: 200px !important;
 }
