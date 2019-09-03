@@ -147,23 +147,23 @@ namespace MasterReservation.Utilities
 
         }
 
-        public static bool SendDate(DateModel model)
-        {
-            try
-            {
-                using (UserContext DbUse = new UserContext())
-                {
-                    DbUse.DateModels.AddOrUpdate(model);
-                     DbUse.SaveChanges();
-                    return true;
-                }
-            }
+        //public static bool SendDate(DateModel model)
+        //{
+        //    try
+        //    {
+        //        using (UserContext DbUse = new UserContext())
+        //        {
+        //            DbUse.DateModels.AddOrUpdate(model);
+        //             DbUse.SaveChanges();
+        //            return true;
+        //        }
+        //    }
 
-            catch (Exception e)
-            {
-                return true;
-            }
-        }
+        //    catch (Exception e)
+        //    {
+        //        return true;
+        //    }
+        //}
 
     }
 

@@ -182,6 +182,10 @@
     <Compile Include="Migrations\201909021438465_YooBeach.Designer.cs">
       <DependentUpon>201909021438465_YooBeach.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909031310356_qwer.cs" />
+    <Compile Include="Migrations\201909031310356_qwer.Designer.cs">
+      <DependentUpon>201909031310356_qwer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
@@ -417,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909021438465_YooBeach.resx">
       <DependentUpon>201909021438465_YooBeach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031310356_qwer.resx">
+      <DependentUpon>201909031310356_qwer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

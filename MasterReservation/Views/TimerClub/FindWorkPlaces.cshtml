@@ -37,13 +37,15 @@
             </span>
             <div id="input-time-sub-wrap">
                 <span class="time-lable">С</span>
-                <input type="text" class="input-time" value="13:00">
+                @Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })
+                @*<input type="text" class="input-time" value="13:00">*@
                 <span class="time-lable">до</span>
-                <input type="text" class="input-time" value="16:00">
+                @Html.EditorFor(model => (model[0] as DateModel).TimeSecond, new { htmlAttributes = new { @class = "input-time", value = "16:00 " } })
+                @*<input type="text" class="input-time" value="16:00">*@
             </div>
             <div class="checkbox-wrap">
-                <input type="checkbox" class="checkbox" id="full-day">
-                <span class="sub-title" id="checkbox-label">Полный рабочий день</span>
+                @Html.EditorFor(model => (model[0] as DateModel).FullTime, new { htmlAttributes = new { @id = "checkbox-label", value = "Полный рабочий день " } })
+                @*<span class="sub-title" id="checkbox-label">Полный рабочий день</span>*@
             </div>
 
         </div>
