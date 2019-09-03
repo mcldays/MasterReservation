@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -37,8 +39,11 @@ namespace MasterReservation.Controllers
             if (SendDbUtility.CompareAut(model) == true)
             {
                 FormsAuthentication.SetAuthCookie(model.Email, true);
-                return RedirectToAction("PersonalData", "TimerClub");
+                var resident = GetData.GetDataResident(model.Email);
+                Response.Cookies["ResidentName"].Value = Server.UrlEncode(resident.Name);
+                Response.Cookies["ResidentSurname"].Value = Server.UrlEncode(resident.Surname);
 
+                return RedirectToAction("PersonalData", "TimerClub");
 
             }
 

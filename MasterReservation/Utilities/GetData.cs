@@ -13,18 +13,9 @@ namespace MasterReservation.Utilities
             using (UserContext DbUse = new UserContext())
             {
                 ResidentModel user = DbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                
-
-
                 return user;
 
             }
-
-
-
-            
         }
-
-
     }
 }

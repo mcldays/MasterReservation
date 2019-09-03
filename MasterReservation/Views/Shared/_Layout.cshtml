@@ -46,17 +46,9 @@
 
             <div id="userblock">
                 <img src="~/Resources/svg/user.svg" id="faceicon">
-                @{
-                    try
-                    {
-                        <span id="residentname">@(Model.Surname + " " + Model.Name)</span>
-                    }
 
-                    catch (Exception e)
-                    {
-                        <span id="residentname">@(Model[0].Surname+" " + Model[0].Name)</span>
-                    }
-                }
+                <span id="residentname">@(Server.UrlDecode(Request.Cookies["ResidentName"].Value) + " " + Server.UrlDecode(Request.Cookies["ResidentSurname"].Value))</span>
+
                 <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
                 <div id="user-dropdown">
                     <div class="dropdown-row" id="to-personal-data-btn">

@@ -6,6 +6,7 @@
 
 @{
     ViewBag.Title = "Личные данные";
+    
 
 }
 
@@ -33,7 +34,7 @@
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Лялин*" } })
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Фамилия*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -89,13 +90,6 @@
                         {
 
                         }
-
-
-
-
-
-
-
                     }
                 </div>
 
@@ -111,14 +105,14 @@
 
                     </div>
                 </div>
-                @Html.EditorFor(model => model.Expirience, new {htmlAttributes = new {@class = "jobscore", PlaceHolder = "Стаж Работы*"}})
+                @Html.EditorFor(model => model.Expirience, new {htmlAttributes = new {@class = "jobscore", PlaceHolder = "Стаж Работы"}})
             </div>
 
             <div class="childtwo">
 
                 <div>
 
-                    @Html.TextAreaFor(model => model.Awards, new { id = "childarea", PlaceHolder = "Стаж Работы*" })
+                    @Html.TextAreaFor(model => model.Awards, new { id = "childarea", PlaceHolder = "Имеющиеся награды" })
                 </div>
 
                 <div id="orientationChildTwo">
