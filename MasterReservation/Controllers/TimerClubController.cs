@@ -44,17 +44,17 @@ namespace MasterReservation.Controllers
 
         public ActionResult WorkingPlacePage()
         {
-            return View(new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)));
+            return View();
         }
 
         public ActionResult ViewBookedTime()
         {
-            return View(new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)));
+            return View();
         }
 
         public ActionResult ViewFavorites()
         {
-            return View(new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)));
+            return View();
         }
     }
 }
