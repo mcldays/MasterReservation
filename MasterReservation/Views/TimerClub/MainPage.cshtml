@@ -92,12 +92,13 @@
         </div>
         <div id="fields-wrap">
             <div id="main-fields">
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имя*" } })
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new { htmlAttributes = new { @class = "field", PlaceHolder = "Фамилия*" } })
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new { htmlAttributes = new { @class = "field", PlaceHolder = "Отчество" } })
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new { htmlAttributes = new { @class = "field", PlaceHolder = "E-mail*" } })
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new { htmlAttributes = new { @class = "field phone-mask", PlaceHolder = "Номер Телефона*" } })
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new { htmlAttributes = new { @class = "field", PlaceHolder = "Город*" } })
+                
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Name, new {htmlAttributes = new {@class = "field", PlaceHolder = "Имя*"}})
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Surname, new {htmlAttributes = new {@class = "field", PlaceHolder = "Фамилия*"}})
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Patronymic, new {htmlAttributes = new {@class = "field", PlaceHolder = "Отчество"}})
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Email, new {htmlAttributes = new {@class = "field", PlaceHolder = "E-mail*"}})
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).PhoneNumber, new {htmlAttributes = new {@class = "field phone-mask", PlaceHolder = "Номер Телефона*"}})
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).City, new {htmlAttributes = new {@class = "field", PlaceHolder = "Город*"}})
             </div>
 
             <div id="offers-container">
@@ -128,10 +129,15 @@
                 @Html.EditorFor(model => (model[1] as RegisterMasterModel).SumbitPassword, new { htmlAttributes = new { @class = "field", PlaceHolder = "Повторите пароль" } })
             </div>
             <div id="checkbox-wrap">
-                <input type="checkbox" id="process-personal-data">
+                @Html.EditorFor(model=>(model[1]  as RegisterMasterModel).ProcessData, new{htmlAttributes = new{ id= "process-personal-data" } })
                 <label for="process-personal-data">Согласен на обработку персональных данных</label>
             </div>
-
+            @{
+                if (ViewBag.wrongMessage != null)
+                {
+                    <span class="messageerror">@ViewBag.wrongMessage</span>
+                }
+            }
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Name, null, new { @class = "messageerror" })
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Surname, null, new { @class = "messageerror" })
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Patronymic, null, new { @class = "messageerror" })
@@ -143,6 +149,7 @@
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Awards, null, new { @class = "messageerror" })
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).Password, null, new { @class = "messageerror" })
             @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).SumbitPassword, null, new { @class = "messageerror" })
+            @Html.ValidationMessageFor(model => (model[1] as RegisterMasterModel).ProcessData, null, new { @class = "messageerror" })
 
             <button class="send-button">Зарегистрироваться</button>
         </div>

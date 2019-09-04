@@ -16,6 +16,13 @@ namespace MasterReservation.Controllers
         [AllowAnonymous]
         public ActionResult MainPage()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("FindWorkPlaces");
+            }
+
+            ViewBag.wrongMessage = TempData["WrongMessage"];
+
             ViewBag.LoginModel = new LoginMaster();
             object[] x = new object[]
             {
@@ -28,12 +35,15 @@ namespace MasterReservation.Controllers
 
         public ActionResult PersonalData()
         {
-            return View(new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name)));
+            ViewBag.wrongMessage = TempData["WrongMessage"];
+            ViewBag.successMessage = TempData["SuccessMessage"];
+            RegisterMasterModel model = new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name));
+            model.Password = string.Empty;
+            return View(model);
         }
 
         public ActionResult FindWorkPlaces()
         {
-            
             object[] x = new object[]
             {
                 new DateModel()
@@ -54,6 +64,12 @@ namespace MasterReservation.Controllers
 
         public ActionResult ViewFavorites()
         {
+            return View();
+        }
+
+        public ActionResult PasswordView()
+        {
+            ViewBag.wrongMessage = TempData["WrongMessage"];
             return View();
         }
     }

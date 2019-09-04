@@ -77,9 +77,6 @@ namespace MasterReservation.Utilities
                         City = model.City,
                         Email = model.Email,
                         Information = model.Information
-
-
-
                     });
 
                     DbUse.SaveChanges();
@@ -102,7 +99,6 @@ namespace MasterReservation.Utilities
                 if (user == null) return false;
                 user.Name = model.Name;
                 user.Surname = model.Surname;
-                user.Password = model.Password;
                 user.Awards = model.Awards;
                 user.Offers = model.Offers;
                 user.Phone = model.PhoneNumber;
@@ -130,22 +126,40 @@ namespace MasterReservation.Utilities
         }
 
 
-        public static bool ChangePassword(string Email, ChangePasswordModel model)
+        public static bool ChangePassword(string Email, string newPass)
         {
-
             using (UserContext dbUse = new UserContext())
             {
                 ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
                 if (user == null) return false;
-                user.Password = model.NewPassword;
-
+                user.Password = newPass;
                 dbUse.ResidentModels.AddOrUpdate(user);
                 dbUse.SaveChanges();
-
                 return true;
             }
-
         }
+
+
+        public static bool CheckEmail(string Email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
+        public static bool CheckPhone(string Phone)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
 
         //public static bool SendDate(DateModel model)
         //{

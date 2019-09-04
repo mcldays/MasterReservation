@@ -108,7 +108,7 @@ letter-spacing: -0.15px;
 
 }
 
-#WrongPass{
+.WrongPass{
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
@@ -120,7 +120,20 @@ letter-spacing: -0.15px;
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
 
+.success-message{
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    color: green;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.09px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
@@ -300,21 +313,17 @@ margin-top:35px;
 margin-left:35px;
 }
 
-.ChildTwoOffers{
+.ChildTwoOffers {
     display: flex;
-    margin-left:35px;
+    justify-content: center;
 }
 
 
-.input-wrap-twoOrient
-{
-position: relative;
+.input-wrap-twoOrient{
+    position: relative;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    margin-left:38px;
-
-
 }
 
 
@@ -331,31 +340,53 @@ position: relative;
 
 
 
-.areastyle-two
-{
-width: 240px;
-height: 50px;
-border: 2px; 
-background-color: #ffffff;
-margin-top:20px;
-resize: none;
-font-family: 'Open Sans', sans-serif;
-font-size: 14px;
-font-weight: 400;
-padding-left: 15px;
+.areastyle-two {
+    width: 240px;
+    height: 50px;
+    border: 2px solid #d2d2d2;
+    background-color: #ffffff;
+    margin-top: 20px;
+    resize: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 15px;
 }
 
-#SaveButton{
+.areastyle-pass {
+    margin-top: 8px;
+}
+
+#SaveButton {
     color: #ffffff;
     font-family: "Open Sans - Semibold";
     font-size: 15px;
     font-weight: 400;
     border: 0;
-    margin-top: 26px;
+    margin-top: 13px;
     display: flex;
     justify-content: center;
+    width: 100%;
+}
 
+#SaveButton-pass {
+    color: #ffffff;
+    font-family: "Open Sans - Semibold";
+    font-size: 15px;
+    font-weight: 400;
+    border: 0;
+    margin-top: 13px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-left: 0px;
 
+}
+
+#change-pass-btn {
+    justify-content: left;
+    margin-left: 10%;
+    margin-top: 10px;
 }
 
 #input-offers-wrap img{
@@ -371,7 +402,7 @@ padding-left: 15px;
 
 
 
-#savebut{
+.savebut{
     width: 192px;
     height: 42px;
     border-radius: 5px;
@@ -380,6 +411,10 @@ padding-left: 15px;
     color: white;
     font-family: "Open Sans";
     border: 0;
+}
+
+.savebut-pass {
+    margin: 0 3px;
 }
 
 #input-offers{
@@ -452,4 +487,12 @@ padding-left: 15px;
 
 #photo-wrap {
     background-color: white;
+}
+
+#center-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 71px;
 }

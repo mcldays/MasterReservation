@@ -11,7 +11,12 @@
         this.parentElement.remove();
 
         $("#input-offers").trigger("keyup");
-    });
+
+        console.log(this.parentElement.innerText.trim() + ";");
+        $("#hidden-offers").val($("#hidden-offers").val().replace(this.parentElement.innerText.trim() + ";", ""));
+        
+
+        });
 
     // нажатие на "раскрыть список услуг"
     $("#input-offers-wrap img").on("click", function () {
@@ -20,6 +25,13 @@
         }
         else {
             this.parentElement.getElementsByClassName("dropdown-menu")[0].classList.remove("show");
+        }
+    });
+
+    $(document).on("click", function (e) {
+        var div = $("#itemss");
+        if (!div.is(e.target) && div.has(e.target).length === 0 && !$("#input-offers-wrap img").is(e.target)) {
+            div.removeClass("show");
         }
     });
 
@@ -52,6 +64,7 @@
         }
         if (!$("#offers-wrap").is("div:contains(" + this.innerText + ")")) {
             $("#offers-wrap").append('<div class="offer"><span>' + this.innerText + '</span><img src="../Resources/img/cross-black.png" alt=""></div>');
+            $("#hidden-offers").val($("#hidden-offers").val() + this.innerText + ";");
         }
         $("#input-offers").trigger("keyup");
     });
