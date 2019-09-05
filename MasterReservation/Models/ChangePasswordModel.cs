@@ -8,6 +8,7 @@ namespace MasterReservation.Models
 {
     public class ChangePasswordModel
     {
+        [Key]
         public int id { get; set; }
 
         [DataType(DataType.Password)]

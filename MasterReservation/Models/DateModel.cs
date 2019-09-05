@@ -8,9 +8,7 @@ namespace MasterReservation.Models
 {
     public class DateModel
     {
-        [Key]
-        public int Id { get; set; }
-
+        
         public string Date { get; set; }
 
         public string TimeFirst { get; set; } 
