@@ -56,6 +56,14 @@ namespace MasterReservation.Controllers
         {
             return View();
         }
+
+        public ActionResult PasswordView()
+        {
+            return View();
+
+        }
+
+
     }
 }
 

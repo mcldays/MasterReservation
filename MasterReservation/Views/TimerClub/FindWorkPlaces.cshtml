@@ -39,13 +39,15 @@
                 <span class="time-lable">С</span>
                 @Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })
                 @*<input type="text" class="input-time" value="13:00">*@
-                <span class="time-lable">до</span>
+                <span class="time-lable" id="checkbox-label">до</span>
                 @Html.EditorFor(model => (model[0] as DateModel).TimeSecond, new { htmlAttributes = new { @class = "input-time", value = "16:00 " } })
                 @*<input type="text" class="input-time" value="16:00">*@
             </div>
             <div class="checkbox-wrap">
-                @Html.EditorFor(model => (model[0] as DateModel).FullTime, new { htmlAttributes = new { @id = "checkbox-label", value = "Полный рабочий день " } })
-                @*<span class="sub-title" id="checkbox-label">Полный рабочий день</span>*@
+                @Html.CheckBoxFor(model => (model[0] as DateModel).FullTime, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })
+              
+               
+                <span class="sub-title" id="checkbox-label">Полный рабочий день</span>
             </div>
 
         </div>
@@ -68,20 +70,24 @@
                 <div class="dropdown-option">Косметологические услуги</div>
             </div>
             <!-- инпут для услуг -->
-            <input type="text" class="hidden-input" id="input-for-offers"/>
+            @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
+            @Html.EditorFor(model => (model[0] as DateModel).Offers, new  { htmlAttributes = new { @id = "input-for-offers", value = "Полный рабочий день ", @class="hidden-input" }})
         </div>
 
-        <span class="sub-title">Город для поиска</span>
-        <input type="text" id="input-city">
+    <span class="sub-title">Город для поиска</span>
+    @Html.EditorFor(model => (model[0] as DateModel).City, new  { htmlAttributes = new { @id = "input-city" }})
+        @*<input type="text" id="input-city">*@
 
         <div id="type-place">
             <span class="sub-title">Тип Рабочего Места</span>
             <div class="checkbox-wrap">
-                <input type="checkbox" class="checkbox">
+                @Html.CheckBoxFor(model => (model[0] as DateModel).PrivateSpace, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })
+                @*<input type="checkbox" class="checkbox">*@
                 <span class="checkbox-label-radio">отдельный кабинет;</span>
             </div>
             <div class="checkbox-wrap">
-                <input type="checkbox" class="checkbox">
+                @Html.CheckBoxFor(model => (model[0] as DateModel).OpenSpace, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })
+                @*<input type="checkbox" class="checkbox">*@
                 <span class="checkbox-label-radio">общее пространство;</span>
             </div>
         </div>
@@ -100,7 +106,8 @@
                 <div class="dropdown-option">Детская комната</div>
             </div>
             <!-- инпут для доп условий -->
-            <input type="text" class="hidden-input"/>
+            @Html.EditorFor(model => (model[0] as DateModel).AddedOffers, new { htmlAttributes = new  { @class="hidden-input" }})
+            @*<input type="text" class="hidden-input"/>*@
         </div>
         <button class="button">Поиск</button>
     @*</div>*@
