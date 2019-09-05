@@ -14,6 +14,8 @@ namespace MasterReservation.Utilities
 {
     public static class SendDbUtility
     {
+
+        //Метод занесения данных мастера в бд
         public static bool SendMaster(RegisterMasterModel model)
         {
             try
@@ -32,13 +34,8 @@ namespace MasterReservation.Utilities
                         Experience = model.Expirience,
                         Awards = model.Awards,
                         Password = model.Password
-
-
-
                     });
-
                     DbUse.SaveChanges();
-
                 }
             }
             catch (Exception e)
@@ -48,24 +45,9 @@ namespace MasterReservation.Utilities
             return true;
         }
 
-
-        public static bool CompareAut(LoginMaster model)
-        {
-            using (UserContext dbUse = new UserContext())
-            {
-
-                ResidentModel user =
-                    dbUse.ResidentModels.FirstOrDefault(t => t.Email == model.Email && t.Password == model.Password);
-                
-                if (user == null) return false;
-                return true;
-            }
-        }
-
-
+        // Метод занесения данных салона в бд
         public static bool SendSalon(RegisterSalonModel model)
         {
-
             try
             {
                 using (UserContext DbUse = new UserContext())
@@ -77,11 +59,7 @@ namespace MasterReservation.Utilities
                         City = model.City,
                         Email = model.Email,
                         Information = model.Information
-
-
-
                     });
-
                     DbUse.SaveChanges();
                 }
             }
@@ -92,7 +70,7 @@ namespace MasterReservation.Utilities
             return true;
         }
 
-
+        // Метод изменения данных мастера в бд
         public static bool ChangeResident(RegisterMasterModel model)
         {
             using (UserContext dbUse = new UserContext())
@@ -102,21 +80,18 @@ namespace MasterReservation.Utilities
                 if (user == null) return false;
                 user.Name = model.Name;
                 user.Surname = model.Surname;
-                user.Password = model.Password;
                 user.Awards = model.Awards;
                 user.Offers = model.Offers;
                 user.Phone = model.PhoneNumber;
                 user.Patronymic = model.Patronymic;
                 user.Experience = model.Expirience;
-
                 dbUse.ResidentModels.AddOrUpdate(user);
                 dbUse.SaveChanges();
-
                 return true;
             }
         }
 
-
+        // Метод проверки введенного логина и пароля
         public static bool ComparePassword(string Password, string Email)
         {
             using (UserContext dbUse = new UserContext())
@@ -129,23 +104,42 @@ namespace MasterReservation.Utilities
             }
         }
 
-
-        public static bool ChangePassword(string Email, ChangePasswordModel model)
+        // Метод изменения пароля
+        public static bool ChangePassword(string Email, string newPass)
         {
-
             using (UserContext dbUse = new UserContext())
             {
                 ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
                 if (user == null) return false;
-                user.Password = model.NewPassword;
-
+                user.Password = newPass;
                 dbUse.ResidentModels.AddOrUpdate(user);
                 dbUse.SaveChanges();
-
                 return true;
             }
-
         }
+
+        // Метод проверки существования емэйла в бд
+        public static bool CheckEmail(string Email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
+        // Метод проверки существования номера телефона в бд
+        public static bool CheckPhone(string Phone)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
 
         //public static bool SendDate(DateModel model)
         //{

@@ -10,6 +10,8 @@
 @Styles.Render("~/Content/FindWorkPlacesStyles.css")
 @Scripts.Render("~/bundles/jqueryval")
 
+<script src="https://api-maps.yandex.ru/2.1/?apikey=8db9bf80-135a-40b0-9e06-66adc66fd9b3&lang=ru_RU"
+        type="text/javascript"></script>
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
 @Scripts.Render("~/Scripts/slick.min.js")
@@ -18,8 +20,8 @@
 
 
 <div id="body-container">
-@using (Html.BeginForm("SendDate", "Authentication", FormMethod.Post, new {@id = "filter-wrap"}))
-{
+    @using (Html.BeginForm("SendDate", "Authentication", FormMethod.Post, new {@id = "filter-wrap"}))
+    {
     @*<div id="filter-wrap">*@
         <span id="filter-title">Фильтр поиска Рабочих Мест</span>
         <div id="calendar-wrap">
@@ -111,7 +113,7 @@
         </div>
         <button class="button">Поиск</button>
     @*</div>*@
-}
+    }
     <div id="main-wrap">
         <div id="results">
             <div id="results-line">
@@ -164,12 +166,14 @@
                             <div class="tariff">16000 р</div>
                         </div>
                     </div>
-                    <button class="button">Подробнее</button>
+                    <button class="button" onclick="document.location='WorkingPlacePage'">Подробнее</button>
                 </div>
             </div>
 
 
         </div>
-        <div id="results-map" style="display: none;"></div>
+        <div id="results-map" style="display: none;">
+            <div id="map"></div>
+        </div>
     </div>
 </div>

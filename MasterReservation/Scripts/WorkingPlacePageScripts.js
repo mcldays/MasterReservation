@@ -98,7 +98,7 @@
         if($(this).hasClass("red-heart")){
             $.ajax({
                 type: "GET",
-                url: "/WorkingPlacePage/RemoveFavorite",
+                url: "/Favorite/RemoveFavorite",
                 data: "data=123",
                 success: function(data){
                     $(".heart").removeClass("red-heart");
@@ -111,7 +111,7 @@
         else{
             $.ajax({
                 type: "GET",
-                url: "/WorkingPlacePage/SetFavorite",
+                url: "/Favorite/SetFavorite",
                 data: "data=123",
                 success: function (data) {
                     $(".heart").addClass("red-heart");
@@ -123,5 +123,31 @@
 
         }
         
+    });
+
+    //карта
+    ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+            center: [56.846377, 53.255902],
+            zoom: 10
+        });
+
+        var myGeocoder = ymaps.geocode("Ижевск, Пушкинская, 239");
+        myGeocoder.then(function (res) {
+            //console.log(res.geoObjects);
+            map.geoObjects.add(res.geoObjects);
+        });
+    });
+
+    $("#show-map-btn").on("click", function () {
+        if ($("#map").is(":visible")) {
+            $("#map").slideUp(300);
+        } else {
+            $("#map").slideDown(300);
+        }
+    });
+
+    $("#map").on("click",function(e) {
+        e.stopPropagation();
     });
 });

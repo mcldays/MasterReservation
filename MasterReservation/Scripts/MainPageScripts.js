@@ -83,6 +83,14 @@
         }
     });
 
+    //клик не по списку
+    $(document).on("click", function (e) {
+        var div = $("#itemss"); 
+        if (!div.is(e.target) && div.has(e.target).length === 0 && !$("#input-offers-wrap img").is(e.target)) {
+            div.removeClass("show");
+        }
+    });
+
     // ввод символов в поле выбора услуг
     $("#input-offers").keyup(function () {
         $("#itemss div").remove();
@@ -117,10 +125,11 @@
         $("#input-offers").trigger("keyup");
     });
 
+
     //автокомплит города
     $("input[name='City']").each(function () {
         $(this).autocomplete({
-            source: '/Test/TestMethod'
+            source: '/Authentication/GetCities'
         });
     });
 
@@ -144,5 +153,7 @@
             // them on the server until the user's session ends.
         }
     }
+
+
 
 });

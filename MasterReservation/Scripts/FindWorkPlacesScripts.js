@@ -48,6 +48,14 @@
             $(this).next().slideDown('300');
         }
     });
+
+    $(document).on("click", function (e) {
+        var div = $(".offers-options");
+        if (!div.is(e.target) && div.has(e.target).length === 0 && !$(".offers-selected-wrap").is(e.target)) {
+            div.slideUp(300);
+        }
+    });
+
     $(".dropdown-option").on("click", function () {
         var value_input = $(this).parent().parent().find(".hidden-input").val();
         if ($(this).is(".active-option")) {
@@ -92,9 +100,32 @@
     //автокомплит города
     $("#input-city").each(function () {
          $(this).autocomplete({
-             source: '/test/testmethod'
+             source: '/Authentication/GetCities'
          });
     });
+
+
+
+    ymaps.ready(function () {
+        // Указывается идентификатор HTML-элемента.
+        //console.log(ymaps.geocode("Ижевск, Пушкинская, 239"));
+
+        
+
+        var map = new ymaps.Map("map", {
+            center: [56.846377, 53.255902],
+            zoom: 10
+        });
+
+        var myGeocoder = ymaps.geocode("Ижевск, Пушкинская, 239");
+        myGeocoder.then(function (res) {
+            //console.log(res.geoObjects);
+            map.geoObjects.add(res.geoObjects);
+        });
+
+        
+    });
+
 
 
 

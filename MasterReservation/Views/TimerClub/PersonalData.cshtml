@@ -39,7 +39,7 @@
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*"}})
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*", disabled="disabled"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
@@ -48,7 +48,6 @@
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle phone-mask", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
-
         </div>
 
     </div>
@@ -61,9 +60,23 @@
         <div>
 
 
-            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { id = "WrongPass" })
-            @Html.ValidationMessageFor(model => model.Expirience, null, new { id = "WrongPass" })
-            @Html.ValidationMessageFor(model => model.SumbitPassword, null, new { id = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Name, null, new { @class = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Offers, null, new { @class = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Expirience, null, new { @class = "WrongPass" })
+            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "WrongPass" })
+            @{
+                if (ViewBag.wrongMessage != null)
+                {
+                    <span class="WrongPass">@ViewBag.wrongMessage</span>
+                }
+
+                if (ViewBag.successMessage != null)
+                {
+                    <span class="success-message">@ViewBag.successMessage</span>
+                }
+            }
         </div>
 
         <div id="BlockTwoContent">
@@ -91,6 +104,7 @@
 
                         }
                     }
+                    @Html.EditorFor(model=>model.Offers, new {htmlAttributes = new{@class="hidden-input", id="hidden-offers"}})
                 </div>
 
             </div>
@@ -115,31 +129,31 @@
                     @Html.TextAreaFor(model => model.Awards, new { id = "childarea", PlaceHolder = "Имеющиеся награды" })
                 </div>
 
-                <div id="orientationChildTwo">
+                @*<div id="orientationChildTwo">
                     <span id="ChosePass">Смена пароля</span>
-                </div>
+                </div>*@
 
                 <div class="ChildTwoOffers">
 
-                    <div class="input-wrap-two">
+                    @*<div class="input-wrap-two">*@
                         @*@Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})*@
                         @*<input type="text" class="areastyle-two" placeholder="Текущий пароль*">*@
-                    </div>
+                    @*</div>*@
 
 
                     <div class="input-wrap-twoOrient">
 
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
+                        @Html.EditorFor(model=>model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
 
 
-                    <div class="input-wrap-twoOrient">
+                    @*<div class="input-wrap-twoOrient">
                         @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
-                    </div>
+                    </div>*@
                 </div>
 
                 <div id="SaveButton">
-                    <button id="savebut">Сохранить</button>
+                    <button class="savebut">Сохранить</button>
                 </div>
 
                
@@ -151,12 +165,14 @@
     </div>
 }
 
-@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new {@id = "SaveButton"}))
+@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new {@id = "change-pass-btn" }))
 {
 
-    <button id="savebut">Изменить пароль</button>
+    <button class="savebut">Изменить пароль</button>
 
 }
+
+
 
 <div id="hidden-offers">
     <div>Парикмахерские услуги</div>
@@ -166,4 +182,6 @@
     <div>Шугаринг</div>
 </div>
 
-<script>$(".phone-mask").mask("+7(999)9999999");</script>
+<script>
+    $(".phone-mask").mask("+7(999)9999999");
+</script>

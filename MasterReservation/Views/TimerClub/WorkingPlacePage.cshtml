@@ -10,6 +10,9 @@
 @Styles.Render("~/Content/slick/slick-theme.css")
 @Styles.Render("~/Content/WorkingPlacePageStyles.css")
 
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=8db9bf80-135a-40b0-9e06-66adc66fd9b3&lang=ru_RU"
+        type="text/javascript"></script>
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
 @Scripts.Render("~/Scripts/slick.min.js")
@@ -67,7 +70,8 @@
 
 						</g>
 					</svg>
-                <button id="show-map-btn" class="blue-button">Показать на карте</button>
+                <button id="show-map-btn" class="blue-button">Показать на карте<div id="map"></div></button>
+                
             </div>
             <span class="address">Пушкинская, 239</span>
             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
@@ -102,15 +106,15 @@
         </div>
         <div id="input-time-wrap">
             <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time">8:00-8:30</button>
-            <button class="button-time white-button">8:00-8:30</button>
-            <button class="button-time white-button">8:00-8:30</button>
-            <button class="button-time white-button">8:00-8:30</button>
+            <button class="button-time">8:30-9:00</button>
+            <button class="button-time">9:00-9:30</button>
+            <button class="button-time">9:30-10:00</button>
+            <button class="button-time">10:00-10:30</button>
+            <button class="button-time">10:30-11:00</button>
+            <button class="button-time">11:00-11:30</button>
+            <button class="button-time white-button">11:30-12:00</button>
+            <button class="button-time white-button">12:00-12:30</button>
+            <button class="button-time white-button">12:30-13:00</button>
         </div>
         <input type="text" class="hidden-input" id="input-times">
         <div id="checkbox-wrap">

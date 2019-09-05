@@ -60,7 +60,7 @@ namespace MasterReservation.Models
         [Required(ErrorMessage = "Введите город")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Выберите предоставляемые услуги услуги")]
+        [Required(ErrorMessage = "Выберите предоставляемые услуги")]
         public string Offers { get; set; }
 
         [Range(0, 50, ErrorMessage = "Недопустимый стаж")]
@@ -73,14 +73,19 @@ namespace MasterReservation.Models
         
        
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки должна быть от 6 до 50 символов")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Длина пароля должна быть от 6 до 50 символов")]
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
 
-        [System.Web.Mvc.Compare("Password",ErrorMessage = "Пароли не совпадают")]
+        [System.Web.Mvc.Compare("Password",ErrorMessage = "Пароли не совпадают!")]
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Повторите пароль")]
         public string SumbitPassword { get; set; }
+
+
+        [Required(ErrorMessage = "Подтвердите согласие на обработку персональных данных")]
+        public bool ProcessData { get; set; }
+
     }
 }
