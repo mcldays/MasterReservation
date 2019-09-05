@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MasterReservation.Controllers
 {
-    public class WorkingPlacePageController : Controller
+    public class FavoriteController : Controller
     {
         
         public string SetFavorite(string data)

@@ -14,193 +14,193 @@ namespace MasterReservation.Controllers
 {
     public class DbController : ApiController
     {
-        public bool AddNewUserResident([FromUri]string Surname, [FromUri]string Name, [FromUri]string Patronomyc, [FromUri]
-            string Phone, [FromUri]string Email, [FromUri]string ServicesIds, [FromUri]string StudyPlace, [FromUri]string Experience, [FromUri]
-            string Awards)
-        {
-            try
-            {
+        //public bool AddNewUserResident([FromUri]string Surname, [FromUri]string Name, [FromUri]string Patronomyc, [FromUri]
+        //    string Phone, [FromUri]string Email, [FromUri]string ServicesIds, [FromUri]string StudyPlace, [FromUri]string Experience, [FromUri]
+        //    string Awards)
+        //{
+        //    try
+        //    {
 
 
-                using (UserContext DbUse = new UserContext())
-                {
-                    DbUse.ResidentModels.Add(new ResidentModel()
-                    {
-                       Surname = Surname,
-                       Name = Name,
-                       Patronymic =  Patronomyc,
-                       Phone = Phone,
-                       Email = Email,
-                       ServicesIds = ServicesIds,
-                       StudyPlace = StudyPlace,
-                       Awards = Awards,
-                       Experience = Experience
+        //        using (UserContext DbUse = new UserContext())
+        //        {
+        //            DbUse.ResidentModels.Add(new ResidentModel()
+        //            {
+        //               Surname = Surname,
+        //               Name = Name,
+        //               Patronymic =  Patronomyc,
+        //               Phone = Phone,
+        //               Email = Email,
+        //               ServicesIds = ServicesIds,
+        //               StudyPlace = StudyPlace,
+        //               Awards = Awards,
+        //               Experience = Experience
 
 
-                    });
+        //            });
 
                     
-                    DbUse.SaveChanges();
-                }
+        //            DbUse.SaveChanges();
+        //        }
 
-                return true;
+        //        return true;
 
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
 
 
             
 
-        }
+        //}
 
-        public bool AddNewUserSalon([FromUri]string ContactPerson, [FromUri]string Phone, [FromUri]string City, [FromUri]
-            string Email, [FromUri]string Message)
-        {
-            try
-            {
-
-
-                using (UserContext DbUse = new UserContext())
-                {
-                    DbUse.SalonModels.Add(new SalonModel()
-                    {
-                        ContactPerson = ContactPerson,
-                        Phone = Phone,
-                        City = City,
-                        Email = Email,
-                        Message = Message
+        //public bool AddNewUserSalon([FromUri]string ContactPerson, [FromUri]string Phone, [FromUri]string City, [FromUri]
+        //    string Email, [FromUri]string Message)
+        //{
+        //    try
+        //    {
 
 
-
-                    }) ;
-
-
-                    DbUse.SaveChanges();
-                }
-
-                return true;
-
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+        //        using (UserContext DbUse = new UserContext())
+        //        {
+        //            DbUse.SalonModels.Add(new SalonModel()
+        //            {
+        //                ContactPerson = ContactPerson,
+        //                Phone = Phone,
+        //                City = City,
+        //                Email = Email,
+        //                Message = Message
 
 
 
+        //            }) ;
 
-        }
+
+        //            DbUse.SaveChanges();
+        //        }
+
+        //        return true;
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
+
+
+
+
+        //}
 
                                     
-        [System.Web.Mvc.HttpGet]
-        public bool DeleteUserResident([FromUri] int id)
-        {
-            try
-            {
+        //[System.Web.Mvc.HttpGet]
+        //public bool DeleteUserResident([FromUri] int id)
+        //{
+        //    try
+        //    {
 
 
-                using (UserContext dbUse = new UserContext())
-                {
-                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == id);
+        //        using (UserContext dbUse = new UserContext())
+        //        {
+        //            ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == id);
 
-                    dbUse.ResidentModels.Remove(user);
+        //            dbUse.ResidentModels.Remove(user);
 
-                    dbUse.SaveChanges();
-                }
+        //            dbUse.SaveChanges();
+        //        }
 
-                return true;
+        //        return true;
 
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-
-
-        }
-
-        public bool DeleteUserSalon([FromUri] int id)
-        {
-            try
-            {
-
-
-                using (UserContext dbUse = new UserContext())
-                {
-                    SalonModel user = dbUse.SalonModels.FirstOrDefault(t => t.Id == id);
-
-                    dbUse.SalonModels.Remove(user);
-
-                    dbUse.SaveChanges();
-                }
-
-                return true;
-
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
 
 
 
-        }
+        //}
+
+        //public bool DeleteUserSalon([FromUri] int id)
+        //{
+        //    try
+        //    {
+
+
+        //        using (UserContext dbUse = new UserContext())
+        //        {
+        //            SalonModel user = dbUse.SalonModels.FirstOrDefault(t => t.Id == id);
+
+        //            dbUse.SalonModels.Remove(user);
+
+        //            dbUse.SaveChanges();
+        //        }
+
+        //        return true;
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
+
+
+
+        //}
 
 
 
 
-        [System.Web.Mvc.HttpGet]
-        public bool ChangeResident([FromUri]string Surname, [FromUri]string Name, [FromUri]string Patronomyc, [FromUri]
-            string Phone, [FromUri]string Email, [FromUri]string ServicesIds, [FromUri]string StudyPlace, [FromUri]string Experience, [FromUri]
-            string Awards)
-        {
-            using (UserContext dbUse = new UserContext())
-            {
+        //[System.Web.Mvc.HttpGet]
+        //public bool ChangeResident([FromUri]string Surname, [FromUri]string Name, [FromUri]string Patronomyc, [FromUri]
+        //    string Phone, [FromUri]string Email, [FromUri]string ServicesIds, [FromUri]string StudyPlace, [FromUri]string Experience, [FromUri]
+        //    string Awards)
+        //{
+        //    using (UserContext dbUse = new UserContext())
+        //    {
 
                
 
-                try
-                {
+        //        try
+        //        {
 
 
-                    using (UserContext DbUse = new UserContext())
-                    {
-                        DbUse.ResidentModels.AddOrUpdate(new ResidentModel()
-                        {
-                            Surname = Surname,
-                            Name = Name,
-                            Patronymic = Patronomyc,
-                            Phone = Phone,
-                            Email = Email,
-                            ServicesIds = ServicesIds,
-                            StudyPlace = StudyPlace,
-                            Awards = Awards,
-                            Experience = Experience
+        //            using (UserContext DbUse = new UserContext())
+        //            {
+        //                DbUse.ResidentModels.AddOrUpdate(new ResidentModel()
+        //                {
+        //                    Surname = Surname,
+        //                    Name = Name,
+        //                    Patronymic = Patronomyc,
+        //                    Phone = Phone,
+        //                    Email = Email,
+        //                    ServicesIds = ServicesIds,
+        //                    StudyPlace = StudyPlace,
+        //                    Awards = Awards,
+        //                    Experience = Experience
 
 
-                        });
+        //                });
 
 
-                        DbUse.SaveChanges();
-                    }
+        //                DbUse.SaveChanges();
+        //            }
 
-                    return true;
+        //            return true;
 
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return false;
+        //        }
 
 
-            } 
+        //    } 
         
-                // dbUse.SaveChanges();
-            }
+        //        // dbUse.SaveChanges();
+        //    }
 
 
        
@@ -210,5 +210,5 @@ namespace MasterReservation.Controllers
 
     }
 
-    }
+}
 

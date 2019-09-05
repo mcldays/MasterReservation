@@ -100,7 +100,7 @@
     //автокомплит города
     $("#input-city").each(function () {
          $(this).autocomplete({
-             source: '/test/testmethod'
+             source: '/Authentication/GetCities'
          });
     });
 

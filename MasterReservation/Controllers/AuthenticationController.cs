@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -13,31 +14,37 @@ namespace MasterReservation.Controllers
 {
     public class AuthenticationController : Controller
     {
-        // GET: Authentication
+        // Регистрация мастера
         [HttpPost]
         [AllowAnonymous]
         public ActionResult RegisterMaster(RegisterMasterModel model)
         {
             //FormsAuthentication.SetAuthCookie("Васильев Вася", false);
+            // Если такой емайл уже есть в бд
             if (SendDbUtility.CheckEmail(model.Email))
             {
                 TempData["WrongMessage"] = "Такой email уже зарегистрирован!";
                 return RedirectToAction("MainPage", "TimerClub");
             }
 
+            // Если такой телефон уже есть в бд
             if (SendDbUtility.CheckPhone(model.PhoneNumber))
             {
                 TempData["WrongMessage"] = "Такой номер телефона уже зарегистрирован!";
                 return RedirectToAction("MainPage", "TimerClub");
             }
+
+            // Заносим модель в бд
             Utilities.SendDbUtility.SendMaster(model);
             return RedirectToAction("MainPage", "TimerClub");
         }
+
+        //Вход мастера
         [AllowAnonymous]
         [HttpPost]
         public ActionResult LoginMaster(LoginMaster model)
         {
-            if (SendDbUtility.CompareAut(model) == true)
+            if (SendDbUtility.ComparePassword(model.Password, model.Email))
             {
                 FormsAuthentication.SetAuthCookie(model.Email, true);
                 var resident = GetData.GetDataResident(model.Email);
@@ -49,10 +56,11 @@ namespace MasterReservation.Controllers
             return RedirectToAction("MainPage", "TimerClub");
         }
 
+        // Отправка данных для регистрации салона
         [AllowAnonymous]
         public ActionResult RegisterSalon(RegisterSalonModel model)
         {
-            Utilities.SendDbUtility.SendSalon(model);
+            //Utilities.SendDbUtility.SendSalon(model);
 
             return RedirectToAction("MainPage", "TimerClub");
         }
@@ -65,6 +73,7 @@ namespace MasterReservation.Controllers
             return RedirectToAction("MainPage", "TimerClub");
         }
 
+        //Обновление данных о мастере
         public ActionResult UpdateResident(RegisterMasterModel model)
         {
             if (model.Offers == null)
@@ -72,6 +81,7 @@ namespace MasterReservation.Controllers
                 TempData["WrongMessage"] = "Выберите предоставляемые услуги!";
                 return RedirectToAction("PersonalData", "TimerClub");
             }
+            //Если пароль введен верно
             if (SendDbUtility.ComparePassword(model.Password, User.Identity.Name))
             {
                 Utilities.SendDbUtility.ChangeResident(model);
@@ -85,23 +95,11 @@ namespace MasterReservation.Controllers
             }
         }
 
-        
-        public JsonResult CheckPassword(string Password)
-        {
-            var result = SendDbUtility.ComparePassword(Password, User.Identity.Name);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
 
-        public ChangePasswordModel ChangePassword(ChangePasswordModel model)
-        {
-            return null;
-        }
-
-
+        // Изменение пароля
         [HttpPost]
         public ActionResult PasswordChange(ChangePasswordModel model)
         {
-
             if (!SendDbUtility.ComparePassword(model.OldPassword, User.Identity.Name))
             {
                 TempData["WrongMessage"] = "Пароль введен не верно!";
@@ -121,15 +119,26 @@ namespace MasterReservation.Controllers
         }
 
 
-        public ActionResult RedirectToPassword()
-        {
-            return RedirectToAction("PasswordView", "TimerClub");
-        }
-
         public ActionResult SendDate(DateModel model)
         {
             //Utilities.SendDbUtility.SendDate(model);
             return RedirectToAction("FindWorkPlaces", "TimerClub");
+        }
+
+        //Автодополнение города
+        [AllowAnonymous]
+        public async Task<ActionResult> GetCities(string term)
+        {
+            List<string> Cities = new List<string>();
+
+            var x = await Utilities.RequestCity.Request(term);
+            x.result.Any();
+            var res = x.result.Where(t => t.id != "Free").ToList().Select(t => new
+            {
+                value = t.name
+            });
+
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
 

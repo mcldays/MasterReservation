@@ -98,7 +98,7 @@
         if($(this).hasClass("red-heart")){
             $.ajax({
                 type: "GET",
-                url: "/WorkingPlacePage/RemoveFavorite",
+                url: "/Favorite/RemoveFavorite",
                 data: "data=123",
                 success: function(data){
                     $(".heart").removeClass("red-heart");
@@ -111,7 +111,7 @@
         else{
             $.ajax({
                 type: "GET",
-                url: "/WorkingPlacePage/SetFavorite",
+                url: "/Favorite/SetFavorite",
                 data: "data=123",
                 success: function (data) {
                     $(".heart").addClass("red-heart");
