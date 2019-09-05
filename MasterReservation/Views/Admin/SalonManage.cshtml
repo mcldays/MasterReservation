@@ -2,7 +2,29 @@
     ViewBag.Title = "Управление салонами";
 }
 
-@Styles.Render("~/Content/PersonalDataStyles.css")
+@Styles.Render("~/Content/SalonManageStyles.css")
 @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/Scripts/PersonalDataScripts.js")
+@Scripts.Render("~/Scripts/SalonManageScripts.js")
+
+
+<div id="form-wrap">
+    <input type="text" class="input" placeholder="Имя контактного лица*" />
+    <input type="text" class="input phone-mask" placeholder="Номер телефона администратора салона*" />
+    <input type="text" id="city-input" class="input" placeholder="Город" />
+    <input type="text" class="input" placeholder="Электронная почта*" />
+    <input type="text" class="input" placeholder="Сообщение" />
+    <input type="text" class="input" placeholder="Адрес" />
+    <input type="text" class="input mode-mask" placeholder="Режим работы" />
+    <div id="checkbox-wrap">
+        <input type="checkbox" id="checkbox" />
+        <label for="checkbox">Подтверждение бронирования</label>
+    </div>
+    <button id="send-form">Добавить салон</button>
+</div>
+
+<script>
+    $(".phone-mask").mask("+7(999)9999999");
+    $(".mode-mask").mask("99:99 - 99:99");
+</script>

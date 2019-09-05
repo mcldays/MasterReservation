@@ -11,6 +11,10 @@ namespace MasterReservation.Controllers
         // GET: Admin
         public ActionResult SalonManage()
         {
+            if (User.Identity.Name != "lexlex971@mail.ru")
+            {
+                return RedirectToAction("MainPage", "TimerClub");
+            }
             return View();
         }
     }

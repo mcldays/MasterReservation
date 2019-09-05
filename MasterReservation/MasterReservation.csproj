@@ -217,6 +217,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\HeaderStyles.css" />
+    <Content Include="Content\SalonManageStyles.css" />
     <Content Include="Content\ViewFavoritesStyles.css" />
     <Content Include="Content\ViewBookedTimeStyles.css" />
     <Content Include="Content\WorkingPlacePageStyles.css" />
@@ -337,6 +338,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
     <Content Include="Scripts\HeaderScripts.js" />
+    <Content Include="Scripts\SalonManageScripts.js" />
     <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
     <Content Include="Scripts\MainPageScripts.js" />
