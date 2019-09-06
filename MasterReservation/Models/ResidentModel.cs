@@ -28,5 +28,7 @@ namespace MasterReservation.Models
         public string City { get; set; }
 
         public string Offers { get; set; }
+
+     
     }
 }

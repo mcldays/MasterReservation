@@ -87,5 +87,6 @@ namespace MasterReservation.Models
         [Required(ErrorMessage = "Подтвердите согласие на обработку персональных данных")]
         public bool ProcessData { get; set; }
 
+
     }
 }
