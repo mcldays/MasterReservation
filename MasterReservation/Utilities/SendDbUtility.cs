@@ -36,7 +36,8 @@ namespace MasterReservation.Utilities
                         Offers = model.Offers,
                         Experience = model.Expirience,
                         Awards = model.Awards,
-                        Password = model.Password
+                        Password = model.Password,
+                        IsAdmin = false
                     });
                     DbUse.SaveChanges();
                 }
@@ -49,20 +50,13 @@ namespace MasterReservation.Utilities
         }
 
         // Метод занесения данных салона в бд
-        public static bool SendSalon(RegisterSalonModel model)
+        public static bool SendSalon(SalonModel model)
         {
             try
             {
                 using (UserContext DbUse = new UserContext())
                 {
-                    DbUse.SalonModels.Add(new SalonModel()
-                    {
-                        ContactPerson = model.Name,
-                        Phone = model.Phone,
-                        City = model.City,
-                        Email = model.Email,
-                        Information = model.Information
-                    });
+                    DbUse.SalonModels.Add(model);
                     DbUse.SaveChanges();
                 }
             }
@@ -138,6 +132,16 @@ namespace MasterReservation.Utilities
             using (UserContext dbUse = new UserContext())
             {
                 ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
+        public static bool IsAdmin(string email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
                 if (user == null) return false;
                 return true;
             }

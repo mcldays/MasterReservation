@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using MasterReservation.Filters;
 using MasterReservation.Models;
 using MasterReservation.Utilities;
 
@@ -58,11 +59,20 @@ namespace MasterReservation.Controllers
 
         // Отправка данных для регистрации салона
         [AllowAnonymous]
-        public ActionResult RegisterSalon(RegisterSalonModel model)
+        [HttpPost]
+        public ActionResult SendRequestRegisterSalon(RegisterSalonModel model)
         {
             //Utilities.SendDbUtility.SendSalon(model);
 
             return RedirectToAction("MainPage", "TimerClub");
+        }
+
+        [Admin]
+        [HttpPost]
+        public ActionResult RegisterSalon(SalonModel model)
+        {
+            Utilities.SendDbUtility.SendSalon(model);
+            return RedirectToAction("SalonManage", "Admin");
         }
 
 

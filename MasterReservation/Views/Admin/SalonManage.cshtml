@@ -1,8 +1,35 @@
-﻿@{
+﻿@model MasterReservation.Models.SalonModel 
+@{
     ViewBag.Title = "Управление салонами";
 }
 
-@Styles.Render("~/Content/PersonalDataStyles.css")
+@Styles.Render("~/Content/SalonManageStyles.css")
 @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/Scripts/PersonalDataScripts.js")
+@Scripts.Render("~/Scripts/SalonManageScripts.js")
+
+@using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new {id = "form-wrap"}))
+{
+    @Html.EditorFor(model=>model.ContactPerson, new{htmlAttributes = new{@class="input", placeholder="Имя контактного лица*"}})
+    @Html.EditorFor(model=>model.Phone, new{htmlAttributes = new{@class="input phone-mask", placeholder= "Номер телефона администратора салона*" } })
+    @Html.EditorFor(model=>model.City, new{htmlAttributes = new{@class="input", id="city-input", placeholder= "Город" } })
+    @Html.EditorFor(model=>model.Email, new{htmlAttributes = new{@class="input", placeholder= "Электронная почта*" } })
+    @Html.EditorFor(model=>model.Message, new{htmlAttributes = new{@class="input", placeholder= "Сообщение" } })
+    @Html.EditorFor(model=>model.Adress, new{htmlAttributes = new{@class="input", placeholder= "Адрес" } })
+    @Html.EditorFor(model=>model.OperatingMode, new{htmlAttributes = new{@class="input mode-mask", placeholder= "Режим работы" } })
+
+    <div id="checkbox-wrap">
+        @Html.EditorFor(model => model.ReservationType, new { htmlAttributes = new { id = "checkbox" } })
+        <label for="checkbox">Подтверждение бронирования</label>
+    </div>
+    <button id="send-form">Добавить салон</button>
+}
+
+<script>
+    $(".phone-mask").mask("+7(999)9999999");
+
+    $.mask.definitions['~'] = '[0-2]';
+    $.mask.definitions['+'] = '[0-5]';
+    $(".mode-mask").mask("~9:+9 - ~9:+9");
+</script>
