@@ -16,8 +16,8 @@ namespace MasterReservation.Models
         public string City { get; set; }
         public string Email { get; set; }
         public string Message { get; set; }
-        public string Password { get; set; }
-
-        public string Information { get; set; }
+        public string Adress { get; set; }
+        public string OperatingMode { get; set; }
+        public bool ReservationType { get; set; }
     }
 }

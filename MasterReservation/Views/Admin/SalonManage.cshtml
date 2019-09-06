@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MasterReservation.Models.SalonModel 
+@{
     ViewBag.Title = "Управление салонами";
 }
 
@@ -8,21 +9,22 @@
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/SalonManageScripts.js")
 
+@using (Html.BeginForm("RegisterMaster", "Authentication", FormMethod.Post, new {id = "form-wrap"}))
+{
+    @Html.EditorFor(model=>model.ContactPerson, new{htmlAttributes = new{@class="input", placeholder="Имя контактного лица*"}})
+    @Html.EditorFor(model=>model.Phone, new{htmlAttributes = new{@class="input phone-mask", placeholder= "Номер телефона администратора салона*" } })
+    @Html.EditorFor(model=>model.City, new{htmlAttributes = new{@class="input", id="city-input", placeholder= "Город" } })
+    @Html.EditorFor(model=>model.Email, new{htmlAttributes = new{@class="input", placeholder= "Электронная почта*" } })
+    @Html.EditorFor(model=>model.Message, new{htmlAttributes = new{@class="input", placeholder= "Сообщение" } })
+    @Html.EditorFor(model=>model.Adress, new{htmlAttributes = new{@class="input", placeholder= "Адрес" } })
+    @Html.EditorFor(model=>model.OperatingMode, new{htmlAttributes = new{@class="input mode-mask", placeholder= "Режим работы" } })
 
-<div id="form-wrap">
-    <input type="text" class="input" placeholder="Имя контактного лица*" />
-    <input type="text" class="input phone-mask" placeholder="Номер телефона администратора салона*" />
-    <input type="text" id="city-input" class="input" placeholder="Город" />
-    <input type="text" class="input" placeholder="Электронная почта*" />
-    <input type="text" class="input" placeholder="Сообщение" />
-    <input type="text" class="input" placeholder="Адрес" />
-    <input type="text" class="input mode-mask" placeholder="Режим работы" />
     <div id="checkbox-wrap">
-        <input type="checkbox" id="checkbox" />
+        @Html.EditorFor(model => model.ReservationType, new { htmlAttributes = new { id = "checkbox" } })
         <label for="checkbox">Подтверждение бронирования</label>
     </div>
     <button id="send-form">Добавить салон</button>
-</div>
+}
 
 <script>
     $(".phone-mask").mask("+7(999)9999999");

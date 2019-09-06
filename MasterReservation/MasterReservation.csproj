@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201909061317301_admin1.Designer.cs">
       <DependentUpon>201909061317301_admin1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909061420202_admin2.cs" />
+    <Compile Include="Migrations\201909061420202_admin2.Designer.cs">
+      <DependentUpon>201909061420202_admin2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
@@ -435,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909061317301_admin1.resx">
       <DependentUpon>201909061317301_admin1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909061420202_admin2.resx">
+      <DependentUpon>201909061420202_admin2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

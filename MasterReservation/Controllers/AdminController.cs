@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MasterReservation.Filters;
+using MasterReservation.Models;
 
 namespace MasterReservation.Controllers
 {
@@ -13,7 +14,8 @@ namespace MasterReservation.Controllers
         [Admin]
         public ActionResult SalonManage()
         {
-            return View();
+            SalonModel model = new SalonModel();
+            return View(model);
         }
     }
 }

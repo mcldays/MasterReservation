@@ -47,20 +47,13 @@ namespace MasterReservation.Utilities
         }
 
         // Метод занесения данных салона в бд
-        public static bool SendSalon(RegisterSalonModel model)
+        public static bool SendSalon(SalonModel model)
         {
             try
             {
                 using (UserContext DbUse = new UserContext())
                 {
-                    DbUse.SalonModels.Add(new SalonModel()
-                    {
-                        ContactPerson = model.Name,
-                        Phone = model.Phone,
-                        City = model.City,
-                        Email = model.Email,
-                        Information = model.Information
-                    });
+                    DbUse.SalonModels.Add(model);
                     DbUse.SaveChanges();
                 }
             }
