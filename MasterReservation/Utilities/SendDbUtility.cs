@@ -33,7 +33,8 @@ namespace MasterReservation.Utilities
                         Offers = model.Offers,
                         Experience = model.Expirience,
                         Awards = model.Awards,
-                        Password = model.Password
+                        Password = model.Password,
+                        IsAdmin = false
                     });
                     DbUse.SaveChanges();
                 }
@@ -135,6 +136,16 @@ namespace MasterReservation.Utilities
             using (UserContext dbUse = new UserContext())
             {
                 ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                if (user == null) return false;
+                return true;
+            }
+        }
+
+        public static bool IsAdmin(string email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
                 if (user == null) return false;
                 return true;
             }

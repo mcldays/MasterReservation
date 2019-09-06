@@ -26,5 +26,8 @@
 
 <script>
     $(".phone-mask").mask("+7(999)9999999");
-    $(".mode-mask").mask("99:99 - 99:99");
+
+    $.mask.definitions['~'] = '[0-2]';
+    $.mask.definitions['+'] = '[0-5]';
+    $(".mode-mask").mask("~9:+9 - ~9:+9");
 </script>
