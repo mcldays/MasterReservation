@@ -190,9 +190,9 @@
     <Compile Include="Migrations\201909041251528_YOUR_FIRST_MIGRATION1.Designer.cs">
       <DependentUpon>201909041251528_YOUR_FIRST_MIGRATION1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909052110164_YOUR_FIRST_MIGRATION2.cs" />
-    <Compile Include="Migrations\201909052110164_YOUR_FIRST_MIGRATION2.Designer.cs">
-      <DependentUpon>201909052110164_YOUR_FIRST_MIGRATION2.cs</DependentUpon>
+    <Compile Include="Migrations\201909061317301_admin1.cs" />
+    <Compile Include="Migrations\201909061317301_admin1.Designer.cs">
+      <DependentUpon>201909061317301_admin1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
@@ -433,8 +433,8 @@
     <EmbeddedResource Include="Migrations\201909041251528_YOUR_FIRST_MIGRATION1.resx">
       <DependentUpon>201909041251528_YOUR_FIRST_MIGRATION1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909052110164_YOUR_FIRST_MIGRATION2.resx">
-      <DependentUpon>201909052110164_YOUR_FIRST_MIGRATION2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909061317301_admin1.resx">
+      <DependentUpon>201909061317301_admin1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

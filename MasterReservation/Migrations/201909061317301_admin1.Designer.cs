@@ -7,13 +7,13 @@ namespace MasterReservation.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class YOUR_FIRST_MIGRATION2 : IMigrationMetadata
+    public sealed partial class admin1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(YOUR_FIRST_MIGRATION2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(admin1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909052110164_YOUR_FIRST_MIGRATION2"; }
+            get { return "201909061317301_admin1"; }
         }
         
         string IMigrationMetadata.Source
