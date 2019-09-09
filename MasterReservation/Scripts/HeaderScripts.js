@@ -16,22 +16,22 @@
 
     //переход на главную страницу при клике на лого
     $("#head-logo").on("click", function () {
-        window.location = "FindWorkPlaces";
+        window.location = "../../TimerClub/FindWorkPlaces";
     });
 
     //переход на страницу личных данных
     $("#to-personal-data-btn").on("click", function() {
-        window.location = "PersonalData";
+        window.location = "../../TimerClub/PersonalData";
     });
 
     //переход на страницу забронированного времени
     $("#to-booked-time-btn").on("click", function () {
-        window.location = "ViewBookedTime";
+        window.location = "../../TimerClub/ViewBookedTime";
     });
 
     //переход на страницу избранного
     $("#to-favorites-btn").on("click", function () {
-        window.location = "ViewFavorites";
+        window.location = "../../TimerClub/ViewFavorites";
     });
 
 

@@ -24,6 +24,7 @@
 .address {
     display: block;
     font-size: 13px;
+    width: max-content;
 }
 
 .tariffs-title {
@@ -38,7 +39,7 @@
 }
 
 .tariff {
-    width: 100px;
+    width: 120px;
     height: 27px;
     background-color: #ffffff;
     margin: 1px 1px;
@@ -170,6 +171,12 @@
     .white-button:hover {
         cursor: pointer;
     }
+
+.green-button {
+    background-color: #4fe33d;
+    color: white;
+    border: 2px solid #4fe33d;
+}
 
 #show-map-btn {
     margin-left: 32px;
@@ -339,7 +346,7 @@ button.button-time:focus {
 }
 
 #map {
-    height: 200px;
+    height: 300px;
     width: 400px;
     position: absolute;
     top: 106%;
@@ -348,6 +355,18 @@ button.button-time:focus {
     display: none;
 }
 
-.ymaps-2-1-74-map {
-    height: 200px !important;
+
+.desc-title {
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin: 12px 0px 8px 0px;
+}
+
+.error-message {
+    color: red;
+}
+
+.info-message {
+    color: blue;
 }

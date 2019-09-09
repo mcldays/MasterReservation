@@ -1,0 +1,145 @@
+﻿.offers-dropdown {
+    position: relative;
+    width: calc(100% + 10px);
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.offers-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 100%;
+    box-shadow: 0 3px 7px rgba(0, 1, 1, 0.17);
+    cursor: default;
+    border-radius: 0 0 7px 7px;
+    display: none;
+    z-index: 9;
+}
+
+.dropdown-option {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 3px 20px;
+}
+
+.dropdown-option:hover {
+    cursor: pointer;
+    background: #cfcecf;
+}
+
+.active-option {
+    background-color: #0a9ad1;
+    color: white;
+}
+
+.active-option:hover {
+    background-color: #0a9ad1;
+}
+
+.offers-arrow {
+    position: absolute;
+    right: 11px;
+    top: 12px;
+}
+
+.offers-selected-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.offers-selected {
+    padding-left: 18px;
+}
+
+.field {
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    width: 100%;
+    height: 35px;
+    padding: 0 10px;
+}
+
+.error-message {
+    margin: 0 auto;
+    color: red;
+}
+
+.info-message {
+    margin: 0 auto;
+    color: blue;
+}
+
+.salon-title {
+    font-size: 27px;
+    margin: 0 auto;
+}
+
+
+.bold-text {
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.table th, .table td {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.table th {
+    padding: 15px 0px;
+}
+
+    .table th:nth-child(odd) {
+        background-color: #dddddd;
+    }
+
+.btn {
+    width: 100%;
+}
+
+.ui-menu {
+    background: white;
+    border-radius: 2px;
+    width: max-content;
+    opacity: 0.9;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.ui-menu-item {
+    list-style-type: none;
+    padding: 5px 20px;
+    background: white;
+}
+
+.ui-menu-item:hover {
+    background: #cfcecf;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.double-input {
+    width: 100px;
+}
+
+.new-record {
+    height: 220px;
+}
+
+.new-record td {
+    vertical-align: top !important;
+}

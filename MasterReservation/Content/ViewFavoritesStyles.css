@@ -99,3 +99,17 @@ button.detail-btn {
     width: 145px;
     margin-top: 10px;
 }
+
+.error-message {
+    color: red;
+}
+
+.info-message {
+    color: blue;
+}
+
+.center {
+    margin: 0 auto;
+    display: block;
+    width: max-content;
+}

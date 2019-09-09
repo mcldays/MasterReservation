@@ -1,0 +1,127 @@
+﻿@using MasterReservation.Models
+@model object[]
+@{
+    ViewBag.Title = "Список салонов";
+}
+
+@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+@Scripts.Render("~/bundles/jqueryval")
+
+@Styles.Render("~/Content/SalonPlacesStyles.css")
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    <span class="error-message">@ViewBag.ErrorMessage</span>
+}
+@if ((Model[0] as List<SalonModel>).Count == 0)
+{
+    <span class="info-message">Салонов пока нет</span>
+}
+
+<div class="table-wrap" style="max-height: 500px; overflow-y: scroll;">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>Id</th>
+                <th>Название салона*</th>
+                <th>Контактное лицо*</th>
+                <th>Телефон администратора*</th>
+                <th>Город</th>
+                <th>Email*</th>
+                <th>Сообщение</th>
+                <th>Адрес</th>
+                <th>Режим работы</th>
+                <th>Тип бронирования</th>
+                <th>Управление салоном</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @if((Model[0] as List<SalonModel>).Count != 0)
+            {
+                foreach (var model in (Model[0] as List<SalonModel>))
+                {
+
+                    <tr>
+                        <td>@(model.Id)</td>
+                        <td>@(model.SalonTitle)</td>
+                        <td>@(model.ContactPerson)</td>
+                        <td>@(model.Phone)</td>
+                        <td>@(model.City)</td>
+                        <td>@(model.Email)</td>
+                        <td>@(model.Message)</td>
+                        <td>@(model.Adress)</td>
+                        <td>@(model.OperatingMode)</td>
+                        <td>
+                            @if (model.ReservationType)
+                            {
+                                @: С бронированием
+                            }
+                            else
+                            {
+                                @: Без бронирования
+                            }
+
+                        </td>
+                        <td><button class="btn btn-secondary salon-mng-btn" value="@(model.Id)">Перейти</button><button class="btn btn-danger salon-dlt-btn" value="@(model.Id)">Удалить</button></td>
+                    </tr>
+
+                }
+            }
+            <tr>
+                @using (Html.BeginForm("AddSalon", "Admin", FormMethod.Post, new { }))
+                {
+                    @Html.HiddenFor((model => (Model[1] as SalonModel).Id))
+                    <td>*</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).SalonTitle, new { htmlAttributes = new { @class = "field", placeholder = "Название салона" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).ContactPerson, new { htmlAttributes = new { @class = "field", placeholder = "Контактное лицо" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Phone, new { htmlAttributes = new { @class = "field phone-mask", placeholder = "Номер телефона" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).City, new { htmlAttributes = new { @class = "field", id = "city-input", placeholder = "Город" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Email, new { htmlAttributes = new { @class = "field", placeholder = "Email" } })</td>
+                    <td>@Html.TextAreaFor(model => (Model[1] as SalonModel).Message, new { @class = "field", placeholder = "Сообщение" })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingMode, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Режим работы" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
+                    <td><button class="btn btn-primary">Добавить</button></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    $(".salon-mng-btn").on("click", function () {
+        document.location = "../../Admin/SalonPlaces/" + $(this).val();
+    });
+
+    $(".phone-mask").mask("+7(999)9999999");
+
+    $.mask.definitions['~'] = '[0-2]';
+    $.mask.definitions['+'] = '[0-5]';
+    $(".mode-mask").mask("~9:00 - ~9:00");
+
+
+    $("#city-input").each(function () {
+        $(this).autocomplete({
+            source: '/Authentication/GetCities'
+        });
+    });
+
+
+    $(".salon-dlt-btn").on("click", function (e) {
+        $.ajax({
+            type: "GET",
+            url: "../../Admin/RemoveSalon",
+            data: "salonId=" + $(this).val(),
+            success: function (data) {
+                $(e.target).parent().parent().remove();
+                alert(data);
+            },
+            error: function () {
+                alert("Произошла ошибка, попробуйте позже");
+            }
+        });
+    });
+</script>

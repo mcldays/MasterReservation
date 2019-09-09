@@ -30,5 +30,6 @@ namespace MasterReservation.Models
         public string Offers { get; set; }
 
         public bool IsAdmin { get; set; }
+        public string Favorites { get; set; }
     }
 }

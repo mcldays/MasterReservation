@@ -31,7 +31,7 @@ namespace MasterReservation.Models
                 Awards = res.Awards;
                 Password = res.Password;
                 id = res.Id;
-
+                IsAdmin = res.IsAdmin;
             }
         }
 
@@ -67,6 +67,8 @@ namespace MasterReservation.Models
         public string Expirience { get; set; }
 
         public string Awards { get; set; }
+
+        public bool IsAdmin { get; set; }
 
 
        
