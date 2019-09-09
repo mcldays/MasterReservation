@@ -24,31 +24,34 @@
     @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
-        <div id="photo-wrap">
+    @using (Html.BeginForm("Create", "Utilities", FormMethod.Post, new {enctype = "multipart/form-data", id="photo-wrap"}))
+    {
+        @*<div id="photo-wrap">*@
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="picField" id="picField" size="24" onchange="" alt="" />
-        </div>
+            <input type="file" name="picField" id="uploadImage" size="24" onchange="" alt=""/>
 
+        @*</div>*@
+    }
         <div id="textboxes">
             <div class="input-wrap">
 
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Имя*" } })
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Имя*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Фамилия*" } })
+                @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Фамилия*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*", disabled="disabled"}})
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*", disabled = "disabled"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle phone-mask", PlaceHolder = "Телефон*" } })
+                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "areastyle phone-mask", PlaceHolder = "Телефон*"}})
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
         </div>

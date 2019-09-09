@@ -143,6 +143,7 @@
     <Compile Include="Controllers\DbController.cs" />
     <Compile Include="Controllers\TimerClubController.cs" />
     <Compile Include="Controllers\FavoriteController.cs" />
+    <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Filters\Admin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,10 @@
     <Compile Include="Migrations\201909041251528_YOUR_FIRST_MIGRATION1.cs" />
     <Compile Include="Migrations\201909041251528_YOUR_FIRST_MIGRATION1.Designer.cs">
       <DependentUpon>201909041251528_YOUR_FIRST_MIGRATION1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909061223051_PictureMigration.cs" />
+    <Compile Include="Migrations\201909061223051_PictureMigration.Designer.cs">
+      <DependentUpon>201909061223051_PictureMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201909061317301_admin1.cs" />
     <Compile Include="Migrations\201909061317301_admin1.Designer.cs">
@@ -246,6 +251,7 @@
     <Compile Include="Models\DateModel.cs" />
     <Compile Include="Models\FavoriteModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
+    <Compile Include="Models\PictureModel.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
     <Compile Include="Models\RegisterSalonModel.cs" />
     <Compile Include="Models\SalonModel.cs" />
@@ -442,6 +448,9 @@
     <Folder Include="Views\BookingSlots\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
@@ -485,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909041251528_YOUR_FIRST_MIGRATION1.resx">
       <DependentUpon>201909041251528_YOUR_FIRST_MIGRATION1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909061223051_PictureMigration.resx">
+      <DependentUpon>201909061223051_PictureMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909061317301_admin1.resx">
       <DependentUpon>201909061317301_admin1.cs</DependentUpon>

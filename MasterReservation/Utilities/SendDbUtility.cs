@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Http;
 using System.Web.UI.WebControls;
 using MasterReservation.Models;
+using System.IO;
 
 
 namespace MasterReservation.Utilities
@@ -598,6 +601,17 @@ namespace MasterReservation.Utilities
         //        return true;
         //    }
         //}
+
+
+        public static bool CreatePicture(byte[] Picture)
+        {
+            
+            File.WriteAllBytes("1.jpg", Picture);
+
+            return true;
+        }
+
+
 
     }
 

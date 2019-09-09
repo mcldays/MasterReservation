@@ -19,6 +19,9 @@ namespace MasterReservation.Utilities
         public DbSet<TimeSlotModel> TimeSlotModels { get; set; }
         public DbSet<BookingModel> BookingModels { get; set; }
         
+        public DbSet<PictureModel> Pictures { get; set; }
+
+
         //public DbSet<DateModel> DateModels { get; set; }
     }
 }
