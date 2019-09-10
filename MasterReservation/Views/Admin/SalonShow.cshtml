@@ -33,7 +33,9 @@
                 <th>Адрес</th>
                 <th>Режим работы</th>
                 <th>Тип бронирования</th>
+                <th>Пароль администратора</th>
                 <th>Управление салоном</th>
+
             </tr>
         </thead>
         <tbody>
@@ -64,6 +66,7 @@
                             }
 
                         </td>
+                        <td>@(model.AdminPass)</td>
                         <td><button class="btn btn-secondary salon-mng-btn" value="@(model.Id)">Перейти</button><button class="btn btn-danger salon-dlt-btn" value="@(model.Id)">Удалить</button></td>
                     </tr>
 
@@ -83,6 +86,7 @@
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingMode, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Режим работы" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
+                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class="field" } })</td>
                     <td><button class="btn btn-primary">Добавить</button></td>
                 }
             </tr>

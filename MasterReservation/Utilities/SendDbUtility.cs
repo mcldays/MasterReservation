@@ -137,6 +137,19 @@ namespace MasterReservation.Utilities
             }
         }
 
+        // Метод проверки введенного логина и пароля
+        public static bool ComparePasswordSalon(string Password, string Email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                SalonModel user =
+                    dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
+
+                if (user == null) return false;
+                return true;
+            }
+        }
+
         // Метод изменения пароля
         public static bool ChangePassword(string Email, string newPass)
         {
@@ -459,13 +472,57 @@ namespace MasterReservation.Utilities
             }
         }
 
-        public static bool RemoveBooking(int bookingId, int residentId)
+        public static BookingModel GetBookingById(int bookingId)
         {
             using (UserContext dbUse = new UserContext())
             {
                 try
                 {
-                    dbUse.BookingModels.Remove(dbUse.BookingModels.Where(t => t.Id == bookingId && t.ResidentId == residentId).FirstOrDefault());
+                    return dbUse.BookingModels.Where(t => t.Id == bookingId).FirstOrDefault();;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+
+
+
+        public static List<BookingModel> GetBookingForSalonId(int salonId)
+        {
+            List<BookingModel> models;
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    models = dbUse.BookingModels.Where(t => t.SalonId == salonId).ToList();
+                    return models;
+                }
+                catch (Exception e)
+                {
+                    return new List<BookingModel>();
+                }
+            }
+        }
+
+        
+
+        public static bool RemoveBooking(int bookingId, int residentId, bool salonAdmin)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    if (salonAdmin)
+                    {
+                        dbUse.BookingModels.Remove(dbUse.BookingModels.Where(t => t.Id == bookingId).FirstOrDefault());
+                    }
+                    else
+                    {
+                        dbUse.BookingModels.Remove(dbUse.BookingModels.Where(t => t.Id == bookingId && t.ResidentId == residentId).FirstOrDefault());
+                    }
 
                     var slots = dbUse.TimeSlotModels.Where(t => t.BookingId == bookingId && t.ResidentId == residentId);
                     foreach (var slot in slots)
@@ -575,6 +632,21 @@ namespace MasterReservation.Utilities
                 try
                 {
                     return dbUse.WorkingPlaceModels.ToList();
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public static List<ResidentModel> GetAllResidents()
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    return dbUse.ResidentModels.ToList();
                 }
                 catch (Exception e)
                 {

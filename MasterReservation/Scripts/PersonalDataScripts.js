@@ -81,6 +81,9 @@
     //});
 
 
+    $("#input-offers").trigger("keyup");
+    $(".dropdown-menu").removeClass("show");
+
     //загрузка фотографии
     document.getElementById('picField').onchange = function (evt) {
         var tgt = evt.target || window.event.srcElement,
@@ -102,7 +105,6 @@
         }
     }
 
-    $("#input-offers").trigger("keyup");
-    $(".dropdown-menu").removeClass("show");
+    
 
 });

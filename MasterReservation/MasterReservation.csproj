@@ -244,9 +244,17 @@
     <Compile Include="Migrations\201909091230460_admin11.Designer.cs">
       <DependentUpon>201909091230460_admin11.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909101514125_Lolkwk.cs" />
-    <Compile Include="Migrations\201909101514125_Lolkwk.Designer.cs">
-      <DependentUpon>201909101514125_Lolkwk.cs</DependentUpon>
+    <Compile Include="Migrations\201909091541078_admin12.cs" />
+    <Compile Include="Migrations\201909091541078_admin12.Designer.cs">
+      <DependentUpon>201909091541078_admin12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909101443364_admin13.cs" />
+    <Compile Include="Migrations\201909101443364_admin13.Designer.cs">
+      <DependentUpon>201909101443364_admin13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909101536071_admin14.cs" />
+    <Compile Include="Migrations\201909101536071_admin14.Designer.cs">
+      <DependentUpon>201909101536071_admin14.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookingModel.cs" />
@@ -447,6 +455,7 @@
     <Content Include="Views\TimerClub\ViewFavorites.cshtml" />
     <Content Include="Views\Admin\SalonShow.cshtml" />
     <Content Include="Views\Admin\SalonPlaces.cshtml" />
+    <Content Include="Views\TimerClub\ShowBookedResidents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BookingSlots\" />
@@ -537,8 +546,14 @@
     <EmbeddedResource Include="Migrations\201909091230460_admin11.resx">
       <DependentUpon>201909091230460_admin11.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909101514125_Lolkwk.resx">
-      <DependentUpon>201909101514125_Lolkwk.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909091541078_admin12.resx">
+      <DependentUpon>201909091541078_admin12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909101443364_admin13.resx">
+      <DependentUpon>201909101443364_admin13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909101536071_admin14.resx">
+      <DependentUpon>201909101536071_admin14.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

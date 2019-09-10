@@ -342,7 +342,7 @@ body {
     display: block;
 }
 
-#window-login-master {
+#window-login-master, #window-login-salon {
     margin-top: auto;
     margin-bottom: auto;
     bottom: 0;

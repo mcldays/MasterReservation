@@ -48,6 +48,10 @@ namespace MasterReservation.Controllers
             List<string> titles = new List<string>();
             List<string> addreses = new List<string>();
             List<WorkingPlaceModel> places = Utilities.SendDbUtility.GetAllWorkingPlaces();
+            if (places == null)
+            {
+                places = new List<WorkingPlaceModel>();
+            }
             foreach (var place in places)
             {
                 titles.Add(Utilities.SendDbUtility.GetSalonTitle(place.SalonId));
@@ -164,6 +168,26 @@ namespace MasterReservation.Controllers
         {
             ViewBag.wrongMessage = TempData["WrongMessage"];
             return View();
+        }
+
+        public ActionResult ShowBookedResidents()
+        {
+            List<ResidentModel> allResidents = Utilities.SendDbUtility.GetAllResidents();
+            int salonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
+            List<BookingModel> models = Utilities.SendDbUtility.GetBookingForSalonId(salonId);
+            List<ResidentModel> residents = new List<ResidentModel>();
+
+            foreach (var booking in models)
+            {
+                residents.AddRange(allResidents.Where(t=>t.Id == booking.ResidentId));
+            }
+
+            object[] x = new object[]
+            {
+                models,
+                allResidents
+            };
+            return View(x);
         }
     }
 }

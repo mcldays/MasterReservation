@@ -58,6 +58,24 @@ namespace MasterReservation.Controllers
             return RedirectToAction("MainPage", "TimerClub");
         }
 
+        //Вход администратора салона
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult LoginSalon(LoginMaster model)
+        {
+            if (SendDbUtility.ComparePasswordSalon(model.Password, model.Email))
+            {
+                FormsAuthentication.SetAuthCookie(model.Email, true);
+                var salon = GetData.GetDataSalonAdmin(model.Email);
+                Response.Cookies["ResidentName"].Value = Server.UrlEncode(salon.ContactPerson);
+                Response.Cookies["ResidentSurname"].Value = Server.UrlEncode(salon.SalonTitle);
+                Response.Cookies["SalonId"].Value = Server.UrlEncode(salon.Id.ToString());
+
+                return RedirectToAction("ShowBookedResidents", "TimerClub");
+            }
+            return RedirectToAction("MainPage", "TimerClub");
+        }
+
         // Отправка данных для регистрации салона
         [AllowAnonymous]
         [HttpPost]
