@@ -1,4 +1,5 @@
-﻿
+﻿@using MasterReservation.Models
+@model object[]
 @{
     ViewBag.Title = "Просмотр забронированного времени";
 }
@@ -12,176 +13,83 @@
     <div id="page-title">
         <span id="main-title">Просмотр забронированного времени</span>
         <span id="sub-title">Здесь отображается список всех ваших актуальных записей</span>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <span class="error-message">@ViewBag.ErrorMessage</span>
+        }
+        @if (ViewBag.InfoMessage != null)
+        {
+            <span class="info-message">@ViewBag.InfoMessage</span>
+        }
     </div>
     <div class="cards-wrap">
-        <div class="favorite-card">
-            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
-            <div class="card-description">
-                <span class="card-title">Студия красоты Beauty Forest</span>
-                <div class="record-wrap">
-                    <div class="time-wrap">
-                        <span class="small-description">
-                            Вторник, 21 Июля
-                        </span>
-                        <span class="bold-description">
-                            14:00 - 19:30 (5,5 часов)
-                        </span>
+        @for(var i=0;i<(Model[0] as List<BookingModel>).Count;i++)
+        {
+            <div class="favorite-card">
+                <img class="photo" src="~/Resources/img/default-card-img.png" onclick="document.location='@Url.Action("WorkingPlacePage",new{id = (Model[0] as List<BookingModel>)[i].PlaceId})'"></img>
+                <div class="card-description">
+                    <span class="card-title" onclick="document.location='@Url.Action("WorkingPlacePage",new{id = (Model[0] as List<BookingModel>)[i].PlaceId})'">@((Model[1] as List<string>)[i])</span>
+                    <div class="record-wrap">
+                        <div class="time-wrap">
+                            <span class="small-description">
+                                @{
+                                    string date = (Model[0] as List<BookingModel>)[i].Date.ToString("dddd, d MMMM");
+                                    date = date.Substring(0, 1).ToUpper() + date.Remove(0, 1);
+                                    <text>@date</text>
+                                }
+                            </span>
+                            <span class="bold-description">
+                                @{
+                                    string times = (Model[0] as List<BookingModel>)[i].Times;
+                                    string[] listTimes = times.Split(';');
+                                    int countHours = listTimes.Length - 1;
+                                    string hoursTitle;
+                                    if (countHours == 2 || countHours == 3 || countHours == 4 || countHours == 22 || countHours == 23 || countHours == 24)
+                                    {
+                                        hoursTitle = " часа";
+                                    }
+                                    else if (countHours == 1 || countHours == 21)
+                                    {
+                                        hoursTitle = " час";
+                                    }
+                                    else
+                                    {
+                                        hoursTitle = " часов";}
+                                }
+                                @(times.Replace(';',',').TrimEnd(',') + " (" + countHours + hoursTitle + ")")
+                            </span>
+                        </div>
+                        <div class="money-wrap">
+                            <span class="small-description">
+                                Стоимость
+                            </span>
+                            <span class="bold-description">
+                                @((Model[0] as List<BookingModel>)[i].Sum.ToString("F") + "р")
+                            </span>
+                        </div>
+                    <button id="remove-record-btn" onclick="document.location = '@Url.Action("RemoveBooking", "BookingSlots", new{id=(Model[0] as List<BookingModel>)[i].Id})'">Отменить запись</button>
                     </div>
-                    <div class="money-wrap">
+                    <div class="status-wrap">
                         <span class="small-description">
-                            Стоимость
+                            Статус
                         </span>
-                        <span class="bold-description">
-                            2400р
-                        </span>
+                        @{
+                            if ((Model[0] as List<BookingModel>)[i].Confirmed)
+                            {
+                                <span class="small-description green-text">
+                                    Подтверждено
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="small-description red-text">
+                                    Ожидается подтверждение администратора
+                                </span>
+                            }
+                        }
                     </div>
-                    <button id="remove-record-btn">Отменить запись</button>
-                </div>
-                <div class="status-wrap">
-                    <span class="small-description">
-                        Статус
-                    </span>
-                    <span class="small-description red-text">
-                        Ожидается подтверждение администратора
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="favorite-card">
-            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
-            <div class="card-description">
-                <span class="card-title">Студия красоты Beauty Forest</span>
-                <div class="record-wrap">
-                    <div class="time-wrap">
-                        <span class="small-description">
-                            Вторник, 21 Июля
-                        </span>
-                        <span class="bold-description">
-                            14:00 - 19:30 (5,5 часов)
-                        </span>
-                    </div>
-                    <div class="money-wrap">
-                        <span class="small-description">
-                            Стоимость
-                        </span>
-                        <span class="bold-description">
-                            2400р
-                        </span>
-                    </div>
-                    <button id="remove-record-btn">Отменить запись</button>
-                </div>
-                <div class="status-wrap">
-                    <span class="small-description">
-                        Статус
-                    </span>
-                    <span class="small-description green-text">
-                        Подтверждено
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="favorite-card">
-            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
-            <div class="card-description">
-                <span class="card-title">Студия красоты Beauty Forest</span>
-                <div class="record-wrap">
-                    <div class="time-wrap">
-                        <span class="small-description">
-                            Вторник, 21 Июля
-                        </span>
-                        <span class="bold-description">
-                            14:00 - 19:30 (5,5 часов)
-                        </span>
-                    </div>
-                    <div class="money-wrap">
-                        <span class="small-description">
-                            Стоимость
-                        </span>
-                        <span class="bold-description">
-                            2400р
-                        </span>
-                    </div>
-                    <button id="remove-record-btn">Отменить запись</button>
-                </div>
-                <div class="status-wrap">
-                    <span class="small-description">
-                        Статус
-                    </span>
-                    <span class="small-description red-text">
-                        Ожидается подтверждение администратора
-                    </span>
                 </div>
             </div>
-        </div>
-
-        <div class="favorite-card">
-            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
-            <div class="card-description">
-                <span class="card-title">Студия красоты Beauty Forest</span>
-                <div class="record-wrap">
-                    <div class="time-wrap">
-                        <span class="small-description">
-                            Вторник, 21 Июля
-                        </span>
-                        <span class="bold-description">
-                            14:00 - 19:30 (5,5 часов)
-                        </span>
-                    </div>
-                    <div class="money-wrap">
-                        <span class="small-description">
-                            Стоимость
-                        </span>
-                        <span class="bold-description">
-                            2400р
-                        </span>
-                    </div>
-                    <button id="remove-record-btn">Отменить запись</button>
-                </div>
-                <div class="status-wrap">
-                    <span class="small-description">
-                        Статус
-                    </span>
-                    <span class="small-description red-text">
-                        Ожидается подтверждение администратора
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="favorite-card">
-            <img class="photo" src="~/Resources/img/default-card-img.png"></img>
-            <div class="card-description">
-                <span class="card-title">Студия красоты Beauty Forest</span>
-                <div class="record-wrap">
-                    <div class="time-wrap">
-                        <span class="small-description">
-                            Вторник, 21 Июля
-                        </span>
-                        <span class="bold-description">
-                            14:00 - 19:30 (5,5 часов)
-                        </span>
-                    </div>
-                    <div class="money-wrap">
-                        <span class="small-description">
-                            Стоимость
-                        </span>
-                        <span class="bold-description">
-                            2400р
-                        </span>
-                    </div>
-                    <button id="remove-record-btn">Отменить запись</button>
-                </div>
-                <div class="status-wrap">
-                    <span class="small-description">
-                        Статус
-                    </span>
-                    <span class="small-description green-text">
-                        Подтверждено
-                    </span>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

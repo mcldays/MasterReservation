@@ -139,6 +139,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BookingSlotsController.cs" />
     <Compile Include="Controllers\DbController.cs" />
     <Compile Include="Controllers\TimerClubController.cs" />
     <Compile Include="Controllers\FavoriteController.cs" />
@@ -203,20 +204,60 @@
     <Compile Include="Migrations\201909061420202_admin2.Designer.cs">
       <DependentUpon>201909061420202_admin2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909061427074_Blya.cs" />
-    <Compile Include="Migrations\201909061427074_Blya.Designer.cs">
-      <DependentUpon>201909061427074_Blya.cs</DependentUpon>
+    <Compile Include="Migrations\201909061858333_admin3.cs" />
+    <Compile Include="Migrations\201909061858333_admin3.Designer.cs">
+      <DependentUpon>201909061858333_admin3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909062203371_admin4.cs" />
+    <Compile Include="Migrations\201909062203371_admin4.Designer.cs">
+      <DependentUpon>201909062203371_admin4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909070917011_admin5.cs" />
+    <Compile Include="Migrations\201909070917011_admin5.Designer.cs">
+      <DependentUpon>201909070917011_admin5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909071955368_admin6.cs" />
+    <Compile Include="Migrations\201909071955368_admin6.Designer.cs">
+      <DependentUpon>201909071955368_admin6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909072059495_admin7.cs" />
+    <Compile Include="Migrations\201909072059495_admin7.Designer.cs">
+      <DependentUpon>201909072059495_admin7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909072203352_admin8.cs" />
+    <Compile Include="Migrations\201909072203352_admin8.Designer.cs">
+      <DependentUpon>201909072203352_admin8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909080934174_admin9.cs" />
+    <Compile Include="Migrations\201909080934174_admin9.Designer.cs">
+      <DependentUpon>201909080934174_admin9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909081706353_admin10.cs" />
+    <Compile Include="Migrations\201909081706353_admin10.Designer.cs">
+      <DependentUpon>201909081706353_admin10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909082143235_admin101.cs" />
+    <Compile Include="Migrations\201909082143235_admin101.Designer.cs">
+      <DependentUpon>201909082143235_admin101.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909091230460_admin11.cs" />
+    <Compile Include="Migrations\201909091230460_admin11.Designer.cs">
+      <DependentUpon>201909091230460_admin11.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
     <Compile Include="Models\DateModel.cs" />
+    <Compile Include="Models\FavoriteModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
     <Compile Include="Models\PictureModel.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
     <Compile Include="Models\RegisterSalonModel.cs" />
     <Compile Include="Models\SalonModel.cs" />
     <Compile Include="Models\ResidentModel.cs" />
+    <Compile Include="Models\TimeSlotModel.cs" />
+    <Compile Include="Models\WorkingPlaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GetData.cs" />
     <Compile Include="Utilities\RequestCity.cs" />
@@ -237,6 +278,7 @@
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\HeaderStyles.css" />
     <Content Include="Content\SalonManageStyles.css" />
+    <Content Include="Content\SalonPlacesStyles.css" />
     <Content Include="Content\ViewFavoritesStyles.css" />
     <Content Include="Content\ViewBookedTimeStyles.css" />
     <Content Include="Content\WorkingPlacePageStyles.css" />
@@ -399,7 +441,11 @@
     <Content Include="Views\TimerClub\WorkingPlacePage.cshtml" />
     <Content Include="Views\TimerClub\ViewBookedTime.cshtml" />
     <Content Include="Views\TimerClub\ViewFavorites.cshtml" />
-    <Content Include="Views\Admin\SalonManage.cshtml" />
+    <Content Include="Views\Admin\SalonShow.cshtml" />
+    <Content Include="Views\Admin\SalonPlaces.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\BookingSlots\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Utilities\" />
@@ -458,8 +504,35 @@
     <EmbeddedResource Include="Migrations\201909061420202_admin2.resx">
       <DependentUpon>201909061420202_admin2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909061427074_Blya.resx">
-      <DependentUpon>201909061427074_Blya.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909061858333_admin3.resx">
+      <DependentUpon>201909061858333_admin3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909062203371_admin4.resx">
+      <DependentUpon>201909062203371_admin4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909070917011_admin5.resx">
+      <DependentUpon>201909070917011_admin5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909071955368_admin6.resx">
+      <DependentUpon>201909071955368_admin6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909072059495_admin7.resx">
+      <DependentUpon>201909072059495_admin7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909072203352_admin8.resx">
+      <DependentUpon>201909072203352_admin8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909080934174_admin9.resx">
+      <DependentUpon>201909080934174_admin9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909081706353_admin10.resx">
+      <DependentUpon>201909081706353_admin10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909082143235_admin101.resx">
+      <DependentUpon>201909082143235_admin101.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909091230460_admin11.resx">
+      <DependentUpon>201909091230460_admin11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

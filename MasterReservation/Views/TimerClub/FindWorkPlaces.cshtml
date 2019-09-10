@@ -126,49 +126,50 @@
             </div>
         </div>
         <div id="results-list">
-            <div class="card">
-                <div class="photos-place">
-                    <div class="img-wrap">
-                        <img src="~/Resources/img/default-card-img.png">
-                    </div>
-                    <div class="img-wrap">
-                        <img src="~/Resources/img/default-card-img.png">
-                    </div>
-                    <div class="img-wrap">
-                        <img src="~/Resources/img/default-card-img.png">
-                    </div>
-                    <div class="img-wrap">
-                        <img src="~/Resources/img/default-card-img.png">
-                    </div>
-                    <div class="img-wrap">
-                        <img src="~/Resources/img/default-card-img.png">
-                    </div>
+            @for (var i=0; i<(Model[1] as List<WorkingPlaceModel>).Count; i++)
+            {
+                <div class="card">
+                    <div class="photos-place">
+                        <div class="img-wrap">
+                            <img src="~/Resources/img/default-card-img.png">
+                        </div>
+                        <div class="img-wrap">
+                            <img src="~/Resources/img/default-card-img.png">
+                        </div>
+                        <div class="img-wrap">
+                            <img src="~/Resources/img/default-card-img.png">
+                        </div>
+                        <div class="img-wrap">
+                            <img src="~/Resources/img/default-card-img.png">
+                        </div>
+                        <div class="img-wrap">
+                            <img src="~/Resources/img/default-card-img.png">
+                        </div>
 
-                </div>
-                <div class="card-description">
-                    <div class="card-title">
-                        <span class="card-title-text">Студия красоты Beauty Forest</span>
-                        <img src="~/Resources/svg/heart-gray.svg">
                     </div>
-                    <span class="address">Пушкинская, 239</span>
-                    <span class="tariffs-title">Тарифы на аренду рабочего места</span>
-                    <div class="tariffs-wrap">
-                        <div class="tariff-line">
-                            <div class="tariff">1 час</div>
-                            <div class="tariff">День</div>
-                            <div class="tariff">15 смен</div>
-                            <div class="tariff">Месяц</div>
+                    <div class="card-description">
+                        <div class="card-title">
+                            <span class="card-title-text">@((Model[2] as List<string>)[i])</span>
+                            <img src="~/Resources/svg/heart-gray.svg">
                         </div>
-                        <div class="tariff-line">
-                            <div class="tariff">500 р</div>
-                            <div class="tariff">1500 р</div>
-                            <div class="tariff">5500 р</div>
-                            <div class="tariff">16000 р</div>
+                        <span class="address">@((Model[3] as List<string>)[i])</span>
+                        <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                        <div class="tariffs-wrap">
+                            <div class="tariff-line">
+                                <div class="tariff">От 1 часа</div>
+                                <div class="tariff">От 3х часов</div>
+                                <div class="tariff">От 12 часов</div>
+                            </div>
+                            <div class="tariff-line">
+                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
+                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate3h)</div>
+                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
+                            </div>
                         </div>
+                        <button class="button" onclick="document.location='@Url.Action("WorkingPlacePage", new{id=((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
                     </div>
-                    <button class="button" onclick="document.location='WorkingPlacePage'">Подробнее</button>
                 </div>
-            </div>
+            }
 
 
         </div>

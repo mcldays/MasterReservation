@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using MasterReservation.Models;
 
 namespace MasterReservation.Controllers
@@ -44,27 +45,119 @@ namespace MasterReservation.Controllers
 
         public ActionResult FindWorkPlaces()
         {
+            List<string> titles = new List<string>();
+            List<string> addreses = new List<string>();
+            List<WorkingPlaceModel> places = Utilities.SendDbUtility.GetAllWorkingPlaces();
+            foreach (var place in places)
+            {
+                titles.Add(Utilities.SendDbUtility.GetSalonTitle(place.SalonId));
+                addreses.Add(Utilities.SendDbUtility.GetSalonAdress(place.SalonId));
+            }
             object[] x = new object[]
             {
-                new DateModel()
+                new DateModel(),
+                places,
+                titles,
+                addreses
             };
             return View(x);
 
         }
 
-        public ActionResult WorkingPlacePage()
+        public ActionResult WorkingPlacePage(string id)
         {
-            return View();
+            if (id == null || !id.IsInt())
+            {
+                return RedirectToAction("FindWorkPlaces");
+            }
+
+            WorkingPlaceModel modelPlace = Utilities.SendDbUtility.GetWorkingPlace(Int32.Parse(id));
+            if (modelPlace == null)
+            {
+                return RedirectToAction("FindWorkPlaces");
+            }
+
+            SalonModel modelSalon = Utilities.SendDbUtility.GetSalon(modelPlace.SalonId);
+            List<TimeSlotModel> modelsTime = Utilities.SendDbUtility.GetTimeSlots(modelPlace.Id);
+            if (modelSalon == null || modelsTime.Count == 0)
+            {
+                return RedirectToAction("FindWorkPlaces");
+            }
+
+            int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            ViewBag.InfoMessage = TempData["InfoMessage"];
+
+            ViewBag.Favorites = Utilities.SendDbUtility.CheckFavorite(modelPlace.Id, userId);
+
+            BookingModel modelBooking = new BookingModel()
+            {
+                PlaceId = Int32.Parse(id),
+                SalonId = modelPlace.SalonId,
+                ResidentId = userId
+            };
+
+            object[] x = new object[]
+            {
+                modelPlace,
+                modelSalon,
+                modelsTime,
+                modelBooking
+            };
+
+            return View(x);
         }
+
 
         public ActionResult ViewBookedTime()
         {
-            return View();
+            List<string> titles = new List<string>();
+            List<BookingModel> models =
+                Utilities.SendDbUtility.GetBooking(Utilities.SendDbUtility.GetResidentId(User.Identity.Name));
+            foreach (var model in models)
+            {
+                titles.Add(Utilities.SendDbUtility.GetSalonTitle(model.SalonId));
+            }
+
+            object[] x = new object[]
+            {
+                models,
+                titles
+            };
+
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            ViewBag.InfoMessage = TempData["InfoMessage"];
+
+            return View(x);
         }
 
         public ActionResult ViewFavorites()
         {
-            return View();
+            List<FavoriteModel> models = new List<FavoriteModel>();
+            int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+            
+            string[] favorites = Utilities.SendDbUtility.GetFavorites(userId).Split(',');
+            for (int i = 0; i < favorites.Length - 1; i++)
+            {
+                WorkingPlaceModel place = Utilities.SendDbUtility.GetWorkingPlace(Int32.Parse(favorites[i]));
+                SalonModel salon = Utilities.SendDbUtility.GetSalon(place.SalonId);
+                models.Add(new FavoriteModel()
+                {
+                    PlaceId = Int32.Parse(favorites[i]),
+                    SalonTitle = salon.SalonTitle,
+                    SalonAdress = salon.Adress,
+                    Rate1h = place.Rate1h,
+                    Rate3h = place.Rate3h,
+                    Rateday = place.RateDay
+                });
+            }
+            
+
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            ViewBag.InfoMessage = TempData["InfoMessage"];
+
+            return View(models);
         }
 
         public ActionResult PasswordView()

@@ -14,7 +14,10 @@
 @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
-
+@if (Model.IsAdmin)
+{
+    <button onclick="document.location = '../Admin/SalonShow'">Панель администратора</button>
+}
 
 @using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
 {
