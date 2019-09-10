@@ -162,16 +162,21 @@
                 <input type="checkbox" id="full-day-checkbox">
                 <span id="checkbox-label">Забронировать весь рабочий день</span>
             </div>
-            <textarea id="textarea" placeholder="Дополнительные требования"></textarea>
-            <div id="total-time">
-                <span class="total-label">Вы записываетесь на:</span>
-                <span id="total-bold"></span>
-            </div>
-            <div id="total-money">
-                <span class="total-label">Итого к оплате:</span>
-                <span id="total-sum"></span>
-            </div>
-            <button class="blue-button disabled-btn" id="booked-btn" disabled>Забронировать</button>
+            if(!ViewBag.IsAdminOfSalon)
+            {
+                <textarea id="textarea" placeholder="Дополнительные требования"></textarea>
+                <div id="total-time">
+                    <span class="total-label">Вы записываетесь на:</span>
+                    <span id="total-bold"></span>
+                </div>
+                <div id="total-money">
+                    <span class="total-label">Итого к оплате:</span>
+                    <span id="total-sum"></span>
+                </div>
+            
+                <button class="blue-button disabled-btn" id="booked-btn" disabled>Забронировать</button>
+             }
+            
         }
 
     </div>
@@ -195,14 +200,22 @@
                     {
                         if (model.Booked)
                         {
-                            if (model.ResidentId == (Model[3] as BookingModel).ResidentId)
+                            if (ViewBag.IsAdminOfSalon == false)
                             {
-                                <div>*@(model.Time)</div>
+                                if (model.ResidentId == (Model[3] as BookingModel).ResidentId)
+                                {
+                                    <div>*@(model.Time)</div>
+                                }
+                                else
+                                {
+                                    <div>+@(model.Time)</div>
+                                }
                             }
                             else
                             {
-                                <div>+@(model.Time)</div>
+                                    <div>+@(model.Time)</div>
                             }
+                            
                             
                         }
                         else

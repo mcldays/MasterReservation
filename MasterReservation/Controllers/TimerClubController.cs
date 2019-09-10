@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
 using MasterReservation.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace MasterReservation.Controllers
 {
@@ -40,6 +41,14 @@ namespace MasterReservation.Controllers
             ViewBag.successMessage = TempData["SuccessMessage"];
             RegisterMasterModel model = new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name));
             model.Password = string.Empty;
+            if (Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                ViewBag.IsAdminOfSalon = true;
+            }
+            else
+            {
+                ViewBag.IsAdminOfSalon = false;
+            }
             return View(model);
         }
 
@@ -102,6 +111,15 @@ namespace MasterReservation.Controllers
                 ResidentId = userId
             };
 
+            bool isAdminOfSalon = false;
+
+            if (Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                isAdminOfSalon = true;
+            }
+
+            ViewBag.IsAdminOfSalon = isAdminOfSalon;
+
             object[] x = new object[]
             {
                 modelPlace,
@@ -124,11 +142,20 @@ namespace MasterReservation.Controllers
                 titles.Add(Utilities.SendDbUtility.GetSalonTitle(model.SalonId));
             }
 
+            if (Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                titles.Clear();
+                models.Clear();
+            }
+
             object[] x = new object[]
             {
                 models,
                 titles
             };
+
+            
+
 
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             ViewBag.InfoMessage = TempData["InfoMessage"];
@@ -156,7 +183,12 @@ namespace MasterReservation.Controllers
                     Rateday = place.RateDay
                 });
             }
-            
+
+            if (Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                models.Clear();
+            }
+
 
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             ViewBag.InfoMessage = TempData["InfoMessage"];

@@ -113,11 +113,15 @@
     $(".salon-dlt-btn").on("click", function (e) {
         $.ajax({
             type: "GET",
-            url: '@Url.Action("RemoveBooking", "BookingSlots")',
-            data: "salonId=" + $(this).val(),
+            url: '@Url.Action("RemoveBookingAjax", "BookingSlots")',
+            data: "id=" + $(this).val(),
             success: function (data) {
-                $(e.target).parent().parent().remove();
-                alert(data);
+                if (data) {
+                    $(e.target).parent().parent().remove();
+                    alert("Бронирование отменено!");
+                } else {
+                    alert("Произошла ошибка, попробуйте позже");
+                }
             },
             error: function () {
                 alert("Произошла ошибка, попробуйте позже");

@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201909101542037_Lolkwk1.Designer.cs">
       <DependentUpon>201909101542037_Lolkwk1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909101753056_admin16.cs" />
+    <Compile Include="Migrations\201909101753056_admin16.Designer.cs">
+      <DependentUpon>201909101753056_admin16.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
@@ -568,6 +572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909101550118_admin15.resx">
       <DependentUpon>201909101550118_admin15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909101753056_admin16.resx">
+      <DependentUpon>201909101753056_admin16.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
