@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
@@ -84,13 +85,32 @@ namespace MasterReservation.Controllers
         }
 
         //Обновление данных о мастере
-        public ActionResult UpdateResident(RegisterMasterModel model)
+        public ActionResult UpdateResident(RegisterMasterModel model, HttpPostedFileBase uploadImage)
         {
+
+            UserContext db = new UserContext();
+
+
+            byte[] imageData = null;
+            // считываем переданный файл в массив байтов
+            using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+            {
+                imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+            }
+
+            // установка массива байтов
+            model.Picture = imageData;
+
+            Utilities.SendDbUtility.CreatePicture(model.Picture);
+
+
+
             if (model.Offers == null)
             {
                 TempData["WrongMessage"] = "Выберите предоставляемые услуги!";
                 return RedirectToAction("PersonalData", "TimerClub");
             }
+
             //Если пароль введен верно
             if (SendDbUtility.ComparePassword(model.Password, User.Identity.Name))
             {
@@ -103,8 +123,9 @@ namespace MasterReservation.Controllers
                 TempData["WrongMessage"] = "Пароль введен не верно!";
                 return RedirectToAction("PersonalData", "TimerClub");
             }
-        }
 
+
+        }
 
         // Изменение пароля
         [HttpPost]

@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201909061420202_admin2.Designer.cs">
       <DependentUpon>201909061420202_admin2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909061427074_Blya.cs" />
+    <Compile Include="Migrations\201909061427074_Blya.Designer.cs">
+      <DependentUpon>201909061427074_Blya.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
@@ -453,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909061420202_admin2.resx">
       <DependentUpon>201909061420202_admin2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909061427074_Blya.resx">
+      <DependentUpon>201909061427074_Blya.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
