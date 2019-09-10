@@ -85,7 +85,7 @@ namespace MasterReservation.Controllers
         }
 
         //Обновление данных о мастере
-        public ActionResult UpdateResident(RegisterMasterModel model, HttpPostedFileBase uploadImage)
+        public ActionResult UpdateResident(RegisterMasterModel model, HttpPostedFileBase upload)
         {
 
             UserContext db = new UserContext();
@@ -93,9 +93,9 @@ namespace MasterReservation.Controllers
 
             byte[] imageData = null;
             // считываем переданный файл в массив байтов
-            using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+            using (var binaryReader = new BinaryReader(upload.InputStream))
             {
-                imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                imageData = binaryReader.ReadBytes(upload.ContentLength);
             }
 
             // установка массива байтов

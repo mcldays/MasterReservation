@@ -19,7 +19,7 @@
     <button onclick="document.location = '../Admin/SalonShow'">Панель администратора</button>
 }
 
-@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock", enctype="multipart/form-data" } ))
 {
     @Html.HiddenFor(model => model.id)
 
@@ -28,8 +28,8 @@
     
         <div id="photo-wrap">
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="picField" id="uploadImage" size="24" onchange="" alt=""/>
-            @Html.EditorFor(model => model.Picture, new {htmlAttributes = new {@id="upload-image", PlaceHolder = "Имя*",  name="uploadImage", size="24", onchange="" }})
+            <input type="file" name="upload" id="hidden-input" size="24" onchange="" alt=""/>
+          
             </div>
     
         <div id="textboxes">
