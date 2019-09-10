@@ -19,19 +19,19 @@
     <button onclick="document.location = '../Admin/SalonShow'">Панель администратора</button>
 }
 
-@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock" }))
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock", enctype="multipart/form-data" } ))
 {
     @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
-    @*@using (Html.BeginForm("Create", "Utilities", FormMethod.Post, new {enctype = "multipart/form-data", id="photo-wrap"}))*@
-      @*{*@
+   
+    
         <div id="photo-wrap">
             <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" id="picField" id="uploadImage" class="hidden-input" size="24" onchange="" alt=""/>
-
-        </div>
-      @*}*@
+            <input type="file" name="upload" id="hidden-input" size="24" onchange="" alt=""/>
+          
+            </div>
+    
         <div id="textboxes">
             <div class="input-wrap">
 
