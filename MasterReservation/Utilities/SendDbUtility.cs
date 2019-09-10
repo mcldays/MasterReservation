@@ -677,8 +677,9 @@ namespace MasterReservation.Utilities
 
         public static bool CreatePicture(byte[] Picture)
         {
-            
-            File.WriteAllBytes("1.jpg", Picture);
+            string path = @"C:\Users\user\Desktop\Images\1.jpg";
+           
+            File.WriteAllBytes(path, Picture);
 
             return true;
         }
