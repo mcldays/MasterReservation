@@ -17,5 +17,15 @@ namespace MasterReservation.Utilities
 
             }
         }
+
+        public static SalonModel GetDataSalonAdmin(string Email)
+        {
+            using (UserContext DbUse = new UserContext())
+            {
+                SalonModel user = DbUse.SalonModels.FirstOrDefault(t => t.Email == Email);
+                return user;
+
+            }
+        }
     }
 }

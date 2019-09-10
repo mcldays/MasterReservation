@@ -53,7 +53,18 @@ namespace MasterReservation.Controllers
         {
             try
             {
-                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(id), Utilities.SendDbUtility.GetResidentId(User.Identity.Name));
+                bool salonAdmin;
+                if (Utilities.SendDbUtility
+                    .GetBookingForSalonId(Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value)))
+                    .Contains(Utilities.SendDbUtility.GetBookingById(Int32.Parse(id))))
+                {
+                    salonAdmin = true;
+                }
+                else
+                {
+                    salonAdmin = false;
+                }
+                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(id), Utilities.SendDbUtility.GetResidentId(User.Identity.Name), salonAdmin);
                 if (!res)
                 {
                     TempData["ErrorMessage"] = "Ошибка удаления!";

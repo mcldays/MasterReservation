@@ -75,6 +75,7 @@
         <button id="login-master">Войти</button>
         <span>Салонам</span>
         <button id="register-salon">Зарегистрировать салон красоты</button>
+        <button id="login-salon">Войти</button>
     </div>
 </div>
 
@@ -171,8 +172,6 @@
         <div id="login-wrap">
             @Html.EditorFor(model => (model[0] as LoginMaster).Email, new { htmlAttributes = new { @class = "field", id = "loginemail", PlaceHolder = "Email" } })
             @Html.EditorFor(model => (model[0] as LoginMaster).Password, new { htmlAttributes = new { @class = "field", id = "loginpass", PlaceHolder = "Пароль" } })
-
-
         </div>
 
         <button class="send-button" id="login-button">Войти</button>
@@ -223,7 +222,29 @@
 
     }
 
-    <div id="hidden-offers">
+<!-- вход лля администратора салона -->
+
+    @using (Html.BeginForm("LoginSalon", "Authentication", FormMethod.Post, new { @class = "modal-window", @id = "window-login-salon" }))
+    {
+        <span class="modal-title">Вход</span>
+
+
+        <div id="login-wrap">
+            @Html.EditorFor(model => (model[0] as LoginMaster).Email, new { htmlAttributes = new { @class = "field", id = "loginemail", PlaceHolder = "Email" } })
+            @Html.EditorFor(model => (model[0] as LoginMaster).Password, new { htmlAttributes = new { @class = "field", id = "loginpass", PlaceHolder = "Пароль" } })
+
+
+        </div>
+
+        <button class="send-button" id="login-button">Войти</button>
+
+
+        <div class="close-modal">
+            <img src="~/Resources/img/close-modal.png">
+        </div>
+    }
+
+<div id="hidden-offers">
         <div>Парикмахерские услуги</div>
         <div>Педикюр</div>
         <div>Массаж</div>

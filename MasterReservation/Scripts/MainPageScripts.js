@@ -6,13 +6,25 @@
         $("#window-login-master").slideDown(300);
     });
 
-    // закрытие окна регистрации мастера
+    // закрытие окна входа мастера
     $(".close-modal").on('click', function () {
         $("#overlay-modal").slideUp(300);
         $("#window-login-master").slideUp(300)[0].reset();
         $("#offers-wrap").empty();
     });
 
+    // открытие окна входа салона
+    $("#login-salon").on("click", function () {
+        $("#overlay-modal").slideDown(300);
+        $("#window-login-salon").slideDown(300);
+    });
+
+    // закрытие окна входа салона
+    $(".close-modal").on('click', function () {
+        $("#overlay-modal").slideUp(300);
+        $("#window-login-salon").slideUp(300)[0].reset();
+        $("#offers-wrap").empty();
+    });
 
     // открытие окна регистрации салона
     $("#register-salon").on("click", function () {

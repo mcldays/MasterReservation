@@ -26,5 +26,6 @@ namespace MasterReservation.Models
         public string Adress { get; set; }
         public string OperatingMode { get; set; }
         public bool ReservationType { get; set; }
+        public string AdminPass { get; set; }
     }
 }
