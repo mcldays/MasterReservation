@@ -49,14 +49,14 @@ namespace MasterReservation.Controllers
             return RedirectToAction("WorkingPlacePage", "TimerClub", new {id = model.PlaceId});
         }
 
-        public ActionResult RemoveBooking(string id)
+        public ActionResult RemoveBooking(string salonId)
         {
             try
             {
+                BookingModel booking = Utilities.SendDbUtility.GetBookingById(Int32.Parse(salonId));
+                int userSalonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
                 bool salonAdmin;
-                if (Utilities.SendDbUtility
-                    .GetBookingForSalonId(Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value)))
-                    .Contains(Utilities.SendDbUtility.GetBookingById(Int32.Parse(id))))
+                if (Utilities.SendDbUtility.GetBookingForSalonId(userSalonId).Contains(booking))
                 {
                     salonAdmin = true;
                 }
@@ -64,7 +64,7 @@ namespace MasterReservation.Controllers
                 {
                     salonAdmin = false;
                 }
-                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(id), Utilities.SendDbUtility.GetResidentId(User.Identity.Name), salonAdmin);
+                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(salonId), Utilities.SendDbUtility.GetResidentId(User.Identity.Name), salonAdmin);
                 if (!res)
                 {
                     TempData["ErrorMessage"] = "Ошибка удаления!";

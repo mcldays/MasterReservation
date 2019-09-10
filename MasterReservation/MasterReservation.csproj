@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201909101536071_admin14.Designer.cs">
       <DependentUpon>201909101536071_admin14.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909101550118_admin15.cs" />
+    <Compile Include="Migrations\201909101550118_admin15.Designer.cs">
+      <DependentUpon>201909101550118_admin15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201909101542037_Lolkwk1.cs" />
     <Compile Include="Migrations\201909101542037_Lolkwk1.Designer.cs">
       <DependentUpon>201909101542037_Lolkwk1.cs</DependentUpon>
@@ -561,6 +565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909101542037_Lolkwk1.resx">
       <DependentUpon>201909101542037_Lolkwk1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909101550118_admin15.resx">
+      <DependentUpon>201909101550118_admin15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
