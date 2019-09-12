@@ -734,16 +734,38 @@ namespace MasterReservation.Utilities
         //}
 
 
-        public static bool CreatePicture(byte[] Picture)
+        public static bool CreatePicture(byte[] picture, int id)
         {
-            string path = @"C:\Users\user\Desktop\Images\1.jpg";
+            string path = $@"C:\Users\user\source\repos\MasterReservation\MasterReservation\ResidenAvatar\{id.ToString()}.jpg";
            
-            File.WriteAllBytes(path, Picture);
+            File.WriteAllBytes(path, picture);
 
             return true;
         }
 
+        public static bool SendPictureToDb(RegisterMasterModel model)
+        {
+            try
+            {
+                if (model != null)
+                { 
 
+
+
+                    string path =
+                        $@"C:\Users\user\source\repos\MasterReservation\MasterReservation\ResidenAvatar\{model.id.ToString()}.jpg";
+                    model.Picture = File.ReadAllBytes(path);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return true;
+            }
+
+
+            return true;
+        }
 
     }
 

@@ -37,9 +37,19 @@ namespace MasterReservation.Controllers
 
         public ActionResult PersonalData()
         {
+
+
+
             ViewBag.wrongMessage = TempData["WrongMessage"];
             ViewBag.successMessage = TempData["SuccessMessage"];
             RegisterMasterModel model = new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name));
+
+            if (model.Picture == null)
+            {
+                Utilities.SendDbUtility.SendPictureToDb(model);
+            }
+
+
             model.Password = string.Empty;
             if (Request.Cookies.AllKeys.Contains("SalonId"))
             {
