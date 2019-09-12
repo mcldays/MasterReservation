@@ -7,21 +7,21 @@ namespace MasterReservation.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.PictureModels",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Image = c.Binary(),
-                    })
-                .PrimaryKey(t => t.id);
+            //CreateTable(
+            //    "dbo.PictureModels",
+            //    c => new
+            //        {
+            //            id = c.Int(nullable: false, identity: true),
+            //            Name = c.String(),
+            //            Image = c.Binary(),
+            //        })
+            //    .PrimaryKey(t => t.id);
             
         }
         
         public override void Down()
         {
-            DropTable("dbo.PictureModels");
+            //DropTable("dbo.PictureModels");
         }
     }
 }

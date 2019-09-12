@@ -196,8 +196,7 @@
     $(document).on("click", function (e) {
         var div = $(".offers-options");
         if (!div.is(e.target) && div.has(e.target).length === 0 && !$(".offers-selected-wrap").is(e.target) && $(".offers-selected-wrap").has(e.target).length === 0) {
-            console.log(div.has(e.target));
-            console.log($(".offers-selected-wrap").is(e.target));
+
             div.slideUp(300);
         }
     });

@@ -104,5 +104,25 @@ namespace MasterReservation.Controllers
                 return false;
             }
         }
+
+        public string CheckFreeSlotsAjax(string date, string times)
+        {
+            string res = "";
+            DateTime Date = DateTime.Parse(date);
+            TimeSpan from = TimeSpan.Parse(times.Split('-')[0]);
+            TimeSpan to = TimeSpan.Parse(times.Split('-')[1]);
+            List<TimeSlotModel> slots = Utilities.SendDbUtility.GetAllTimeSlots();
+            foreach (var slot in slots)
+            {
+                TimeSpan slotFrom = TimeSpan.Parse(slot.Time.Split('-')[0]);
+                TimeSpan slotTo = TimeSpan.Parse(slot.Time.Split('-')[1]);
+                if (Date == slot.Date && slotFrom >= from && slotTo <= to && !slot.Booked)
+                {
+                    res += slot.PlaceId.ToString() + ",";
+                }
+            }
+
+            return res;
+        }
     }
 }

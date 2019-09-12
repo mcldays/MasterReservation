@@ -14,7 +14,7 @@
 {
     <span class="error-message">@ViewBag.ErrorMessage</span>
 }
-@if ((Model[0] as List<SalonModel>).Count == 0)
+@if ((Model[0] as List<SalonModel>) == null)
 {
     <span class="info-message">Салонов пока нет</span>
 }
@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             
-            @if((Model[0] as List<SalonModel>).Count != 0)
+            @if((Model[0] as List<SalonModel>) != null)
             {
                 foreach (var model in (Model[0] as List<SalonModel>))
                 {
@@ -102,9 +102,21 @@
 
     $(".phone-mask").mask("+7(999)9999999");
 
-    $.mask.definitions['~'] = '[0-2]';
-    $.mask.definitions['+'] = '[0-5]';
-    $(".mode-mask").mask("~9:00 - ~9:00");
+    $(".mode-mask").mask(
+        "99:99-99:99",
+        {
+            placeholder: "_",
+            completed: function()
+            {
+                var val = $(this).val().split(':');
+                if ( val[0]*1 > 23) val[0] = '23';
+                if ( val[1]*1 > 59) val[1] = '59';
+                $(this).val( val.join(':') );
+                $(this).next(':input').focus();
+            }
+        }
+    );
+
 
 
     $("#city-input").each(function () {

@@ -57,6 +57,10 @@ namespace MasterReservation.Controllers
             List<string> titles = new List<string>();
             List<string> addreses = new List<string>();
             List<WorkingPlaceModel> places = Utilities.SendDbUtility.GetAllWorkingPlaces();
+            List<bool> favorites = new List<bool>();
+            int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+            List<SalonModel> salons = new List<SalonModel>();
+
             if (places == null)
             {
                 places = new List<WorkingPlaceModel>();
@@ -65,13 +69,27 @@ namespace MasterReservation.Controllers
             {
                 titles.Add(Utilities.SendDbUtility.GetSalonTitle(place.SalonId));
                 addreses.Add(Utilities.SendDbUtility.GetSalonAdress(place.SalonId));
+                favorites.Add(Utilities.SendDbUtility.CheckFavorite(place.Id, userId));
+                salons.Add(Utilities.SendDbUtility.GetSalon(place.SalonId));
             }
-            object[] x = new object[]
+
+            if (Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                //for (int i = 0; i < favorites.Count; i++)
+                //{
+                //    favorites[i] = false;
+                //}
+                favorites.ForEach(t=>t = false);
+            }
+
+                object[] x = new object[]
             {
                 new DateModel(),
                 places,
                 titles,
-                addreses
+                addreses,
+                favorites,
+                salons
             };
             return View(x);
 

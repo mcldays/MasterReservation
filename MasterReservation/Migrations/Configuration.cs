@@ -10,7 +10,6 @@ namespace MasterReservation.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "MasterReservation.Utilities.UserContext";
         }
 
         protected override void Seed(MasterReservation.Utilities.UserContext context)

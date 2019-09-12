@@ -12,6 +12,7 @@
 
 <script src="https://api-maps.yandex.ru/2.1/?apikey=8db9bf80-135a-40b0-9e06-66adc66fd9b3&lang=ru_RU"
         type="text/javascript"></script>
+@Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
 @Scripts.Render("~/Scripts/slick.min.js")
@@ -21,7 +22,7 @@
 
 <div id="body-container">
     @*@using (Html.BeginForm("SendDate", "Authentication", FormMethod.Post, new {@id = "filter-wrap"}))
-    {*@
+        {*@
     <div id="filter-wrap">
         <span id="filter-title">Фильтр поиска Рабочих Мест</span>
         <div id="calendar-wrap">
@@ -33,23 +34,23 @@
             @*@Html.EditorFor(model => (model[0] as DateModel).Date, new {htmlAttributes = new {@class = "hidden-input", id = "input-for-date"}})*@
             <input type="text" class="hidden-input" id="input-for-date">
         </div>
-        <div id="input-time-wrap">
+        <div id="input-time-wrap" style="display: none;">
             <span class="sub-title">
                 Выберите время
             </span>
             <div id="input-time-sub-wrap">
                 <span class="time-lable">С</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })*@
-                <input type="text" class="input-time" value="13:00">
+                <input type="text" class="input-time">
                 <span class="time-lable" id="checkbox-label">до</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeSecond, new { htmlAttributes = new { @class = "input-time", value = "16:00 " } })*@
-                <input type="text" class="input-time" value="16:00">
+                <input type="text" class="input-time">
             </div>
             <div class="checkbox-wrap">
                 @*@Html.CheckBoxFor(model => (model[0] as DateModel).FullTime, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })*@
-                <input type="checkbox" class="sub-title" value="Полный рабочий день "/>
-               
-                <span class="sub-title" id="checkbox-label">Полный рабочий день</span>
+                @*<input type="checkbox" class="sub-title" value="Полный рабочий день "/>*@
+
+                @*<span class="sub-title" id="checkbox-label">Полный рабочий день</span>*@
             </div>
 
         </div>
@@ -60,36 +61,36 @@
                 <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
             </div>
             <div class="offers-options">
-                <div class="dropdown-option">Парикмахерские услуги</div>
-                <div class="dropdown-option">Маникюр</div>
-                <div class="dropdown-option">Педикюр</div>
-                <div class="dropdown-option">Массаж</div>
-                <div class="dropdown-option">Визаж</div>
-                <div class="dropdown-option">Шугаринг</div>
-                <div class="dropdown-option">Оформление бровей</div>
-                <div class="dropdown-option">Наращивание ресниц</div>
-                <div class="dropdown-option">Перманентный макияж</div>
-                <div class="dropdown-option">Косметологические услуги</div>
+                <div class="dropdown-option offers">Парикмахерские услуги</div>
+                <div class="dropdown-option offers">Маникюр</div>
+                <div class="dropdown-option offers">Педикюр</div>
+                <div class="dropdown-option offers">Массаж</div>
+                <div class="dropdown-option offers">Визаж</div>
+                <div class="dropdown-option offers">Шугаринг</div>
+                <div class="dropdown-option offers">Оформление бровей</div>
+                <div class="dropdown-option offers">Наращивание ресниц</div>
+                <div class="dropdown-option offers">Перманентный макияж</div>
+                <div class="dropdown-option offers">Косметологические услуги</div>
             </div>
             <!-- инпут для услуг -->
-            <input type="text" class="hidden-input" id="input-for-offers"/>
+            <input type="text" class="hidden-input" id="input-for-offers" />
             @*@Html.EditorFor(model => (model[0] as DateModel).Offers, new  { htmlAttributes = new { @id = "input-for-offers", value = "Полный рабочий день ", @class="hidden-input" }})*@
         </div>
 
-    <span class="sub-title">Город для поиска</span>
-    @*@Html.EditorFor(model => (model[0] as DateModel).City, new  { htmlAttributes = new { @id = "input-city" }})*@
+        <span class="sub-title">Город для поиска</span>
+        @*@Html.EditorFor(model => (model[0] as DateModel).City, new  { htmlAttributes = new { @id = "input-city" }})*@
         <input type="text" id="input-city">
 
         <div id="type-place">
             <span class="sub-title">Тип Рабочего Места</span>
             <div class="checkbox-wrap">
                 @*@Html.CheckBoxFor(model => (model[0] as DateModel).PrivateSpace, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })*@
-                <input type="checkbox" class="checkbox">
+                <input type="checkbox" class="checkbox checkbox1">
                 <span class="checkbox-label-radio">отдельный кабинет;</span>
             </div>
             <div class="checkbox-wrap">
                 @*@Html.CheckBoxFor(model => (model[0] as DateModel).OpenSpace, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })*@
-                <input type="checkbox" class="checkbox">
+                <input type="checkbox" class="checkbox checkbox2">
                 <span class="checkbox-label-radio">общее пространство;</span>
             </div>
         </div>
@@ -100,25 +101,34 @@
                 <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
             </div>
             <div class="offers-options">
-                <div class="dropdown-option">Бесплатный чай/кофе</div>
-                <div class="dropdown-option">Расходные материалы</div>
-                <div class="dropdown-option">Камера хранения</div>
-                <div class="dropdown-option">Парковка</div>
-                <div class="dropdown-option">Комната отдыха</div>
-                <div class="dropdown-option">Детская комната</div>
+                <div class="dropdown-option ad-cond">Бесплатный чай/ кофе</div>
+                <div class="dropdown-option ad-cond">Расходные материалы</div>
+                <div class="dropdown-option ad-cond">Камера хранения</div>
+                <div class="dropdown-option ad-cond">Парковка</div>
+                <div class="dropdown-option ad-cond">Комната отдыха</div>
+                <div class="dropdown-option ad-cond">Детская комната</div>
             </div>
             <!-- инпут для доп условий -->
             @*@Html.EditorFor(model => (model[0] as DateModel).AddedOffers, new { htmlAttributes = new  { @class="hidden-input" }})*@
-            <input type="text" class="hidden-input"/>
+            <input type="text" class="hidden-input" />
         </div>
-        <button class="button">Поиск</button>
+        <button class="button" id="send-filter-data">Поиск</button>
+        <div class="hidden-input" id="query-field">
+            <div id="date-field"></div>
+            <div id="times-field"></div>
+            <div id="offers-field"></div>
+            <div id="city-field"></div>
+            <div id="types-field-1"></div>
+            <div id="types-field-2"></div>
+            <div id="ad-cond-field"></div>
+        </div>
     </div>
     @*}*@
     <div id="main-wrap">
         <div id="results">
             <div id="results-line">
                 <span id="results-title">Результаты поиска:</span>
-                <div id="query-line"><span id="city">г.Москва,</span> <span id="date">21 Июля,</span> <span id="time">16:00,</span> <span id="offers">Парикмахерские услуги</span></div>
+                <div id="query-line"><span id="city"></span> <span id="date"></span> <span id="time"></span> <span id="offers"></span></div>
             </div>
             <div id="results-buttons">
                 <button class="result-button active-button" id="show-list">Показать список</button>
@@ -126,9 +136,15 @@
             </div>
         </div>
         <div id="results-list">
-            @for (var i=0; i<(Model[1] as List<WorkingPlaceModel>).Count; i++)
+            @for (var i = 0; i < (Model[1] as List<WorkingPlaceModel>).Count; i++)
             {
+
                 <div class="card">
+                    @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).Id, new { @class = "card-id" })
+                    @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).Offers, new { @class = "card-offers" })
+                    @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).PlaceType, new { @class = "card-place-type" })
+                    @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).AdditionalConditions, new { @class = "card-ad-cond" })
+                    @Html.HiddenFor(model => ((model[5] as List<SalonModel>)[i]).City, new { @class = "card-city" })
                     <div class="photos-place">
                         <div class="img-wrap">
                             <img src="~/Resources/img/default-card-img.png">
@@ -150,7 +166,35 @@
                     <div class="card-description">
                         <div class="card-title">
                             <span class="card-title-text">@((Model[2] as List<string>)[i])</span>
-                            <img src="~/Resources/svg/heart-gray.svg">
+                            @*<img src="~/Resources/svg/heart-gray.svg">*@
+
+                            @if ((Model[4] as List<bool>)[i])
+                            {
+                                <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                                <g id="favorite">
+                                <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+
+
+
+                                    </g>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                                <g id="favorite">
+                                <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+
+
+
+                                    </g>
+                                </svg>
+
+                            }
                         </div>
                         <span class="address">@((Model[3] as List<string>)[i])</span>
                         <span class="tariffs-title">Тарифы на аренду рабочего места</span>
@@ -166,7 +210,8 @@
                                 <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
                             </div>
                         </div>
-                        <button class="button" onclick="document.location='@Url.Action("WorkingPlacePage", new{id=((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
+                        <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
+
                     </div>
                 </div>
             }
@@ -178,3 +223,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    
+    $(".input-time").mask(
+        "99:99",
+        {
+            placeholder: "_",
+            completed: function()
+            {
+                var val = $(this).val().split(':');
+                if ( val[0]*1 > 23) val[0] = '23';
+                if ( val[1]*1 > 59) val[1] = '59';
+                $(this).val( val.join(':') );
+                $(this).next(':input').focus();
+            }
+        }
+    );
+
+
+
+</script>

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using MasterReservation.App_Start;
+using MasterReservation.Jobs;
 
 namespace MasterReservation
 {
@@ -19,6 +20,8 @@ namespace MasterReservation
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            DbSheduler.Start();
         }
     }
 }

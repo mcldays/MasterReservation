@@ -391,6 +391,23 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static List<TimeSlotModel> GetTimeSlotsBySalonId(int salonId)
+        {
+            List<TimeSlotModel> models;
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    models = dbUse.TimeSlotModels.Where(t => t.SalonId == salonId).ToList();
+                    return models;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
         public static int GetResidentId(string email)
         {
             int id;
@@ -552,7 +569,8 @@ namespace MasterReservation.Utilities
                 try
                 {
                     ResidentModel model = dbUse.ResidentModels.FirstOrDefault(t => t.Id == residentId);
-                    if (model.Favorites.Contains(placeId.ToString() + ","))
+
+                    if (model.Favorites != null && model.Favorites.Contains(placeId.ToString() + ","))
                     {
                         return false;
                     }
@@ -656,6 +674,45 @@ namespace MasterReservation.Utilities
                 }
             }
         }
+
+        public static List<TimeSlotModel> GetAllTimeSlots()
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    return dbUse.TimeSlotModels.ToList();
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public static bool CheckTimeSlot(DateTime date, string times, int placeId)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    TimeSlotModel model = dbUse.TimeSlotModels.FirstOrDefault(t => t.PlaceId == placeId && t.Date == date && t.Time == times);
+                    if (model == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
 
 
         //public static bool SendDate(DateModel model)
