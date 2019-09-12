@@ -27,10 +27,21 @@
    
     
         <div id="photo-wrap">
-            <img src="~/Resources/img/avatar-default.png" id="avatar">
-            <input type="file" name="upload" id="hidden-input" size="24" onchange="" alt=""/>
-          
-            </div>
+            @{
+                try
+                {
+                    @Html.Raw("<img id='avatar' src=\"data:image/jpg;base64,"
+                                             + Convert.ToBase64String(Model.Picture) + "\" />")
+                }
+                catch (Exception e)
+                {
+                    <img src ="../../Resources/img/avatar-default.png" id="avatar">
+                }
+
+                
+                <input type="file" name="upload" id="picField" size="24" onchange="" alt="" />
+            }
+        </div>
     
         <div id="textboxes">
             <div class="input-wrap">

@@ -30,7 +30,7 @@ namespace MasterReservation.Controllers
                 // установка массива байтов
                 Image = imageData;
 
-                Utilities.SendDbUtility.CreatePicture(Image);
+              
 
               
                 

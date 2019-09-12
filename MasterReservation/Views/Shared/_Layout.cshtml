@@ -46,9 +46,9 @@
 
             <div id="userblock">
                 <img src="~/Resources/svg/user.svg" id="faceicon">
-
-                <span id="residentname">@(Server.UrlDecode(Request.Cookies["ResidentName"].Value) + " " + Server.UrlDecode(Request.Cookies["ResidentSurname"].Value))</span>
-
+            
+                        <span id="residentname">@(Server.UrlDecode(Request.Cookies["ResidentName"].Value) + " " + Server.UrlDecode(Request.Cookies["ResidentSurname"].Value))</span>
+               
                 <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
                 <div id="user-dropdown">
                     <div class="dropdown-row" id="to-personal-data-btn">

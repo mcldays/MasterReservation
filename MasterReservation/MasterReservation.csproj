@@ -264,6 +264,14 @@
     <Compile Include="Migrations\201909101542037_Lolkwk1.Designer.cs">
       <DependentUpon>201909101542037_Lolkwk1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909111420355_Blysat.cs" />
+    <Compile Include="Migrations\201909111420355_Blysat.Designer.cs">
+      <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909122112381_123.cs" />
+    <Compile Include="Migrations\201909122112381_123.Designer.cs">
+      <DependentUpon>201909122112381_123.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
@@ -285,10 +293,6 @@
     <Compile Include="Utilities\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Movies.mdf" />
-    <Content Include="App_Data\Movies_log.ldf">
-      <DependentUpon>Movies.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -466,6 +470,7 @@
     <Content Include="Views\TimerClub\ShowBookedResidents.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\BookingSlots\" />
     <Folder Include="Views\Utilities\" />
   </ItemGroup>
@@ -568,6 +573,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909101550118_admin15.resx">
       <DependentUpon>201909101550118_admin15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909111420355_Blysat.resx">
+      <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909122112381_123.resx">
+      <DependentUpon>201909122112381_123.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
