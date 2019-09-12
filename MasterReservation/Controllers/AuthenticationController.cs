@@ -97,7 +97,15 @@ namespace MasterReservation.Controllers
 
         public ActionResult LogOut()
         {
+            //Response.Cookies.Clear();
             FormsAuthentication.SignOut();
+
+            var cookie = new HttpCookie("SalonId")
+            {
+                Expires = DateTime.Now.AddDays(-1d)
+            };
+            Response.Cookies.Add(cookie);
+
 
             return RedirectToAction("MainPage", "TimerClub");
         }

@@ -49,22 +49,24 @@ namespace MasterReservation.Controllers
             return RedirectToAction("WorkingPlacePage", "TimerClub", new {id = model.PlaceId});
         }
 
-        public ActionResult RemoveBooking(string salonId)
+        public ActionResult RemoveBooking(string id)
         {
             try
             {
-                BookingModel booking = Utilities.SendDbUtility.GetBookingById(Int32.Parse(salonId));
-                int userSalonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
-                bool salonAdmin;
-                if (Utilities.SendDbUtility.GetBookingForSalonId(userSalonId).Contains(booking))
-                {
-                    salonAdmin = true;
-                }
-                else
-                {
-                    salonAdmin = false;
-                }
-                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(salonId), Utilities.SendDbUtility.GetResidentId(User.Identity.Name), salonAdmin);
+                //BookingModel booking = Utilities.SendDbUtility.GetBookingById(Int32.Parse(id));
+                //int userSalonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
+                //bool salonAdmin = false;
+                //List<BookingModel> models = Utilities.SendDbUtility.GetBookingForSalonId(userSalonId);
+                //foreach (var model in models)
+                //{
+                //    if (model.Id == booking.Id)
+                //    {
+                //        salonAdmin = true;
+                //    }
+                //}
+            
+                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(id), Utilities.SendDbUtility.GetResidentId(User.Identity.Name), false);
+                
                 if (!res)
                 {
                     TempData["ErrorMessage"] = "Ошибка удаления!";
@@ -80,6 +82,27 @@ namespace MasterReservation.Controllers
             }
             
             return RedirectToAction("ViewBookedTime", "TimerClub");
+        }
+
+        public bool RemoveBookingAjax(string id)
+        {
+            try
+            {
+                bool res = Utilities.SendDbUtility.RemoveBooking(Int32.Parse(id), 0, true);
+
+                if (!res)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

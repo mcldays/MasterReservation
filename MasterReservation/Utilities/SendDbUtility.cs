@@ -256,6 +256,7 @@ namespace MasterReservation.Utilities
                 {
                     dbUse.WorkingPlaceModels.Remove(dbUse.WorkingPlaceModels.Where(t => t.Id == id).FirstOrDefault());
                     dbUse.TimeSlotModels.RemoveRange(dbUse.TimeSlotModels.Where(t => t.PlaceId == id));
+                    dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.PlaceId == id));
                     dbUse.SaveChanges();
                 }
                 catch (Exception e)
@@ -292,6 +293,7 @@ namespace MasterReservation.Utilities
                     dbUse.SalonModels.Remove(dbUse.SalonModels.Where(t => t.Id == salonId).FirstOrDefault());
                     dbUse.WorkingPlaceModels.RemoveRange(dbUse.WorkingPlaceModels.Where(t => t.SalonId == salonId));
                     dbUse.TimeSlotModels.RemoveRange(dbUse.TimeSlotModels.Where(t => t.SalonId == salonId));
+                    dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.SalonId == salonId));
                     dbUse.SaveChanges();
                 }
                 catch (Exception e)
@@ -524,7 +526,7 @@ namespace MasterReservation.Utilities
                         dbUse.BookingModels.Remove(dbUse.BookingModels.Where(t => t.Id == bookingId && t.ResidentId == residentId).FirstOrDefault());
                     }
 
-                    var slots = dbUse.TimeSlotModels.Where(t => t.BookingId == bookingId && t.ResidentId == residentId);
+                    var slots = dbUse.TimeSlotModels.Where(t => t.BookingId == bookingId);
                     foreach (var slot in slots)
                     {
                         slot.Booked = false;

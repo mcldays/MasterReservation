@@ -6,7 +6,7 @@
 
 @{
     ViewBag.Title = "Личные данные";
-    
+
 
 }
 
@@ -19,13 +19,18 @@
     <button onclick="document.location = '../Admin/SalonShow'">Панель администратора</button>
 }
 
-@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock", enctype="multipart/form-data" } ))
+@if (ViewBag.IsAdminOfSalon)
+{
+    <button onclick="document.location = '@Url.Action("ShowBookedResidents")'">Просмотр забронированых мест</button>
+}
+
+@using (Html.BeginForm("UpdateResident", "Authentication", FormMethod.Post, new { @id = "MainBlock", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.id)
 
     <div id="BlockOne">
-   
-    
+
+
         <div id="photo-wrap">
             @{
                 try
@@ -46,23 +51,23 @@
         <div id="textboxes">
             <div class="input-wrap">
 
-                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Имя*"}})
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Имя*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Фамилия*"}})
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Фамилия*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "areastyle", PlaceHolder = "Email*", disabled = "disabled"}})
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "areastyle", PlaceHolder = "Email*", disabled = "disabled" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
 
 
             <div class="input-wrap">
-                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "areastyle phone-mask", PlaceHolder = "Телефон*"}})
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "areastyle phone-mask", PlaceHolder = "Телефон*" } })
                 <img src="~/Resources/svg/pencil.svg" class="editbutton">
             </div>
         </div>
@@ -102,7 +107,7 @@
 
                 <div id="offers-wrap">
                     @{
-                        string[] mas = new string[] {};
+                        string[] mas = new string[] { };
 
                         try
                         {
@@ -111,7 +116,7 @@
                             {
                                 <div class="offer">
                                     <span>@mas[i]</span>
-                                    <img src="~/Resources/img/cross-black.png"/>
+                                    <img src="~/Resources/img/cross-black.png" />
                                 </div>
                             }
 
@@ -121,7 +126,7 @@
 
                         }
                     }
-                    @Html.EditorFor(model=>model.Offers, new {htmlAttributes = new{@class="hidden-input", id="hidden-offers"}})
+                    @Html.EditorFor(model => model.Offers, new { htmlAttributes = new { @class = "hidden-input", id = "hidden-offers" } })
                 </div>
 
             </div>
@@ -136,7 +141,7 @@
 
                     </div>
                 </div>
-                @Html.EditorFor(model => model.Expirience, new {htmlAttributes = new {@class = "jobscore", PlaceHolder = "Стаж Работы"}})
+                @Html.EditorFor(model => model.Expirience, new { htmlAttributes = new { @class = "jobscore", PlaceHolder = "Стаж Работы" } })
             </div>
 
             <div class="childtwo">
@@ -147,33 +152,33 @@
                 </div>
 
                 @*<div id="orientationChildTwo">
-                    <span id="ChosePass">Смена пароля</span>
-                </div>*@
+                        <span id="ChosePass">Смена пароля</span>
+                    </div>*@
 
                 <div class="ChildTwoOffers">
 
                     @*<div class="input-wrap-two">*@
-                        @*@Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})*@
-                        @*<input type="text" class="areastyle-two" placeholder="Текущий пароль*">*@
+                    @*@Html.EditorFor(model => model.Password, new { htmlAttributes=new{@class = "areastyle-two", PlaceHolder = "Текущий пароль*" }})*@
+                    @*<input type="text" class="areastyle-two" placeholder="Текущий пароль*">*@
                     @*</div>*@
 
 
                     <div class="input-wrap-twoOrient">
 
-                        @Html.EditorFor(model=>model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
                     </div>
 
 
                     @*<div class="input-wrap-twoOrient">
-                        @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
-                    </div>*@
+                            @Html.EditorFor(model => model.SumbitPassword, new { htmlAttributes = new { @class = "areastyle-two", PlaceHolder = "Текущий пароль*" } })
+                        </div>*@
                 </div>
 
                 <div id="SaveButton">
                     <button class="savebut">Сохранить</button>
                 </div>
 
-               
+
 
 
             </div>
@@ -182,7 +187,7 @@
     </div>
 }
 
-@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new {@id = "change-pass-btn" }))
+@using (Html.BeginForm("PasswordView", "TimerClub", FormMethod.Post, new { @id = "change-pass-btn" }))
 {
 
     <button class="savebut">Изменить пароль</button>

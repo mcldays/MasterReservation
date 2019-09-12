@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201909101542037_Lolkwk1.Designer.cs">
       <DependentUpon>201909101542037_Lolkwk1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909101753056_admin16.cs" />
+    <Compile Include="Migrations\201909101753056_admin16.Designer.cs">
+      <DependentUpon>201909101753056_admin16.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201909111420355_Blysat.cs" />
     <Compile Include="Migrations\201909111420355_Blysat.Designer.cs">
       <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
@@ -573,6 +577,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909101550118_admin15.resx">
       <DependentUpon>201909101550118_admin15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909101753056_admin16.resx">
+      <DependentUpon>201909101753056_admin16.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909111420355_Blysat.resx">
       <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
