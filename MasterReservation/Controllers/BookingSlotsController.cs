@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MasterReservation.Models;
+using MasterReservation.Utilities;
 
 namespace MasterReservation.Controllers
 {
@@ -111,7 +114,7 @@ namespace MasterReservation.Controllers
             DateTime Date = DateTime.Parse(date);
             TimeSpan from = TimeSpan.Parse(times.Split('-')[0]);
             TimeSpan to = TimeSpan.Parse(times.Split('-')[1]);
-            List<TimeSlotModel> slots = Utilities.SendDbUtility.GetAllTimeSlots();
+            List<TimeSlotModel> slots = SendDbUtility.GetAllTimeSlots();
             foreach (var slot in slots)
             {
                 TimeSpan slotFrom = TimeSpan.Parse(slot.Time.Split('-')[0]);
@@ -121,7 +124,7 @@ namespace MasterReservation.Controllers
                     res += slot.PlaceId.ToString() + ",";
                 }
             }
-
+            
             return res;
         }
     }

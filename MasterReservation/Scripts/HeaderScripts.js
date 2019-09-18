@@ -34,5 +34,8 @@
         window.location = "../../TimerClub/ViewFavorites";
     });
 
+    $(".dropdown-item").on("click", function() {
+        $("#dropdownMenuButton").find("span").text($(this).text());
+    });
 
 });

@@ -425,6 +425,23 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static ResidentModel GetResident(string email)
+        {
+            ResidentModel resident;
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    resident = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email);
+                    return resident;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
         public static bool SetBooking(BookingModel model)
         {
             using (UserContext dbUse = new UserContext())
@@ -690,7 +707,7 @@ namespace MasterReservation.Utilities
             }
         }
 
-        public static bool CheckTimeSlot(DateTime date, string times, int placeId)
+        public static string CheckTimeSlot(DateTime date, string times, int placeId)
         {
             using (UserContext dbUse = new UserContext())
             {
@@ -699,16 +716,16 @@ namespace MasterReservation.Utilities
                     TimeSlotModel model = dbUse.TimeSlotModels.FirstOrDefault(t => t.PlaceId == placeId && t.Date == date && t.Time == times);
                     if (model == null)
                     {
-                        return false;
+                        return "0";
                     }
                     else
                     {
-                        return true;
+                        return "1";
                     }
                 }
                 catch (Exception e)
                 {
-                    return false;
+                    return e.ToString();
                 }
             }
         }
@@ -736,7 +753,7 @@ namespace MasterReservation.Utilities
 
         public static bool CreatePicture(byte[] picture, int id)
         {
-            string path = $@"C:\Users\user\source\repos\MasterReservation\MasterReservation\ResidenAvatar\{id.ToString()}.jpg";
+            string path = $@"C:\MasterReservation\ResidenAvatar\{id.ToString()}.jpg";
            
             File.WriteAllBytes(path, picture);
 
@@ -753,7 +770,7 @@ namespace MasterReservation.Utilities
 
 
                     string path =
-                        $@"C:\Users\user\source\repos\MasterReservation\MasterReservation\ResidenAvatar\{model.id.ToString()}.jpg";
+                        $@"C:\MasterReservation\ResidenAvatar\{model.id.ToString()}.jpg";
                     model.Picture = File.ReadAllBytes(path);
                     return true;
                 }

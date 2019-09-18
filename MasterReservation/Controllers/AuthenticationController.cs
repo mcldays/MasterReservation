@@ -116,18 +116,30 @@ namespace MasterReservation.Controllers
 
             UserContext db = new UserContext();
 
+           
+
 
             byte[] imageData = null;
             // считываем переданный файл в массив байтов
-            using (var binaryReader = new BinaryReader(upload.InputStream))
+            if (upload == null)
             {
-                imageData = binaryReader.ReadBytes(upload.ContentLength);
+                imageData = new byte[]{};
+            }
+            else
+            {
+                using (var binaryReader = new BinaryReader(upload.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(upload.ContentLength);
+                }
             }
 
             // установка массива байтов
             model.Picture = imageData;
 
-            Utilities.SendDbUtility.CreatePicture(model.Picture, model.id);
+            if (model.Picture.Length != 0)
+            {
+                Utilities.SendDbUtility.CreatePicture(model.Picture, model.id);
+            }
 
 
 

@@ -336,8 +336,11 @@ button.button-time:focus {
     fill: #e1e1e1;
     stroke: #000000;
     stroke-width: 3%;
-    cursor: pointer;
 }
+
+    .heart path {
+        cursor: pointer;
+    }
 
 .red-heart {
     fill: #ff2323;

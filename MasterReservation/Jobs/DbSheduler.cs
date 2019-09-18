@@ -19,9 +19,12 @@ namespace MasterReservation.Jobs
 
             ITrigger trigger = TriggerBuilder.Create()  // создаем триггер
                 .WithIdentity("trigger1", "group1")     // идентифицируем триггер с именем и группой
-                .StartAt(new DateTimeOffset(DateTime.Now.AddDays(1)))                         
+                //.StartNow()
+                //.StartAt(new DateTimeOffset(DateTime.Now.AddMinutes(5)))
+                .StartAt(new DateTimeOffset(DateTime.Today.AddDays(1)))
                 .WithSimpleSchedule(x => x            // настраиваем выполнение действия
-                    .WithIntervalInHours(24)         
+                    .WithIntervalInHours(24)
+                    //.WithIntervalInMinutes(5) 
                     .RepeatForever())                   // бесконечное повторение
                 .Build();                               // создаем триггер
 

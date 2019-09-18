@@ -37,9 +37,6 @@ namespace MasterReservation.Controllers
 
         public ActionResult PersonalData()
         {
-
-
-
             ViewBag.wrongMessage = TempData["WrongMessage"];
             ViewBag.successMessage = TempData["SuccessMessage"];
             RegisterMasterModel model = new RegisterMasterModel(Utilities.GetData.GetDataResident(User.Identity.Name));
@@ -68,7 +65,10 @@ namespace MasterReservation.Controllers
             List<string> addreses = new List<string>();
             List<WorkingPlaceModel> places = Utilities.SendDbUtility.GetAllWorkingPlaces();
             List<bool> favorites = new List<bool>();
-            int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+            
+            ResidentModel resident = Utilities.SendDbUtility.GetResident(User.Identity.Name);
+            int userId = resident.Id;
+            string userCity = resident.City;
             List<SalonModel> salons = new List<SalonModel>();
 
             if (places == null)
@@ -99,7 +99,8 @@ namespace MasterReservation.Controllers
                 titles,
                 addreses,
                 favorites,
-                salons
+                salons,
+                userCity
             };
             return View(x);
 

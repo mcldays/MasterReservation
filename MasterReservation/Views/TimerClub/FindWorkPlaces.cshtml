@@ -7,11 +7,14 @@
 @Styles.Render("~/Content/datepicker.css")
 @Styles.Render("~/Content/slick/slick.css")
 @Styles.Render("~/Content/slick/slick-theme.css")
+@Styles.Render("~/Content/chosen.min.css")
 @Styles.Render("~/Content/FindWorkPlacesStyles.css")
-@Scripts.Render("~/bundles/jqueryval")
 
+
+@Scripts.Render("~/bundles/jqueryval")
 <script src="https://api-maps.yandex.ru/2.1/?apikey=8db9bf80-135a-40b0-9e06-66adc66fd9b3&lang=ru_RU"
         type="text/javascript"></script>
+@Scripts.Render("~/Scripts/chosen.jquery.min.js")
 @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
@@ -41,10 +44,54 @@
             <div id="input-time-sub-wrap">
                 <span class="time-lable">С</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })*@
-                <input type="text" class="input-time">
+                @*<input type="text" class="input-time">*@
+                <select data-placeholder="Время" class="input-time">
+                    <option></option>
+                    <option value="06:00">06:00</option>
+                    <option value="07:00">07:00</option>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+                    <option value="22:00">22:00</option>
+                    <option value="23:00">23:00</option>
+                    <option value="24:00">24:00</option>
+                </select>
                 <span class="time-lable" id="checkbox-label">до</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeSecond, new { htmlAttributes = new { @class = "input-time", value = "16:00 " } })*@
-                <input type="text" class="input-time">
+                @*<input type="text" class="input-time">*@
+                <select data-placeholder="Время" class="input-time">
+                    <option></option>
+                    <option value="06:00">06:00</option>
+                    <option value="07:00">07:00</option>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+                    <option value="22:00">22:00</option>
+                    <option value="23:00">23:00</option>
+                    <option value="24:00">24:00</option>
+                </select>
             </div>
             <div class="checkbox-wrap">
                 @*@Html.CheckBoxFor(model => (model[0] as DateModel).FullTime, new  { @id = "checkbox-label", value = "Полный рабочий день ", @class="sub-title" })*@
@@ -55,31 +102,23 @@
 
         </div>
         <span class="sub-title">Оказываемая услуга</span>
-        <div class="offers-dropdown">
-            <div class="offers-selected-wrap">
-                <span class="offers-selected">Выберите несколько</span>
-                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
-            </div>
-            <div class="offers-options">
-                <div class="dropdown-option offers">Парикмахерские услуги</div>
-                <div class="dropdown-option offers">Маникюр</div>
-                <div class="dropdown-option offers">Педикюр</div>
-                <div class="dropdown-option offers">Массаж</div>
-                <div class="dropdown-option offers">Визаж</div>
-                <div class="dropdown-option offers">Шугаринг</div>
-                <div class="dropdown-option offers">Оформление бровей</div>
-                <div class="dropdown-option offers">Наращивание ресниц</div>
-                <div class="dropdown-option offers">Перманентный макияж</div>
-                <div class="dropdown-option offers">Косметологические услуги</div>
-            </div>
-            <!-- инпут для услуг -->
-            <input type="text" class="hidden-input" id="input-for-offers" />
-            @*@Html.EditorFor(model => (model[0] as DateModel).Offers, new  { htmlAttributes = new { @id = "input-for-offers", value = "Полный рабочий день ", @class="hidden-input" }})*@
-        </div>
+        <select data-placeholder="Выберите несколько" class="chosen-select1" multiple="" tabindex="-1">
+            <option value=""></option>
+            <option value="Парикмахерские услуги">Парикмахерские услуги</option>
+            <option value="Маникюр">Маникюр</option>
+            <option value="Педикюр">Педикюр</option>
+            <option value="Массаж">Массаж</option>
+            <option value="Визаж">Визаж</option>
+            <option value="Шугаринг">Шугаринг</option>
+            <option value="Оформление бровей">Оформление бровей</option>
+            <option value="Наращивание ресниц">Наращивание ресниц</option>
+            <option value="Перманентный макияж">Перманентный макияж</option>
+            <option value="Косметологические услуги">Косметологические услуги</option>
+        </select>
 
         <span class="sub-title">Город для поиска</span>
         @*@Html.EditorFor(model => (model[0] as DateModel).City, new  { htmlAttributes = new { @id = "input-city" }})*@
-        <input type="text" id="input-city">
+        <input type="text" id="input-city" value="@(Model[6] as string)">
 
         <div id="type-place">
             <span class="sub-title">Тип Рабочего Места</span>
@@ -95,23 +134,34 @@
             </div>
         </div>
         <span class="sub-title">Дополнительные условия</span>
-        <div class="offers-dropdown">
-            <div class="offers-selected-wrap">
-                <span class="offers-selected">Выберите несколько</span>
-                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
-            </div>
-            <div class="offers-options">
-                <div class="dropdown-option ad-cond">Бесплатный чай/ кофе</div>
-                <div class="dropdown-option ad-cond">Расходные материалы</div>
-                <div class="dropdown-option ad-cond">Камера хранения</div>
-                <div class="dropdown-option ad-cond">Парковка</div>
-                <div class="dropdown-option ad-cond">Комната отдыха</div>
-                <div class="dropdown-option ad-cond">Детская комната</div>
-            </div>
-            <!-- инпут для доп условий -->
-            @*@Html.EditorFor(model => (model[0] as DateModel).AddedOffers, new { htmlAttributes = new  { @class="hidden-input" }})*@
-            <input type="text" class="hidden-input" />
+
+        <select data-placeholder="Выберите несколько" class="chosen-select2" multiple="" tabindex="-1">
+            <option value=""></option>
+            <option value="Бесплатный чай/ кофе">Бесплатный чай/ кофе</option>
+            <option value="Расходные материалы">Расходные материалы</option>
+            <option value="Камера хранения">Камера хранения</option>
+            <option value="Парковка">Парковка</option>
+            <option value="Комната отдыха">Комната отдыха</option>
+            <option value="Детская комната">Детская комната</option>
+        </select>
+
+        @*<div class="offers-dropdown">
+        <div class="offers-selected-wrap">
+            <span class="offers-selected">Выберите несколько</span>
+            <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
         </div>
+        <div class="offers-options">
+            <div class="dropdown-option ad-cond">Бесплатный чай/ кофе</div>
+            <div class="dropdown-option ad-cond">Расходные материалы</div>
+            <div class="dropdown-option ad-cond">Камера хранения</div>
+            <div class="dropdown-option ad-cond">Парковка</div>
+            <div class="dropdown-option ad-cond">Комната отдыха</div>
+            <div class="dropdown-option ad-cond">Детская комната</div>
+        </div>*@
+        <!-- инпут для доп условий -->
+        @*@Html.EditorFor(model => (model[0] as DateModel).AddedOffers, new { htmlAttributes = new  { @class="hidden-input" }})*@
+        @*<input type="text" class="hidden-input" />
+        </div>*@
         <button class="button" id="send-filter-data">Поиск</button>
         <div class="hidden-input" id="query-field">
             <div id="date-field"></div>
@@ -158,9 +208,7 @@
                         <div class="img-wrap">
                             <img src="~/Resources/img/default-card-img.png">
                         </div>
-                        <div class="img-wrap">
-                            <img src="~/Resources/img/default-card-img.png">
-                        </div>
+
 
                     </div>
                     <div class="card-description">
@@ -175,9 +223,6 @@
                                 <g id="favorite">
                                 <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
-
-
-
                                     </g>
                                 </svg>
                             }
@@ -188,15 +233,12 @@
                                 <g id="favorite">
                                 <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
-
-
-
                                     </g>
                                 </svg>
 
                             }
                         </div>
-                        <span class="address">@((Model[3] as List<string>)[i])</span>
+                        <span class="address">@((Model[5] as List<SalonModel>)[i].City), @((Model[3] as List<string>)[i])</span>
                         <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                         <div class="tariffs-wrap">
                             <div class="tariff-line">
@@ -226,21 +268,197 @@
 
 <script>
     
-    $(".input-time").mask(
-        "99:99",
-        {
-            placeholder: "_",
-            completed: function()
-            {
-                var val = $(this).val().split(':');
-                if ( val[0]*1 > 23) val[0] = '23';
-                if ( val[1]*1 > 59) val[1] = '59';
-                $(this).val( val.join(':') );
-                $(this).next(':input').focus();
+    //$(".input-time").mask(
+    //    "99:99",
+    //    {
+    //        placeholder: "_",
+    //        completed: function()
+    //        {
+    //            var val = $(this).val().split(':');
+    //            if ( val[0]*1 > 23) val[0] = '23';
+    //            if ( val[1]*1 > 59) val[1] = '59';
+    //            $(this).val( val.join(':') );
+    //            $(this).next(':input').focus();
+    //        }
+    //    }
+    //);
+
+
+
+
+    //карта
+
+    var objects = [];
+    let baloons = [];
+    for (let i = 0; i < $(".address").length; i++) {
+        baloons.push($($(".address")[i]).prev().text().trim());
+    }
+    ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+            center: [56.846377, 53.255902],
+            zoom: 10
+        });
+
+        for (let i = 0; i < $(".address").length; i++) {
+            let myGeocoder = ymaps.geocode($(".address")[i].innerText);
+            myGeocoder.then(function (res) {
+                let coords = res.geoObjects.get(0).geometry.getCoordinates();
+
+                let baloon = baloons[i];
+                let adress = $(".address")[i].innerText;
+                let id = $($(".address")[i]).parent().parent().find(".card-id").val();
+
+                //var invCoords = [coords[1], coords[0]];
+                //map.geoObjects.add(res.geoObjects);
+                let myGeoObject = new ymaps.GeoObject({
+                    geometry: {
+                        type: "Point",
+                        coordinates: coords
+                    },
+                    properties: {
+                        //balloonContentBody: baloon
+                        balloonContentBody: [
+                            '<address>',
+                            '<strong>' + baloon + '</strong>',
+                            '<br/>',
+                            'Адрес: ' + adress,
+                            '<br/>',
+                            '<button class=\'button\' onclick=\'document.location = "../../TimerClub/WorkingPlacePage/{id}"\'> Подробнее</button >'.replace('{id}', id),
+                            '</address>'
+                        ].join('')
+                    }
+                });
+
+                objects.push(myGeoObject);
+                map.geoObjects.add(myGeoObject);
+            });
+        }
+    });
+
+    monthA = 'Января,Февраля,Марта,Апреля,Мая,Июня,Июля,Августа,Сентября,Октября,Ноября,Декабря'.split(',');
+    $("#send-filter-data").on("click", function () {
+        var placesIds = "";
+        if ($("#date-field").val() != "" && $("#times-field").val() != "") {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("CheckFreeSlotsAjax", "BookingSlots")",
+                data: "date=" + $("#date-field").val() + "&times=" + $("#times-field").val(),
+                async: false,
+                success: function (data) {
+                    placesIds = data;
+                },
+                error: function () {
+                    alert("Произошла ошибка, попробуйте позже");
+                }
+            });
+        }
+        if (($("#date-field").val() != "")) {
+            $("#date").text($("#date-field").val().substring(0, 2) + " " + monthA[parseInt($("#date-field").val().substring(3, 5))] + ",");
+        } else {
+            $("#date").text("");
+        }
+        if ($("#times-field").val() != "") {
+            $("#time").text($("#times-field").val() + ",");
+        } else {
+            $("#time").text("");
+        }
+        if ($("#offers-field").val() != "") {
+            $("#offers").text($("#offers-field").val());
+        } else {
+            $("#offers").text("");
+        }
+        if ($("#city-field").val() != "") {
+            $("#city").text($("#city-field").val() + ",");
+        } else {
+            $("#city").text("");
+        }
+
+        var places = $(".card");
+        for (var place of places) {
+            var ajaxSalonsInclude = false;
+            //alert(placesIds);
+            //alert($(place).find($(".card-id")).val());
+            if (placesIds.includes($(place).find($(".card-id")).val())) {
+                ajaxSalonsInclude = true;
+            }
+            if ($("#date-field").val() == "" || $("#times-field").val() == "") {
+                ajaxSalonsInclude = true;
+            }
+
+
+            var offersInclude = false;
+            var offers = $(place).find($(".card-offers")).val().split(",");
+            for (var i = 0; i < offers.length - 1; i++) {
+                if ($("#offers-field").val().includes(offers[i])) {
+                    offersInclude = true;
+                }
+            }
+            if ($("#offers-field").val() == "") {
+                offersInclude = true;
+            }
+
+            var cityInclude = false;
+            var city = $(place).find($(".card-city")).val();
+            if ($("#city-field").val() == city) {
+                cityInclude = true;
+            }
+            if ($("#city-field").val() == "") {
+                cityInclude = true;
+            }
+
+            var typeInclude = false;
+            var type = $(place).find($(".card-place-type")).val();
+            if ($("#types-field-1").val() == "true" && type == "Отдельный кабинет") {
+                typeInclude = true;
+            }
+            if ($("#types-field-2").val() == "true" && type == "Общее пространство") {
+                typeInclude = true;
+            }
+            if ($("#types-field-1").val() == "false" && $("#types-field-2").val() == "false") {
+                typeInclude = true;
+            }
+
+
+            var adCondInclude = false;
+            var addCond = $(place).find($(".card-ad-cond")).val().split(",");
+            for (var i = 0; i < addCond.length - 1; i++) {
+                if ($("#ad-cond-field").val().includes(addCond[i])) {
+                    adCondInclude = true;
+                }
+            }
+            if ($("#ad-cond-field").val() == "") {
+                adCondInclude = true;
+            }
+
+            var result = ymaps.geoQuery(objects);
+
+            if (!offersInclude || !cityInclude || !typeInclude || !adCondInclude || !ajaxSalonsInclude) {
+                $(place).slideUp(300);
+                
+                for (let i = 0; i < result.getLength(); i++) {
+                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        result.get(i).options.set('visible', false);
+                    }
+                }
+
+            } else {
+                $(place).slideDown(300);
+
+                for (let i = 0; i < result.getLength(); i++) {
+                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        result.get(i).options.set('visible', true);
+                    }
+                }
             }
         }
-    );
 
+
+    });
+
+    $("#city-field").val("@(Model[6] as string)");
+    $(".input-time").chosen({ width: "90px"});
+    $(".chosen-select1").chosen({width: "100%"});
+    $(".chosen-select2").chosen({width: "100%"});
 
 
 </script>

@@ -165,8 +165,8 @@
 
 
     //Нажатие на сердце
-    $(".heart").on("click", function(){
-        if($(this).hasClass("red-heart")){
+    $(".heart path").on("click", function(){
+        if ($(this).parent().parent().hasClass("red-heart")){
             $.ajax({
                 type: "GET",
                 url: "/Favorite/RemoveFavorite",
