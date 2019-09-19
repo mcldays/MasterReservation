@@ -111,14 +111,16 @@
             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
             <div class="tariffs-wrap">
                 <div class="tariff-line bold-line">
-                    <div class="tariff">От 1 часа</div>
-                    <div class="tariff">От 3х часов</div>
-                    <div class="tariff">От 12 часов</div>
+                    <div class="tariff">Цена 1 часа</div>
+                    <div class="tariff">Цена смены</div>
+                    <div class="tariff">Цена половины месяца</div>
+                    <div class="tariff">Цена месяца</div>
                 </div>
                 <div class="tariff-line">
                     <div class="tariff" id="rate1h">@((Model[0] as WorkingPlaceModel).Rate1h) р</div>
-                    <div class="tariff" id="rate3h">@((Model[0] as WorkingPlaceModel).Rate3h) р</div>
                     <div class="tariff" id="rateday">@((Model[0] as WorkingPlaceModel).RateDay) р</div>
+                    <div class="tariff" id="ratehalfmounth">@((Model[0] as WorkingPlaceModel).RateHalfMounth) р</div>
+                    <div class="tariff" id="ratemounth">@((Model[0] as WorkingPlaceModel).RateMounth) р</div>
                 </div>
             </div>
         </div>

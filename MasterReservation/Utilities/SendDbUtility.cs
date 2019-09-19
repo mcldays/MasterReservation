@@ -448,6 +448,25 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
+                    List<BookingModel> bookings = dbUse.BookingModels.ToList();
+                    foreach (var book in bookings)
+                    {
+                        bool flagBooked = false;
+                        string[] bookTimes = book.Times.Split(';');
+                        for (int i = 0; i < bookTimes.Length-1; i++)
+                        {
+                            if (model.Times.Contains(bookTimes[i]))
+                            {
+                                flagBooked = true;
+                                break;
+                            }
+                        }
+
+                        if ((book.PlaceId == model.PlaceId) && (book.Date == model.Date) && (flagBooked))
+                        {
+                            return false;
+                        }
+                    }
                     SalonModel salon = GetSalon(model.SalonId);
                     if (salon.ReservationType)
                     {

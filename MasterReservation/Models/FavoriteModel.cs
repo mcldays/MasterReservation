@@ -15,7 +15,8 @@ namespace MasterReservation.Models
         public string SalonAdress { get; set; }
         public int PlaceId { get; set; }
         public double Rate1h { get; set; }
-        public double Rate3h { get; set; }
         public double Rateday { get; set; }
+        public double RateHalfMounth { get; set; }
+        public double RateMounth { get; set; }
     }
 }

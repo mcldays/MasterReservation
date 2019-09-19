@@ -29,11 +29,13 @@
                 <th><span class="thead-span">Id</span></th>
                 <th><span class="thead-span">Перечень услуг*</span></th>
                 <th><span class="thead-span">Цена часа, руб*</span></th>
-                <th><span class="thead-span">Цена от 3х часов, руб*</span></th>
-                <th><span class="thead-span">Цена смены, руб*</span></th>
+                <th><span class="thead-span">Цена полного дня, руб*</span></th>
+                <th><span class="thead-span">Цена половины месяца, руб*</span></th>
+                <th><span class="thead-span">Цена месяца, руб*</span></th>
                 <th><span class="thead-span">Тип места*</span></th>
                 <th><span class="thead-span">Доп. условия</span></th>
                 <th><span class="thead-span">Описание</span></th>
+                <th><span class="thead-span">Фотографии</span></th>
                 <th><span class="thead-span">Управление местом</span></th>
             </tr>
         </thead>
@@ -43,120 +45,130 @@
         {
             foreach (var model in (Model[0] as List<WorkingPlaceModel>))
             {
-                <tr>
-                    <td>@(model.Id)</td>
-                    <td>@(model.Offers)</td>
-                    <td>@(model.Rate1h)</td>
-                    <td>@(model.Rate3h)</td>
-                    <td>@(model.RateDay)</td>
-                    <td>@(model.PlaceType)</td>
-                    <td>@(model.AdditionalConditions)</td>
-                    <td>@(model.Description)</td>
-                    <td>
-                        <button class="btn btn-secondary salon-go-btn" value="@(model.Id)">Перейти</button>
-                        <br/>
-                        <button class="btn btn-danger salon-mng-btn" value="@(model.Id)">Удалить</button>
-                    </td>
-                </tr>
+            <tr>
+                <td>@(model.Id)</td>
+                <td>@(model.Offers)</td>
+                <td>@(model.Rate1h)</td>
+                <td>@(model.RateDay)</td>
+                <td>@(model.RateHalfMounth)</td>
+                <td>@(model.RateMounth)</td>
+                <td>@(model.PlaceType)</td>
+                <td>@(model.AdditionalConditions)</td>
+                <td>@(model.Description)</td>
+                <td>Фотографии</td>
+                <td>
+                    <button class="btn btn-secondary salon-go-btn" value="@(model.Id)">Перейти</button>
+                    <br />
+                    <button class="btn btn-danger salon-mng-btn" value="@(model.Id)">Удалить</button>
+                </td>
+            </tr>
             }
         }
 
-        <tr class="new-record">
-            @using (Html.BeginForm("AddWorkingPlace", "Admin", FormMethod.Post, new {}))
-            {
-                @Html.HiddenFor((model => (Model[1] as WorkingPlaceModel).SalonId))
-                <td>*</td>
+            <tr class="new-record">
+                @using (Html.BeginForm("AddWorkingPlace", "Admin", FormMethod.Post, new { }))
+                {
+                    @Html.HiddenFor((model => (Model[1] as WorkingPlaceModel).SalonId))
+                    <td>*</td>
                     @*<td>@Html.EditorFor((model => (Model[1] as WorkingPlaceModel).Offers))</td>*@
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Offers, null, new {@class = "WrongData"})
-                    <div class="offers-dropdown">
-                        <div class="offers-selected-wrap">
-                            <span class="offers-selected">Услуги</span>
-                            <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Offers, null, new { @class = "WrongData" })
+                        <div class="offers-dropdown">
+                            <div class="offers-selected-wrap">
+                                <span class="offers-selected">Услуги</span>
+                                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                            </div>
+                            <div class="offers-options">
+                                <div class="dropdown-option">Парикмахерские услуги</div>
+                                <div class="dropdown-option">Маникюр</div>
+                                <div class="dropdown-option">Педикюр</div>
+                                <div class="dropdown-option">Массаж</div>
+                                <div class="dropdown-option">Визаж</div>
+                                <div class="dropdown-option">Шугаринг</div>
+                                <div class="dropdown-option">Оформление бровей</div>
+                                <div class="dropdown-option">Наращивание ресниц</div>
+                                <div class="dropdown-option">Перманентный макияж</div>
+                                <div class="dropdown-option">Косметологические услуги</div>
+                            </div>
+                            <!-- инпут для услуг -->
+                            @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
+                            @Html.EditorFor(model => (model[1] as WorkingPlaceModel).Offers, new { htmlAttributes = new { @id = "input-for-offers", @class = "hidden-input" } })
                         </div>
-                        <div class="offers-options">
-                            <div class="dropdown-option">Парикмахерские услуги</div>
-                            <div class="dropdown-option">Маникюр</div>
-                            <div class="dropdown-option">Педикюр</div>
-                            <div class="dropdown-option">Массаж</div>
-                            <div class="dropdown-option">Визаж</div>
-                            <div class="dropdown-option">Шугаринг</div>
-                            <div class="dropdown-option">Оформление бровей</div>
-                            <div class="dropdown-option">Наращивание ресниц</div>
-                            <div class="dropdown-option">Перманентный макияж</div>
-                            <div class="dropdown-option">Косметологические услуги</div>
-                        </div>
-                        <!-- инпут для услуг -->
-                        @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
-                        @Html.EditorFor(model => (model[1] as WorkingPlaceModel).Offers, new {htmlAttributes = new {@id = "input-for-offers", @class = "hidden-input"}})
-                    </div>
-                </td>
+                    </td>
 
 
 
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Rate1h, null, new {@class = "WrongData"})
-                    @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).Rate1h), new {htmlAttributes = new {placeholder = "Цена одного часа, руб", @class = "field double-input"}})
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Rate3h, null, new {@class = "WrongData"})
-                    @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).Rate3h), new {htmlAttributes = new {placeholder = "Цена от 3х часов, руб", @class = "field double-input"}})
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).RateDay, null, new {@class = "WrongData"})
-                    @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).RateDay), new {htmlAttributes = new {placeholder = "Цена одной смены, руб", @class = "field double-input"}})
-                </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Rate1h, null, new { @class = "WrongData" })
+                        @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).Rate1h), new { htmlAttributes = new { placeholder = "Цена одного часа, руб", @class = "field double-input" } })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).RateDay, null, new { @class = "WrongData" })
+                        @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).RateDay), new { htmlAttributes = new { placeholder = "Цена одной смены, руб", @class = "field double-input" } })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).RateHalfMounth, null, new { @class = "WrongData" })
+                        @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).RateHalfMounth), new { htmlAttributes = new { placeholder = "Цена от 3х часов, руб", @class = "field double-input" } })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).RateMounth, null, new { @class = "WrongData" })
+                        @Html.EditorFor((model => (Model[1] as WorkingPlaceModel).RateMounth), new { htmlAttributes = new { placeholder = "Цена от 3х часов, руб", @class = "field double-input" } })
+                    </td>
                     @*<td>@Html.EditorFor((model => (Model[1] as WorkingPlaceModel).PlaceType))</td>*@
 
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).PlaceType, null, new {@class = "WrongData"})
-                    <div class="offers-dropdown">
-                        <div class="offers-selected-wrap">
-                            <span class="offers-selected">Тип места</span>
-                            <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).PlaceType, null, new { @class = "WrongData" })
+                        <div class="offers-dropdown">
+                            <div class="offers-selected-wrap">
+                                <span class="offers-selected">Тип места</span>
+                                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                            </div>
+                            <div class="offers-options">
+                                <div class="dropdown-option one-select">Отдельный кабинет</div>
+                                <div class="dropdown-option one-select">Общее пространство</div>
+                            </div>
+                            <!-- инпут для услуг -->
+                            @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
+                            @Html.EditorFor(model => (model[1] as WorkingPlaceModel).PlaceType, new { htmlAttributes = new { @class = "hidden-input" } })
                         </div>
-                        <div class="offers-options">
-                            <div class="dropdown-option one-select">Отдельный кабинет</div>
-                            <div class="dropdown-option one-select">Общее пространство</div>
-                        </div>
-                        <!-- инпут для услуг -->
-                        @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
-                        @Html.EditorFor(model => (model[1] as WorkingPlaceModel).PlaceType, new {htmlAttributes = new {@class = "hidden-input"}})
-                    </div>
-                </td>
+                    </td>
 
 
                     @*<td>@Html.EditorFor((model => (Model[1] as WorkingPlaceModel).AdditionalConditions))</td>*@
 
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).AdditionalConditions, null, new {@class = "WrongData"})
-                    <div class="offers-dropdown">
-                        <div class="offers-selected-wrap">
-                            <span class="offers-selected">Доп. условия</span>
-                            <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).AdditionalConditions, null, new { @class = "WrongData" })
+                        <div class="offers-dropdown">
+                            <div class="offers-selected-wrap">
+                                <span class="offers-selected">Доп. условия</span>
+                                <img src="~/Resources/svg/gray-arrow.svg" class="offers-arrow">
+                            </div>
+                            <div class="offers-options">
+                                <div class="dropdown-option">Бесплатный чай/ кофе</div>
+                                <div class="dropdown-option">Расходные материалы</div>
+                                <div class="dropdown-option">Камера хранения</div>
+                                <div class="dropdown-option">Парковка</div>
+                                <div class="dropdown-option">Комната отдыха</div>
+                                <div class="dropdown-option">Детская комната</div>
+                            </div>
+                            <!-- инпут для услуг -->
+                            @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
+                            @Html.EditorFor(model => (model[1] as WorkingPlaceModel).AdditionalConditions, new { htmlAttributes = new { @class = "hidden-input" } })
                         </div>
-                        <div class="offers-options">
-                            <div class="dropdown-option">Бесплатный чай/ кофе</div>
-                            <div class="dropdown-option">Расходные материалы</div>
-                            <div class="dropdown-option">Камера хранения</div>
-                            <div class="dropdown-option">Парковка</div>
-                            <div class="dropdown-option">Комната отдыха</div>
-                            <div class="dropdown-option">Детская комната</div>
-                        </div>
-                        <!-- инпут для услуг -->
-                        @*<input type="text" class="hidden-input" id="input-for-offers"/>*@
-                        @Html.EditorFor(model => (model[1] as WorkingPlaceModel).AdditionalConditions, new {htmlAttributes = new {@class = "hidden-input"}})
-                    </div>
-                </td>
+                    </td>
 
+                    <td>
+                        @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Description, null, new { @class = "WrongData" })
+                        @Html.TextAreaFor((model => (Model[1] as WorkingPlaceModel).Description), new { placeholder = "Описание", @class = "field" })
+                    </td>
 
-                <td>
-                    @Html.ValidationMessageFor(model => (Model[1] as WorkingPlaceModel).Description, null, new {@class = "WrongData"})
-                    @Html.TextAreaFor((model => (Model[1] as WorkingPlaceModel).Description), new {placeholder = "Описание", @class = "field"})
-                </td>
-                <td><button class="btn btn-primary">Добавить</button></td>
-            }
-        </tr>
+                    <td>
+                        <input type="file" multiple="multiple"/>
+                        @*СЮДА ИНПУТЫ ФОТОК БЛЯТЬ*@
+                    </td>
+                    <td><button class="btn btn-primary">Добавить</button></td>
+                }
+            </tr>
         </tbody>
     </table>
 

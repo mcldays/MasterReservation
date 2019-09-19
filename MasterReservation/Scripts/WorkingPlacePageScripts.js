@@ -84,12 +84,10 @@
                 }
             };
             $("#total-bold").text($("#input-date").text() + ", " + normTimes.slice(0, -2) + " (" + $(".active-button").length + hoursTitle() + ")");
-            if ($(".active-button").length < 3) {
-                var sum = ($(".active-button").length * parseFloat($("#rate1h").text().replace(/,/g, "."))).toFixed(2);
-            } else if ($(".active-button").length < 12) {
-                var sum = ($(".active-button").length * parseFloat($("#rate3h").text().replace(/,/g, "."))).toFixed(2);
+            if ($(".active-button").length == $(".button-time").length) {
+                var sum = parseFloat($("#rateday").text().replace(/,/g, ".")).toFixed(2);
             } else {
-                var sum = ($(".active-button").length * parseFloat($("#rateday").text().replace(/,/g, "."))).toFixed(2);
+                var sum = ($(".active-button").length * parseFloat($("#rate1h").text().replace(/,/g, "."))).toFixed(2);
             }
             $("#total-sum").text(sum + "р");
 
@@ -139,6 +137,7 @@
         else{
             $(".active-button").addClass("white-button");
             $(".active-button").removeClass("active-button");
+            $("#input-times").val("");
             updateTotalBold();
         }
     });

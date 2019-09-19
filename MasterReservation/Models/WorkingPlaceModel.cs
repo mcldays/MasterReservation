@@ -16,9 +16,11 @@ namespace MasterReservation.Models
         [Required]
         public double Rate1h { get; set; }
         [Required]
-        public double Rate3h { get; set; }
-        [Required]
         public double RateDay { get; set; }
+        [Required]
+        public double RateHalfMounth { get; set; }
+        [Required]
+        public double RateMounth { get; set; }
         [Required]
         public string PlaceType { get; set; }
         public string AdditionalConditions { get; set; }

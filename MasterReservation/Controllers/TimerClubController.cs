@@ -67,8 +67,19 @@ namespace MasterReservation.Controllers
             List<bool> favorites = new List<bool>();
             
             ResidentModel resident = Utilities.SendDbUtility.GetResident(User.Identity.Name);
-            int userId = resident.Id;
-            string userCity = resident.City;
+            int userId = 0;
+            string userCity = "";
+            if (!Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                if (resident == null)
+                {
+                    return RedirectToAction("LogOut", "Authentication");
+                }
+                userId = resident.Id;
+                userCity = resident.City;
+            }
+            
+            
             List<SalonModel> salons = new List<SalonModel>();
 
             if (places == null)
@@ -208,8 +219,9 @@ namespace MasterReservation.Controllers
                     SalonTitle = salon.SalonTitle,
                     SalonAdress = salon.Adress,
                     Rate1h = place.Rate1h,
-                    Rate3h = place.Rate3h,
-                    Rateday = place.RateDay
+                    Rateday = place.RateDay,
+                    RateHalfMounth = place.RateHalfMounth,
+                    RateMounth = place.RateMounth
                 });
             }
 
@@ -233,6 +245,10 @@ namespace MasterReservation.Controllers
 
         public ActionResult ShowBookedResidents()
         {
+            if (!Request.Cookies.AllKeys.Contains("SalonId"))
+            {
+                return RedirectToAction("MainPage");
+            }
             List<ResidentModel> allResidents = Utilities.SendDbUtility.GetAllResidents();
             int salonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
             List<BookingModel> models = Utilities.SendDbUtility.GetBookingForSalonId(salonId);

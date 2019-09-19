@@ -6,7 +6,10 @@
 }
 
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 
+
+@Styles.Render("~/Content/themes/base/jquery-ui.min.css")
 @Styles.Render("~/Content/SalonPlacesStyles.css")
 
 @if (@ViewBag.ErrorMessage != null)
@@ -62,7 +65,7 @@
                         <td>@(model.Times)</td>
                         <td>@(model.Info)</td>
                         <td>@(model.Sum.ToString("F") + "р")</td>
-                        <td><button class="btn btn-danger salon-dlt-btn" value="@(model.Id)">Удалить</button></td>
+                        <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
                     </tr>
 
                 }
@@ -110,7 +113,41 @@
     //});
 
 
-    $(".salon-dlt-btn").on("click", function (e) {
+    $(".viewDialog").on("click", function (e) {
+        e.preventDefault();
+        $("<div><button class='btn btn-primary btn-sm' onclick='deletebook({id})'>Да</button><button class='btn btn-secondary btn-sm' onclick='$(\".dialog\").remove();'>Нет</button></div>".replace("{id}", e.target.value))
+            .addClass("dialog")
+            .appendTo("body")
+            .dialog({
+                title: "Вы уверены?",
+                close: function () { $(this).remove() },
+                modal: true
+            });
+    });
+
+    function deletebook(id){
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("RemoveBookingAjax", "BookingSlots")',
+            data: "id=" + id,
+            success: function (data) {
+                if (data) {
+                    $("[value = {id}]".replace("{id}", id)).parent().parent().remove();
+                    $(".dialog").remove();
+                    alert("Бронирование отменено!");
+                } else {
+                    alert("Произошла ошибка, попробуйте позже");
+                }
+            },
+            error: function () {
+                alert("Произошла ошибка, попробуйте позже");
+            }
+        });
+    }
+
+
+
+    @*$(".salon-dlt-btn").on("click", function (e) {
         $.ajax({
             type: "GET",
             url: '@Url.Action("RemoveBookingAjax", "BookingSlots")',
@@ -127,5 +164,10 @@
                 alert("Произошла ошибка, попробуйте позже");
             }
         });
-    });
+
+
+        
+    });*@
+
+    
 </script>

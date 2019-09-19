@@ -143,3 +143,13 @@
 .new-record td {
     vertical-align: top !important;
 }
+
+.dialog {
+    min-height: 0 !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-sm {
+    width: 40%;
+}

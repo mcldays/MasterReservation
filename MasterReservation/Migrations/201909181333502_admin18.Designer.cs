@@ -7,13 +7,13 @@ namespace MasterReservation.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Blysat : IMigrationMetadata
+    public sealed partial class admin18 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Blysat));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(admin18));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909111420355_Blysat"; }
+            get { return "201909181333502_admin18"; }
         }
         
         string IMigrationMetadata.Source

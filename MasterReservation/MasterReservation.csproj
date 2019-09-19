@@ -275,17 +275,13 @@
     <Compile Include="Migrations\201909101753056_admin16.Designer.cs">
       <DependentUpon>201909101753056_admin16.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909111420355_Blysat.cs" />
-    <Compile Include="Migrations\201909111420355_Blysat.Designer.cs">
-      <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909122112381_123.cs" />
-    <Compile Include="Migrations\201909122112381_123.Designer.cs">
-      <DependentUpon>201909122112381_123.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201909122041447_admin17.cs" />
     <Compile Include="Migrations\201909122041447_admin17.Designer.cs">
       <DependentUpon>201909122041447_admin17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909181333502_admin18.cs" />
+    <Compile Include="Migrations\201909181333502_admin18.Designer.cs">
+      <DependentUpon>201909181333502_admin18.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookingModel.cs" />
@@ -393,6 +389,7 @@
     <Content Include="Resources\svg\gray-arrow.svg" />
     <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\heart-gray.svg" />
+    <Content Include="Resources\svg\house.svg" />
     <Content Include="Resources\svg\left-arrow.svg" />
     <Content Include="Resources\svg\logo-white.svg" />
     <Content Include="Resources\svg\logo.svg" />
@@ -597,14 +594,11 @@
     <EmbeddedResource Include="Migrations\201909101753056_admin16.resx">
       <DependentUpon>201909101753056_admin16.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909111420355_Blysat.resx">
-      <DependentUpon>201909111420355_Blysat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909122112381_123.resx">
-      <DependentUpon>201909122112381_123.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909122041447_admin17.resx">
       <DependentUpon>201909122041447_admin17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181333502_admin18.resx">
+      <DependentUpon>201909181333502_admin18.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

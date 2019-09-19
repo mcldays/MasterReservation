@@ -26,20 +26,21 @@
                          <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                          <div class="table-wrap">
                              <div class="first-line">
-                                 <span class="bold-text">От 1 часа</span>
-                                 <span class="bold-text">От 3х часов</span>
-                                 <span class="bold-text">От 12 часов</span>
+                                 <span class="bold-text">Цена часа</span>
+                                 <span class="bold-text">Цена смены</span>
+                                 <span class="bold-text">Цена половины месяца</span>
+                                 <span class="bold-text">Цена месяца</span>
                              </div>
                              <div class="second-line">
                                  <span class="bold-text">@(model.Rate1h)р</span>
-                                 <span class="bold-text">@(model.Rate3h)р</span>
                                  <span class="bold-text">@(model.Rateday)р</span>
+                                 <span class="bold-text">@(model.RateHalfMounth)р</span>
+                                 <span class="bold-text">@(model.RateMounth)р</span>
                              </div>
                          </div>
                          <button class="detail-btn" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">Подробнее</button>
-
-                    </div>
-                 </div >
+                     </div>
+                 </div>
             }
         }
         else

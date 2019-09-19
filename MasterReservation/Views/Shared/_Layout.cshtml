@@ -21,11 +21,12 @@
 <body>
     <div class="header">
         <div class="city-wrap">
+            <img id="head-logo" src="~/Resources/svg/house.svg" style="width: 25px; margin-right: 0;">
             <img id="head-logo" src="~/Resources/svg/logo-white.svg">
             <span class="town">Город</span>
 
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" @*data-toggle="dropdown"*@ aria-haspopup="true" aria-expanded="false">
                     <span>Ижевск</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -37,38 +38,48 @@
         </div>
 
         <div class="icons-wrap">
-            <span class="number"><a href="tel:+79198534241">8 919 853 42 41</a></span>
+            <span class="number"><a href="tel:+79512001144">8 951 200 11 44</a></span>
             <div class="cocialicons">
-                <a href="https://www.instagram.com/"><img src="~/Resources/img/instagram.png" alt=""></a>
-                <a href="https://www.facebook.com/"><img src="~/Resources/img/facebook.png" alt=""></a>
-                <a href="https://vk.com"><img src="~/Resources/img/vk.png" alt=""></a>
+                <a href="https://www.instagram.com/timer.club/"><img src="~/Resources/img/instagram.png" alt=""></a>
+                <a href="https://www.facebook.com/beauty.timer.club/"><img src="~/Resources/img/facebook.png" alt=""></a>
+                <a href="https://vk.com/timer_beauty_club/"><img src="~/Resources/img/vk.png" alt=""></a>
             </div>
 
             <div id="userblock">
                 <img src="~/Resources/svg/user.svg" id="faceicon">
-            
-                        <span id="residentname">@(Server.UrlDecode(Request.Cookies["ResidentName"].Value) + " " + Server.UrlDecode(Request.Cookies["ResidentSurname"].Value))</span>
-               
-                <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
-                <div id="user-dropdown">
-                    <div class="dropdown-row" id="to-personal-data-btn">
-                        <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
-                        <span>Личные данные</span>
-                    </div>
-                    <hr>
-                    <div class="dropdown-row" id="to-booked-time-btn">
-                        <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
-                        <span>Просмотр забронированного времени</span>
-                    </div>
-                    <hr>
 
-                    <div class="dropdown-row" id="to-favorites-btn">
-                        <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
-                        <span>Избранное</span>
+                @if (Request.Cookies.AllKeys.Contains("ResidentName") && Request.Cookies.AllKeys.Contains("ResidentSurname"))
+                {
+                    <span id="residentname">
+                        @(Server.UrlDecode(Request.Cookies["ResidentName"].Value) + " " + Server.UrlDecode(Request.Cookies["ResidentSurname"].Value))
+                    </span>
+                }
+                else
+                {
+                    Response.Redirect("~/Authentication/LogOut");
+                }
+
+
+                    <img src="~/Resources/svg/down-arrow-white.svg" id="down-arrowstyle">
+                    <div id="user-dropdown">
+                        <div class="dropdown-row" id="to-personal-data-btn">
+                            <img class="dropdown-img" src="~/Resources/svg/business-card-blue.svg" alt="">
+                            <span>Личные данные</span>
+                        </div>
+                        <hr>
+                        <div class="dropdown-row" id="to-booked-time-btn">
+                            <img class="dropdown-img" src="~/Resources/svg/clock-blue.svg" alt="">
+                            <span>Просмотр забронированного времени</span>
+                        </div>
+                        <hr>
+
+                        <div class="dropdown-row" id="to-favorites-btn">
+                            <img class="dropdown-img" src="~/Resources/svg/heart-blue.svg" alt="">
+                            <span>Избранное</span>
+                        </div>
+                        <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
                     </div>
-                    <button onclick="document.location = '@Url.Action("LogOut", "Authentication")'" id="go-out">Выйти</button>
                 </div>
-            </div>
         </div>
     </div>
 

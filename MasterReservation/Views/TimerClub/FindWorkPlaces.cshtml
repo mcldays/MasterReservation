@@ -242,14 +242,16 @@
                         <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                         <div class="tariffs-wrap">
                             <div class="tariff-line">
-                                <div class="tariff">От 1 часа</div>
-                                <div class="tariff">От 3х часов</div>
-                                <div class="tariff">От 12 часов</div>
+                                <div class="tariff">Цена 1 часа</div>
+                                <div class="tariff">Цена смены</div>
+                                <div class="tariff">Цена половины месяца</div>
+                                <div class="tariff">Цена месяца</div>
                             </div>
                             <div class="tariff-line">
                                 <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
-                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate3h)</div>
                                 <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
+                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)</div>
+                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)</div>
                             </div>
                         </div>
                         <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
