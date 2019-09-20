@@ -66,7 +66,7 @@
         }
 
             <tr class="new-record">
-                @using (Html.BeginForm("AddWorkingPlace", "Admin", FormMethod.Post, new { }))
+                @using (Html.BeginForm("AddWorkingPlace", "Admin", FormMethod.Post, new {enctype="multipart/form-data"}))
                 {
                     @Html.HiddenFor((model => (Model[1] as WorkingPlaceModel).SalonId))
                     <td>*</td>
@@ -163,8 +163,16 @@
                     </td>
 
                     <td>
-                        <input type="file" multiple="multiple"/>
+                        <input type="file" multiple="multiple" name="SalonPhoto"/>
+                        @*<input type="file" multiple="multiple" name="SalonPhoto"/>
+                        <input type="file" multiple="multiple" name="SalonPhoto"/>
+                        <input type="file" multiple="multiple" name="SalonPhoto"/>
+                        <input type="file" multiple="multiple" name="SalonPhoto"/>*@
+                       
                         @*СЮДА ИНПУТЫ ФОТОК БЛЯТЬ*@
+                        
+                        
+
                     </td>
                     <td><button class="btn btn-primary">Добавить</button></td>
                 }

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
 using MasterReservation.Models;
+using MasterReservation.Utilities;
 using Microsoft.Ajax.Utilities;
 
 namespace MasterReservation.Controllers
@@ -205,6 +206,7 @@ namespace MasterReservation.Controllers
 
         public ActionResult ViewFavorites()
         {
+
             List<FavoriteModel> models = new List<FavoriteModel>();
             int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
             
@@ -212,17 +214,32 @@ namespace MasterReservation.Controllers
             for (int i = 0; i < favorites.Length - 1; i++)
             {
                 WorkingPlaceModel place = Utilities.SendDbUtility.GetWorkingPlace(Int32.Parse(favorites[i]));
-                SalonModel salon = Utilities.SendDbUtility.GetSalon(place.SalonId);
-                models.Add(new FavoriteModel()
+                SalonModel salon;
+
+                try
                 {
-                    PlaceId = Int32.Parse(favorites[i]),
-                    SalonTitle = salon.SalonTitle,
-                    SalonAdress = salon.Adress,
-                    Rate1h = place.Rate1h,
-                    Rateday = place.RateDay,
-                    RateHalfMounth = place.RateHalfMounth,
-                    RateMounth = place.RateMounth
-                });
+                    salon = SendDbUtility.GetSalon(place.SalonId);
+                    models.Add(new FavoriteModel()
+                    {
+                        PlaceId = Int32.Parse(favorites[i]),
+                        SalonTitle = salon.SalonTitle,
+                        SalonAdress = salon.Adress,
+                        Rate1h = place.Rate1h,
+                        Rateday = place.RateDay,
+                        RateHalfMounth = place.RateHalfMounth,
+                        RateMounth = place.RateMounth
+                    });
+                }
+                catch (Exception e)
+                {
+                    
+                }
+                
+                
+                
+
+
+                
             }
 
             if (Request.Cookies.AllKeys.Contains("SalonId"))

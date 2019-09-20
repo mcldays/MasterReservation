@@ -58,6 +58,7 @@ img.photo {
 }
 
 .bold-description {
+    width: 100% !important;
     font-size: 15px;
     font-weight: bold;
     width: -webkit-max-content;

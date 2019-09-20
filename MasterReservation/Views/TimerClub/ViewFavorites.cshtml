@@ -1,4 +1,6 @@
-﻿@model List<MasterReservation.Models.FavoriteModel>
+﻿@using System.Web.Hosting
+@using MasterReservation.Models
+@model List<MasterReservation.Models.FavoriteModel>
 @{
     ViewBag.Title = "Избранное";
 }
@@ -19,7 +21,41 @@
              foreach (var model in Model)
              {
                  <div class="favorite-card">
-                     <img class="photo" src="~/Resources/img/default-card-img.png"></img>
+                     @*<img class="photo" src="~/Resources/img/default-card-img.png">*@
+                     
+                     @{
+                         string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (model.PlaceId);
+                         string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
+                         DirectoryInfo dirInfo = new DirectoryInfo(path);
+                         DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
+                         FileInfo[] files = new FileInfo[] {};
+
+                         try
+                         {
+                             files = dirInfo.GetFiles();
+
+                             if (files.Length == 0)
+                             {
+                                 <div class="img-wrap">
+                                     <img class="photo" src="~/Resources/svg/default-place.svg">
+                                 </div>
+                             }
+
+                             byte[] array = File.ReadAllBytes(files[0].FullName);
+                             <div class="img-wrap">
+
+                                 @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
+                                           + Convert.ToBase64String(array) + "\" />")
+                             </div>
+                         }
+                         catch (Exception e)
+                         {
+                             <div class="img-wrap">
+                                 <img class="photo" src="~/Resources/svg/default-place.svg">
+                             </div>
+                         }
+                     }
+
                      <div class="card-description">
                          <span class="card-title">@(model.SalonTitle)</span>
                          <span class="adress">@(model.SalonAdress)</span>

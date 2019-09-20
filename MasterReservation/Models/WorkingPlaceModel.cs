@@ -28,5 +28,7 @@ namespace MasterReservation.Models
 
         public int SalonId { get; set; }
 
+       
+
     }
 }

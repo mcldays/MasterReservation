@@ -115,10 +115,15 @@
                     <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
                         <div><span>Парикмахерские услуги</span></div>
+                        <div><span>Маникюр</span></div>
                         <div><span>Педикюр</span></div>
                         <div><span>Массаж</span></div>
                         <div><span>Визаж</span></div>
                         <div><span>Шугаринг</span></div>
+                        <div><span>Оформление бровей</span></div>
+                        <div><span>Наращивание ресниц</span></div>
+                        <div><span>Перманентный макияж</span></div>
+                        <div><span>Косметологические услуги</span></div>
                     </div>
                 </div>
                 @Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })
@@ -245,11 +250,16 @@
     }
 
 <div id="hidden-offers">
-        <div>Парикмахерские услуги</div>
-        <div>Педикюр</div>
-        <div>Массаж</div>
-        <div>Визаж</div>
-        <div>Шугаринг</div>
+    <div>Парикмахерские услуги</div>
+    <div>Маникюр</div>
+    <div>Педикюр</div>
+    <div>Массаж</div>
+    <div>Визаж</div>
+    <div>Шугаринг</div>
+    <div>Оформление бровей</div>
+    <div>Наращивание ресниц</div>
+    <div>Перманентный макияж</div>
+    <div>Косметологические услуги</div>
     </div>
 
     <script>$(".phone-mask").mask("+7(999)9999999");</script>

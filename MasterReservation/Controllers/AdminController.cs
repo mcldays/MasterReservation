@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using MasterReservation.Filters;
 using MasterReservation.Models;
@@ -60,14 +62,36 @@ namespace MasterReservation.Controllers
 
         [Admin]
         [HttpPost]
-        public ActionResult AddWorkingPlace(WorkingPlaceModel model)
+        public ActionResult AddWorkingPlace(WorkingPlaceModel model, IEnumerable<HttpPostedFileBase> SalonPhoto)
         {
             if (!ModelState.IsValid)
             {
                 TempData["ErrorMessage"] = "Не заполнены все обязательные поля!";
                 return RedirectToAction("SalonPlaces", "Admin", new { id = model.SalonId });
             }
+
             Utilities.SendDbUtility.AddWorkingPlace(model);
+            foreach (var file in SalonPhoto)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    
+                    string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto";
+                    string subpath =  model.Id.ToString();
+                    DirectoryInfo dirInfo = new DirectoryInfo(path);
+                    if (!dirInfo.Exists)
+                    {
+                        dirInfo.Create();
+                    }
+                    dirInfo.CreateSubdirectory(subpath);
+
+                    file.SaveAs(Server.MapPath("~/SalonPhoto/" + subpath + "/"+ fileName));
+
+                }
+            }
             return RedirectToAction("SalonPlaces","Admin", new { id = model.SalonId });
         }
 

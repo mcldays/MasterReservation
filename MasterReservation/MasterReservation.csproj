@@ -290,6 +290,7 @@
     <Compile Include="Models\DateModel.cs" />
     <Compile Include="Models\FavoriteModel.cs" />
     <Compile Include="Models\LoginMaster.cs" />
+    <Compile Include="Models\PhotoModel.cs" />
     <Compile Include="Models\PictureModel.cs" />
     <Compile Include="Models\RegisterMasterModel.cs" />
     <Compile Include="Models\RegisterSalonModel.cs" />
@@ -384,6 +385,7 @@
     <Content Include="Resources\img\vk.png" />
     <Content Include="Resources\svg\business-card-blue.svg" />
     <Content Include="Resources\svg\clock-blue.svg" />
+    <Content Include="Resources\svg\default-place.svg" />
     <Content Include="Resources\svg\down-arrow-white.svg" />
     <Content Include="Resources\svg\down-arrow.svg" />
     <Content Include="Resources\svg\gray-arrow.svg" />
