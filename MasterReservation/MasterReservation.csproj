@@ -283,6 +283,10 @@
     <Compile Include="Migrations\201909181333502_admin18.Designer.cs">
       <DependentUpon>201909181333502_admin18.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909201128029_admin19.cs" />
+    <Compile Include="Migrations\201909201128029_admin19.Designer.cs">
+      <DependentUpon>201909201128029_admin19.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
@@ -601,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909181333502_admin18.resx">
       <DependentUpon>201909181333502_admin18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909201128029_admin19.resx">
+      <DependentUpon>201909201128029_admin19.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

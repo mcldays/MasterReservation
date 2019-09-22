@@ -28,111 +28,111 @@ namespace MasterReservation.Modules
 
         private void Service(object obj)
         {
-            lock (synclock)
-            {
-                DateTime dd = DateTime.Now;
-                if (dd.Hour == hours && dd.Minute == minutes && flag == false)
-                {
+            //lock (synclock)
+            //{
+            //    DateTime dd = DateTime.Now;
+            //    if (dd.Hour == hours && dd.Minute == minutes && flag == false)
+            //    {
 
-                    try
-                    {
-                        string isError = "";
-                        int addedSlots = 0;
-                        int deletedSlots = 0;
-                        using (UserContext dbUse = new UserContext())
-                        {
-                            try
-                            {
-                                IEnumerable<TimeSlotModel> slots = dbUse.TimeSlotModels.Where(t => t.Date < DateTime.Today);
-                                dbUse.TimeSlotModels.RemoveRange(slots);
-                                dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.Date < DateTime.Today));
-                                dbUse.SaveChanges();
-                                deletedSlots = slots.Count();
-                            }
-                            catch (Exception e)
-                            {
-                                isError = "Ошибка в удалении прошедших дат:\n" + e.ToString();
-                            }
-                        }
+            //        try
+            //        {
+            //            string isError = "";
+            //            int addedSlots = 0;
+            //            int deletedSlots = 0;
+            //            using (UserContext dbUse = new UserContext())
+            //            {
+            //                try
+            //                {
+            //                    IEnumerable<TimeSlotModel> slots = dbUse.TimeSlotModels.Where(t => t.Date < DateTime.Today);
+            //                    dbUse.TimeSlotModels.RemoveRange(slots);
+            //                    dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.Date < DateTime.Today));
+            //                    dbUse.SaveChanges();
+            //                    deletedSlots = slots.Count();
+            //                }
+            //                catch (Exception e)
+            //                {
+            //                    isError = "Ошибка в удалении прошедших дат:\n" + e.ToString();
+            //                }
+            //            }
 
-                        using (UserContext dbUse = new UserContext())
-                        {
-                            try
-                            {
-                                List<WorkingPlaceModel> allPlaces = SendDbUtility.GetAllWorkingPlaces();
+            //            using (UserContext dbUse = new UserContext())
+            //            {
+            //                try
+            //                {
+            //                    List<WorkingPlaceModel> allPlaces = SendDbUtility.GetAllWorkingPlaces();
 
-                                foreach (var place in allPlaces)
-                                {
-                                    SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
-                                    string[] workingTime = salon.OperatingMode.Split('-');
-                                    int constFrom = Int32.Parse(workingTime[0].Trim().Substring(0, 2));
-                                    int constTo = Int32.Parse(workingTime[1].Trim().Substring(0, 2));
+            //                    foreach (var place in allPlaces)
+            //                    {
+            //                        SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
+            //                        string[] workingTime = salon.OperatingMode.Split('-');
+            //                        int constFrom = Int32.Parse(workingTime[0].Trim().Substring(0, 2));
+            //                        int constTo = Int32.Parse(workingTime[1].Trim().Substring(0, 2));
 
-                                    int from;
-                                    int to;
-                                    int tempTo;
-                                    int tempFrom;
-                                    DateTime dateNow = DateTime.Today;
+            //                        int from;
+            //                        int to;
+            //                        int tempTo;
+            //                        int tempFrom;
+            //                        DateTime dateNow = DateTime.Today;
 
-                                    for (int i = 0; i < 14; i++)
-                                    {
+            //                        for (int i = 0; i < 14; i++)
+            //                        {
 
-                                        from = constFrom;
-                                        to = constTo;
-                                        while (from != to)
-                                        {
-                                            tempFrom = from;
-                                            tempTo = ++from;
-                                            string isExist = SendDbUtility.CheckTimeSlot(dateNow,
-                                                tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
-                                            if (isExist == "0")
-                                            {
-                                                dbUse.TimeSlotModels.Add(new TimeSlotModel()
-                                                {
-                                                    PlaceId = place.Id,
-                                                    SalonId = place.SalonId,
-                                                    Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
-                                                    Booked = false,
-                                                    Date = dateNow
-                                                });
-                                                addedSlots++;
-                                            }
-                                            else if (isExist != "1")
-                                            {
-                                                isError = "Ошибка в проверке тайм слота:"/* + isExist*/;
-                                            }
-                                        }
-                                        dateNow = dateNow.AddDays(1);
-                                    }
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                isError = "Ошибка в добавлении новых дат:"/* + e.ToString()*/;
-                            }
-                            if (isError != "")
-                            {
-                                WriteLogs(isError);
-                            }
-                            else
-                            {
-                                dbUse.SaveChanges();
-                                WriteLogs("Обновление прошло успешно\nУдалено " + deletedSlots + " слотов\nДобавлено " + addedSlots + " слотов");
-                                flag = true;
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        WriteLogs("Глобальная ошибка обновления");
-                    }
+            //                            from = constFrom;
+            //                            to = constTo;
+            //                            while (from != to)
+            //                            {
+            //                                tempFrom = from;
+            //                                tempTo = ++from;
+            //                                string isExist = SendDbUtility.CheckTimeSlot(dateNow,
+            //                                    tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
+            //                                if (isExist == "0")
+            //                                {
+            //                                    dbUse.TimeSlotModels.Add(new TimeSlotModel()
+            //                                    {
+            //                                        PlaceId = place.Id,
+            //                                        SalonId = place.SalonId,
+            //                                        Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
+            //                                        Booked = false,
+            //                                        Date = dateNow
+            //                                    });
+            //                                    addedSlots++;
+            //                                }
+            //                                else if (isExist != "1")
+            //                                {
+            //                                    isError = "Ошибка в проверке тайм слота:"/* + isExist*/;
+            //                                }
+            //                            }
+            //                            dateNow = dateNow.AddDays(1);
+            //                        }
+            //                    }
+            //                }
+            //                catch (Exception e)
+            //                {
+            //                    isError = "Ошибка в добавлении новых дат:"/* + e.ToString()*/;
+            //                }
+            //                if (isError != "")
+            //                {
+            //                    WriteLogs(isError);
+            //                }
+            //                else
+            //                {
+            //                    dbUse.SaveChanges();
+            //                    WriteLogs("Обновление прошло успешно\nУдалено " + deletedSlots + " слотов\nДобавлено " + addedSlots + " слотов");
+            //                    flag = true;
+            //                }
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            WriteLogs("Глобальная ошибка обновления");
+            //        }
 
-                }
-                else if (dd.Hour != hours && dd.Minute != minutes)
-                {
-                    flag = false;
-                }
-            }
+            //    }
+            //    else if (dd.Hour != hours && dd.Minute != minutes)
+            //    {
+            //        flag = false;
+            //    }
+            //}
         }
 
 

@@ -234,12 +234,6 @@ namespace MasterReservation.Controllers
                 {
                     
                 }
-                
-                
-                
-
-
-                
             }
 
             if (Request.Cookies.AllKeys.Contains("SalonId"))

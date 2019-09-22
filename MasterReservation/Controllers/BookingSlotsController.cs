@@ -20,7 +20,15 @@ namespace MasterReservation.Controllers
                 var timesCount = model.Times.Split(';').Length - 1;
                 WorkingPlaceModel place = Utilities.SendDbUtility.GetWorkingPlace(model.PlaceId);
                 SalonModel salon = Utilities.SendDbUtility.GetSalon(place.SalonId);
-                string[] times = salon.OperatingMode.Split('-');
+                string[] times = new string[]{};
+                if (model.Date.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    times = salon.OperatingModeSat.Split('-');
+                }
+                else
+                {
+                    times = salon.OperatingModeWeek.Split('-');
+                }
                 int fullDayCount = Int32.Parse(times[1].Split(':')[0]) - Int32.Parse(times[0].Split(':')[0]);
                 double total;
                 if (timesCount >= fullDayCount)

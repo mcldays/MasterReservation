@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.UI.WebControls;
 using MasterReservation.Models;
 using System.IO;
+using System.Web.Hosting;
 
 
 namespace MasterReservation.Utilities
@@ -207,12 +208,20 @@ namespace MasterReservation.Utilities
                     dbUse.SaveChanges();
 
                     SalonModel salon = GetSalon(model.SalonId);
-                    string[] workingTime = salon.OperatingMode.Split('-');
-                    int constFrom = Int32.Parse(workingTime[0].Trim().Substring(0,2));
-                    int constTo = Int32.Parse(workingTime[1].Trim().Substring(0,2));
-                    if (constFrom >= constTo)
+                    string[] workingTimeWeek = salon.OperatingModeWeek.Split('-');
+                    string[] workingTimeSat = salon.OperatingModeSat.Split('-');
+                    int constFromWeek = Int32.Parse(workingTimeWeek[0].Trim().Substring(0,2));
+                    int constToWeek = Int32.Parse(workingTimeWeek[1].Trim().Substring(0,2));
+                    int constFromSat = Int32.Parse(workingTimeSat[0].Trim().Substring(0,2));
+                    int constToSat = Int32.Parse(workingTimeSat[1].Trim().Substring(0,2));
+                    if (constFromWeek >= constToWeek)
                     {
                         return false;
+                    }
+
+                    if (constFromSat > constToSat)
+                    {
+                        constFromSat = constToSat;
                     }
                     int from;
                     int to;
@@ -221,20 +230,31 @@ namespace MasterReservation.Utilities
                     DateTime dateNow = DateTime.Today;
                     for (int i = 0; i < 14; i++)
                     {
-                        from = constFrom;
-                        to = constTo;
-                        while (from != to)
+                        if (dateNow.DayOfWeek != DayOfWeek.Sunday)
                         {
-                            tempFrom = from;
-                            tempTo = ++from;
-                            dbUse.TimeSlotModels.Add(new TimeSlotModel()
+                            if (dateNow.DayOfWeek == DayOfWeek.Saturday)
                             {
-                                PlaceId = model.Id,
-                                SalonId = model.SalonId,
-                                Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
-                                Booked = false,
-                                Date = dateNow
-                            });
+                                from = constFromSat;
+                                to = constToSat;
+                            }
+                            else
+                            {
+                                from = constFromWeek;
+                                to = constToWeek;
+                            }
+                            while (from != to)
+                            {
+                                tempFrom = from;
+                                tempTo = ++from;
+                                dbUse.TimeSlotModels.Add(new TimeSlotModel()
+                                {
+                                    PlaceId = model.Id,
+                                    SalonId = model.SalonId,
+                                    Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
+                                    Booked = false,
+                                    Date = dateNow
+                                });
+                            }
                         }
                         dateNow = dateNow.AddDays(1);
                     }
@@ -772,7 +792,7 @@ namespace MasterReservation.Utilities
 
         public static bool CreatePicture(byte[] picture, int id)
         {
-            string path = $@"C:\MasterReservation\ResidenAvatar\{id.ToString()}.jpg";
+            string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
            
             File.WriteAllBytes(path, picture);
 
@@ -784,12 +804,9 @@ namespace MasterReservation.Utilities
             try
             {
                 if (model != null)
-                { 
-
-
-
+                {
                     string path =
-                        $@"C:\MasterReservation\ResidenAvatar\{model.id.ToString()}.jpg";
+                        HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{model.id.ToString()}.jpg";
                     model.Picture = File.ReadAllBytes(path);
                     return true;
                 }

@@ -26,8 +26,8 @@
         <div id="slider-photo">
             
             @{
-                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (Model[0] as WorkingPlaceModel).Id;
-                string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + (Model[0] as WorkingPlaceModel).Id;
+                string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"Resources\svg\default-place.svg";
                 DirectoryInfo dirInfo = new DirectoryInfo(path);
                 DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
                 FileInfo[] files = new FileInfo[] { };
@@ -228,22 +228,24 @@
                             {
                                 if (model.ResidentId == (Model[3] as BookingModel).ResidentId)
                                 {
+                                    // время, занятое самим резидентом
                                     <div>*@(model.Time)</div>
                                 }
                                 else
                                 {
+                                    // время, занятое другим резидентом
                                     <div>+@(model.Time)</div>
                                 }
                             }
                             else
                             {
-                                    <div>+@(model.Time)</div>
+                                // время, занятое другим резидентом
+                                <div>+@(model.Time)</div>
                             }
-                            
-                            
                         }
                         else
                         {
+                            // свободное время
                             <div>-@(model.Time)</div>
                         }
                     }

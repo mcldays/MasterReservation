@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using MasterReservation.Models;
 using MasterReservation.Utilities;
 using Quartz;
@@ -47,43 +48,111 @@ namespace MasterReservation.Jobs
 
                         foreach (var place in allPlaces)
                         {
-                            SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
-                            string[] workingTime = salon.OperatingMode.Split('-');
-                            int constFrom = Int32.Parse(workingTime[0].Trim().Substring(0, 2));
-                            int constTo = Int32.Parse(workingTime[1].Trim().Substring(0, 2));
+                            //SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
+                            //string[] workingTime = salon.OperatingMode.Split('-');
+                            //int constFrom = Int32.Parse(workingTime[0].Trim().Substring(0, 2));
+                            //int constTo = Int32.Parse(workingTime[1].Trim().Substring(0, 2));
 
+                            //int from;
+                            //int to;
+                            //int tempTo;
+                            //int tempFrom;
+                            //DateTime dateNow = DateTime.Today;
+
+                            //for (int i = 0; i < 14; i++)
+                            //{
+
+                            //    from = constFrom;
+                            //    to = constTo;
+                            //    while (from != to)
+                            //    {
+                            //        tempFrom = from;
+                            //        tempTo = ++from;
+                            //        string isExist = SendDbUtility.CheckTimeSlot(dateNow,
+                            //            tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
+                            //        if (isExist == "0")
+                            //        {
+                            //            dbUse.TimeSlotModels.Add(new TimeSlotModel()
+                            //            {
+                            //                PlaceId = place.Id,
+                            //                SalonId = place.SalonId,
+                            //                Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
+                            //                Booked = false,
+                            //                Date = dateNow
+                            //            });
+                            //            addedSlots++;
+                            //        }
+                            //        else if(isExist != "1")
+                            //        {
+                            //            isError = "Ошибка в проверке тайм слота:\n" + isExist;
+                            //        }
+                            //    }
+                            //    dateNow = dateNow.AddDays(1);
+                            //}
+
+
+
+                            SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
+                            string[] workingTimeWeek = salon.OperatingModeWeek.Split('-');
+                            int constFromWeek = Int32.Parse(workingTimeWeek[0].Trim().Substring(0, 2));
+                            int constToWeek = Int32.Parse(workingTimeWeek[1].Trim().Substring(0, 2));
+                            
+                            string[] workingTimeSat = salon.OperatingModeSat.Split('-');
+                            int constFromSat = Int32.Parse(workingTimeSat[0].Trim().Substring(0, 2));
+                            int constToSat = Int32.Parse(workingTimeSat[1].Trim().Substring(0, 2));
+
+                            if (constFromWeek >= constToWeek)
+                            {
+                                continue;
+                            }
+
+                            if (constFromSat > constToSat)
+                            {
+                                constFromSat = constToSat;
+                            }
                             int from;
                             int to;
                             int tempTo;
                             int tempFrom;
                             DateTime dateNow = DateTime.Today;
-                        
                             for (int i = 0; i < 14; i++)
                             {
-                            
-                                from = constFrom;
-                                to = constTo;
-                                while (from != to)
+                                if (dateNow.DayOfWeek != DayOfWeek.Sunday)
                                 {
-                                    tempFrom = from;
-                                    tempTo = ++from;
-                                    string isExist = SendDbUtility.CheckTimeSlot(dateNow,
-                                        tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
-                                    if (isExist == "0")
+                                    if (dateNow.DayOfWeek == DayOfWeek.Saturday)
                                     {
-                                        dbUse.TimeSlotModels.Add(new TimeSlotModel()
-                                        {
-                                            PlaceId = place.Id,
-                                            SalonId = place.SalonId,
-                                            Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
-                                            Booked = false,
-                                            Date = dateNow
-                                        });
-                                        addedSlots++;
+                                        from = constFromSat;
+                                        to = constToSat;
                                     }
-                                    else if(isExist != "1")
+                                    else
                                     {
-                                        isError = "Ошибка в проверке тайм слота:\n" + isExist;
+                                        from = constFromWeek;
+                                        to = constToWeek;
+                                    }
+                                    while (from != to)
+                                    {
+                                        tempFrom = from;
+                                        tempTo = ++from;
+
+                                        string isExist = SendDbUtility.CheckTimeSlot(dateNow,
+                                                        tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
+                                        if (isExist == "0")
+                                        {
+
+                                            dbUse.TimeSlotModels.Add(new TimeSlotModel()
+                                            {
+                                                PlaceId = place.Id,
+                                                SalonId = place.SalonId,
+                                                Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
+                                                Booked = false,
+                                                Date = dateNow
+                                            });
+                                            addedSlots++;
+                                        }
+                                        else if (isExist != "1")
+                                        {
+                                            isError = "Ошибка в проверке тайм слота:\n" + isExist;
+                                        }
                                     }
                                 }
                                 dateNow = dateNow.AddDays(1);
@@ -114,7 +183,7 @@ namespace MasterReservation.Jobs
 
         public void WriteLogs(string msg)
         {
-            using (StreamWriter sw = new StreamWriter(@"C:\MasterReservation\file.txt", true, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\file.txt", true, System.Text.Encoding.Default))
             //using (StreamWriter sw = new StreamWriter(@"C:\Users\lexle\Desktop\WPFProjects\MasterReservation\MasterReservation\file.txt", true, System.Text.Encoding.Default))
             {
                 sw.WriteLine(DateTime.Now.ToString() + " " + msg + "\n\n\n");
