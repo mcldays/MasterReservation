@@ -37,6 +37,7 @@
                 <th>Чт</th>
                 <th>Пт</th>
                 <th>Сб</th>
+                <th>Вс</th>
                 <th>Тип бронирования</th>
                 <th>Пароль администратора</th>
                 <th>Управление салоном</th>
@@ -49,35 +50,36 @@
                 foreach (var model in (Model[0] as List<SalonModel>))
                 {
 
-                    <tr>
-                        <td>@(model.Id)</td>
-                        <td>@(model.SalonTitle)</td>
-                        <td>@(model.ContactPerson)</td>
-                        <td>@(model.Phone)</td>
-                        <td>@(model.City)</td>
-                        <td>@(model.Email)</td>
-                        @*<td>@(model.Message)</td>*@
-                        <td>@(model.Adress)</td>
-                        <td>@(model.OperatingModeMon)</td>
-                        <td>@(model.OperatingModeTue)</td>
-                        <td>@(model.OperatingModeWed)</td>
-                        <td>@(model.OperatingModeThu)</td>
-                        <td>@(model.OperatingModeFri)</td>
-                        <td>@(model.OperatingModeSat)</td>
-                        <td>
-                            @if (model.ReservationType)
-                            {
-                                @: С бронированием
-                            }
-                            else
-                            {
-                                @: Без бронирования
-                            }
+            <tr>
+                <td>@(model.Id)</td>
+                <td>@(model.SalonTitle)</td>
+                <td>@(model.ContactPerson)</td>
+                <td>@(model.Phone)</td>
+                <td>@(model.City)</td>
+                <td>@(model.Email)</td>
+                @*<td>@(model.Message)</td>*@
+                <td>@(model.Adress)</td>
+                <td>@(model.OperatingModeMon)</td>
+                <td>@(model.OperatingModeTue)</td>
+                <td>@(model.OperatingModeWed)</td>
+                <td>@(model.OperatingModeThu)</td>
+                <td>@(model.OperatingModeFri)</td>
+                <td>@(model.OperatingModeSat)</td>
+                <td>@(model.OperatingModeSun)</td>
+                <td>
+                    @if (model.ReservationType)
+                    {
+                        @: С бронированием
+                    }
+                    else
+                    {
+                        @: Без бронирования
+                    }
 
-                        </td>
-                        <td>@(model.AdminPass)</td>
-                        <td><button class="btn btn-secondary salon-mng-btn" value="@(model.Id)">Перейти</button><button class="btn btn-danger salon-dlt-btn" value="@(model.Id)">Удалить</button></td>
-                    </tr>
+                </td>
+                <td>@(model.AdminPass)</td>
+                <td><button class="btn btn-secondary salon-mng-btn" value="@(model.Id)">Перейти</button><button class="btn btn-danger salon-dlt-btn" value="@(model.Id)">Удалить</button></td>
+            </tr>
 
                 }
             }
@@ -99,6 +101,7 @@
                     <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeThu, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Чт" } })</td>
                     <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeFri, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пт" } })</td>
                     <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeSat, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Сб" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeSun, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Вс" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class="field" } })</td>
                     <td><button class="btn btn-primary">Добавить</button></td>

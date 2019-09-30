@@ -231,23 +231,27 @@ namespace MasterReservation.Utilities
                     string[] workingTimeSat = salon.OperatingModeSat.Split('-');
                     int constFromSat = Int32.Parse(workingTimeSat[0].Trim().Substring(0,2));
                     int constToSat = Int32.Parse(workingTimeSat[1].Trim().Substring(0,2));
-                    if (constFromMon >= constToMon)
+
+                    string[] workingTimeSun = salon.OperatingModeSun.Split('-');
+                    int constFromSun = Int32.Parse(workingTimeSun[0].Trim().Substring(0, 2));
+                    int constToSun = Int32.Parse(workingTimeSun[1].Trim().Substring(0, 2));
+                    if (constFromMon > constToMon)
                     {
                         constFromMon = constToMon;
                     }
-                    if (constFromTue >= constToTue)
+                    if (constFromTue > constToTue)
                     {
                         constFromTue = constToTue;
                     }
-                    if (constFromWed >= constToWed)
+                    if (constFromWed > constToWed)
                     {
                         constFromWed = constToWed;
                     }
-                    if (constFromThu >= constToThu)
+                    if (constFromThu > constToThu)
                     {
                         constFromThu = constToThu;
                     }
-                    if (constFromFri >= constToFri)
+                    if (constFromFri > constToFri)
                     {
                         constFromFri = constToFri;
                     }
@@ -257,6 +261,11 @@ namespace MasterReservation.Utilities
                     {
                         constFromSat = constToSat;
                     }
+                    if (constFromSun > constToSun)
+                    {
+                        constFromSun = constToSun;
+                    }
+
                     int from;
                     int to;
                     int tempTo;

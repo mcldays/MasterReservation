@@ -25,6 +25,10 @@ namespace MasterReservation.Controllers
                 {
                     times = salon.OperatingModeSat.Split('-');
                 }
+                else if (model.Date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    times = salon.OperatingModeSun.Split('-');
+                }
                 else if (model.Date.DayOfWeek == DayOfWeek.Monday)
                 {
                     times = salon.OperatingModeMon.Split('-');

@@ -117,14 +117,39 @@ namespace MasterReservation.Jobs
                             int constFromSat = Int32.Parse(workingTimeSat[0].Trim().Substring(0, 2));
                             int constToSat = Int32.Parse(workingTimeSat[1].Trim().Substring(0, 2));
 
-                            if ((constFromMon >= constToMon) || (constFromTue >= constToTue) || (constFromWed >= constToWed) || (constFromThu >= constToThu) || (constFromFri >= constToFri))
+                            string[] workingTimeSun = salon.OperatingModeSun.Split('-');
+                            int constFromSun = Int32.Parse(workingTimeSun[0].Trim().Substring(0, 2));
+                            int constToSun = Int32.Parse(workingTimeSun[1].Trim().Substring(0, 2));
+
+                            if (constFromMon > constToMon)
                             {
-                                continue;
+                                constFromMon = constToMon;
                             }
+                            if (constFromTue > constToTue)
+                            {
+                                constFromTue = constToTue;
+                            }
+                            if (constFromWed > constToWed)
+                            {
+                                constFromWed = constToWed;
+                            }
+                            if (constFromThu > constToThu)
+                            {
+                                constFromThu = constToThu;
+                            }
+                            if (constFromFri > constToFri)
+                            {
+                                constFromFri = constToFri;
+                            }
+
 
                             if (constFromSat > constToSat)
                             {
                                 constFromSat = constToSat;
+                            }
+                            if (constFromSun > constToSun)
+                            {
+                                constFromSun = constToSun;
                             }
                             int from;
                             int to;
@@ -133,68 +158,72 @@ namespace MasterReservation.Jobs
                             DateTime dateNow = DateTime.Today;
                             for (int i = 0; i < 14; i++)
                             {
-                                if (dateNow.DayOfWeek != DayOfWeek.Sunday)
+
+                                if (dateNow.DayOfWeek == DayOfWeek.Saturday)
                                 {
-                                    if (dateNow.DayOfWeek == DayOfWeek.Saturday)
-                                    {
-                                        from = constFromSat;
-                                        to = constToSat;
-                                    }
-                                    else if(dateNow.DayOfWeek == DayOfWeek.Monday)
-                                    {
-                                        from = constFromMon;
-                                        to = constToMon;
-                                    }
-                                    else if (dateNow.DayOfWeek == DayOfWeek.Tuesday)
-                                    {
-                                        from = constFromTue;
-                                        to = constToTue;
-                                    }
-                                    else if (dateNow.DayOfWeek == DayOfWeek.Wednesday)
-                                    {
-                                        from = constFromWed;
-                                        to = constToWed;
-                                    }
-                                    else if (dateNow.DayOfWeek == DayOfWeek.Thursday)
-                                    {
-                                        from = constFromThu;
-                                        to = constToThu;
-                                    }
-                                    else if (dateNow.DayOfWeek == DayOfWeek.Friday)
-                                    {
-                                        from = constFromFri;
-                                        to = constToFri;
-                                    }
-                                    else
-                                    {
-                                        throw new NotImplementedException();
-                                    }
-                                    while (from != to)
-                                    {
-                                        tempFrom = from;
-                                        tempTo = ++from;
+                                    from = constFromSat;
+                                    to = constToSat;
+                                }
+                                else if (dateNow.DayOfWeek == DayOfWeek.Sunday)
+                                {
+                                    from = constFromSun;
+                                    to = constToSun;
+                                }
+                                else if(dateNow.DayOfWeek == DayOfWeek.Monday)
+                                {
+                                    from = constFromMon;
+                                    to = constToMon;
+                                }
+                                else if (dateNow.DayOfWeek == DayOfWeek.Tuesday)
+                                {
+                                    from = constFromTue;
+                                    to = constToTue;
+                                }
+                                else if (dateNow.DayOfWeek == DayOfWeek.Wednesday)
+                                {
+                                    from = constFromWed;
+                                    to = constToWed;
+                                }
+                                else if (dateNow.DayOfWeek == DayOfWeek.Thursday)
+                                {
+                                    from = constFromThu;
+                                    to = constToThu;
+                                }
+                                else if (dateNow.DayOfWeek == DayOfWeek.Friday)
+                                {
+                                    from = constFromFri;
+                                    to = constToFri;
+                                }
+                                else
+                                {
+                                    throw new NotImplementedException();
+                                }
+                                while (from != to)
+                                {
+                                    tempFrom = from;
+                                    tempTo = ++from;
 
-                                        string isExist = SendDbUtility.CheckTimeSlot(dateNow,
-                                                        tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
-                                        if (isExist == "0")
-                                        {
+                                    string isExist = SendDbUtility.CheckTimeSlot(dateNow,
+                                                    tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00", place.Id);
+                                    if (isExist == "0")
+                                    {
 
-                                            dbUse.TimeSlotModels.Add(new TimeSlotModel()
-                                            {
-                                                PlaceId = place.Id,
-                                                SalonId = place.SalonId,
-                                                Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
-                                                Booked = false,
-                                                Date = dateNow
-                                            });
-                                            addedSlots++;
-                                        }
-                                        else if (isExist != "1")
+                                        dbUse.TimeSlotModels.Add(new TimeSlotModel()
                                         {
-                                            isError = "Ошибка в проверке тайм слота:\n" + isExist;
-                                        }
+                                            PlaceId = place.Id,
+                                            SalonId = place.SalonId,
+                                            Time = tempFrom.ToString() + ":00-" + tempTo.ToString() + ":00",
+                                            Booked = false,
+                                            Date = dateNow
+                                        });
+                                        addedSlots++;
+                                    }
+                                    else if (isExist != "1")
+                                    {
+                                        isError = "Ошибка в проверке тайм слота:\n" + isExist;
                                     }
                                 }
+                                
                                 dateNow = dateNow.AddDays(1);
                             }
                         }
