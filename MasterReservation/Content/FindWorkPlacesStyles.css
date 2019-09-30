@@ -245,8 +245,8 @@
     .photos-place img {
         width: 210px;
         height: 216px;
-        -o-object-fit: contain;
-        object-fit: contain;
+        /*-o-object-fit: contain;*/
+        /*object-fit: contain;*/
     }
 
 .card-description {
