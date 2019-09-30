@@ -93,15 +93,31 @@ namespace MasterReservation.Jobs
 
 
                             SalonModel salon = SendDbUtility.GetSalon(place.SalonId);
-                            string[] workingTimeWeek = salon.OperatingModeWeek.Split('-');
-                            int constFromWeek = Int32.Parse(workingTimeWeek[0].Trim().Substring(0, 2));
-                            int constToWeek = Int32.Parse(workingTimeWeek[1].Trim().Substring(0, 2));
-                            
+                            string[] workingTimeMon = salon.OperatingModeMon.Split('-');
+                            int constFromMon = Int32.Parse(workingTimeMon[0].Trim().Substring(0, 2));
+                            int constToMon = Int32.Parse(workingTimeMon[1].Trim().Substring(0, 2));
+
+                            string[] workingTimeTue = salon.OperatingModeTue.Split('-');
+                            int constFromTue = Int32.Parse(workingTimeTue[0].Trim().Substring(0, 2));
+                            int constToTue = Int32.Parse(workingTimeTue[1].Trim().Substring(0, 2));
+
+                            string[] workingTimeWed = salon.OperatingModeWed.Split('-');
+                            int constFromWed = Int32.Parse(workingTimeWed[0].Trim().Substring(0, 2));
+                            int constToWed = Int32.Parse(workingTimeWed[1].Trim().Substring(0, 2));
+
+                            string[] workingTimeThu = salon.OperatingModeThu.Split('-');
+                            int constFromThu = Int32.Parse(workingTimeThu[0].Trim().Substring(0, 2));
+                            int constToThu = Int32.Parse(workingTimeThu[1].Trim().Substring(0, 2));
+
+                            string[] workingTimeFri = salon.OperatingModeFri.Split('-');
+                            int constFromFri = Int32.Parse(workingTimeFri[0].Trim().Substring(0, 2));
+                            int constToFri = Int32.Parse(workingTimeFri[1].Trim().Substring(0, 2));
+
                             string[] workingTimeSat = salon.OperatingModeSat.Split('-');
                             int constFromSat = Int32.Parse(workingTimeSat[0].Trim().Substring(0, 2));
                             int constToSat = Int32.Parse(workingTimeSat[1].Trim().Substring(0, 2));
 
-                            if (constFromWeek >= constToWeek)
+                            if ((constFromMon >= constToMon) || (constFromTue >= constToTue) || (constFromWed >= constToWed) || (constFromThu >= constToThu) || (constFromFri >= constToFri))
                             {
                                 continue;
                             }
@@ -124,10 +140,34 @@ namespace MasterReservation.Jobs
                                         from = constFromSat;
                                         to = constToSat;
                                     }
+                                    else if(dateNow.DayOfWeek == DayOfWeek.Monday)
+                                    {
+                                        from = constFromMon;
+                                        to = constToMon;
+                                    }
+                                    else if (dateNow.DayOfWeek == DayOfWeek.Tuesday)
+                                    {
+                                        from = constFromTue;
+                                        to = constToTue;
+                                    }
+                                    else if (dateNow.DayOfWeek == DayOfWeek.Wednesday)
+                                    {
+                                        from = constFromWed;
+                                        to = constToWed;
+                                    }
+                                    else if (dateNow.DayOfWeek == DayOfWeek.Thursday)
+                                    {
+                                        from = constFromThu;
+                                        to = constToThu;
+                                    }
+                                    else if (dateNow.DayOfWeek == DayOfWeek.Friday)
+                                    {
+                                        from = constFromFri;
+                                        to = constToFri;
+                                    }
                                     else
                                     {
-                                        from = constFromWeek;
-                                        to = constToWeek;
+                                        throw new NotImplementedException();
                                     }
                                     while (from != to)
                                     {
