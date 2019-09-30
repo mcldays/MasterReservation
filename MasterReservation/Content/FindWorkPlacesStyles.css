@@ -382,3 +382,31 @@
     flex-direction: column;
     font-size: 14px;
 }
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    
+}
+
+/* Portrait tablets and medium desktops */
+@media (max-width: 1199px) {
+    #body-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+                                              }
+
+/* Landscape phones and portrait tablets */
+media (max-width: 767px) {
+
+                       }
+
+/* Landscape phones and smaller */
+media (max-width: 480px) {
+
+                       }

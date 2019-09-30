@@ -25,9 +25,29 @@ namespace MasterReservation.Controllers
                 {
                     times = salon.OperatingModeSat.Split('-');
                 }
+                else if (model.Date.DayOfWeek == DayOfWeek.Monday)
+                {
+                    times = salon.OperatingModeMon.Split('-');
+                }
+                else if (model.Date.DayOfWeek == DayOfWeek.Tuesday)
+                {
+                    times = salon.OperatingModeTue.Split('-');
+                }
+                else if (model.Date.DayOfWeek == DayOfWeek.Wednesday)
+                {
+                    times = salon.OperatingModeWed.Split('-');
+                }
+                else if (model.Date.DayOfWeek == DayOfWeek.Thursday)
+                {
+                    times = salon.OperatingModeThu.Split('-');
+                }
+                else if (model.Date.DayOfWeek == DayOfWeek.Friday)
+                {
+                    times = salon.OperatingModeFri.Split('-');
+                }
                 else
                 {
-                    times = salon.OperatingModeWeek.Split('-');
+                    throw new NotImplementedException();
                 }
                 int fullDayCount = Int32.Parse(times[1].Split(':')[0]) - Int32.Parse(times[0].Split(':')[0]);
                 double total;

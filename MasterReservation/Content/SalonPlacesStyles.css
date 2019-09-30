@@ -97,6 +97,10 @@
     text-align: center;
 }
 
+.times-width {
+    min-width: 135px;
+}
+
 .table th {
     padding: 15px 0px;
 }

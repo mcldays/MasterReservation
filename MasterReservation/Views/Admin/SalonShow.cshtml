@@ -31,12 +31,15 @@
                 <th>Email*</th>
                 <th>Сообщение</th>
                 <th>Адрес</th>
-                <th>Режим работы пн-пт</th>
-                <th>Режим работы сб</th>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th>Сб</th>
                 <th>Тип бронирования</th>
                 <th>Пароль администратора</th>
                 <th>Управление салоном</th>
-
             </tr>
         </thead>
         <tbody>
@@ -55,7 +58,11 @@
                         <td>@(model.Email)</td>
                         <td>@(model.Message)</td>
                         <td>@(model.Adress)</td>
-                        <td>@(model.OperatingModeWeek)</td>
+                        <td>@(model.OperatingModeMon)</td>
+                        <td>@(model.OperatingModeTue)</td>
+                        <td>@(model.OperatingModeWed)</td>
+                        <td>@(model.OperatingModeThu)</td>
+                        <td>@(model.OperatingModeFri)</td>
                         <td>@(model.OperatingModeSat)</td>
                         <td>
                             @if (model.ReservationType)
@@ -86,8 +93,12 @@
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).Email, new { htmlAttributes = new { @class = "field", placeholder = "Email" } })</td>
                     <td>@Html.TextAreaFor(model => (Model[1] as SalonModel).Message, new { @class = "field", placeholder = "Сообщение" })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeWeek, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeSat, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Сб" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeMon, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeTue, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeWed, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeThu, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeFri, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Пн - Пт" } })</td>
+                    <td class="times-width">@Html.EditorFor(model => (Model[1] as SalonModel).OperatingModeSat, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Сб" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
                     <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class="field" } })</td>
                     <td><button class="btn btn-primary">Добавить</button></td>

@@ -27,7 +27,15 @@ namespace MasterReservation.Models
         [Required]
         public string Adress { get; set; }
         [Required]
-        public string OperatingModeWeek { get; set; }
+        public string OperatingModeMon { get; set; }
+        [Required]
+        public string OperatingModeTue { get; set; }
+        [Required]
+        public string OperatingModeWed { get; set; }
+        [Required]
+        public string OperatingModeThu { get; set; }
+        [Required]
+        public string OperatingModeFri { get; set; }
         [Required]
         public string OperatingModeSat { get; set; }
         public bool ReservationType { get; set; }
