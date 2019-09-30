@@ -133,7 +133,7 @@ namespace MasterReservation.Controllers
 
             SalonModel modelSalon = Utilities.SendDbUtility.GetSalon(modelPlace.SalonId);
             List<TimeSlotModel> modelsTime = Utilities.SendDbUtility.GetTimeSlots(modelPlace.Id);
-            if (modelSalon == null || modelsTime.Count == 0)
+            if (modelSalon == null)
             {
                 return RedirectToAction("FindWorkPlaces");
             }
