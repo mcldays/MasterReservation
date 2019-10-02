@@ -115,6 +115,13 @@ body {
     width: auto;
 }
 
+@media (max-width: 1199px) {
+    .icons-wrap {display: none}
+    #body-wrap {margin: auto}
+   
+}
+
+
 #CityButton {
     width: 101px;
     height: 24px;
