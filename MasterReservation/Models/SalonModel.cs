@@ -38,6 +38,8 @@ namespace MasterReservation.Models
         public string OperatingModeFri { get; set; }
         [Required]
         public string OperatingModeSat { get; set; }
+        [Required]
+        public string OperatingModeSun { get; set; }
         public bool ReservationType { get; set; }
         [Required]
         public string AdminPass { get; set; }

@@ -383,6 +383,29 @@
     font-size: 14px;
 }
 
+#toTop {
+    width: 90px;
+    height: 31px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 10px; /* отступ кнопки от нижнего края страницы*/
+    left: 10px;
+    cursor: pointer;
+    display: none;
+    color: #333;
+    font-family: verdana;
+    font-size: 13px;
+}
+
+
+
+
+
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     

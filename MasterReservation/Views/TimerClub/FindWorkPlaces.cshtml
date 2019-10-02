@@ -290,8 +290,13 @@
     </div>
 </div>
 
-<script>
-    
+
+<div id="toTop">^ Наверх</div>
+
+
+
+    <script>
+
     //$(".input-time").mask(
     //    "99:99",
     //    {
@@ -458,7 +463,7 @@
 
             if (!offersInclude || !cityInclude || !typeInclude || !adCondInclude || !ajaxSalonsInclude) {
                 $(place).slideUp(300);
-                
+
                 for (let i = 0; i < result.getLength(); i++) {
                     if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
                         result.get(i).options.set('visible', false);
@@ -485,4 +490,4 @@
     $(".chosen-select2").chosen({width: "100%"});
 
 
-</script>
+    </script>
