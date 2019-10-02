@@ -51,7 +51,14 @@ namespace MasterReservation.Controllers
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    TempData["ErrorMessage"] = "Ошибка бронирования!";
+                    return RedirectToAction("WorkingPlacePage", "TimerClub", new { id = model.PlaceId });
+                }
+
+                if (times.Length != 2)
+                {
+                    TempData["ErrorMessage"] = "Ошибка бронирования!";
+                    return RedirectToAction("WorkingPlacePage", "TimerClub", new { id = model.PlaceId });
                 }
                 int fullDayCount = Int32.Parse(times[1].Split(':')[0]) - Int32.Parse(times[0].Split(':')[0]);
                 double total;

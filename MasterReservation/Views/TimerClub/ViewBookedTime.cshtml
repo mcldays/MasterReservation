@@ -78,8 +78,29 @@
                             <span class="bold-description">
                                 @{
                                     string times = (Model[0] as List<BookingModel>)[i].Times;
-                                    string[] listTimes = times.Split(';');
-                                    int countHours = listTimes.Length - 1;
+                                    List<string> listTimes = times.Split(';').ToList();
+                                    int combinedTime = 0;
+                                    int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
+
+                                    for (int j = 1; j < listTimes.Count - 1; j++)
+                                    {
+                                        if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
+                                        {
+                                            combinedTime++;
+                                        }
+                                    }
+
+
+                                    if (combinedTime + 1 == listTimes.Count-1)
+                                    {
+                                        
+                                        times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
+                                
+                                    }
+
+
+
+                                    int countHours = listTimes.Count - 1;
                                     string hoursTitle;
                                     if (countHours == 2 || countHours == 3 || countHours == 4 || countHours == 22 || countHours == 23 || countHours == 24)
                                     {

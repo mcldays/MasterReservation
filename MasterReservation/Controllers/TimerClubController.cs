@@ -178,21 +178,25 @@ namespace MasterReservation.Controllers
             List<string> titles = new List<string>();
             List<BookingModel> models =
                 Utilities.SendDbUtility.GetBooking(Utilities.SendDbUtility.GetResidentId(User.Identity.Name));
+            List<int> placesTimes = new List<int>();
             foreach (var model in models)
             {
                 titles.Add(Utilities.SendDbUtility.GetSalonTitle(model.SalonId));
+                placesTimes.Add(Utilities.SendDbUtility.GetCountTimesOfDay(model.Date, model.PlaceId));
             }
 
             if (Request.Cookies.AllKeys.Contains("SalonId"))
             {
                 titles.Clear();
                 models.Clear();
+                placesTimes.Clear();
             }
 
             object[] x = new object[]
             {
                 models,
-                titles
+                titles,
+                placesTimes
             };
 
             

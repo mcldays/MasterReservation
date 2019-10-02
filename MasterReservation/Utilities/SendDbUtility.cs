@@ -840,6 +840,21 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static int GetCountTimesOfDay(DateTime date, int placeId)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    return dbUse.TimeSlotModels.Where(t=>t.Date == date && t.PlaceId == placeId).ToList().Count;
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+            }
+        }
+
 
 
         //public static bool SendDate(DateModel model)

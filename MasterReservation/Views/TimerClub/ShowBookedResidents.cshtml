@@ -47,8 +47,38 @@
 
             @if ((Model[0] as List<BookingModel>).Count != 0)
             {
+                
+
+
+
                 foreach (var model in (Model[0] as List<BookingModel>))
                 {
+
+                    string times = model.Times;
+
+
+                    List<string> listTimes = times.Split(';').ToList();
+                    int combinedTime = 0;
+                    int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
+
+                    for (int j = 1; j < listTimes.Count - 1; j++)
+                    {
+                        if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
+                        {
+                            combinedTime++;
+                        }
+                    }
+
+
+                    if (combinedTime + 1 == listTimes.Count-1)
+                    {
+                                        
+                        times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
+                                
+                    }
+
+
+
 
                     <tr>
                         <td>@(model.Id)</td>
@@ -62,7 +92,7 @@
                         <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
                         <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
                         <td>@(model.Date.ToString("dddd, d MMMM"))</td>
-                        <td>@(model.Times)</td>
+                        <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
                         <td>@(model.Info)</td>
                         <td>@(model.Sum.ToString("F") + "р")</td>
                         <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
