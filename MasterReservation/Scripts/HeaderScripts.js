@@ -15,7 +15,7 @@
 
 
     //переход на главную страницу при клике на лого
-    $("#head-logo").on("click", function () {
+    $(".head-logo").on("click", function () {
         window.location = "../../TimerClub/FindWorkPlaces";
     });
 

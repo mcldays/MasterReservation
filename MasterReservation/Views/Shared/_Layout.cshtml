@@ -21,8 +21,9 @@
 <body>
     <div class="header">
         <div class="city-wrap">
-            <img id="head-logo" src="~/Resources/svg/house.svg" style="width: 25px; margin-right: 0;">
-            <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+            <img class="head-logo" src="~/Resources/svg/house.svg" style="width: 25px; margin-right: 0;">
+            <img class="head-logo" src="~/Resources/svg/logo-white.svg">
+            <span class="mobile-head-title" style="display: none;">Аренда мест в лучших салонах города</span>
             <span class="town">Город</span>
 
             <div class="dropdown">
@@ -85,7 +86,20 @@
 
     @RenderBody()
 
-
+<div class="mobile-foot-nav" style="display: none;">
+    <a class="foot-nav-option" href="../TimerClub/PersonalData">
+        <img src="~/Resources/svg/business-card-white.svg" />
+        <span>Личные данные</span>
+    </a>
+    <a href="../TimerClub/ViewBookedTime" class="foot-nav-option">
+        <img src="~/Resources/svg/clock-white.svg" />
+        <span>Просмотр забронированного времени</span>
+    </a>
+    <a href="../TimerClub/ViewFavorites" class="foot-nav-option">
+        <img src="~/Resources/svg/heart-white.svg" />
+        <span>Избранное</span>
+    </a>
+</div>
 @RenderSection("scripts", required: false)
 </body>
 </html>

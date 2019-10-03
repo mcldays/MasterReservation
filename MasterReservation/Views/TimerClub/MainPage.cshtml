@@ -39,7 +39,7 @@
 <body>
 <div class="header">
     <div class="city-wrap">
-        <img id="head-logo" src="~/Resources/svg/logo-white.svg">
+        <img class="head-logo" src="~/Resources/svg/logo-white.svg">
         <span class="town">Город</span>
 
         <div class="dropdown">
@@ -130,10 +130,10 @@
                 </div>
             </div>
 
-            <div id="sub-fields">
+            <div class="sub-fields">
                 <div id="input-offers-wrap">
                     <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
-                    <img src="~/Resources/svg/down-arrow.svg">
+                    @*<img src="~/Resources/svg/down-arrow.svg">*@
                     <div id="itemss" class="dropdown-menu">
                         <div><span>Парикмахерские услуги</span></div>
                         <div><span>Маникюр</span></div>
@@ -149,7 +149,9 @@
                 </div>
                 @Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })
             </div>
-            @Html.EditorFor(model => (model[1] as RegisterMasterModel).Awards, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имеющиеся награды", @id = "rewards" } })
+            <div class="sub-fields">
+                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Awards, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имеющиеся награды", @id = "rewards" } })
+            </div>
 
             <div id="pass-wrap">
                 @Html.EditorFor(model => (model[1] as RegisterMasterModel).Password, new { htmlAttributes = new { @class = "field", PlaceHolder = "Пароль*" } })

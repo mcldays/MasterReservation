@@ -236,14 +236,14 @@
                     <div class="card-description">
                         <div class="card-title">
                             <span class="card-title-text">@((Model[2] as List<string>)[i])</span>
-                            @*<img src="~/Resources/svg/heart-gray.svg">*@
+                            
 
                             @if ((Model[4] as List<bool>)[i])
                             {
                                 <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                      width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                <g id="favorite">
-                                <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+                                    <g id="favorite">
+                                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
                                     </g>
                                 </svg>
@@ -252,8 +252,8 @@
                             {
                                 <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                      width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                <g id="favorite">
-                                <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+                                    <g id="favorite">
+                                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
                                     </g>
                                 </svg>
@@ -264,10 +264,10 @@
                         <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                         <div class="tariffs-wrap">
                             <div class="tariff-line">
-                                <div class="tariff">Цена 1 часа</div>
-                                <div class="tariff">Цена смены</div>
-                                <div class="tariff">Цена половины месяца</div>
-                                <div class="tariff">Цена месяца</div>
+                                <div class="tariff">1 час</div>
+                                <div class="tariff">День</div>
+                                <div class="tariff">15 смен</div>
+                                <div class="tariff">Месяц</div>
                             </div>
                             <div class="tariff-line">
                                 <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
@@ -279,6 +279,7 @@
                         <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
 
                     </div>
+                    <button style="display: none;" class="mobile-button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">></button>
                 </div>
             }
 
@@ -367,7 +368,7 @@
     monthA = 'Января,Февраля,Марта,Апреля,Мая,Июня,Июля,Августа,Сентября,Октября,Ноября,Декабря'.split(',');
     $("#send-filter-data").on("click", function () {
         var placesIds = "";
-        if ($("#date-field").val() != "" && $("#times-field").val() != "") {
+        if ($("#date-field").val() != "" && $(".input-time")[0].value != "" && $(".input-time")[1].value != "") {
             $.ajax({
                 type: "GET",
                 url: "@Url.Action("CheckFreeSlotsAjax", "BookingSlots")",
@@ -381,12 +382,12 @@
                 }
             });
         }
-        if (($("#date-field").val() != "")) {
+        if (($("#date-field").val() != "") && ($(".input-time")[0].value != "" && $(".input-time")[1].value != "")) {
             $("#date").text($("#date-field").val().substring(0, 2) + " " + monthA[parseInt($("#date-field").val().substring(3, 5))] + ",");
         } else {
             $("#date").text("");
         }
-        if ($("#times-field").val() != "") {
+        if ($(".input-time")[0].value != "" && $(".input-time")[1].value != "") {
             $("#time").text($("#times-field").val() + ",");
         } else {
             $("#time").text("");
@@ -410,7 +411,7 @@
             if (placesIds.includes($(place).find($(".card-id")).val())) {
                 ajaxSalonsInclude = true;
             }
-            if ($("#date-field").val() == "" || $("#times-field").val() == "") {
+            if ($("#date-field").val() == "" || $(".input-time")[0].value == "" || $(".input-time")[1].value == "") {
                 ajaxSalonsInclude = true;
             }
 

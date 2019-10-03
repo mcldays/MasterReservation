@@ -41,7 +41,7 @@ body {
     margin-left: 11%;
 }
 
-#head-logo {
+.head-logo {
     width: 71px;
     margin-right: 58px;
     cursor: pointer;
@@ -267,4 +267,66 @@ hr {
     height: 0px;
     opacity: 0;
     position: absolute;
+}
+
+
+@media (max-width: 1199px) {
+    .town {
+        display: none;
+    }
+    .dropdown {
+        display: none;
+    }
+    .city-wrap {
+        margin-left: 4%;
+    }
+    .head-logo {
+        margin-right: 0px;
+    }
+    .mobile-head-title {
+        display: block !important;
+        color: white;
+        font-size: 10px;
+    }
+    #filter-wrap {
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-foot-nav {
+        display: flex !important;
+        height: 57px;
+        width: 100%;
+        background: #333333;
+        position: fixed;
+        bottom: 0;
+        color: #fff;
+        justify-content: center;
+        z-index: 999;
+    }
+
+    .foot-nav-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 8px;
+        justify-content: center;
+        padding: 0 10px;
+        max-width: 40%;
+        background-color: #555555;
+        margin: 0 1px;
+    }
+    .foot-nav-option img{
+        width: 17px;
+    }
+
+        .foot-nav-option span {
+            text-align: center;
+        }
+
+    #body-container {
+        margin-bottom: 57px;
+    }
 }

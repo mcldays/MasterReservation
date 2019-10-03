@@ -399,12 +399,15 @@
     <Content Include="Resources\img\instagram.png" />
     <Content Include="Resources\img\keyboard_back.png" />
     <Content Include="Resources\img\vk.png" />
+    <Content Include="Resources\svg\business-card-white.svg" />
     <Content Include="Resources\svg\business-card-blue.svg" />
+    <Content Include="Resources\svg\clock-white.svg" />
     <Content Include="Resources\svg\clock-blue.svg" />
     <Content Include="Resources\svg\default-place.svg" />
     <Content Include="Resources\svg\down-arrow-white.svg" />
     <Content Include="Resources\svg\down-arrow.svg" />
     <Content Include="Resources\svg\gray-arrow.svg" />
+    <Content Include="Resources\svg\heart-white.svg" />
     <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\heart-gray.svg" />
     <Content Include="Resources\svg\house.svg" />

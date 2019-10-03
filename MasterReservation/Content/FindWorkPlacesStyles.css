@@ -403,33 +403,98 @@
 
 
 
-
-
-
-/* Large desktops and laptops */
-@media (min-width: 1200px) {
-    
-}
-
 /* Portrait tablets and medium desktops */
 @media (max-width: 1199px) {
     #body-container {
         flex-direction: column;
         align-items: center;
     }
+
+    #checkbox-wrap {
+        width: 66%;
+        justify-content: center;
+    }
+
+    .chosen-select1,
+    .chosen-select2 {
+        width: 100%;
+    }
+
+    #results-line {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #results {
+        margin-left: 0px;
+    }
+
+    #main-wrap {
+        margin-left: 0px;
+    }
+
+    #results-buttons {
+        display: flex;
+    }
+    .result-button {
+        margin: 0 3px;
+    }
+
+    .photos-place {
+        width: 30%;
+        height: 100px;
+    }
+
+        .photos-place img {
+            width: 100px;
+            height: 100px;
+        }
+
+    .tariff {
+        width: -webkit-fill-available;
+        height: 16px;
+        font-size: 10px;
+    }
+
+    .card-title-text {
+        font-size: 11px;
+    }
+
+    .address {
+        font-size: 9px;
+    }
+
+    .tariffs-title {
+        font-size: 10px;
+        margin: 6px 0px 2px 0px;
+    }
+
+    .card-title {
+        margin-bottom: 0px;
+    }
+
+    .button {
+        display: none;
+    }
+
+    .card-description {
+        margin: 0px 0px 0px 7px;
+    }
+
+    .mobile-button {
+        display: block !important;
+        border-radius: 5px;
+        background-color: #0a9ad1;
+        color: white;
+        padding: 4px 60px;
+        font-family: "Open Sans";
+        font-size: 14px;
+        margin-top: 20px;
+        border: 0;
+        margin-bottom: 14px;
+    }
+
+    .card {
+        justify-content: space-between;
+    }
 }
-
-/* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 991px) {
-
-                                              }
-
-/* Landscape phones and portrait tablets */
-media (max-width: 767px) {
-
-                       }
-
-/* Landscape phones and smaller */
-media (max-width: 480px) {
-
-                       }
