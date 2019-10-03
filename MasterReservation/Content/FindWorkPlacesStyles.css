@@ -401,6 +401,10 @@
     font-size: 13px;
 }
 
+.card-wrap {
+    display: flex;
+}
+
 
 
 /* Portrait tablets and medium desktops */
@@ -418,6 +422,13 @@
     .chosen-select1,
     .chosen-select2 {
         width: 100%;
+        max-width: 500px;
+        border-radius: 5px;
+        background: white;
+    }
+
+    #input-city {
+        max-width: 500px;
     }
 
     #results-line {
@@ -435,29 +446,31 @@
 
     #results-buttons {
         display: flex;
+        justify-content: center;
     }
     .result-button {
         margin: 0 3px;
     }
 
     .photos-place {
-        width: 30%;
+        width: 100px;
         height: 100px;
     }
 
         .photos-place img {
             width: 100px;
             height: 100px;
+            margin: auto;
         }
 
     .tariff {
         width: -webkit-fill-available;
         height: 16px;
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .card-title-text {
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .address {
@@ -465,7 +478,7 @@
     }
 
     .tariffs-title {
-        font-size: 10px;
+        font-size: 8px;
         margin: 6px 0px 2px 0px;
     }
 
@@ -486,15 +499,27 @@
         border-radius: 5px;
         background-color: #0a9ad1;
         color: white;
-        padding: 4px 60px;
         font-family: "Open Sans";
         font-size: 14px;
-        margin-top: 20px;
         border: 0;
-        margin-bottom: 14px;
+        width: 34px;
     }
 
     .card {
         justify-content: space-between;
+        max-width: 340px;
+        margin: 5px auto;
+    }
+
+    #filter-title {
+        width: unset;
+    }
+
+    #filter-wrap {
+        padding: 10px 30px 30px 30px;
+    }
+
+    .heart {
+        width: 16px;
     }
 }

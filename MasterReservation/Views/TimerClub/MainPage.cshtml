@@ -40,16 +40,19 @@
 <div class="header">
     <div class="city-wrap">
         <img class="head-logo" src="~/Resources/svg/logo-white.svg">
-        <span class="town">Город</span>
+        <div class="town-wrap">
+            <span class="town-main">Город</span>
+        
 
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" @*data-toggle="dropdown"*@ aria-haspopup="true" aria-expanded="false">
-                Ижевск
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @*<a class="dropdown-item" href="#">Питер</a>
+            <div class="dropdown-main">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" @*data-toggle="dropdown"*@ aria-haspopup="true" aria-expanded="false">
+                    Ижевск
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @*<a class="dropdown-item" href="#">Питер</a>
                 <a class="dropdown-item" href="#">Ижевск</a>*@
-                @*<a class="dropdown-item" href="#">Казань</a>*@
+                    @*<a class="dropdown-item" href="#">Казань</a>*@
+                </div>
             </div>
         </div>
     </div>

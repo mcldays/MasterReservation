@@ -20,6 +20,9 @@ body {
 
 .city-wrap {
     margin-left: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .error-message {
@@ -419,6 +422,10 @@ body {
     display: none;
 }
 
+.icons-wrap {
+    display: none;
+}
+
 .icons-wrap-mobile {
 
     align-items: center;
@@ -452,7 +459,6 @@ body {
     width: 100%;
     height: 16px;
     color: #303030;
-    font-family: "Proxima Nova";
     font-size: 20px;
     font-weight: 400;
     display: flex;
@@ -490,8 +496,19 @@ body {
     }
 
     .master button {
-        width: unset;
+        width: 85%;
+        margin: 12px auto auto;
     }
+    
+    .master button:nth-child(3) {
+        margin-bottom: 40px;
+    }
+
+    .master span {
+        font-weight: bold;
+        margin: auto;
+    }
+    
 
     #body-wrap {
         margin: auto;
@@ -502,6 +519,7 @@ body {
         padding-left: 0;
         text-align: center;
         width: auto;
+        margin-top: 31px;
     }
 
     .master {
@@ -540,6 +558,8 @@ body {
         margin-bottom: 30px;
     }
 
-    
+    .logo {
+        display: none;
+    }
 
 }
