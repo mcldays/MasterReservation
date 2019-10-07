@@ -28,6 +28,31 @@
 {
     @Html.HiddenFor(model => model.id)
 
+    <span id="mobile-title">Личные данные</span>
+
+    <div class="messages-mobile" style="display: none;">
+
+
+        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "WrongPass" })
+        @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "WrongPass" })
+        @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "WrongPass" })
+        @Html.ValidationMessageFor(model => model.Offers, null, new { @class = "WrongPass" })
+        @Html.ValidationMessageFor(model => model.Expirience, null, new { @class = "WrongPass" })
+        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "WrongPass" })
+        @{
+            if (ViewBag.wrongMessage != null)
+            {
+                <span class="WrongPass">@ViewBag.wrongMessage</span>
+            }
+
+            if (ViewBag.successMessage != null)
+            {
+                <span class="success-message">@ViewBag.successMessage</span>
+            }
+        }
+    </div>
+
+
     <div id="BlockOne">
 
 
@@ -79,7 +104,7 @@
             <span id="personitems">Личные данные</span>
 
         </div>
-        <div>
+        <div class="messages-pc">
 
 
             @Html.ValidationMessageFor(model => model.Name, null, new { @class = "WrongPass" })

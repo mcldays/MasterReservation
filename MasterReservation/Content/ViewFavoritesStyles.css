@@ -113,3 +113,108 @@ button.detail-btn {
     display: block;
     width: max-content;
 }
+
+.table-wrap {
+    display: table;
+    width: 100%;
+    text-align: center;
+}
+
+.first-line {
+    display: table-row;
+}
+
+.second-line {
+    display: table-row;
+}
+
+@media (max-width: 1199px) {
+    #background-overlay {
+        background-image: none;
+    }
+
+    #body-container {
+        width: 90%;
+        min-width: unset;
+    }
+
+    #sub-title {
+        text-align: center;
+    }
+
+    .favorite-card {
+        border: 2px solid #d7d7d7;
+        border-radius: 0px 5px 5px 0px;
+    }
+
+    .img-wrap {
+        width: 127px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .photo {
+        width: 79px !important;
+        height: 105px !important;
+        position: absolute;
+        top: 50%;
+        display: block;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .card-title {
+        font-size: 12px;
+        margin-left: 5px;
+    }
+    
+
+    .adress {
+        font-size: 10px;
+        margin-left: 5px;
+    }
+
+    .cards-wrap {
+        margin-bottom: 80px;
+    }
+
+.gray-wrap {
+    background-color: #e1e1e1;
+    padding: 2px 9px;
+    width: 100%;
+}
+
+    .tariffs-title {
+        line-height: 12px;
+        font-size: 9px;
+        display: block;
+        margin: 1px 0px;
+    }
+
+    .table-wrap {
+        font-size: 10px;
+    }
+
+
+    .table-layout {
+        display: flex;
+    }
+
+    .detail-btn {
+        display: none;
+    }
+
+    .btn-mobile {
+        display: block !important;
+        margin: 0 !important;
+        border: 0;
+        width: 48px !important;
+        border-radius: 2px !important; 
+    }
+
+    .card-description {
+        padding: 6px 5px;
+    }
+}

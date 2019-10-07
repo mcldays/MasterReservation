@@ -411,6 +411,8 @@
     <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\heart-gray.svg" />
     <Content Include="Resources\svg\house.svg" />
+    <Content Include="Resources\svg\points.svg" />
+    <Content Include="Resources\svg\user.svg" />
     <Content Include="Resources\svg\icons-facebook-blue.svg" />
     <Content Include="Resources\svg\instagram_blue.svg" />
     <Content Include="Resources\svg\left-arrow.svg" />
@@ -418,7 +420,6 @@
     <Content Include="Resources\svg\logo.svg" />
     <Content Include="Resources\svg\pencil.svg" />
     <Content Include="Resources\svg\right-arrow.svg" />
-    <Content Include="Resources\svg\user.svg" />
     <Content Include="Resources\svg\vk-social-logotype_blue.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -27,6 +28,22 @@ namespace MasterReservation
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             DbSheduler.Start();
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+
+        {
+
+            string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs.txt");
+
+            using (StreamWriter sw = new StreamWriter(logFilePath, true, System.Text.Encoding.UTF8))
+
+            {
+
+                sw.Write(HttpContext.Current.Error);
+
+            }
+
         }
     }
 }

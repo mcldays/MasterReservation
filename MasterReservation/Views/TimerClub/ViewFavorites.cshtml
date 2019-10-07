@@ -20,63 +20,69 @@
         {
              foreach (var model in Model)
              {
-                 <div class="favorite-card">
-                     @*<img class="photo" src="~/Resources/img/default-card-img.png">*@
-                     
-                     @{
-                         string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (model.PlaceId);
-                         string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
-                         DirectoryInfo dirInfo = new DirectoryInfo(path);
-                         DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
-                         FileInfo[] files = new FileInfo[] {};
+        <div class="favorite-card">
+            @*<img class="photo" src="~/Resources/img/default-card-img.png">*@
 
-                         try
-                         {
-                             files = dirInfo.GetFiles();
+            @{
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (model.PlaceId);
+                string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
+                FileInfo[] files = new FileInfo[] { };
 
-                             if (files.Length == 0)
-                             {
-                                 <div class="img-wrap">
-                                     <img class="photo" src="~/Resources/svg/default-place.svg">
-                                 </div>
-                             }
+                try
+                {
+                    files = dirInfo.GetFiles();
 
-                             byte[] array = File.ReadAllBytes(files[0].FullName);
-                             <div class="img-wrap">
+                    if (files.Length == 0)
+                    {
+                        <div class="img-wrap">
+                            <img class="photo" src="~/Resources/svg/default-place.svg">
+                        </div>
+                    }
 
-                                 @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
-                                           + Convert.ToBase64String(array) + "\" />")
-                             </div>
-                         }
-                         catch (Exception e)
-                         {
-                             <div class="img-wrap">
-                                 <img class="photo" src="~/Resources/svg/default-place.svg">
-                             </div>
-                         }
-                     }
+                    byte[] array = File.ReadAllBytes(files[0].FullName);
+                    <div class="img-wrap">
 
-                     <div class="card-description">
-                         <span class="card-title">@(model.SalonTitle)</span>
-                         <span class="adress">@(model.SalonAdress)</span>
-                         <span class="tariffs-title">Тарифы на аренду рабочего места</span>
-                         <div class="table-wrap">
-                             <div class="first-line">
-                                 <span class="bold-text">Цена часа</span>
-                                 <span class="bold-text">Цена смены</span>
-                                 <span class="bold-text">Цена половины месяца</span>
-                                 <span class="bold-text">Цена месяца</span>
-                             </div>
-                             <div class="second-line">
-                                 <span class="bold-text">@(model.Rate1h)р</span>
-                                 <span class="bold-text">@(model.Rateday)р</span>
-                                 <span class="bold-text">@(model.RateHalfMounth)р</span>
-                                 <span class="bold-text">@(model.RateMounth)р</span>
-                             </div>
-                         </div>
-                         <button class="detail-btn" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">Подробнее</button>
-                     </div>
-                 </div>
+                        @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
+                                  + Convert.ToBase64String(array) + "\" />")
+                    </div>
+                }
+                catch (Exception e)
+                {
+                    <div class="img-wrap">
+                        <img class="photo" src="~/Resources/svg/default-place.svg">
+                    </div>
+                }
+            }
+
+            <div class="card-description">
+                <span class="card-title">@(model.SalonTitle)</span>
+                <span class="adress">@(model.SalonAdress)</span>
+                <div class="table-layout">
+                    <div class="gray-wrap">
+                        <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                        <table class="table-wrap">
+                            <tr class="first-line">
+                                <th class="bold-text">Час</th>
+                                <th class="bold-text">День</th>
+                                <th class="bold-text">15 смен</th>
+                                <th class="bold-text">Месяц</th>
+                            </tr>
+                            <tr class="second-line">
+                                <td class="bold-text">@(model.Rate1h)р</td>
+                                <td class="bold-text">@(model.Rateday)р</td>
+                                <td class="bold-text">@(model.RateHalfMounth)р</td>
+                                <td class="bold-text">@(model.RateMounth)р</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button class="detail-btn" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">Подробнее</button>
+
+                </div>
+            </div>
+            <button class="detail-btn btn-mobile" style="display: none;" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">></button>
+        </div>
             }
         }
         else

@@ -67,64 +67,94 @@
                 <div class="card-description">
                     <span class="card-title" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = (Model[0] as List<BookingModel>)[i].PlaceId})'">@((Model[1] as List<string>)[i])</span>
                     <div class="record-wrap">
-                        <div class="time-wrap">
-                            <span class="small-description">
-                                @{
-                                    string date = (Model[0] as List<BookingModel>)[i].Date.ToString("dddd, d MMMM");
-                                    date = date.Substring(0, 1).ToUpper() + date.Remove(0, 1);
+                        <div class="digits-wrap">
+                            <div class="time-wrap">
+                                <span class="small-description">
+                                    @{
+                                        string date = (Model[0] as List<BookingModel>)[i].Date.ToString("dddd, d MMMM");
+                                        date = date.Substring(0, 1).ToUpper() + date.Remove(0, 1);
             <text>@date</text>
-                                }
-                            </span>
-                            <span class="bold-description">
-                                @{
-                                    string times = (Model[0] as List<BookingModel>)[i].Times;
-                                    List<string> listTimes = times.Split(';').ToList();
-                                    int combinedTime = 0;
-                                    int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
+                                    }
+                                </span>
+                                <div class="dots-wrap">
+                                    <span class="bold-description bold-times">
+                                        @{
+                                            string times = (Model[0] as List<BookingModel>)[i].Times;
+                                            List<string> listTimes = times.Split(';').ToList();
+                                            int combinedTime = 0;
+                                            int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
 
-                                    for (int j = 1; j < listTimes.Count - 1; j++)
-                                    {
-                                        if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
-                                        {
-                                            combinedTime++;
+                                            for (int j = 1; j < listTimes.Count - 1; j++)
+                                            {
+                                                if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
+                                                {
+                                                    combinedTime++;
+                                                }
+                                            }
+
+
+                                            if (combinedTime + 1 == listTimes.Count - 1)
+                                            {
+
+                                                times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count - 2].Split('-')[1];
+
+                                            }
+
+
+
+                                            int countHours = listTimes.Count - 1;
+                                            string hoursTitle;
+                                            if (countHours == 2 || countHours == 3 || countHours == 4 || countHours == 22 || countHours == 23 || countHours == 24)
+                                            {
+                                                hoursTitle = " часа";
+                                            }
+                                            else if (countHours == 1 || countHours == 21)
+                                            {
+                                                hoursTitle = " час";
+                                            }
+                                            else
+                                            {
+                                                hoursTitle = " часов";
+                                            }
                                         }
-                                    }
-
-
-                                    if (combinedTime + 1 == listTimes.Count-1)
-                                    {
-                                        
-                                        times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
-                                
-                                    }
-
-
-
-                                    int countHours = listTimes.Count - 1;
-                                    string hoursTitle;
-                                    if (countHours == 2 || countHours == 3 || countHours == 4 || countHours == 22 || countHours == 23 || countHours == 24)
-                                    {
-                                        hoursTitle = " часа";
-                                    }
-                                    else if (countHours == 1 || countHours == 21)
-                                    {
-                                        hoursTitle = " час";
-                                    }
-                                    else
-                                    {
-                                        hoursTitle = " часов";
-                                    }
-                                }
-                                @(times.Replace(';', ',').TrimEnd(',') + " (" + countHours + hoursTitle + ")")
-                            </span>
+                                        @{
+                                            string[] arrTimes = (times.Replace(";", ",") + " (" + countHours + hoursTitle + ")").Split(',');
+                                        }
+                                        @foreach (var time in arrTimes)
+                                        {
+                                            <text>@time<wbr></text>;
+                                        }
+                                    </span>
+                                    @*<img class="dots" style="display: none;" src="~/Resources/svg/points.svg" />*@
+                                </div>
+                            </div>
+                            <div class="money-wrap">
+                                <span class="small-description">
+                                    Стоимость
+                                </span>
+                                <span class="bold-description">
+                                    @((Model[0] as List<BookingModel>)[i].Sum.ToString("F") + "р")
+                                </span>
+                            </div>
                         </div>
-                        <div class="money-wrap">
+                        <div class="status-wrap-mobile" style="display: none;">
                             <span class="small-description">
-                                Стоимость
+                                Статус
                             </span>
-                            <span class="bold-description">
-                                @((Model[0] as List<BookingModel>)[i].Sum.ToString("F") + "р")
-                            </span>
+                            @{
+                                if ((Model[0] as List<BookingModel>)[i].Confirmed)
+                                {
+                                    <span class="small-description green-text">
+                                        Подтверждено
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="small-description red-text">
+                                        Ожидается подтверждение администратора
+                                    </span>
+                                }
+                            }
                         </div>
                         <button id="remove-record-btn" onclick="document.location = '@Url.Action("RemoveBooking", "BookingSlots", new {id = (Model[0] as List<BookingModel>)[i].Id})'">Отменить запись</button>
                     </div>
@@ -154,7 +184,29 @@
     </div>
 </div>
 <script>
-    $(".photo").on("click", function() {
-        document.location='../../TimerClub/WorkingPlacePage/' + $(this).parent().prev().val();
+    $(document).ready(function() {
+        $(".photo").on("click",
+            function() {
+                document.location = '../../TimerClub/WorkingPlacePage/' + $(this).parent().prev().val();
+            });
+
+        //for (var elem of $(".time-wrap")) {
+        //    //$(elem).with(".bold-times", function() {
+        //    //    alert();
+        //    //});
+        //    console.log($(elem));
+        //    if ($(elem).find(".bold-times").height() > 15) {
+        //        alert();
+        //        $(elem).find(".dots").val($(elem).find(".bold-times").text().trim());
+        //        $(elem).find(".bold-times").text($(elem).find(".bold-times").text().trim().replace(/   /g, "").slice(0, 19));
+        //        $(elem).find(".dots").show();
+        //    }
+        //}
+        //if ($(".bold-times").first().height() > 15) {
+        //    $(".bold-description")
+        //}
+        //with
+
     });
+    
 </script>

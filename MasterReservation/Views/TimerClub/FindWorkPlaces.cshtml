@@ -196,88 +196,92 @@
                     @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).PlaceType, new { @class = "card-place-type" })
                     @Html.HiddenFor(model => ((model[1] as List<WorkingPlaceModel>)[i]).AdditionalConditions, new { @class = "card-ad-cond" })
                     @Html.HiddenFor(model => ((model[5] as List<SalonModel>)[i]).City, new { @class = "card-city" })
-                    <div class="photos-place">
-                        @{
-                            string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + ((Model[1] as List<WorkingPlaceModel>)[i]).Id;
-                            string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath()+@"Resources\svg\default-place.svg";
-                            DirectoryInfo dirInfo = new DirectoryInfo(path);
-                            DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
-                            FileInfo[] files = new FileInfo[]{};
+                    <div class="card-wrap">
+                        <div class="photos-place">
+                            @{
+                                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + ((Model[1] as List<WorkingPlaceModel>)[i]).Id;
+                                string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"Resources\svg\default-place.svg";
+                                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                                DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
+                                FileInfo[] files = new FileInfo[] { };
 
-                            try
-                            {
-                                files = dirInfo.GetFiles();
+                                try
+                                {
+                                    files = dirInfo.GetFiles();
 
-                                if (files.Length == 0)
+                                    if (files.Length == 0)
+                                    {
+                                        <div class="img-wrap">
+                                            <img src="~/Resources/svg/default-place.svg">
+                                        </div>
+                                    }
+
+                                    for (int j = 0; j < files.Length; j++)
+                                    {
+                                        byte[] array = File.ReadAllBytes(files[j].FullName);
+                                        <div class="img-wrap">
+
+                                            @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                                      + Convert.ToBase64String(array) + "\" />")
+                                        </div>
+                                    }
+                                }
+                                catch (Exception e)
                                 {
                                     <div class="img-wrap">
                                         <img src="~/Resources/svg/default-place.svg">
                                     </div>
                                 }
+                            }
+                        </div>
+                        <div class="card-description">
+                            <div class="card-title">
+                                <span class="card-title-text">@((Model[2] as List<string>)[i])</span>
 
-                                for (int j = 0; j < files.Length; j++)
+
+                                @if ((Model[4] as List<bool>)[i])
                                 {
-                                    byte[] array = File.ReadAllBytes(files[j].FullName);
-                                    <div class="img-wrap">
-                                            
-                                        @Html.Raw("<img src=\"data:image/jpeg;base64,"
-                                                  + Convert.ToBase64String(array) + "\" />")
-                                    </div>
+                                    <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                                    <g id="favorite">
+                                    <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+
+                                    </g>
+                                </svg>
                                 }
-                            }
-                            catch (Exception e)
-                            {
-                                <div class="img-wrap">
-                                    <img src="~/Resources/svg/default-place.svg">
+                                else
+                                {
+                                    <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                                    <g id="favorite">
+                                    <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+
+                                    </g>
+                                </svg>
+
+                                }
+                            </div>
+                            <span class="address">@((Model[5] as List<SalonModel>)[i].City), @((Model[3] as List<string>)[i])</span>
+                            <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                            <div class="tariffs-wrap">
+                                <div class="tariff-line">
+                                    <div class="tariff">1 час</div>
+                                    <div class="tariff">День</div>
+                                    <div class="tariff">15 смен</div>
+                                    <div class="tariff">Месяц</div>
                                 </div>
-                            }
-                        }
-                    </div>
-                    <div class="card-description">
-                        <div class="card-title">
-                            <span class="card-title-text">@((Model[2] as List<string>)[i])</span>
-                            
-
-                            @if ((Model[4] as List<bool>)[i])
-                            {
-                                <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                    <g id="favorite">
-                                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
-								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
-                                    </g>
-                                </svg>
-                            }
-                            else
-                            {
-                                <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                    <g id="favorite">
-                                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
-								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
-                                    </g>
-                                </svg>
-
-                            }
-                        </div>
-                        <span class="address">@((Model[5] as List<SalonModel>)[i].City), @((Model[3] as List<string>)[i])</span>
-                        <span class="tariffs-title">Тарифы на аренду рабочего места</span>
-                        <div class="tariffs-wrap">
-                            <div class="tariff-line">
-                                <div class="tariff">1 час</div>
-                                <div class="tariff">День</div>
-                                <div class="tariff">15 смен</div>
-                                <div class="tariff">Месяц</div>
+                                <div class="tariff-line">
+                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
+                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
+                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)</div>
+                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)</div>
+                                </div>
                             </div>
-                            <div class="tariff-line">
-                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
-                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
-                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)</div>
-                                <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)</div>
-                            </div>
-                        </div>
-                        <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
+                            <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
 
+                        </div>
                     </div>
                     <button style="display: none;" class="mobile-button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">></button>
                 </div>

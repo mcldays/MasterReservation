@@ -151,7 +151,7 @@
             $.ajax({
                 type: "GET",
                 url: "/Favorite/RemoveFavorite",
-                data: "data=" + $(this).parent().parent().parent().parent().parent().find(".card-id").val(),
+                data: "data=" + $(this).parent().parent().parent().parent().parent().parent().find(".card-id").val(),
                 success: function (data) {
                     if (data == "1") {
                         console.log($(e.target));
@@ -167,7 +167,7 @@
             $.ajax({
                 type: "GET",
                 url: "/Favorite/SetFavorite",
-                data: "data=" + $(this).parent().parent().parent().parent().parent().find(".card-id").val(),
+                data: "data=" + $(this).parent().parent().parent().parent().parent().parent().find(".card-id").val(),
                 success: function (data) {
                     if (data == "1") {
                         $(e.target).parent().parent().addClass("red-heart");
