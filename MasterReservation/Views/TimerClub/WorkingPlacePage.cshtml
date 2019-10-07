@@ -22,15 +22,56 @@
 
 
 <div id="body-container">
+    
+   
+    
+
     <div id="left-bar">
+        
+        <div id="mobile-card-title" class="card-title">
+            <div class="mobile-contain">
+            <span class="card-title-text">@((Model[1] as SalonModel).SalonTitle)</span>
+            @if (ViewBag.Favorites)
+            {
+                <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                    <g id="favorite">
+                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z"/>
+
+                    </g>
+                </svg>
+            }
+            else
+            {
+                <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                    <g id="favorite">
+                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z"/>
+
+                    </g>
+                </svg>
+            }
+
+            <span id="address-mobile" style="display: none" class="address">@((Model[1] as SalonModel).City), @((Model[1] as SalonModel).Adress)</span>
+        </div>
+            <button id="show-map-btn" class="blue-button">
+                Показать на карте
+                <div id="map"></div>
+            </button>
+
+        </div>
+        
+
         <div id="slider-photo">
-            
+
             @{
                 string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + (Model[0] as WorkingPlaceModel).Id;
                 string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"Resources\svg\default-place.svg";
                 DirectoryInfo dirInfo = new DirectoryInfo(path);
                 DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
-                FileInfo[] files = new FileInfo[] { };
+                FileInfo[] files = new FileInfo[] {};
 
                 try
                 {
@@ -62,30 +103,36 @@
             }
         </div>
         <div id="main-description">
-            <span id="destription-title">
-                @((Model[0] as WorkingPlaceModel).Description)
-            </span>
-            <ul id="description-body">
-                <span class="desc-title">Подходящие услуги</span>
-                @{ var list = (Model[0] as WorkingPlaceModel).Offers.Split(','); }
-                @for (int i = 0; i < list.Length - 1; i++)
-                {
-                    <li class="description-line">@list[i]</li>
-                }
-                <span class="desc-title">Дополнительные условия</span>
-                @{
-                    var ac = (Model[0] as WorkingPlaceModel).AdditionalConditions;
-                    if (ac != null)
+            
+            <div id="flagContain">
+                <img src="~/Resources/svg/down-arrow.svg" id="arrow-style" />
+                <span id="pc-desc-title" class="destription-title">
+                    @((Model[0] as WorkingPlaceModel).Description)
+                </span>
+                <ul id="description-body">
+
+                    <span class="desc-title">Подходящие услуги</span>
+
+                    @{ var list = (Model[0] as WorkingPlaceModel).Offers.Split(','); }
+                    @for (int i = 0; i < list.Length - 1; i++)
                     {
-                        list = ac.Split(',');
-                        for (int i = 0; i < list.Length - 1; i++)
+                        <li class="description-line">@list[i]</li>
+                    }
+                    <span class="desc-title">Дополнительные условия</span>
+                    @{
+                        var ac = (Model[0] as WorkingPlaceModel).AdditionalConditions;
+                        if (ac != null)
                         {
-                            <li class="description-line">@list[i]</li>
+                            list = ac.Split(',');
+                            for (int i = 0; i < list.Length - 1; i++)
+                            {
+                                <li class="description-line">@list[i]</li>
+                            }
                         }
                     }
-                }
 
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
     <div id="right-bar">
@@ -99,44 +146,44 @@
                 <span class="info-message">@ViewBag.InfoMessage</span>
             }
 
-                <div class="card-title">
-                    <span class="card-title-text">@((Model[1] as SalonModel).SalonTitle)</span>
-                    @if (ViewBag.Favorites)
-                    {
-                        <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+            <div id="pc-card-title" class="card-title">
+                <span class="card-title-text">@((Model[1] as SalonModel).SalonTitle)</span>
+                @if (ViewBag.Favorites)
+                {
+                    <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
                         <g id="favorite">
-                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
-								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+                            <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z"/>
 
                         </g>
                     </svg>
-                    }
-                    else
-                    {
-                        <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
+                }
+                else
+                {
+                    <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
                         <g id="favorite">
-                        <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
-								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
+                            <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z"/>
 
                         </g>
                     </svg>
-                    }
-                    <button id="show-map-btn" class="blue-button">
-                        Показать на карте
-                        <div id="map"></div>
-                    </button>
+                }
+                <button id="show-map-btn" class="blue-button">
+                    Показать на карте
+                    <div id="map"></div>
+                </button>
 
-                </div>
-                <span class="address">@((Model[1] as SalonModel).City), @((Model[1] as SalonModel).Adress)</span>
+            </div>
+            <span id="address-pc" class="address">@((Model[1] as SalonModel).City), @((Model[1] as SalonModel).Adress)</span>
             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
             <div class="tariffs-wrap">
                 <div class="tariff-line bold-line">
-                    <div class="tariff">Цена 1 часа</div>
-                    <div class="tariff">Цена смены</div>
-                    <div class="tariff">Цена половины месяца</div>
-                    <div class="tariff">Цена месяца</div>
+                    <div class="tariff">1 час</div>
+                    <div class="tariff">День</div>
+                    <div class="tariff">15 смен</div>
+                    <div class="tariff">Месяц</div>
                 </div>
                 <div class="tariff-line">
                     <div class="tariff" id="rate1h">@((Model[0] as WorkingPlaceModel).Rate1h) р</div>
@@ -148,16 +195,19 @@
         </div>
         @using (Html.BeginForm("Booking", "BookingSlots", FormMethod.Post))
         {
-            @Html.HiddenFor(model=>(Model[3] as BookingModel).PlaceId);
-            @Html.HiddenFor(model=>(Model[3] as BookingModel).SalonId);
-            @Html.HiddenFor(model=>(Model[3] as BookingModel).ResidentId);
+            @Html.HiddenFor(model => (Model[3] as BookingModel).PlaceId)
+            ;
+            @Html.HiddenFor(model => (Model[3] as BookingModel).SalonId)
+            ;
+            @Html.HiddenFor(model => (Model[3] as BookingModel).ResidentId)
+            ;
             <div id="record-day">
                 <span>Доступное время записи на:</span>
                 <div id="input-date-wrap">
                     <img src="~/Resources/svg/left-arrow.svg" id="prev-day">
                     <span id="input-date"></span>
                     @*<input type="text" class="hidden-input" id="chosen-date">*@
-                    @Html.EditorFor(model => (Model[3] as BookingModel).Date, new { htmlAttributes = new { @class = "hidden-input", id = "chosen-date" } })
+                    @Html.EditorFor(model => (Model[3] as BookingModel).Date, new {htmlAttributes = new {@class = "hidden-input", id = "chosen-date"}})
                     <img src="~/Resources/svg/right-arrow.svg" id="next-day">
                 </div>
                 <button type="button" class="blue-button" id="calendar-btn">
@@ -181,12 +231,12 @@
 
             </div>
             @*<input type="text" class="hidden-input" id="input-times">*@
-            @Html.EditorFor(model => (Model[3] as BookingModel).Times, new { htmlAttributes = new { @class = "hidden-input", id = "input-times" } })
+            @Html.EditorFor(model => (Model[3] as BookingModel).Times, new {htmlAttributes = new {@class = "hidden-input", id = "input-times"}})
             <div id="checkbox-wrap">
                 <input type="checkbox" id="full-day-checkbox">
                 <span id="checkbox-label">Забронировать весь рабочий день</span>
             </div>
-            if(!ViewBag.IsAdminOfSalon)
+            if (!ViewBag.IsAdminOfSalon)
             {
                 <textarea id="textarea" placeholder="Дополнительные требования"></textarea>
                 <div id="total-time">
@@ -197,10 +247,10 @@
                     <span class="total-label">Итого к оплате:</span>
                     <span id="total-sum"></span>
                 </div>
-            
+
                 <button class="blue-button disabled-btn" id="booked-btn" disabled>Забронировать</button>
-             }
-            
+            }
+
         }
 
     </div>

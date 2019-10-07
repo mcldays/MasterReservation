@@ -240,5 +240,17 @@
         e.stopPropagation();
     });
 
-    
+    $("#arrow-style").on("click", function () {
+        if ($("#description-body").is(":visible")) {
+            $("#description-body").slideUp(300);
+        }
+        else {
+            $("#description-body").slideDown(300);
+        }
+    });
+
+
+
+
+
 });

@@ -74,7 +74,7 @@
     margin-top: 17px;
 }
 
-#destription-title {
+.destription-title {
     display: block;
     color: #414141;
     margin-bottom: 15px;
@@ -372,4 +372,122 @@ button.button-time:focus {
 
 .info-message {
     color: blue;
+}
+
+
+.mobile-contain {
+    text-align: center;
+}
+
+
+#mobile-card-title {
+    display: none
+}
+
+#arrow-style {
+    float: right;
+    margin-top: 3%;
+    cursor: pointer;
+    margin-right: 3%;
+}
+
+@media(max-width: 1199px) {
+    #body-container{flex-direction: column}
+    /*#mobile-desc-title{display: block}
+    #pc-desc-title {display: none}*/
+    #mobile-card-title{display: flex;
+        flex-direction: column;}
+    #pc-card-title{display: none}
+    #left-bar{width: 100%}
+    #address-pc{display: none}
+    #address-mobile {
+        display: block !important;
+        margin: auto;
+    }
+    #show-map-btn {
+        margin-left: 0;
+     
+        width: 95%;
+        margin: auto;
+        margin-top: 10px;
+    }
+    .img-wrap img {width: 100%}
+    #right-bar{width: 90%;
+        margin: auto;}
+    .card-description {
+        display: flex;
+        flex-direction: column;
+      
+    }
+
+    #record-day {
+        flex-direction: column
+    }
+
+    div#input-date-wrap {
+        margin: 15px 30px;
+    }
+    .blue-button {
+        width: 90%;
+    }
+
+    div#input-time-wrap {
+        max-width: 90%;
+        margin: auto;
+
+    }
+    
+    #slider-photo {
+        float: unset;
+        margin: auto;
+        width: 95%;
+    }
+
+    #description-body {
+        background: #e1e1e1;
+        padding: 15px 16px;
+        margin-top: 20px;
+    }
+
+
+    #main-description {
+        float: unset;
+        margin: auto; background: #e1e1e1;
+    }
+
+    #checkbox-wrap {
+        display: flex;
+        justify-content: center;
+    }
+
+    #textarea {
+        margin: auto;
+        display: block;
+    }
+
+    button#booked-btn {
+        margin: auto;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    div#calendar-wrap {
+        left: 50%;
+        transform: translate(-50%, 10%);
+    }
+
+
+    .destription-title {
+        margin-bottom: unset
+    }
+
+    .tariffs-title {
+        margin: auto
+    }
+
+    #textarea {
+       min-width: 100%
+    }
+
 }
