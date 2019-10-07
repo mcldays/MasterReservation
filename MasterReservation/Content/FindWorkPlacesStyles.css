@@ -522,4 +522,9 @@
     .heart {
         width: 16px;
     }
+
+    #send-filter-data {
+        display: block;
+        margin-bottom: 0px;
+    }
 }
