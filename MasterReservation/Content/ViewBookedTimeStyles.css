@@ -127,3 +127,111 @@ img.photo {
     display: block;
     width: max-content;
 }
+
+.dots {
+    width: 16px;
+    margin-left: 9px;
+    cursor: pointer;
+}
+
+.dots-wrap {
+    align-items: center;
+    display: flex;
+}
+
+.digits-wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-right: 8px;
+}
+
+@media (max-width: 1199px) {
+    #background-overlay {
+        background-image: none;
+    }
+
+    #body-container {
+        text-align: center;
+        width: 90%;
+        min-width: unset;
+    }
+
+    .favorite-card {
+        border: 2px solid #d7d7d7;
+    }
+
+    .photo {
+        width: 79px !important;
+        height: 105px !important;
+        position: absolute;
+        top: 50%;
+        display: block;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .img-wrap {
+        width: 127px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .card-description {
+        padding: 0;
+        margin: 7px 4px 8px 10px;
+    }
+
+    .digits-wrap {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .cards-wrap {
+        margin-top: 12px;
+        margin-bottom: 80px;
+    }
+
+    .record-wrap {
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .small-description {
+        font-size: 9px;
+        text-align: left;
+    }
+    .time-wrap {
+        display: flex;
+        margin-right: 5px;
+    }
+
+    .bold-description {
+        font-size: 10px;
+        margin-top: 0px;
+        text-align: left;
+    }
+
+    .status-wrap-mobile {
+        display: block !important;
+    }
+
+    .status-wrap {
+        display: none;
+    }
+
+    #remove-record-btn {
+        margin-top: 8px;
+    }
+}
