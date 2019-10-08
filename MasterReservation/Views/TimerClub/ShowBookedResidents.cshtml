@@ -30,8 +30,8 @@
                 <th>Имя</th>
                 <th>Фамилия</th>
                 <th>Город</th>
-                <th>Email*</th>
                 <th>Телефон</th>
+                <th>Email</th>
                 <th>Опыт работы</th>
                 <th>Награды</th>
                 <th>Услуги</th>
@@ -47,10 +47,6 @@
 
             @if ((Model[0] as List<BookingModel>).Count != 0)
             {
-                
-
-
-
                 foreach (var model in (Model[0] as List<BookingModel>))
                 {
 
@@ -76,23 +72,40 @@
                         times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
                                 
                     }
-                    <tr>
-                        <td>@(model.Id)</td>
-                        <td>@(model.PlaceId)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t=>t.Id == model.ResidentId).FirstOrDefault().Name)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Surname)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().City)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Email)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Phone)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Experience)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
-                        <td>@(model.Date.ToString("dddd, d MMMM"))</td>
-                        <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
-                        <td>@(model.Info)</td>
-                        <td>@(model.Sum.ToString("F") + "р")</td>
-                        <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
-                    </tr>
+            <tr>
+                <td>@(model.Id)</td>
+                <td>@(model.PlaceId)</td>
+                @if (model.ResidentId == 0)
+                {
+                    <td>@(model.Name)</td>
+                    <td>@(model.Surname)</td>
+                    <td></td>
+                    <td>@(model.Phone)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                }
+                else
+                {
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Name)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Surname)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().City)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Phone)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Email)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Experience)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
+                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
+                }
+
+
+
+                <td>@(model.Date.ToString("dddd, d MMMM"))</td>
+                <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
+                <td>@(model.Info)</td>
+                <td>@(model.Sum.ToString("F") + "р")</td>
+                <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
+            </tr>
 
                 }
             }

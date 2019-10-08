@@ -507,7 +507,7 @@
 
     .card {
         justify-content: space-between;
-        max-width: 340px;
+        width: 98%;
         margin: 5px auto;
     }
 

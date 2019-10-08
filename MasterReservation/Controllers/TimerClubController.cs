@@ -79,14 +79,19 @@ namespace MasterReservation.Controllers
                 userId = resident.Id;
                 userCity = resident.City;
             }
+            else
+            {
+
+                
+
+                places.RemoveAll(t => t.SalonId.ToString() != Request.Cookies["SalonId"].Value);
+
+                favorites.ForEach(t => t = false);
+            }
             
             
             List<SalonModel> salons = new List<SalonModel>();
 
-            if (places == null)
-            {
-                places = new List<WorkingPlaceModel>();
-            }
             foreach (var place in places)
             {
                 titles.Add(Utilities.SendDbUtility.GetSalonTitle(place.SalonId));
@@ -95,14 +100,6 @@ namespace MasterReservation.Controllers
                 salons.Add(Utilities.SendDbUtility.GetSalon(place.SalonId));
             }
 
-            if (Request.Cookies.AllKeys.Contains("SalonId"))
-            {
-                //for (int i = 0; i < favorites.Count; i++)
-                //{
-                //    favorites[i] = false;
-                //}
-                favorites.ForEach(t=>t = false);
-            }
 
                 object[] x = new object[]
             {
@@ -138,12 +135,29 @@ namespace MasterReservation.Controllers
                 return RedirectToAction("FindWorkPlaces");
             }
 
-            int userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+            
 
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             ViewBag.InfoMessage = TempData["InfoMessage"];
 
+            
+
+            
+
+            bool isAdminOfSalon = false;
+            int userId = 0;
+            if (Request.Cookies.AllKeys.Contains("SalonId") && Request.Cookies["SalonId"].Value == modelPlace.SalonId.ToString())
+            {
+                isAdminOfSalon = true;
+            }
+            else
+            {
+                userId = Utilities.SendDbUtility.GetResidentId(User.Identity.Name);
+            }
+
             ViewBag.Favorites = Utilities.SendDbUtility.CheckFavorite(modelPlace.Id, userId);
+
+            ViewBag.IsAdminOfSalon = isAdminOfSalon;
 
             BookingModel modelBooking = new BookingModel()
             {
@@ -152,14 +166,7 @@ namespace MasterReservation.Controllers
                 ResidentId = userId
             };
 
-            bool isAdminOfSalon = false;
-
-            if (Request.Cookies.AllKeys.Contains("SalonId"))
-            {
-                isAdminOfSalon = true;
-            }
-
-            ViewBag.IsAdminOfSalon = isAdminOfSalon;
+           
 
             object[] x = new object[]
             {
@@ -273,6 +280,8 @@ namespace MasterReservation.Controllers
             {
                 residents.AddRange(allResidents.Where(t=>t.Id == booking.ResidentId));
             }
+
+            
 
             object[] x = new object[]
             {

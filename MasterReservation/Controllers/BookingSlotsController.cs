@@ -17,6 +17,21 @@ namespace MasterReservation.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Cookies.AllKeys.Contains("SalonId"))
+                {
+                    if (Request.Cookies["SalonId"].Value != model.SalonId.ToString())
+                    {
+                        TempData["ErrorMessage"] = "Ошибка бронирования.";
+                        return RedirectToAction("WorkingPlacePage", "TimerClub", new {id = model.PlaceId.ToString()});
+                    }
+
+                    if (model.Name == "" || model.Surname == "" || model.Phone == "")
+                    {
+                        TempData["ErrorMessage"] = "Введите имя, фамилию и телефон мастера";
+                        return RedirectToAction("WorkingPlacePage", "TimerClub", new { id = model.PlaceId.ToString() });
+                    }
+                }
+
                 var timesCount = model.Times.Split(';').Length - 1;
                 WorkingPlaceModel place = Utilities.SendDbUtility.GetWorkingPlace(model.PlaceId);
                 SalonModel salon = Utilities.SendDbUtility.GetSalon(place.SalonId);

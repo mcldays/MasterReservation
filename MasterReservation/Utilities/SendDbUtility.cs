@@ -782,7 +782,7 @@ namespace MasterReservation.Utilities
                 }
                 catch (Exception e)
                 {
-                    return null;
+                    return new List<WorkingPlaceModel>();
                 }
             }
         }

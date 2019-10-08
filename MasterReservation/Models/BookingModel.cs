@@ -20,5 +20,8 @@ namespace MasterReservation.Models
         public string Info { get; set; }
         public double Sum { get; set; }
         public bool Confirmed { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Phone { get; set; }
     }
 }
