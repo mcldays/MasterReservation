@@ -906,7 +906,27 @@ namespace MasterReservation.Utilities
             return true;
         }
 
+
+
+
+
+
+
+        public static bool HookAdmin(AdminBookingModel model)
+        {
+            Request
+
+
+
+
+            return true;
+        }
     }
 
-
+        // TODO 1) Все данные салона красоты 
+        // TODO 2) Лист моделей рабочих мест салона 
+        // TODO 3) Лист моделей тайм слотов все тайм слоты 
+        // TODO 4) Лист модели Booking Model 
+        // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
+        // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
 }

@@ -268,6 +268,11 @@ namespace MasterReservation.Controllers
             int salonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
             List<BookingModel> models = Utilities.SendDbUtility.GetBookingForSalonId(salonId);
             List<ResidentModel> residents = new List<ResidentModel>();
+            foreach (var a in residents)
+            {
+                List<BookingModel> timeslots = Utilities.SendDbUtility.GetBooking(a.Id);
+            }
+           
 
             foreach (var booking in models)
             {
@@ -279,6 +284,28 @@ namespace MasterReservation.Controllers
                 models,
                 allResidents
             };
+
+           // AdminBookingModel model = new AdminBookingModel();
+
+           //model.JobPlaceId =  Int32.Parse(Request.Cookies["SalonId"].Value);
+
+           // int SalonIdAdmin = Int32.Parse(Request.Cookies["SalonId"].Value);
+
+           // // получаем список рабочих мест по айди из куки
+           // model.bookingTimeList = Utilities.SendDbUtility.GetWorkingPlaces(SalonIdAdmin);
+            
+
+
+            //foreach (var f in model.bookingTimeList)
+            //{
+            //  model.TimeSlotAdmin.AddRange(Utilities.SendDbUtility.GetTimeSlots(f.Id));
+
+            //}
+           
+           
+
+
+
             return View(x);
         }
     }
