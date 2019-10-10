@@ -201,10 +201,19 @@
 
     //карта
     ymaps.ready(function () {
-        var map = new ymaps.Map("map", {
-            center: [56.846377, 53.255902],
-            zoom: 10
-        });
+        let width = screen.width;
+        if (width > 1199) {
+            
+            var map = new ymaps.Map("map", {
+                center: [56.846377, 53.255902],
+                zoom: 10
+            });
+        } else {
+            var map = new ymaps.Map("mobile-map", {
+                center: [56.846377, 53.255902],
+                zoom: 10
+            });
+        }
 
         var myGeocoder = ymaps.geocode($(".address")[0].innerText);
         var coords;
@@ -228,15 +237,24 @@
         
     });
 
-    $("#show-map-btn").on("click", function () {
-        if ($("#map").is(":visible")) {
-            $("#map").hide();
+    $(".show-map-btn:visible").on("click", function () {
+        if ($("#map", this).is(":visible")) {
+            $("#map", this).hide();
         } else {
-            $("#map").show();
+            $("#map", this).show();
+        }
+        
+        if ($("#mobile-map", this).is(":visible")) {
+            $("#mobile-map", this).hide();
+        } else {
+            $("#mobile-map", this).show();
         }
     });
 
     $("#map").on("click",function(e) {
+        e.stopPropagation();
+    });
+    $("#mobile-map").on("click", function (e) {
         e.stopPropagation();
     });
 

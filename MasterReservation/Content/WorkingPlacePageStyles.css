@@ -178,7 +178,7 @@
     border: 2px solid #4fe33d;
 }
 
-#show-map-btn {
+.show-map-btn {
     margin-left: 32px;
     position: relative;
 }
@@ -225,7 +225,7 @@ span#checkbox-label {
     font-size: 14px;
 }
 
-#textarea {
+.textarea {
     resize: none;
     width: 65%;
     height: 119px;
@@ -348,7 +348,7 @@ button.button-time:focus {
     stroke-width: 3%;
 }
 
-#map {
+#map, #mobile-map {
     height: 300px;
     width: 400px;
     position: absolute;
@@ -357,6 +357,11 @@ button.button-time:focus {
     left: 0;
     display: none;
 }
+
+#mobile-map {
+    width: 100%;
+}
+
 
 
 .desc-title {
@@ -385,10 +390,22 @@ button.button-time:focus {
 }
 
 #arrow-style {
+    display: none;
     float: right;
     margin-top: 3%;
     cursor: pointer;
     margin-right: 3%;
+}
+
+.personal-data {
+    border-radius: 5px;
+    border: 1px solid #c2c2c2;
+    margin: 0 2px;
+    padding: 4px 5px;
+}
+
+.wrap-wrap {
+
 }
 
 @media(max-width: 1199px) {
@@ -404,12 +421,16 @@ button.button-time:focus {
         display: block !important;
         margin: auto;
     }
-    #show-map-btn {
+    .show-map-btn {
         margin-left: 0;
      
         width: 95%;
         margin: auto;
         margin-top: 10px;
+    }
+
+    #arrow-style {
+        display: block;
     }
     .img-wrap img {width: 100%}
     #right-bar{width: 90%;
@@ -460,7 +481,7 @@ button.button-time:focus {
         justify-content: center;
     }
 
-    #textarea {
+    .textarea {
         margin: auto;
         display: block;
     }
@@ -486,7 +507,7 @@ button.button-time:focus {
         margin: auto
     }
 
-    #textarea {
+    .textarea {
        min-width: 100%
     }
 
