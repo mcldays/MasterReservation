@@ -283,7 +283,9 @@
 
                         </div>
                     </div>
-                    <button style="display: none;" class="mobile-button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">></button>
+                    <button style="display: none;" class="mobile-button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">
+                        <img style="transform: rotate(270deg);" src="~/Resources/svg/down-arrow-white.svg" alt="Alternate Text" />
+                    </button>
                 </div>
             }
 

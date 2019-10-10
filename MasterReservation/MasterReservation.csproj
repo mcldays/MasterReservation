@@ -308,6 +308,7 @@
       <DependentUpon>201910081232343_admin23.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminBookingModel.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\CitiesModel.cs" />
@@ -421,6 +422,7 @@
     <Content Include="Resources\svg\heart-gray.svg" />
     <Content Include="Resources\svg\house.svg" />
     <Content Include="Resources\svg\points.svg" />
+    <Content Include="Resources\svg\right-arrow-white.svg" />
     <Content Include="Resources\svg\user.svg" />
     <Content Include="Resources\svg\icons-facebook-blue.svg" />
     <Content Include="Resources\svg\instagram_blue.svg" />
