@@ -343,6 +343,7 @@
     <Content Include="Content\HeaderStyles.css" />
     <Content Include="Content\SalonManageStyles.css" />
     <Content Include="Content\SalonPlacesStyles.css" />
+    <Content Include="Content\ShowBookedResidentsStyles.css" />
     <Content Include="Content\ViewFavoritesStyles.css" />
     <Content Include="Content\ViewBookedTimeStyles.css" />
     <Content Include="Content\WorkingPlacePageStyles.css" />

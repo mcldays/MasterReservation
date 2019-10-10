@@ -203,7 +203,7 @@
     ymaps.ready(function () {
         let width = screen.width;
         if (width > 1199) {
-            
+            console.log(width);
             var map = new ymaps.Map("map", {
                 center: [56.846377, 53.255902],
                 zoom: 10

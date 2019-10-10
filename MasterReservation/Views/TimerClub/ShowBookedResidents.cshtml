@@ -7,131 +7,673 @@
 
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+@Scripts.Render("~/Scripts/datepicker.js")
+@Scripts.Render("~/Scripts/slick.min.js")
 
 
 @Styles.Render("~/Content/themes/base/jquery-ui.min.css")
-@Styles.Render("~/Content/SalonPlacesStyles.css")
+@Styles.Render("~/Content/datepicker.css")
+@Styles.Render("~/Content/slick/slick.css")
+@Styles.Render("~/Content/slick/slick-theme.css")
+@Styles.Render("~/Content/ShowBookedResidentsStyles.css")
 
-@if (@ViewBag.ErrorMessage != null)
-{
-    <span class="error-message">@ViewBag.ErrorMessage</span>
-}
-@if ((Model[0] as List<BookingModel>).Count == 0)
-{
-    <span class="info-message">Бронирований пока нет</span>
-}
+@*@if (@ViewBag.ErrorMessage != null)
+    {
+        <span class="error-message">@ViewBag.ErrorMessage</span>
+    }
+    @if ((Model[0] as List<BookingModel>).Count == 0)
+    {
+        <span class="info-message">Бронирований пока нет</span>
+    }
 
-<div class="table-wrap" style="max-height: 500px; overflow-y: scroll;">
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <th>Id</th>
-                <th>Id рабочего места</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Город</th>
-                <th>Телефон</th>
-                <th>Email</th>
-                <th>Опыт работы</th>
-                <th>Награды</th>
-                <th>Услуги</th>
-                <th>Дата</th>
-                <th>Время</th>
-                <th>Доп.Информация</th>
-                <th>Сумма</th>
-                <th>Управление</th>
+    <div class="table-wrap" style="max-height: 500px; overflow-y: scroll;">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Id рабочего места</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Город</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                    <th>Опыт работы</th>
+                    <th>Награды</th>
+                    <th>Услуги</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Доп.Информация</th>
+                    <th>Сумма</th>
+                    <th>Управление</th>
 
-            </tr>
-        </thead>
-        <tbody>
+                </tr>
+            </thead>
+            <tbody>
 
-            @if ((Model[0] as List<BookingModel>).Count != 0)
-            {
-                foreach (var model in (Model[0] as List<BookingModel>))
+                @if ((Model[0] as List<BookingModel>).Count != 0)
                 {
-
-                    string times = model.Times;
-
-
-                    List<string> listTimes = times.Split(';').ToList();
-                    int combinedTime = 0;
-                    int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
-
-                    for (int j = 1; j < listTimes.Count - 1; j++)
+                    foreach (var model in (Model[0] as List<BookingModel>))
                     {
-                        if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
+
+                        string times = model.Times;
+
+
+                        List<string> listTimes = times.Split(';').ToList();
+                        int combinedTime = 0;
+                        int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
+
+                        for (int j = 1; j < listTimes.Count - 1; j++)
                         {
-                            combinedTime++;
+                            if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
+                            {
+                                combinedTime++;
+                            }
                         }
-                    }
 
 
-                    if (combinedTime + 1 == listTimes.Count-1)
+                        if (combinedTime + 1 == listTimes.Count-1)
+                        {
+
+                            times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
+
+                        }
+                <tr>
+                    <td>@(model.Id)</td>
+                    <td>@(model.PlaceId)</td>
+                    @if (model.ResidentId == 0)
                     {
-                                        
-                        times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
-                                
+                        <td>@(model.Name)</td>
+                        <td>@(model.Surname)</td>
+                        <td></td>
+                        <td>@(model.Phone)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     }
-            <tr>
-                <td>@(model.Id)</td>
-                <td>@(model.PlaceId)</td>
-                @if (model.ResidentId == 0)
-                {
-                    <td>@(model.Name)</td>
-                    <td>@(model.Surname)</td>
-                    <td></td>
-                    <td>@(model.Phone)</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    else
+                    {
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Name)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Surname)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().City)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Phone)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Email)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Experience)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
+                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
+                    }
+
+
+
+                    <td>@(model.Date.ToString("dddd, d MMMM"))</td>
+                    <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
+                    <td>@(model.Info)</td>
+                    <td>@(model.Sum.ToString("F") + "р")</td>
+                    <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
+                </tr>
+
+                    }
                 }
-                else
-                {
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Name)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Surname)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().City)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Phone)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Email)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Experience)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
-                    <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
-                }
+                <tr>
+                    @using (Html.BeginForm("AddSalon", "Admin", FormMethod.Post, new { }))
+                    {
+                        @Html.HiddenFor((model => (Model[1] as SalonModel).Id))
+                        <td>*</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).SalonTitle, new { htmlAttributes = new { @class = "field", placeholder = "Название салона" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).ContactPerson, new { htmlAttributes = new { @class = "field", placeholder = "Контактное лицо" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Phone, new { htmlAttributes = new { @class = "field phone-mask", placeholder = "Номер телефона" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).City, new { htmlAttributes = new { @class = "field", id = "city-input", placeholder = "Город" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Email, new { htmlAttributes = new { @class = "field", placeholder = "Email" } })</td>
+                        <td>@Html.TextAreaFor(model => (Model[1] as SalonModel).Message, new { @class = "field", placeholder = "Сообщение" })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingMode, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Режим работы" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminEmail, new { htmlAttributes = new { @class = "field" } })</td>
+                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class = "field" } })</td>
+                        <td><button class="btn btn-primary">Добавить</button></td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+
+    </div>*@
 
 
+<div class="main-container">
+    <div class="left-wrap">
+        <span class="sub-title">
+            Выберите дату:
+        </span>
+        <div id="calendar" class="calendar"></div>
+    </div>
+    <div class="center-wrap">
+    <div class="times title-time-mon">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-tue">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-wed">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-thu">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-fri">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-sat">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+    <div class="times title-time-sun">
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">8:00</span>
+        <span class="span-time">22:00</span>
+    </div>
+        <div class="slider-places">
+            <div class="slider-card" value="1">
+                <div class="card-head">
+                    <img src="~/Resources/img/default-card-img.png" width="100px" height="100px" alt="Alternate Text" />
+                    <div class="head-title-text">
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                    </div>
+                </div>
+                <table class="time-table time-mon" value="14-10-2019">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина<img src="~/Resources/img/close-modal.png" class="delete-record viewDialog"></img></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="time-table time-tue" value="15-10-2019">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="time-table time-wed" value="16-10-2019">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            <table class="time-table time-thu" value="17-10-2019">
+                <tr>
+                    <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="time-table time-fri" value="18-10-2019">
+                <tr>
+                    <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="time-table time-sat" value="19-10-2019">
+                <tr>
+                    <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="time-table time-sun" value="20-10-2019">
+                <tr>
+                    <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
 
-                <td>@(model.Date.ToString("dddd, d MMMM"))</td>
-                <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
-                <td>@(model.Info)</td>
-                <td>@(model.Sum.ToString("F") + "р")</td>
-                <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
-            </tr>
-
-                }
-            }
-            <tr>
-                @*@using (Html.BeginForm("AddSalon", "Admin", FormMethod.Post, new { }))
-                {
-                    @Html.HiddenFor((model => (Model[1] as SalonModel).Id))
-                    <td>*</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).SalonTitle, new { htmlAttributes = new { @class = "field", placeholder = "Название салона" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).ContactPerson, new { htmlAttributes = new { @class = "field", placeholder = "Контактное лицо" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Phone, new { htmlAttributes = new { @class = "field phone-mask", placeholder = "Номер телефона" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).City, new { htmlAttributes = new { @class = "field", id = "city-input", placeholder = "Город" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Email, new { htmlAttributes = new { @class = "field", placeholder = "Email" } })</td>
-                    <td>@Html.TextAreaFor(model => (Model[1] as SalonModel).Message, new { @class = "field", placeholder = "Сообщение" })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingMode, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Режим работы" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminEmail, new { htmlAttributes = new { @class = "field" } })</td>
-                    <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class = "field" } })</td>
-                    <td><button class="btn btn-primary">Добавить</button></td>
-                }*@
-            </tr>
-        </tbody>
-    </table>
-
+            <div class="slider-card" value="2">
+                <div class="card-head">
+                    <img src="~/Resources/img/default-card-img.png" width="100px" height="100px" alt="Alternate Text" />
+                    <div class="head-title-text">
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                    </div>
+                </div>
+                <table class="time-table">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="slider-card" value="3">
+                <div class="card-head">
+                    <img src="~/Resources/img/default-card-img.png" width="100px" height="100px" alt="Alternate Text" />
+                    <div class="head-title-text">
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                    </div>
+                </div>
+                <table class="time-table">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="slider-card" value="4">
+                <div class="card-head">
+                    <img src="~/Resources/img/default-card-img.png" width="100px" height="100px" alt="Alternate Text" />
+                    <div class="head-title-text">
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                        <span class="head-title">
+                            Массаж
+                        </span>
+                    </div>
+                </div>
+                <table class="time-table">
+                    <tr>
+                        <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        <div class="slider-card" value="5">
+            <div class="card-head">
+                <img src="~/Resources/img/default-card-img.png" width="100px" height="100px" alt="Alternate Text" />
+                <div class="head-title-text">
+                    <span class="head-title">
+                        Массаж
+                    </span>
+                    <span class="head-title">
+                        Массаж
+                    </span>
+                </div>
+            </div>
+            <table class="time-table">
+                <tr>
+                    <td rowspan="4" colspan="2" class="booked-slot">Санникова Екатерина</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2" class="booked-slot">Иванов Иван</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+    <div class="right-wrap">
+        <span class="right-title">
+            Все рабочие места:
+        </span>
+        <div class="all-places">
+            <img src="~/Resources/img/default-card-img.png" value="1" filtered="false"/>
+            <img src="~/Resources/img/default-card-img.png" value="2" filtered="false" />
+            <img src="~/Resources/img/default-card-img.png" value="3" filtered="false" />
+            <img src="~/Resources/img/default-card-img.png" value="4" filtered="false" />
+            <img src="~/Resources/img/default-card-img.png" value="5" filtered="false" />
+        </div>
+    </div>
 </div>
+
+
 
 <script>
     //$(".salon-mng-btn").on("click", function () {
@@ -150,6 +692,90 @@
     //        source: '/Authentication/GetCities'
     //    });
     //});
+    let filtered = false;
+    $(".all-places img").on("click",
+        function (e) {
+            if ($(this).attr("filtered") == "false") {
+                $(".slider-places").slick('slickUnfilter');
+                $(".slider-places").slick('slickFilter', '[value="' + this.getAttribute("value") + '"]');
+                $(".slider-places").slick("slickSetOption", "slidesToShow", 1, true);
+                $(".all-places img").attr("filtered", false);
+                $(this).attr("filtered", true);
+            } else {
+                $(".slider-places").slick('slickUnfilter');
+                $(".slider-places").slick("slickSetOption", "slidesToShow", 3, true);
+                $(".all-places img").attr("filtered", false);
+            }
+        }
+    );
+
+    $(".slider-places").slick({
+        infinite: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1199,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 840,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
+    refreshSlots(new Date());
+
+    function refreshSlots(date) {
+        $(".time-table").hide();
+        $(".times").hide();
+        let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+        $("[value='" + formatted_date + "']").show();
+        switch (date.getDay()) {
+            case 1:
+                $(".title-time-mon").show();
+                break;
+            case 2:
+                $(".title-time-tue").show();
+                    break;
+            case 3:
+                $(".title-time-wed").show();
+                    break;
+            case 4:
+                $(".title-time-thu").show();
+                    break;
+            case 5:
+                $(".title-time-fri").show();
+                    break;
+            case 6:
+                $(".title-time-sat").show();
+                    break;
+            case 0:
+                $(".title-time-sun").show();
+                    break;
+        }
+    }
+
+    // календарь
+    var calendar1 = $('#calendar').datepicker({
+        minDate: new Date(),
+        toggleSelected: true,
+        onRenderCell: function (date, cellType) {
+
+            var currentDate = date.getDate();
+            var currentMonth = date.getMonth();
+            var currentYear = date.getFullYear();
+        },
+        onSelect: function onSelect(fd, date, inst) {
+            refreshSlots(date);
+        }
+    }).data('datepicker');
+
 
 
     $(".viewDialog").on("click", function (e) {
@@ -205,8 +831,8 @@
         });
 
 
-        
+
     });*@
 
-    
+
 </script>
