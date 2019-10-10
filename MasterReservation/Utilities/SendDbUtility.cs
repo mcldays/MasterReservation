@@ -855,6 +855,21 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static bool CheckAdmin(int salonId, string email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    return dbUse.SalonModels.FirstOrDefault(t=>t.Email == email && t.Id == salonId) != null;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
 
 
         //public static bool SendDate(DateModel model)
@@ -906,21 +921,6 @@ namespace MasterReservation.Utilities
             return true;
         }
 
-
-
-
-
-
-
-        public static bool HookAdmin(AdminBookingModel model)
-        {
-            Request
-
-
-
-
-            return true;
-        }
     }
 
         // TODO 1) Все данные салона красоты 

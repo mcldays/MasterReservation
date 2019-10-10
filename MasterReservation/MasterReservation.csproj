@@ -323,7 +323,6 @@
     <Compile Include="Models\ResidentModel.cs" />
     <Compile Include="Models\TimeSlotModel.cs" />
     <Compile Include="Models\WorkingPlaceModel.cs" />
-    <Compile Include="Modules\DbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GetData.cs" />
     <Compile Include="Utilities\RequestCity.cs" />

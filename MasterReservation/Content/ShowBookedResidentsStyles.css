@@ -81,8 +81,6 @@
 .slider-places {
     height: 100%;
     width: 100%;
-    display: grid;
-    display: -ms-grid;
 }
 
 .slider-card {
@@ -102,6 +100,7 @@
         border: 2px solid #dbcfcf;
         padding: 0px 10px;
         color: white;
+        position: relative;
     }
 
 .booked-slot {
@@ -151,7 +150,7 @@
 .all-places {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
     .all-places img {
@@ -162,6 +161,9 @@
 .delete-record {
     float: right;
     width: 14px;
+    position: absolute;
+    top: 7px;
+    right: 8px;
 }
 
 .delete-record:hover {
@@ -178,6 +180,18 @@
     width: 40%;
     height: 40px;
 }
+
+.head-title {
+    line-height: 1.2;
+    font-size: 12px;
+}
+
+.slick-track {
+    margin: unset;
+}
+
+
+
 
 @media (max-width: 1199px) {
     .main-container {
@@ -213,11 +227,5 @@
     .left-wrap {
         flex: 0;
         padding-bottom: 20px;
-    }
-
-    .slider-card {
-    }
-
-    .slick-track {
     }
 }

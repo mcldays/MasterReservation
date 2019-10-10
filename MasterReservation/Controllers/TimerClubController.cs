@@ -135,18 +135,12 @@ namespace MasterReservation.Controllers
                 return RedirectToAction("FindWorkPlaces");
             }
 
-            
-
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             ViewBag.InfoMessage = TempData["InfoMessage"];
 
-            
-
-            
-
             bool isAdminOfSalon = false;
             int userId = 0;
-            if (Request.Cookies.AllKeys.Contains("SalonId") && Request.Cookies["SalonId"].Value == modelPlace.SalonId.ToString())
+            if (Request.Cookies.AllKeys.Contains("SalonId") && Request.Cookies["SalonId"].Value == modelPlace.SalonId.ToString() && Utilities.SendDbUtility.CheckAdmin(modelPlace.SalonId, User.Identity.Name))
             {
                 isAdminOfSalon = true;
             }
@@ -271,26 +265,62 @@ namespace MasterReservation.Controllers
             {
                 return RedirectToAction("MainPage");
             }
-            List<ResidentModel> allResidents = Utilities.SendDbUtility.GetAllResidents();
             int salonId = Int32.Parse(Server.UrlDecode(Request.Cookies["SalonId"].Value));
-            List<BookingModel> models = Utilities.SendDbUtility.GetBookingForSalonId(salonId);
-            List<ResidentModel> residents = new List<ResidentModel>();
-            foreach (var a in residents)
-            {
-                List<BookingModel> timeslots = Utilities.SendDbUtility.GetBooking(a.Id);
-            }
-           
 
-            foreach (var booking in models)
+            if (!Utilities.SendDbUtility.CheckAdmin(salonId, User.Identity.Name))
             {
-                residents.AddRange(allResidents.Where(t=>t.Id == booking.ResidentId));
+                return RedirectToAction("MainPage");
             }
+
+
 
             
+            
+            //List<BookingModel> bookings = Utilities.SendDbUtility.GetBookingForSalonId(salonId);
+            //List<ResidentModel> residents = new List<ResidentModel>();
+            //foreach (var a in residents)
+            //{
+            //    List<BookingModel> timeslots = Utilities.SendDbUtility.GetBooking(a.Id);
+            //}
+           
+
+            //foreach (var booking in bookings)
+            //{
+            //    residents.AddRange(allResidents.Where(t=>t.Id == booking.ResidentId));
+            //}
+
+
+            SalonModel salon = Utilities.SendDbUtility.GetSalon(salonId);
+            List<List<int>> workingTimes = new List<List<int>>();
+            workingTimes.Add(new List<int>() { Int32.Parse(salon.OperatingModeSun.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeSun.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeMon.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeMon.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeTue.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeTue.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeWed.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeWed.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeThu.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeThu.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeFri.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeFri.Split('-')[1].Split(':')[0]) + 1 });
+            workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeSat.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeSat.Split('-')[1].Split(':')[0]) + 1 });
+            foreach (var times in workingTimes)
+            {
+                if (times[1] - times[0] == 1)
+                {
+                    times[1] = times[0];
+                }
+            }
+
+            List<WorkingPlaceModel> places = Utilities.SendDbUtility.GetWorkingPlaces(salonId);
+
+
+            List<BookingModel> bookings = Utilities.SendDbUtility.GetBookingForSalonId(salonId);
+
+            List<ResidentModel> allResidents = Utilities.SendDbUtility.GetAllResidents();
 
             object[] x = new object[]
             {
-                models,
+                //bookings,
+                //allResidents
+                workingTimes,
+                places,
+                bookings,
                 allResidents
             };
 
