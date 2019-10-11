@@ -1,4 +1,5 @@
-﻿@using MasterReservation.Models
+﻿@using System.Web.Hosting
+@using MasterReservation.Models
 @model object[]
 
 @{
@@ -16,127 +17,6 @@
 @Styles.Render("~/Content/slick/slick.css")
 @Styles.Render("~/Content/slick/slick-theme.css")
 @Styles.Render("~/Content/ShowBookedResidentsStyles.css")
-
-@*@if (@ViewBag.ErrorMessage != null)
-    {
-        <span class="error-message">@ViewBag.ErrorMessage</span>
-    }
-    @if ((Model[0] as List<BookingModel>).Count == 0)
-    {
-        <span class="info-message">Бронирований пока нет</span>
-    }
-
-    <div class="table-wrap" style="max-height: 500px; overflow-y: scroll;">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th>Id</th>
-                    <th>Id рабочего места</th>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Город</th>
-                    <th>Телефон</th>
-                    <th>Email</th>
-                    <th>Опыт работы</th>
-                    <th>Награды</th>
-                    <th>Услуги</th>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Доп.Информация</th>
-                    <th>Сумма</th>
-                    <th>Управление</th>
-
-                </tr>
-            </thead>
-            <tbody>
-
-                @if ((Model[0] as List<BookingModel>).Count != 0)
-                {
-                    foreach (var model in (Model[0] as List<BookingModel>))
-                    {
-
-                        string times = model.Times;
-
-
-                        List<string> listTimes = times.Split(';').ToList();
-                        int combinedTime = 0;
-                        int prevTime = Int32.Parse(listTimes[0].Split('-')[0].Split(':')[0]);
-
-                        for (int j = 1; j < listTimes.Count - 1; j++)
-                        {
-                            if (++prevTime == Int32.Parse(listTimes[j].Split('-')[0].Split(':')[0]))
-                            {
-                                combinedTime++;
-                            }
-                        }
-
-
-                        if (combinedTime + 1 == listTimes.Count-1)
-                        {
-
-                            times = listTimes.First().Split('-')[0] + "-" + listTimes[listTimes.Count-2].Split('-')[1];
-
-                        }
-                <tr>
-                    <td>@(model.Id)</td>
-                    <td>@(model.PlaceId)</td>
-                    @if (model.ResidentId == 0)
-                    {
-                        <td>@(model.Name)</td>
-                        <td>@(model.Surname)</td>
-                        <td></td>
-                        <td>@(model.Phone)</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    }
-                    else
-                    {
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Name)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Surname)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().City)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Phone)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Email)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Experience)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Awards)</td>
-                        <td>@((Model[1] as List<ResidentModel>).Where(t => t.Id == model.ResidentId).FirstOrDefault().Offers)</td>
-                    }
-
-
-
-                    <td>@(model.Date.ToString("dddd, d MMMM"))</td>
-                    <td>@(times + "(" + (listTimes.Count - 1) + ")")</td>
-                    <td>@(model.Info)</td>
-                    <td>@(model.Sum.ToString("F") + "р")</td>
-                    <td><button class="btn btn-danger salon-dlt-btn viewDialog" value="@(model.Id)">Удалить</button></td>
-                </tr>
-
-                    }
-                }
-                <tr>
-                    @using (Html.BeginForm("AddSalon", "Admin", FormMethod.Post, new { }))
-                    {
-                        @Html.HiddenFor((model => (Model[1] as SalonModel).Id))
-                        <td>*</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).SalonTitle, new { htmlAttributes = new { @class = "field", placeholder = "Название салона" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).ContactPerson, new { htmlAttributes = new { @class = "field", placeholder = "Контактное лицо" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Phone, new { htmlAttributes = new { @class = "field phone-mask", placeholder = "Номер телефона" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).City, new { htmlAttributes = new { @class = "field", id = "city-input", placeholder = "Город" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Email, new { htmlAttributes = new { @class = "field", placeholder = "Email" } })</td>
-                        <td>@Html.TextAreaFor(model => (Model[1] as SalonModel).Message, new { @class = "field", placeholder = "Сообщение" })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).Adress, new { htmlAttributes = new { @class = "field", placeholder = "Адрес" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).OperatingMode, new { htmlAttributes = new { @class = "field mode-mask", placeholder = "Режим работы" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).ReservationType, new { htmlAttributes = new { id = "checkbox" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminEmail, new { htmlAttributes = new { @class = "field" } })</td>
-                        <td>@Html.EditorFor(model => (Model[1] as SalonModel).AdminPass, new { htmlAttributes = new { @class = "field" } })</td>
-                        <td><button class="btn btn-primary">Добавить</button></td>
-                    }
-                </tr>
-            </tbody>
-        </table>
-
-    </div>*@
 
 
 <div class="main-container">
@@ -170,10 +50,40 @@
         <div class="slider-places">
             @for (var k=0; k<places.Count;k++)
             {
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (places[k].Id);
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                FileInfo[] files = new FileInfo[] { };
+
+
                 DateTime date = DateTime.Today;
                 <div class="slider-card" value="@places[k].Id">
                     <div class="card-head">
-                        <a href="WorkingPlacePage/@places[k].Id"><img src="~/Resources/img/default-card-img.png" width="100px" height="100px" /></a>
+                        <a href="WorkingPlacePage/@places[k].Id">
+                            @try
+                            {
+                                files = dirInfo.GetFiles();
+
+                                if (files.Length == 0)
+                                {
+
+                                    <img width="100px" height="100px" src="~/Resources/svg/default-place.svg">
+
+                                }
+
+                                byte[] array = File.ReadAllBytes(files[0].FullName);
+
+
+                                @Html.Raw("<img width='100px' height='100px' src=\"data:image/jpeg;base64,"
+                                          + Convert.ToBase64String(array) + "\" />")
+
+                            }
+                            catch (Exception e)
+                            {
+                            
+                                <img width="100px" height="100px" src="~/Resources/svg/default-place.svg">
+
+                            }
+                        </a>
                         <div class="head-title-text">
                             @for (var h = 0; h < places[k].Offers.Split(',').Length - 1; h++)
                             {
@@ -293,7 +203,35 @@
         <div class="all-places">
             @foreach (var place in places)
             {
-                <img src="~/Resources/img/default-card-img.png" value="@place.Id" filtered="false" />
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (place.Id);
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                FileInfo[] files = new FileInfo[] { };
+
+                try
+                 {
+                     files = dirInfo.GetFiles();
+
+                     if (files.Length == 0)
+                     {
+
+                         <img value="@place.Id" filtered="false" src="~/Resources/svg/default-place.svg">
+
+                     }
+
+                     byte[] array = File.ReadAllBytes(files[0].FullName);
+
+
+                     @Html.Raw("<img value='{@place.Id}' filtered='false'  src=\"data:image/jpeg;base64,".Replace("{@place.Id}",place.Id.ToString())
+                               + Convert.ToBase64String(array) + "\" />")
+
+                 }
+                 catch (Exception e)
+                 {
+                            
+                     <img value="@place.Id" filtered="false" src="~/Resources/svg/default-place.svg">
+
+                 }
+
             }
         </div>
     </div>
@@ -302,38 +240,154 @@
 
 
 <script>
-    //$(".salon-mng-btn").on("click", function () {
-    //    document.location = "../../Admin/SalonPlaces/" + $(this).val();
-    //});
+ // календарь
+    var calendar1 = $('#calendar').datepicker({
+        minDate: new Date(),
+        toggleSelected: false,
+        onRenderCell: function (date, cellType) {
 
-    //$(".phone-mask").mask("+7(999)9999999");
+            var currentDate = date.getDate();
+            var currentMonth = date.getMonth();
+            var currentYear = date.getFullYear();
+        },
+        onSelect: function onSelect(fd, date, inst) {
+            refreshSlots(date);
+        }
+    }).data('datepicker');
 
-    //$.mask.definitions['~'] = '[0-2]';
-    //$.mask.definitions['+'] = '[0-5]';
-    //$(".mode-mask").mask("~9:00 - ~9:00");
 
-
-    //$("#city-input").each(function () {
-    //    $(this).autocomplete({
-    //        source: '/Authentication/GetCities'
-    //    });
-    //});
     let filtered = false;
+    let filterMemory = [];
     $(".all-places img").on("click",
         function (e) {
+            //$(".slider-places").slick('refresh');
             if ($(this).attr("filtered") == "false") {
-                $(".slider-places").slick('slickUnfilter');
-                $(".slider-places").slick('slickFilter', '[value="' + this.getAttribute("value") + '"]');
-                $(".slider-places").slick("slickSetOption", "slidesToShow", 1, true);
+                let isFiltered = false;
+                for (let img of $(".all-places img")) {
+                    if (img.getAttribute("filtered") == "true") {
+                        isFiltered = true;
+                    }
+                }
+                if (isFiltered) {
+                    hideWeek();
+                    unfilter();
+                }
+                let cardCount = $(".slider-card").length;
+                for (let i = 0; i < cardCount; i++) {
+                    if ($(".slider-card")[i].getAttribute("value") != this.getAttribute("value")) {
+                        filterMemory.push([$(".slider-card")[i], i]);
+                    }
+                }
+                filter();
                 $(".all-places img").attr("filtered", false);
+                showWeek($(this));
+
                 $(this).attr("filtered", true);
             } else {
-                $(".slider-places").slick('slickUnfilter');
-                $(".slider-places").slick("slickSetOption", "slidesToShow", 3, true);
+                hideWeek();
+                //$(".slider-places").slick('slickUnfilter');
+                unfilter();
                 $(".all-places img").attr("filtered", false);
+                
+                
             }
         }
     );
+    var titleArr = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    var titleArrRus = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+    var mounthsArrRus = [
+        "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября",
+        "Декабря"
+    ];
+    function showWeek(data) {
+        $(".left-wrap").hide();
+        $(".center-wrap")[0].style.width = "calc(100% - 197px + 40px)";
+        $(".slider-places")[0].style.width = "100%";
+        calendar1.selectDate(new Date());
+        var date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+        var divTodaywrap = document.createElement("div");
+        var cardHead = $(".card-head");
+        cardHead.children().hide();
+        let now = new Date();
+        cardHead.append("<div class='date-title'>" + titleArrRus[now.getDay()] + ", " + now.getDate() + " " + mounthsArrRus[now.getMonth()] + "</div>");
+        for (var elem of cardHead.parent().find(".time-table")) {
+            divTodaywrap.appendChild(elem);
+        }
+        divTodaywrap.prepend(cardHead[0]);
+        divTodaywrap.style.width = "100%";
+        
+        
+
+        $(".slider-card")[0].prepend($(".times:visible")[0].cloneNode(true));
+        $(".slider-card")[0].appendChild(divTodaywrap);
+
+        $(".center-wrap").find(".times:visible")[0].style.display = "none";
+
+        for (var i = 0; i < 6; i++) {
+            var mainDiv = document.createElement('div');
+            var parentDiv = document.createElement('div');
+            var table = $(".time-{dayWeek}".replace("{dayWeek}", titleArr[date.getDay()]))[0].cloneNode(true);
+            table.style.display = "table";
+            var textDay = document.createTextNode(titleArrRus[date.getDay()] + ", " + date.getDate() + " " + mounthsArrRus[date.getMonth()]);
+            var textDiv = document.createElement("div");
+            textDiv.classList.add("date-title");
+            textDiv.appendChild(textDay);
+            parentDiv.appendChild(textDiv);
+            parentDiv.appendChild(table);
+            mainDiv.classList.add("table-for-week");
+
+            var leftTimes = $(".title-time-{dayWeek}".replace("{dayWeek}", titleArr[date.getDay()]))[0].cloneNode(true);
+            leftTimes.style.display = "flex";
+            mainDiv.style.display = "flex";
+            parentDiv.style.width = "100%";
+
+            mainDiv.appendChild(leftTimes);
+            mainDiv.appendChild(parentDiv);
+        
+            $(".slider-places").slick('slickAdd', mainDiv);
+            date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+
+
+        }
+        $(".slider-card")[0].style.display = "flex";
+        $(".slick-prev")[0].style.left = "0px";
+    }
+
+    function filter() {
+        let adder = -1;
+        for (let i = 0; i < filterMemory.length; i++) {
+            $(".slider-places").slick('slickRemove', filterMemory[i][1] - adder, true);
+            adder++;
+        }
+    }
+
+    function unfilter() {
+        for (let i = 0; i < filterMemory.length; i++) {
+            $(".slider-places").slick('slickAdd', filterMemory[i][0]);
+        }
+        filterMemory = [];
+    }
+
+    function hideWeek() {
+        let today = new Date();
+        let card = $(".slider-card");
+        $(".center-wrap").find(".title-time-{dayWeek}".replace("{dayWeek}", titleArr[today.getDay()]))[0].style.display = "flex";
+
+        $(".slider-card .times").remove();
+        let tmp_tables = card.children().first().children().detach();
+        card.children().first().remove();
+        card.append(tmp_tables);
+        card[0].style.display = "block";
+        for (var i = 1;i<7;i++) {
+            $(".slider-places").slick('slickRemove',2, true);
+        }
+        
+        $(".card-head").children().show();
+        $(".card-head").find(".date-title").remove();
+        $(".left-wrap").show();
+        $(".center-wrap")[0].style.width = "";
+        $(".slider-places")[0].style.width = "";
+    }
 
     $(".slider-places").slick({
         infinite: false,
@@ -344,13 +398,15 @@
             {
                 breakpoint: 1199,
                 settings: {
-                    slidesToShow: 2
+                    slidesToShow: 2,
+                    slidesToScroll: 1
                 }
             },
             {
                 breakpoint: 840,
                 settings: {
-                    slidesToShow: 1
+                    slidesToShow: 1,
+                    slidesToScroll: 1
                 }
             }
         ]
@@ -389,23 +445,6 @@
 
     }
 
-    // календарь
-    var calendar1 = $('#calendar').datepicker({
-        minDate: new Date(),
-        toggleSelected: false,
-        onRenderCell: function (date, cellType) {
-
-            var currentDate = date.getDate();
-            var currentMonth = date.getMonth();
-            var currentYear = date.getFullYear();
-        },
-        onSelect: function onSelect(fd, date, inst) {
-            refreshSlots(date);
-        }
-    }).data('datepicker');
-
-
-
     $(".viewDialog").on("click", function (e) {
         e.preventDefault();
         $("<div><button class='btn btn-primary btn-sm' onclick='deletebook({id})'>Да</button><button class='btn btn-secondary btn-sm' onclick='$(\".dialog\").remove();'>Нет</button></div>".replace("{id}", e.target.getAttribute("value")))
@@ -438,30 +477,5 @@
             }
         });
     }
-
-
-
-    @*$(".salon-dlt-btn").on("click", function (e) {
-        $.ajax({
-            type: "GET",
-            url: '@Url.Action("RemoveBookingAjax", "BookingSlots")',
-            data: "id=" + $(this).val(),
-            success: function (data) {
-                if (data) {
-                    $(e.target).parent().parent().remove();
-                    alert("Бронирование отменено!");
-                } else {
-                    alert("Произошла ошибка, попробуйте позже");
-                }
-            },
-            error: function () {
-                alert("Произошла ошибка, попробуйте позже");
-            }
-        });
-
-
-
-    });*@
-
 
 </script>
