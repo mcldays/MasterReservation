@@ -38,7 +38,20 @@ namespace MasterReservation.Controllers
 
             // Заносим модель в бд
             Utilities.SendDbUtility.SendMaster(model);
-            return RedirectToAction("MainPage", "TimerClub");
+
+            FormsAuthentication.SetAuthCookie(model.Email, true);
+            var resident = GetData.GetDataResident(model.Email);
+            Response.Cookies["ResidentName"].Value = Server.UrlEncode(resident.Name);
+            Response.Cookies["ResidentSurname"].Value = Server.UrlEncode(resident.Surname);
+            Response.Cookies["City"].Value = Server.UrlEncode(resident.City);
+
+            var cookie = new HttpCookie("SalonId")
+            {
+                Expires = DateTime.Now.AddDays(-1d)
+            };
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("FindWorkPlaces", "TimerClub");
         }
 
         //Вход мастера
@@ -52,6 +65,13 @@ namespace MasterReservation.Controllers
                 var resident = GetData.GetDataResident(model.Email);
                 Response.Cookies["ResidentName"].Value = Server.UrlEncode(resident.Name);
                 Response.Cookies["ResidentSurname"].Value = Server.UrlEncode(resident.Surname);
+                Response.Cookies["City"].Value = Server.UrlEncode(resident.City);
+
+                var cookie = new HttpCookie("SalonId")
+                {
+                    Expires = DateTime.Now.AddDays(-1d)
+                };
+                Response.Cookies.Add(cookie);
 
                 return RedirectToAction("FindWorkPlaces", "TimerClub");
             }
@@ -70,6 +90,7 @@ namespace MasterReservation.Controllers
                 Response.Cookies["ResidentName"].Value = Server.UrlEncode(salon.ContactPerson);
                 Response.Cookies["ResidentSurname"].Value = Server.UrlEncode(salon.SalonTitle);
                 Response.Cookies["SalonId"].Value = Server.UrlEncode(salon.Id.ToString());
+                Response.Cookies["City"].Value = Server.UrlEncode(salon.City);
 
                 return RedirectToAction("ShowBookedResidents", "TimerClub");
             }

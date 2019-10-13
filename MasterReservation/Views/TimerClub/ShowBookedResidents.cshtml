@@ -121,7 +121,6 @@
                                 {
                                     <tr>
                                         <td></td>
-                                        <td></td>
                                     </tr>
                                     continue;
                                 }
@@ -170,7 +169,6 @@
                                         if (rowspan == 0)
                                         {
                                             <tr>
-                                                <td></td>
                                                 <td></td>
                                             </tr>
                                         }
@@ -299,7 +297,21 @@
         "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября",
         "Декабря"
     ];
+
+    $(document).on("click",
+        ".center-photo",
+        function() {
+            document.location.href = "../../TimerClub/WorkingPlacePage/" + this.getAttribute("value");
+        });
+
     function showWeek(data) {
+        $(".center-photo").remove();
+        let centerPhoto = data[0].cloneNode(true);
+        centerPhoto.classList.add("center-photo");
+        $(".center-wrap").css("flex-direction", "column");
+        $(".center-wrap").prepend(centerPhoto);
+        
+
         $(".left-wrap").hide();
         $(".center-wrap")[0].style.width = "calc(100% - 197px + 40px)";
         $(".slider-places")[0].style.width = "100%";
@@ -351,6 +363,8 @@
         }
         $(".slider-card")[0].style.display = "flex";
         $(".slick-prev")[0].style.left = "0px";
+
+        $(".slider-card .times").css("margin-top", "10px");
     }
 
     function filter() {
@@ -387,23 +401,34 @@
         $(".left-wrap").show();
         $(".center-wrap")[0].style.width = "";
         $(".slider-places")[0].style.width = "";
+
+        $(".slider-card .times").css("margin-top", "");
+        $(".center-photo").remove();
+        $(".center-wrap").css("flex-direction", "");
     }
 
     $(".slider-places").slick({
         infinite: false,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
 
         responsive: [
             {
                 breakpoint: 1199,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                     slidesToScroll: 1
                 }
             },
             {
                 breakpoint: 840,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 570,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1

@@ -43,7 +43,7 @@
                 Выберите время
             </span>
             <div id="input-time-sub-wrap">
-                <span class="time-lable">С</span>
+                <span class="time-lable">с</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })*@
                 @*<input type="text" class="input-time">*@
                 <select data-placeholder="Время" class="input-time">
@@ -267,16 +267,49 @@
                             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                             <div class="tariffs-wrap">
                                 <div class="tariff-line">
-                                    <div class="tariff">1 час</div>
-                                    <div class="tariff">День</div>
-                                    <div class="tariff">15 смен</div>
-                                    <div class="tariff">Месяц</div>
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].Rate1h != 0)
+                                    {
+                                        <div class="tariff">1 час</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateDay != 0)
+                                    {
+                                        <div class="tariff">День</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth != 0)
+                                    {
+                                        <div class="tariff">15 смен</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateMounth != 0)
+                                    {
+                                        <div class="tariff">Месяц</div>
+                                    }
                                 </div>
                                 <div class="tariff-line">
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)</div>
+
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].Rate1h != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateDay != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateDay)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateMounth != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>

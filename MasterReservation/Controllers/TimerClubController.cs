@@ -291,6 +291,10 @@ namespace MasterReservation.Controllers
 
 
             SalonModel salon = Utilities.SendDbUtility.GetSalon(salonId);
+            if (salon == null)
+            {
+                return RedirectToAction("MainPage");
+            }
             List<List<int>> workingTimes = new List<List<int>>();
             workingTimes.Add(new List<int>() { Int32.Parse(salon.OperatingModeSun.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeSun.Split('-')[1].Split(':')[0]) + 1 });
             workingTimes.Add(new List<int>(){ Int32.Parse(salon.OperatingModeMon.Split('-')[0].Split(':')[0]), Int32.Parse(salon.OperatingModeMon.Split('-')[1].Split(':')[0]) + 1 });

@@ -146,6 +146,17 @@ img.photo {
     margin-right: 8px;
 }
 
+.dialog {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dialog .btn {
+    width: 40%;
+    height: 40px;
+}
+
 @media (max-width: 1199px) {
     #background-overlay {
         background-image: none;

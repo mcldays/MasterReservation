@@ -21,20 +21,23 @@
 <body>
     <div class="header">
         <div class="city-wrap">
-            <img class="head-logo" src="~/Resources/svg/house.svg" style="width: 25px; margin-right: 0;">
+            @*<img class="head-logo" src="~/Resources/svg/house.svg" style="width: 25px; margin-right: 0;">*@
             <img class="head-logo" src="~/Resources/svg/logo-white.svg">
             <span class="mobile-head-title" style="display: none;">Аренда мест в лучших салонах города</span>
-            <span class="town">Город</span>
 
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" @*data-toggle="dropdown"*@ aria-haspopup="true" aria-expanded="false">
-                    <span>Ижевск</span>
+                    @if (Request.Cookies.AllKeys.Contains("City"))
+                    {
+                        <span>@(Server.UrlDecode(Request.Cookies["City"].Value))</span>
+                    }
+                    
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @*<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Питер</a>
                     <a class="dropdown-item" href="#">Ижевск</a>
                     <a class="dropdown-item" href="#">Казань</a>
-                </div>
+                </div>*@
             </div>
         </div>
 

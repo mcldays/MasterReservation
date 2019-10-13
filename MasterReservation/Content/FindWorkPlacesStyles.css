@@ -528,4 +528,8 @@
         display: block;
         margin-bottom: 0px;
     }
+
+    .sub-title {
+        text-align: center;
+    }
 }

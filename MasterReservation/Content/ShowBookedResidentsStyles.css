@@ -64,8 +64,8 @@
 .center-wrap {
     height: 100%;
     display: flex;
-    padding-top: 20px;
     width: calc(100% - 270px - 197px);
+    align-items: center;
 }
 
 .right-wrap {
@@ -112,7 +112,7 @@
 .times {
     display: flex;
     flex-direction: column;
-    margin-top: 82px;
+    margin-top: 88px;
     width: 40px;
 }
 
@@ -186,7 +186,7 @@
 
 .head-title {
     line-height: 1.2;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .slick-track {
@@ -196,9 +196,22 @@
 .date-title {
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 30px;
+
 }
 
+.center-photo {
+    width: 100px;
+}
+
+.table-for-week .times {
+    margin-top: 10px;
+}
+
+.slick-prev, 
+.slick-next{
+    top: 0px;
+}
 
 
 
@@ -238,4 +251,14 @@
         padding-bottom: 20px;
     }
 
+    .slick-prev, .slick-next {
+        top: 54px;
+    }
+
+    .slick-next {
+        right: -22px;
+    }
+    .slick-prev {
+        left: -22px !important;
+    }
 }

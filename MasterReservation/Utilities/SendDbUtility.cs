@@ -107,93 +107,144 @@ namespace MasterReservation.Utilities
         // Метод изменения данных мастера в бд
         public static bool ChangeResident(RegisterMasterModel model)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == model.id);
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == model.id);
 
-                if (user == null) return false;
-                user.Name = model.Name;
-                user.Surname = model.Surname;
-                user.Awards = model.Awards;
-                user.Offers = model.Offers;
-                user.Phone = model.PhoneNumber;
-                user.Patronymic = model.Patronymic;
-                user.Experience = model.Expirience;
-                dbUse.ResidentModels.AddOrUpdate(user);
-                dbUse.SaveChanges();
-                return true;
+                    if (user == null) return false;
+                    user.Name = model.Name;
+                    user.Surname = model.Surname;
+                    user.Awards = model.Awards;
+                    user.Offers = model.Offers;
+                    user.Phone = model.PhoneNumber;
+                    user.Patronymic = model.Patronymic;
+                    user.Experience = model.Expirience;
+                    dbUse.ResidentModels.AddOrUpdate(user);
+                    dbUse.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод проверки введенного логина и пароля
         public static bool ComparePassword(string Password, string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user =
-                    dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user =
+                        dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
                 
-                if (user == null) return false;
-                return true;
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
-        // Метод проверки введенного логина и пароля
+        // Метод проверки введенного логина и пароля салона
         public static bool ComparePasswordSalon(string Password, string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                SalonModel user =
-                    dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
+                using (UserContext dbUse = new UserContext())
+                {
+                    SalonModel user =
+                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
 
-                if (user == null) return false;
-                return true;
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод изменения пароля
         public static bool ChangePassword(string Email, string newPass)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                if (user == null) return false;
-                user.Password = newPass;
-                dbUse.ResidentModels.AddOrUpdate(user);
-                dbUse.SaveChanges();
-                return true;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                    if (user == null) return false;
+                    user.Password = newPass;
+                    dbUse.ResidentModels.AddOrUpdate(user);
+                    dbUse.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод проверки существования емэйла в бд
         public static bool CheckEmail(string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                if (user == null) return false;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
                 return true;
             }
+            
         }
 
         // Метод проверки существования номера телефона в бд
         public static bool CheckPhone(string Phone)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
-                if (user == null) return false;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
                 return true;
             }
+            
         }
 
         public static bool IsAdmin(string email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
-                if (user == null) return false;
-                return true;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
@@ -893,11 +944,18 @@ namespace MasterReservation.Utilities
 
         public static bool CreatePicture(byte[] picture, int id)
         {
-            string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
+            try
+            {
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
            
-            File.WriteAllBytes(path, picture);
+                File.WriteAllBytes(path, picture);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public static bool SendPictureToDb(RegisterMasterModel model)
