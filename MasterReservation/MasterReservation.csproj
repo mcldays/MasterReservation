@@ -131,6 +131,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="XmpCore, Version=5.1.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XmpCore.5.1.3.1\lib\net35\XmpCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -475,6 +478,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
     <Content Include="Scripts\HeaderScripts.js" />
+    <Content Include="Scripts\load-image-orientation.js" />
     <Content Include="Scripts\SalonManageScripts.js" />
     <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
@@ -489,7 +493,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

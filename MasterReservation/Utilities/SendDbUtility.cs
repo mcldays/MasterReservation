@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -11,6 +13,7 @@ using System.Web.Http;
 using System.Web.UI.WebControls;
 using MasterReservation.Models;
 using System.IO;
+using System.Text;
 using System.Web.Hosting;
 
 
@@ -966,25 +969,136 @@ namespace MasterReservation.Utilities
                 {
                     string path =
                         HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{model.id.ToString()}.jpg";
+                    //model.Picture = RotateImage(File.ReadAllBytes(path));
                     model.Picture = File.ReadAllBytes(path);
                     return true;
                 }
+                return false;
             }
             catch (Exception e)
             {
-                return true;
+                return false;
             }
-
-
-            return true;
+            
         }
 
+        private const int exifOrientationID = 0x112; //274
+        
+        public static byte[] RotateImage(byte[] bytes)
+        {
+            Bitmap bitmap;
+            Bitmap bitmap2;
+            using (var ms = new MemoryStream(bytes,0,bytes.Length,true))
+            {
+                var img = System.Drawing.Image.FromStream(ms);
+                ExifRotate(img);
+
+                
+                //bitmap = new Bitmap(ms);
+                //System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
+                //img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                //var a = img.PropertyItems;
+                //UTF8Encoding encodings = new UTF8Encoding();
+
+                //List<string> props = new List<string>();
+                //foreach (var i in a)
+                //{
+
+                //    props.Add(System.Text.Encoding.GetEncoding().GetString(i.Value));
+                //}
+                //Bitmap b2 = new Bitmap(img, new Size(100, 200));
+
+                //var data = Encoding.UTF8.GetBytes("my comment");
+                //var propItem = img.PropertyItems.FirstOrDefault();
+                //propItem.Type = 2;
+                //propItem.Id = 0x010E; // <-- Image Description
+                //propItem.Len = data.Length;
+                //propItem.Value = data;
+                //img.SetPropertyItem(propItem);
+
+
+                //bitmap.Save(ms, bitmap.RawFormat);
+                img.Save(ms, ImageFormat.Jpeg);
+                
+
+                return ms.ToArray();
+            }
+            
+        }
+
+        
+
+        public static void ExifRotate(System.Drawing.Image img)
+        {
+            if (!img.PropertyIdList.Contains(exifOrientationID))
+                return;
+
+            var prop = img.GetPropertyItem(exifOrientationID);
+            int val = BitConverter.ToUInt16(prop.Value, 0);
+            var rot = RotateFlipType.RotateNoneFlipNone;
+
+            if (val == 3 || val == 4)
+                rot = RotateFlipType.Rotate180FlipNone;
+            else if (val == 5 || val == 6)
+                rot = RotateFlipType.Rotate90FlipNone;
+            else if (val == 7 || val == 8)
+                rot = RotateFlipType.Rotate270FlipNone;
+
+            if (val == 2 || val == 4 || val == 5 || val == 7)
+                rot |= RotateFlipType.RotateNoneFlipX;
+
+            if (rot != RotateFlipType.RotateNoneFlipNone)
+                img.RotateFlip(rot);
+        }
     }
 
-        // TODO 1) Все данные салона красоты 
-        // TODO 2) Лист моделей рабочих мест салона 
-        // TODO 3) Лист моделей тайм слотов все тайм слоты 
-        // TODO 4) Лист модели Booking Model 
-        // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
-        // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
+
+    public class JpegPatcher
+    {
+        public Stream PatchAwayExif(Stream inStream, Stream outStream)
+        {
+            byte[] jpegHeader = new byte[2];
+            jpegHeader[0] = (byte)inStream.ReadByte();
+            jpegHeader[1] = (byte)inStream.ReadByte();
+            if (jpegHeader[0] == 0xff && jpegHeader[1] == 0xd8)
+            {
+                SkipExifSection(inStream);
+            }
+
+            outStream.WriteByte(0xff);
+            outStream.WriteByte(0xd8);
+
+            int readCount;
+            byte[] readBuffer = new byte[4096];
+            while ((readCount = inStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
+                outStream.Write(readBuffer, 0, readCount);
+
+            return outStream;
+        }
+
+        private void SkipExifSection(Stream inStream)
+        {
+            byte[] header = new byte[2];
+            header[0] = (byte)inStream.ReadByte();
+            header[1] = (byte)inStream.ReadByte();
+            if (header[0] == 0xff && header[1] == 0xe1)
+            {
+                int exifLength = inStream.ReadByte();
+                exifLength = exifLength << 8;
+                exifLength |= inStream.ReadByte();
+
+                for (int i = 0; i < exifLength - 2; i++)
+                {
+                    inStream.ReadByte();
+                }
+            }
+        }
+    }
+
+    // TODO 1) Все данные салона красоты 
+    // TODO 2) Лист моделей рабочих мест салона 
+    // TODO 3) Лист моделей тайм слотов все тайм слоты 
+    // TODO 4) Лист модели Booking Model 
+    // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
+    // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
 }
