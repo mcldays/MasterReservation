@@ -88,7 +88,7 @@
                 }
             };
             $("#total-bold").text($("#input-date").text() + ", " + normTimes + " (" + $(".active-button").length + hoursTitle() + ")");
-            if ($(".active-button").length == $(".button-time").length) {
+            if ($(".active-button").length == $(".button-time").length && $("#rateday").length != 0) {
                 var sum = parseFloat($("#rateday").text().replace(/,/g, ".")).toFixed(2);
             } else {
                 var sum = ($(".active-button").length * parseFloat($("#rate1h").text().replace(/,/g, "."))).toFixed(2);

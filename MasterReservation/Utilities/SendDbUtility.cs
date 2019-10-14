@@ -817,11 +817,15 @@ namespace MasterReservation.Utilities
                 try
                 {
                     string favorites = dbUse.ResidentModels.FirstOrDefault(t => t.Id == residentId).Favorites;
-                    return favorites;
+                    if (favorites != null)
+                    {
+                        return favorites;
+                    }
+                    return "";
                 }
                 catch (Exception e)
                 {
-                    return string.Empty;
+                    return "";
                 }
             }
         }
@@ -832,7 +836,9 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
-                    return dbUse.WorkingPlaceModels.ToList();
+                    var places = dbUse.WorkingPlaceModels.ToList();
+
+                    return places;
                 }
                 catch (Exception e)
                 {

@@ -357,52 +357,68 @@
 
     //карта
 
-    var objects = [];
-    let baloons = [];
-    for (let i = 0; i < $(".address").length; i++) {
-        baloons.push($($(".address")[i]).prev().text().trim());
-    }
-    ymaps.ready(function () {
+    $(document).ready(function () {
+        let objects = [];
+        ymaps.ready(function () {
         var map = new ymaps.Map("map", {
             center: [56.846377, 53.255902],
             zoom: 10
         });
 
+
+        clusterer = new ymaps.Clusterer({
+            preset: 'islands#darkBlueClusterIcons',
+            groupByCoordinates: true,
+            clusterDisableClickZoom: true,
+            clusterHideIconOnBalloonOpen: false,
+            geoObjectHideIconOnBalloonOpen: false
+        }),
+        getPointData = function(index, baloon, adress) {
+            return {
+                balloonContentBody: [
+                    '<address>',
+                    'Адрес: ' + adress,
+                    '</address>',
+                    '<button class=\'button-map\' onclick=\'document.location = "../../TimerClub/WorkingPlacePage/{id}"\'> Подробнее</button >'
+                    .replace('{id}', index),
+                ].join(''),
+                clusterCaption: '<strong>' + baloon + '</strong>'
+            };
+        },
+        getPointOptions = function() {
+            return {
+                preset: 'islands#darkBlueIcon'
+            };
+        };
+
+        
         for (let i = 0; i < $(".address").length; i++) {
             let myGeocoder = ymaps.geocode($(".address")[i].innerText);
             myGeocoder.then(function (res) {
                 let coords = res.geoObjects.get(0).geometry.getCoordinates();
+                
+                let baloon = $($(".address")[i]).parent().parent().parent().find(".card-offers").val().slice(0,-1);
 
-                let baloon = baloons[i];
                 let adress = $(".address")[i].innerText;
+
                 let id = $($(".address")[i]).parent().parent().parent().find(".card-id").val();
 
-                //var invCoords = [coords[1], coords[0]];
-                //map.geoObjects.add(res.geoObjects);
-                let myGeoObject = new ymaps.GeoObject({
-                    geometry: {
-                        type: "Point",
-                        coordinates: coords
-                    },
-                    properties: {
-                        //balloonContentBody: baloon
-                        balloonContentBody: [
-                            '<address>',
-                            '<strong>' + baloon + '</strong>',
-                            '<br/>',
-                            'Адрес: ' + adress,
-                            '<br/>',
-                            '<button class=\'button\' onclick=\'document.location = "../../TimerClub/WorkingPlacePage/{id}"\'> Подробнее</button >'.replace('{id}', id),
-                            '</address>'
-                        ].join('')
-                    }
-                });
+                let geoObject = new ymaps.Placemark(coords, getPointData(id, baloon, adress), getPointOptions());
 
-                objects.push(myGeoObject);
-                map.geoObjects.add(myGeoObject);
+                objects.push(geoObject);
+                clusterer.add(geoObject);
+                
             });
-        }
+        };
+        map.geoObjects.add(clusterer);
+
+        //map.setBounds(clusterer.getBounds(), {
+        //    checkZoomRange: true
+        //});
+
     });
+
+    let deletedObjects = [];
 
     monthA = 'Января,Февраля,Марта,Апреля,Мая,Июня,Июля,Августа,Сентября,Октября,Ноября,Декабря'.split(',');
     $("#send-filter-data").on("click", function () {
@@ -500,22 +516,26 @@
             }
 
             var result = ymaps.geoQuery(objects);
-
+            
+            let gObjcts = clusterer.getGeoObjects();
             if (!offersInclude || !cityInclude || !typeInclude || !adCondInclude || !ajaxSalonsInclude) {
                 $(place).slideUp(300);
-
-                for (let i = 0; i < result.getLength(); i++) {
-                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
-                        result.get(i).options.set('visible', false);
+                
+                for (let i = 0; i < gObjcts.length; i++) {
+                    if (gObjcts[i].properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        //gObjcts[i].options.set('visible', false);
+                        deletedObjects.push(gObjcts[i]);
+                        clusterer.remove(gObjcts[i]);
                     }
                 }
 
             } else {
                 $(place).slideDown(300);
 
-                for (let i = 0; i < result.getLength(); i++) {
-                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
-                        result.get(i).options.set('visible', true);
+                for (let i = 0; i < deletedObjects.length; i++) {
+                    if (deletedObjects[i].properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        //rgObjcts[i].options.set('visible', true);
+                        clusterer.add(deletedObjects[i]);
                     }
                 }
             }
@@ -528,6 +548,7 @@
     $(".input-time").chosen({ width: "90px"});
     $(".chosen-select1").chosen({width: "100%"});
     $(".chosen-select2").chosen({width: "100%"});
+    });
 
 
     </script>
