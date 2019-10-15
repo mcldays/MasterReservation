@@ -7,6 +7,7 @@ using System.Web.Hosting;
 using System.Web.Mvc;
 using MasterReservation.Filters;
 using MasterReservation.Models;
+using MasterReservation.Utilities;
 
 namespace MasterReservation.Controllers
 {
@@ -75,20 +76,7 @@ namespace MasterReservation.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
-                    // сохраняем файл в папку Files в проекте
-                    
-                    string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto";
-                    string subpath =  model.Id.ToString();
-                    DirectoryInfo dirInfo = new DirectoryInfo(path);
-                    if (!dirInfo.Exists)
-                    {
-                        dirInfo.Create();
-                    }
-                    dirInfo.CreateSubdirectory(subpath);
-
-                    file.SaveAs(Server.MapPath("~/SalonPhoto/" + subpath + "/"+ fileName));
+                    SendDbUtility.SaveSalonPhoto(file, model.Id.ToString());
 
                 }
             }

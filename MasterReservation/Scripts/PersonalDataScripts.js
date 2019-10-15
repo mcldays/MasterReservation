@@ -109,7 +109,6 @@
     }
     if (document.getElementsByClassName("default-avatar").length == 0) {
         let file = srcToFile(document.getElementById("avatar").src, "foto.jpg", "image/jpeg").then(function(res) {
-            console.log(res);
             loadImage(
                 res,
                 function (img) {

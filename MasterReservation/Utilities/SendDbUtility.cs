@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
@@ -949,14 +950,45 @@ namespace MasterReservation.Utilities
         //        return true;
         //    }
         //}
+        public static bool SaveSalonPhoto(HttpPostedFileBase file, string id)
+        {
+            try
+            {
+                // получаем имя файла
+                string fileName = System.IO.Path.GetFileName(file.FileName);
 
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto";
+                string subpath = id;
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo dirInfoTumbnail = new DirectoryInfo(path + @"\Thumbnails");
+                if (!dirInfo.Exists)
+                {
+                    dirInfo.Create();
+                }
+                if (!dirInfoTumbnail.Exists)
+                {
+                    dirInfoTumbnail.Create();
+                }
+                dirInfo.CreateSubdirectory(subpath);
+                dirInfoTumbnail.CreateSubdirectory(subpath);
+
+                file.SaveAs(path + @"\" + subpath + @"\" + fileName);
+
+                ResizeImage(path + @"\" + subpath + @"\" + fileName,path + @"\Thumbnails\" + subpath + @"\" + fileName,210, 216,ImageFormat.Jpeg );
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public static bool CreatePicture(byte[] picture, int id)
         {
             try
             {
                 string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
-           
+
                 File.WriteAllBytes(path, picture);
 
                 return true;
@@ -988,118 +1020,69 @@ namespace MasterReservation.Utilities
             
         }
 
-        private const int exifOrientationID = 0x112; //274
-        
-        public static byte[] RotateImage(byte[] bytes)
+        public static void ResizeImage(string FileNameInput, string FileNameOutput, double ResizeHeight, double ResizeWidth, ImageFormat OutputFormat)
         {
-            Bitmap bitmap;
-            Bitmap bitmap2;
-            using (var ms = new MemoryStream(bytes,0,bytes.Length,true))
+            using (System.Drawing.Image photo = new Bitmap(FileNameInput))
             {
-                var img = System.Drawing.Image.FromStream(ms);
-                ExifRotate(img);
+                double aspectRatio = (double)photo.Width / photo.Height;
+                double boxRatio = ResizeWidth / ResizeHeight;
+                double scaleFactor = 0;
 
-                
-                //bitmap = new Bitmap(ms);
-                //System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
-                //img.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                //var a = img.PropertyItems;
-                //UTF8Encoding encodings = new UTF8Encoding();
-
-                //List<string> props = new List<string>();
-                //foreach (var i in a)
-                //{
-
-                //    props.Add(System.Text.Encoding.GetEncoding().GetString(i.Value));
-                //}
-                //Bitmap b2 = new Bitmap(img, new Size(100, 200));
-
-                //var data = Encoding.UTF8.GetBytes("my comment");
-                //var propItem = img.PropertyItems.FirstOrDefault();
-                //propItem.Type = 2;
-                //propItem.Id = 0x010E; // <-- Image Description
-                //propItem.Len = data.Length;
-                //propItem.Value = data;
-                //img.SetPropertyItem(propItem);
-
-
-                //bitmap.Save(ms, bitmap.RawFormat);
-                img.Save(ms, ImageFormat.Jpeg);
-                
-
-                return ms.ToArray();
-            }
-            
-        }
-
-        
-
-        public static void ExifRotate(System.Drawing.Image img)
-        {
-            if (!img.PropertyIdList.Contains(exifOrientationID))
-                return;
-
-            var prop = img.GetPropertyItem(exifOrientationID);
-            int val = BitConverter.ToUInt16(prop.Value, 0);
-            var rot = RotateFlipType.RotateNoneFlipNone;
-
-            if (val == 3 || val == 4)
-                rot = RotateFlipType.Rotate180FlipNone;
-            else if (val == 5 || val == 6)
-                rot = RotateFlipType.Rotate90FlipNone;
-            else if (val == 7 || val == 8)
-                rot = RotateFlipType.Rotate270FlipNone;
-
-            if (val == 2 || val == 4 || val == 5 || val == 7)
-                rot |= RotateFlipType.RotateNoneFlipX;
-
-            if (rot != RotateFlipType.RotateNoneFlipNone)
-                img.RotateFlip(rot);
-        }
-    }
-
-
-    public class JpegPatcher
-    {
-        public Stream PatchAwayExif(Stream inStream, Stream outStream)
-        {
-            byte[] jpegHeader = new byte[2];
-            jpegHeader[0] = (byte)inStream.ReadByte();
-            jpegHeader[1] = (byte)inStream.ReadByte();
-            if (jpegHeader[0] == 0xff && jpegHeader[1] == 0xd8)
-            {
-                SkipExifSection(inStream);
-            }
-
-            outStream.WriteByte(0xff);
-            outStream.WriteByte(0xd8);
-
-            int readCount;
-            byte[] readBuffer = new byte[4096];
-            while ((readCount = inStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
-                outStream.Write(readBuffer, 0, readCount);
-
-            return outStream;
-        }
-
-        private void SkipExifSection(Stream inStream)
-        {
-            byte[] header = new byte[2];
-            header[0] = (byte)inStream.ReadByte();
-            header[1] = (byte)inStream.ReadByte();
-            if (header[0] == 0xff && header[1] == 0xe1)
-            {
-                int exifLength = inStream.ReadByte();
-                exifLength = exifLength << 8;
-                exifLength |= inStream.ReadByte();
-
-                for (int i = 0; i < exifLength - 2; i++)
+                if (photo.Width < ResizeWidth && photo.Height < ResizeHeight)
                 {
-                    inStream.ReadByte();
+                    // keep the image the same size since it is already smaller than our max width/height
+                    scaleFactor = 1.0;
+                }
+                else
+                {
+                    if (boxRatio > aspectRatio)
+                        scaleFactor = ResizeHeight / photo.Height;
+                    else
+                        scaleFactor = ResizeWidth / photo.Width;
+                }
+
+                int newWidth = (int)(photo.Width * scaleFactor);
+                int newHeight = (int)(photo.Height * scaleFactor);
+
+                using (Bitmap bmp = new Bitmap(newWidth, newHeight))
+                {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                        g.DrawImage(photo, 0, 0, newWidth, newHeight);
+
+                        if (ImageFormat.Png.Equals(OutputFormat))
+                        {
+                            bmp.Save(FileNameOutput, OutputFormat);
+                        }
+                        else if (ImageFormat.Jpeg.Equals(OutputFormat))
+                        {
+                            ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
+                            EncoderParameters encoderParameters;
+                            using (encoderParameters = new System.Drawing.Imaging.EncoderParameters(1))
+                            {
+                                // use jpeg info[1] and set quality to 90
+                                encoderParameters.Param[0] = new System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 90L);
+                                try
+                                {
+                                    PropertyItem propItem = photo.GetPropertyItem(274);
+                                    bmp.SetPropertyItem(propItem);
+                                }
+                                catch{}
+
+                                bmp.Save(FileNameOutput, info[1], encoderParameters);
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+
 
     // TODO 1) Все данные салона красоты 
     // TODO 2) Лист моделей рабочих мест салона 
