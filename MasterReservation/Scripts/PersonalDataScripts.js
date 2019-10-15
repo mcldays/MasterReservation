@@ -2,7 +2,7 @@
 
     
     // нажатие на аватар
-    $("#avatar").on("click", function () {
+    $(document).on("click", "#avatar", function () {
         $("#picField").click();
     });
 
@@ -89,21 +89,66 @@
         var tgt = evt.target || window.event.srcElement,
             files = tgt.files;
 
-        // FileReader support
-        if (FileReader && files && files.length) {
-            var fr = new FileReader();
-            fr.onload = function () {
-                document.getElementById("avatar").src = fr.result;
+        let loadingImage = loadImage(
+            files[0],
+            function(img) {
+                document.getElementById("avatar").remove();
+                img.id = "avatar";
+                document.getElementById("photo-wrap").appendChild(img);
+            },
+            {
+                orientation: true
             }
-            fr.readAsDataURL(files[0]);
-        }
-
-        // Not supported
-        else {
-            // fallback -- perhaps submit the input to an iframe and temporarily store
-            // them on the server until the user's session ends.
-        }
+        );
     }
+    function srcToFile(src, fileName, mimeType) {
+        return (fetch(src)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], fileName, { type: mimeType }); })
+        );
+    }
+    if (document.getElementsByClassName("default-avatar").length == 0) {
+        let file = srcToFile(document.getElementById("avatar").src, "foto.jpg", "image/jpeg").then(function(res) {
+            console.log(res);
+            loadImage(
+                res,
+                function (img) {
+                    document.getElementById("avatar").remove();
+                    img.id = "avatar";
+                    document.getElementById("photo-wrap").appendChild(img);
+                },
+                {
+                    orientation: true,
+                    canvas: false
+                }
+            );
+        });
+        
+    }
+
+    //let file;
+    //fetch(document.getElementById("avatar").src)
+    //    .then(res => res.blob())
+    //    .then(blob => {
+    //        file = new File([blob], "File name");
+
+    //        loadImage(
+    //            file,
+    //            function (img) {
+    //                console.log(img);
+    //                //document.getElementById("avatar").remove();
+    //                //img.id = "avatar";
+    //                //document.getElementById("avatar").src = img;
+    //                img.id = "avatar";
+    //                document.getElementById("photo-wrap").appendChild(img);
+    //            },
+    //            {
+    //                canvas: false,
+    //                orientation: true
+    //            }
+    //        );
+    //    });
+
 
     
 

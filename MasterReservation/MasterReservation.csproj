@@ -478,7 +478,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
     <Content Include="Scripts\HeaderScripts.js" />
-    <Content Include="Scripts\load-image-orientation.js" />
+    <Content Include="Scripts\load-image.all.min.js" />
     <Content Include="Scripts\SalonManageScripts.js" />
     <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />

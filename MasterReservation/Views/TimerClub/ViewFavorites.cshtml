@@ -61,16 +61,40 @@
                                 <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                                 <table class="table-wrap">
                                     <tr class="first-line">
-                                        <th class="bold-text">Час</th>
-                                        <th class="bold-text">День</th>
-                                        <th class="bold-text">15 смен</th>
-                                        <th class="bold-text">Месяц</th>
+                                        @if (model.Rate1h != 0)
+                                        {
+                                            <th class="bold-text">Час</th>
+                                        }
+                                        @if (model.Rateday != 0)
+                                        {
+                                            <th class="bold-text">День</th>
+                                        }
+                                        @if (model.RateHalfMounth != 0)
+                                        {
+                                            <th class="bold-text">15 смен</th>
+                                        }
+                                        @if (model.RateMounth != 0)
+                                        {
+                                            <th class="bold-text">Месяц</th>
+                                        }
                                     </tr>
                                     <tr class="second-line">
-                                        <td class="bold-text">@(model.Rate1h)р</td>
-                                        <td class="bold-text">@(model.Rateday)р</td>
-                                        <td class="bold-text">@(model.RateHalfMounth)р</td>
-                                        <td class="bold-text">@(model.RateMounth)р</td>
+                                        @if (model.Rate1h != 0)
+                                        {
+                                            <td class="bold-text">@(model.Rate1h)р</td>
+                                        }
+                                        @if (model.Rateday != 0)
+                                        {
+                                            <td class="bold-text">@(model.Rateday)р</td>
+                                        }
+                                        @if (model.RateHalfMounth != 0)
+                                        {
+                                            <td class="bold-text">@(model.RateHalfMounth)р</td>
+                                        }
+                                        @if (model.RateMounth != 0)
+                                        {
+                                            <td class="bold-text">@(model.RateMounth)р</td>
+                                        }
                                     </tr>
                                 </table>
                             </div>
