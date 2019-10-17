@@ -589,14 +589,11 @@
         $(".chosen-select1").chosen({width: "100%"});
         $(".chosen-select2").chosen({ width: "100%" });
 
-        let offers = "@(Model[7] as string)".split(";");
-        for (let i = 0; i < offers.length - 1; i++) {
-            console.log(offers[i]);
-            $(".chosen-select1").val($(".chosen-select1").val() + offers[i]);
-            $("#offers-field").val(offers[i]);
-            $(".chosen-select1").trigger("chosen:updated");
-        };
-        
+        let offers = "@(Model[7] as string)".split(";").slice(0, -1);
+
+        $(".chosen-select1").val(offers).trigger("chosen:updated");
+        $("#offers-field").val(offers.join(",") + ",");
+
     });
 
 
