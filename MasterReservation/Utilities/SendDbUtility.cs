@@ -912,15 +912,15 @@ namespace MasterReservation.Utilities
 
 
 
-        public static bool HookAdmin(AdminBookingModel model)
-        {
-            Request
+    //    public static bool HookAdmin(AdminBookingModel model)
+    //    {
+    //        Request
 
 
 
 
-            return true;
-        }
+    //        return true;
+    //    }
     }
 
         // TODO 1) Все данные салона красоты 

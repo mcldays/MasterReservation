@@ -466,19 +466,19 @@
     .tariff {
         width: -webkit-fill-available;
         height: 16px;
-        font-size: 8px;
+        font-size: 70%;
     }
 
     .card-title-text {
-        font-size: 9px;
+        font-size: 100%;
     }
 
     .address {
-        font-size: 9px;
+        font-size: 90%;
     }
 
     .tariffs-title {
-        font-size: 8px;
+        font-size: 70%;
         margin: 6px 0px 2px 0px;
     }
 
