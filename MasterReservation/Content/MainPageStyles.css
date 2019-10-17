@@ -35,6 +35,8 @@ body {
 .logo {
     width: 337px;
     margin-top: 21px;
+    margin-bottom: 27px;
+    margin-left: 12px;
 }
 
 .rent {
@@ -91,6 +93,7 @@ body {
     width: max-content;
     margin-left: 10%;
     margin-bottom: 50px;
+    padding-top: 27px;
 }
 
 #overlay-modal {

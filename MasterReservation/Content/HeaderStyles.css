@@ -49,7 +49,6 @@ body {
     width: 40%;
     margin-right: 16%;
     cursor: pointer;
-    margin-top: 36%;
 }
 
 
@@ -327,11 +326,9 @@ hr {
     }
     .head-logo {
         margin-right: 0px;
-        margin-top: 20%;
         position: relative;
-        min-width: 70%;
+        max-height: 48px;
         width: 100%;
-        margin-top: 90%;
     }
     .mobile-head-title {
         /*display: block !important;
