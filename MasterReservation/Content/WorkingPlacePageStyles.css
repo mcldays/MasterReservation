@@ -404,8 +404,8 @@ button.button-time:focus {
     padding: 4px 5px;
 }
 
-.wrap-wrap {
-
+.info-title{
+    font-size: 14px;
 }
 
 @media(max-width: 1199px) {
