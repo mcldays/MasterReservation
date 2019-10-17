@@ -423,6 +423,8 @@
     <Content Include="Resources\svg\heart-blue.svg" />
     <Content Include="Resources\svg\heart-gray.svg" />
     <Content Include="Resources\svg\house.svg" />
+    <Content Include="Resources\svg\new-logo-color.svg" />
+    <Content Include="Resources\svg\new-logo-dark.svg" />
     <Content Include="Resources\svg\points.svg" />
     <Content Include="Resources\svg\right-arrow-white.svg" />
     <Content Include="Resources\svg\user.svg" />

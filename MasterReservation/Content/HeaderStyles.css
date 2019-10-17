@@ -38,13 +38,25 @@ body {
 .city-wrap {
     display: flex;
     align-items: center;
-    margin-left: 11%;
+    margin-left: 2%;
+    max-width: 38%;
 }
 
 .head-logo {
-    width: 71px;
+    /*width: 71px;
     margin-right: 58px;
+    cursor: pointer;*/
+    width: 40%;
+    margin-right: 16%;
     cursor: pointer;
+    margin-top: 36%;
+}
+
+
+.home_icon_class {
+    width: 25px;
+    margin-right: 0;
+    margin-top: 0;
 }
 
 .icons-wrap {
@@ -315,6 +327,11 @@ hr {
     }
     .head-logo {
         margin-right: 0px;
+        margin-top: 20%;
+        position: relative;
+        min-width: 70%;
+        width: 100%;
+        margin-top: 90%;
     }
     .mobile-head-title {
         /*display: block !important;
@@ -371,5 +388,9 @@ hr {
 
     #body-container {
         margin-bottom: 57px;
+    }
+
+    .home_icon_class {
+        display: none;
     }
 }
