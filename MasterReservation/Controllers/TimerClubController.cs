@@ -70,6 +70,7 @@ namespace MasterReservation.Controllers
             ResidentModel resident = Utilities.SendDbUtility.GetResident(User.Identity.Name);
             int userId = 0;
             string userCity = "";
+            string userOffers = "";
             if (!Request.Cookies.AllKeys.Contains("SalonId"))
             {
                 if (resident == null)
@@ -78,12 +79,10 @@ namespace MasterReservation.Controllers
                 }
                 userId = resident.Id;
                 userCity = resident.City;
+                userOffers = resident.Offers;
             }
             else
             {
-
-                
-
                 places.RemoveAll(t => t.SalonId.ToString() != Request.Cookies["SalonId"].Value);
 
                 favorites.ForEach(t => t = false);
@@ -109,7 +108,8 @@ namespace MasterReservation.Controllers
                 addreses,
                 favorites,
                 salons,
-                userCity
+                userCity,
+                userOffers
             };
             return View(x);
 

@@ -584,10 +584,19 @@
 
 
 
-    $("#city-field").val("@(Model[6] as string)");
-    $(".input-time").chosen({ width: "90px"});
-    $(".chosen-select1").chosen({width: "100%"});
-    $(".chosen-select2").chosen({width: "100%"});
+        $("#city-field").val("@(Model[6] as string)");
+        $(".input-time").chosen({ width: "90px"});
+        $(".chosen-select1").chosen({width: "100%"});
+        $(".chosen-select2").chosen({ width: "100%" });
+
+        let offers = "@(Model[7] as string)".split(";");
+        for (let i = 0; i < offers.length - 1; i++) {
+            console.log(offers[i]);
+            $(".chosen-select1").val($(".chosen-select1").val() + offers[i]);
+            $("#offers-field").val(offers[i]);
+            $(".chosen-select1").trigger("chosen:updated");
+        };
+        
     });
 
 
