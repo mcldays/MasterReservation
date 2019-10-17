@@ -43,18 +43,6 @@
         <div class="town-wrap">
             <span class="town-main">Город</span>
         
-
-            <div class="dropdown-main">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" @*data-toggle="dropdown"*@ aria-haspopup="true" aria-expanded="false">
-                    Ижевск
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @*<a class="dropdown-item" href="#">Питер</a>
-                <a class="dropdown-item" href="#">Ижевск</a>*@
-                    @*<a class="dropdown-item" href="#">Казань</a>*@
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="icons-wrap">
@@ -136,7 +124,7 @@
             <div class="sub-fields">
                 <div id="input-offers-wrap">
                     <input class="field" id="input-offers" type="text" autocomplete="off" placeholder="Предоставляемые услуги">
-                    @*<img src="~/Resources/svg/down-arrow.svg">*@
+                    <img src="~/Resources/svg/down-arrow.svg">
                     <div id="itemss" class="dropdown-menu">
                         <div><span>Парикмахерские услуги</span></div>
                         <div><span>Маникюр</span></div>
@@ -150,7 +138,7 @@
                         <div><span>Косметологические услуги</span></div>
                     </div>
                 </div>
-                @Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })
+                @*@Html.EditorFor(model => (model[1] as RegisterMasterModel).Expirience, new { htmlAttributes = new { @class = "field", placeholder = "Стаж работы" } })*@
             </div>
             <div class="sub-fields">
                 @Html.EditorFor(model => (model[1] as RegisterMasterModel).Awards, new { htmlAttributes = new { @class = "field", PlaceHolder = "Имеющиеся награды", @id = "rewards" } })

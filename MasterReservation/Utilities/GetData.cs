@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using MasterReservation.Models;
@@ -12,9 +14,16 @@ namespace MasterReservation.Utilities
         {
             using (UserContext DbUse = new UserContext())
             {
-                ResidentModel user = DbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                return user;
-
+                try
+                {
+                    ResidentModel user = DbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+                
             }
         }
 
@@ -27,5 +36,9 @@ namespace MasterReservation.Utilities
 
             }
         }
+
     }
+
+
+    
 }

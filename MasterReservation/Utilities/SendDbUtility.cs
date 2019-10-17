@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -11,6 +14,7 @@ using System.Web.Http;
 using System.Web.UI.WebControls;
 using MasterReservation.Models;
 using System.IO;
+using System.Text;
 using System.Web.Hosting;
 
 
@@ -107,93 +111,144 @@ namespace MasterReservation.Utilities
         // Метод изменения данных мастера в бд
         public static bool ChangeResident(RegisterMasterModel model)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == model.id);
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Id == model.id);
 
-                if (user == null) return false;
-                user.Name = model.Name;
-                user.Surname = model.Surname;
-                user.Awards = model.Awards;
-                user.Offers = model.Offers;
-                user.Phone = model.PhoneNumber;
-                user.Patronymic = model.Patronymic;
-                user.Experience = model.Expirience;
-                dbUse.ResidentModels.AddOrUpdate(user);
-                dbUse.SaveChanges();
-                return true;
+                    if (user == null) return false;
+                    user.Name = model.Name;
+                    user.Surname = model.Surname;
+                    user.Awards = model.Awards;
+                    user.Offers = model.Offers;
+                    user.Phone = model.PhoneNumber;
+                    user.Patronymic = model.Patronymic;
+                    user.Experience = model.Expirience;
+                    dbUse.ResidentModels.AddOrUpdate(user);
+                    dbUse.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод проверки введенного логина и пароля
         public static bool ComparePassword(string Password, string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user =
-                    dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user =
+                        dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
                 
-                if (user == null) return false;
-                return true;
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
-        // Метод проверки введенного логина и пароля
+        // Метод проверки введенного логина и пароля салона
         public static bool ComparePasswordSalon(string Password, string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                SalonModel user =
-                    dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
+                using (UserContext dbUse = new UserContext())
+                {
+                    SalonModel user =
+                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
 
-                if (user == null) return false;
-                return true;
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод изменения пароля
         public static bool ChangePassword(string Email, string newPass)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                if (user == null) return false;
-                user.Password = newPass;
-                dbUse.ResidentModels.AddOrUpdate(user);
-                dbUse.SaveChanges();
-                return true;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                    if (user == null) return false;
+                    user.Password = newPass;
+                    dbUse.ResidentModels.AddOrUpdate(user);
+                    dbUse.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
         // Метод проверки существования емэйла в бд
         public static bool CheckEmail(string Email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
-                if (user == null) return false;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
                 return true;
             }
+            
         }
 
         // Метод проверки существования номера телефона в бд
         public static bool CheckPhone(string Phone)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
-                if (user == null) return false;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Phone == Phone);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
                 return true;
             }
+            
         }
 
         public static bool IsAdmin(string email)
         {
-            using (UserContext dbUse = new UserContext())
+            try
             {
-                ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
-                if (user == null) return false;
-                return true;
+                using (UserContext dbUse = new UserContext())
+                {
+                    ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == email && t.IsAdmin);
+                    if (user == null) return false;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
@@ -763,11 +818,15 @@ namespace MasterReservation.Utilities
                 try
                 {
                     string favorites = dbUse.ResidentModels.FirstOrDefault(t => t.Id == residentId).Favorites;
-                    return favorites;
+                    if (favorites != null)
+                    {
+                        return favorites;
+                    }
+                    return "";
                 }
                 catch (Exception e)
                 {
-                    return string.Empty;
+                    return "";
                 }
             }
         }
@@ -778,7 +837,9 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
-                    return dbUse.WorkingPlaceModels.ToList();
+                    var places = dbUse.WorkingPlaceModels.ToList();
+
+                    return places;
                 }
                 catch (Exception e)
                 {
@@ -855,6 +916,21 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static bool CheckAdmin(int salonId, string email)
+        {
+            using (UserContext dbUse = new UserContext())
+            {
+                try
+                {
+                    return dbUse.SalonModels.FirstOrDefault(t=>t.Email == email && t.Id == salonId) != null;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
 
 
         //public static bool SendDate(DateModel model)
@@ -874,15 +950,53 @@ namespace MasterReservation.Utilities
         //        return true;
         //    }
         //}
+        public static bool SaveSalonPhoto(HttpPostedFileBase file, string id)
+        {
+            try
+            {
+                // получаем имя файла
+                string fileName = System.IO.Path.GetFileName(file.FileName);
 
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto";
+                string subpath = id;
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo dirInfoTumbnail = new DirectoryInfo(path + @"\Thumbnails");
+                if (!dirInfo.Exists)
+                {
+                    dirInfo.Create();
+                }
+                if (!dirInfoTumbnail.Exists)
+                {
+                    dirInfoTumbnail.Create();
+                }
+                dirInfo.CreateSubdirectory(subpath);
+                dirInfoTumbnail.CreateSubdirectory(subpath);
+
+                file.SaveAs(path + @"\" + subpath + @"\" + fileName);
+
+                ResizeImage(path + @"\" + subpath + @"\" + fileName,path + @"\Thumbnails\" + subpath + @"\" + fileName,210, 216,ImageFormat.Jpeg );
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public static bool CreatePicture(byte[] picture, int id)
         {
-            string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
-           
-            File.WriteAllBytes(path, picture);
+            try
+            {
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{id.ToString()}.jpg";
 
-            return true;
+                File.WriteAllBytes(path, picture);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public static bool SendPictureToDb(RegisterMasterModel model)
@@ -893,40 +1007,87 @@ namespace MasterReservation.Utilities
                 {
                     string path =
                         HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\ResidenAvatar\{model.id.ToString()}.jpg";
+                    //model.Picture = RotateImage(File.ReadAllBytes(path));
                     model.Picture = File.ReadAllBytes(path);
                     return true;
                 }
+                return false;
             }
             catch (Exception e)
             {
-                return true;
+                return false;
             }
-
-
-            return true;
+            
         }
 
+        public static void ResizeImage(string FileNameInput, string FileNameOutput, double ResizeHeight, double ResizeWidth, ImageFormat OutputFormat)
+        {
+            using (System.Drawing.Image photo = new Bitmap(FileNameInput))
+            {
+                double aspectRatio = (double)photo.Width / photo.Height;
+                double boxRatio = ResizeWidth / ResizeHeight;
+                double scaleFactor = 0;
 
+                if (photo.Width < ResizeWidth && photo.Height < ResizeHeight)
+                {
+                    // keep the image the same size since it is already smaller than our max width/height
+                    scaleFactor = 1.0;
+                }
+                else
+                {
+                    if (boxRatio > aspectRatio)
+                        scaleFactor = ResizeHeight / photo.Height;
+                    else
+                        scaleFactor = ResizeWidth / photo.Width;
+                }
 
+                int newWidth = (int)(photo.Width * scaleFactor);
+                int newHeight = (int)(photo.Height * scaleFactor);
 
+                using (Bitmap bmp = new Bitmap(newWidth, newHeight))
+                {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
+                        g.DrawImage(photo, 0, 0, newWidth, newHeight);
 
+                        if (ImageFormat.Png.Equals(OutputFormat))
+                        {
+                            bmp.Save(FileNameOutput, OutputFormat);
+                        }
+                        else if (ImageFormat.Jpeg.Equals(OutputFormat))
+                        {
+                            ImageCodecInfo[] info = ImageCodecInfo.GetImageEncoders();
+                            EncoderParameters encoderParameters;
+                            using (encoderParameters = new System.Drawing.Imaging.EncoderParameters(1))
+                            {
+                                // use jpeg info[1] and set quality to 90
+                                encoderParameters.Param[0] = new System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 90L);
+                                try
+                                {
+                                    PropertyItem propItem = photo.GetPropertyItem(274);
+                                    bmp.SetPropertyItem(propItem);
+                                }
+                                catch{}
 
-    //    public static bool HookAdmin(AdminBookingModel model)
-    //    {
-    //        Request
-
-
-
-
-    //        return true;
-    //    }
+                                bmp.Save(FileNameOutput, info[1], encoderParameters);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
-        // TODO 1) Все данные салона красоты 
-        // TODO 2) Лист моделей рабочих мест салона 
-        // TODO 3) Лист моделей тайм слотов все тайм слоты 
-        // TODO 4) Лист модели Booking Model 
-        // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
-        // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
+
+    // TODO 1) Все данные салона красоты 
+    // TODO 2) Лист моделей рабочих мест салона 
+    // TODO 3) Лист моделей тайм слотов все тайм слоты 
+    // TODO 4) Лист модели Booking Model 
+    // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
+    // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
 }

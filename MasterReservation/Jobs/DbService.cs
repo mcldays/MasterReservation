@@ -239,6 +239,7 @@ namespace MasterReservation.Jobs
                     }
                     else
                     {
+
                         dbUse.SaveChanges();
                         WriteLogs("Обновление прошло успешно \nУдалено " + deletedSlots + " слотов \nДобавлено " + addedSlots + " слотов");
                     }

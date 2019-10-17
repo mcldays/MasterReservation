@@ -173,7 +173,8 @@
     padding-left: 20px;
 }
 
-.button {
+.button,
+.button-map{
     border-radius: 5px;
     background-color: #0a9ad1;
     color: white;
@@ -527,5 +528,9 @@
     #send-filter-data {
         display: block;
         margin-bottom: 0px;
+    }
+
+    .sub-title {
+        text-align: center;
     }
 }

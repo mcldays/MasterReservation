@@ -68,12 +68,16 @@
 
     function updateTotalBold() {
         var normTimes = "";
-        for (var time of $(".active-button")) {
-            var from = time.innerText.split("-")[0];
-            var to = time.innerText.split("-")[1];
-            normTimes += "с " + from + " до " + to + ", ";
+        if ($(".active-button").length == 1) {
+            normTimes = $(".active-button").text();
+        } else {
+            let firstSlot = $(".active-button").first().text();
+            let lastSlot = $(".active-button").last().text();
+            normTimes += "с " + firstSlot.split("-")[0] + " до " + lastSlot.split("-")[1];
+            
         }
-        if ($(".active-button").length != 0) {
+        
+        if ($(".active-button").length >= 1) {
             var hoursTitle = function () {
                 if ($(".active-button").length == 1 || $(".active-button").length == 21) {
                     return " час";
@@ -83,8 +87,8 @@
                     return " часов";
                 }
             };
-            $("#total-bold").text($("#input-date").text() + ", " + normTimes.slice(0, -2) + " (" + $(".active-button").length + hoursTitle() + ")");
-            if ($(".active-button").length == $(".button-time").length) {
+            $("#total-bold").text($("#input-date").text() + ", " + normTimes + " (" + $(".active-button").length + hoursTitle() + ")");
+            if ($(".active-button").length == $(".button-time").length && $("#rateday").length != 0) {
                 var sum = parseFloat($("#rateday").text().replace(/,/g, ".")).toFixed(2);
             } else {
                 var sum = ($(".active-button").length * parseFloat($("#rate1h").text().replace(/,/g, "."))).toFixed(2);
@@ -103,19 +107,62 @@
 
     //обработка нажатий на даты
     $(document).on("click", ".white-button", function(){
-        $(this).removeClass("white-button");
-        $(this).addClass("active-button");
-        $("#input-times").val($("#input-times").val() + $(this).text() + ";");
+        if ($(".active-button").length == 0) {
+            $(this).removeClass("white-button");
+            $(this).addClass("active-button");
+            $("#input-times").val($(this).text() + ";");
+        }
+        else if ($(".active-button").length == 1) {
+            let activeId = $(".button-time").index($(".active-button")[0]);
+            let thisId = $(".button-time").index(this);
+            if (thisId > activeId) {
+                for (let i = activeId+1; i < thisId + 1; i++) {
+                    if (!$(".button-time:eq(" + i + ")").is(".white-button")) {
+                        console.log(i);
+                        return;
+                    }
+                }
+            } else {
+                for (let i = thisId; i < activeId; i++) {
+                    if (!$(".button-time:eq(" + i + ")").is(".white-button")) {
+                        return;
+                    }
+                }
+            }
+            
+            $("#input-times").val("");
+            if (thisId > activeId) {
+                for (let i = activeId; i < thisId + 1; i++) {
+                    $(".button-time:eq(" + i + ")").removeClass("white-button");
+                    $(".button-time:eq(" + i + ")").addClass("active-button");
+                    $("#input-times").val($("#input-times").val() + $(".button-time:eq(" + i + ")").text() + ";");
+                }
+            } else {
+                for (let i = thisId; i < activeId + 1; i++) {
+                    $(".button-time:eq(" + i + ")").removeClass("white-button");
+                    $(".button-time:eq(" + i + ")").addClass("active-button");
+                    $("#input-times").val($("#input-times").val() + $(".button-time:eq(" + i + ")").text() + ";");
+                }
+            }
+        }
+
+        if ($(".active-button").length == $(".button-time").length) {
+            $("#full-day-checkbox").prop("checked", true);
+        }
 
         updateTotalBold();
 
     });
     $(document).on("click", ".active-button", function () {
+
         $("#full-day-checkbox").prop("checked", false);
-        $(this).removeClass("active-button");
-        $(this).addClass("white-button");
-        var old_data = $("#input-times").val();
-        $("#input-times").val(old_data.replace($(this).text() + ";", ""));
+
+        for (let elem of $(".active-button")) {
+            $(elem).removeClass("active-button");
+            $(elem).addClass("white-button");
+        }
+
+        $("#input-times").val("");
 
         updateTotalBold();
 
@@ -203,7 +250,6 @@
     ymaps.ready(function () {
         let width = screen.width;
         if (width > 1199) {
-            
             var map = new ymaps.Map("map", {
                 center: [56.846377, 53.255902],
                 zoom: 10

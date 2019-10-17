@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using MasterReservation.Controllers
 @using MasterReservation.Models
 @using MasterReservation.Utilities
 @model RegisterMasterModel
@@ -13,6 +14,7 @@
 @Styles.Render("~/Content/PersonalDataStyles.css")
 @Scripts.Render("~/Scripts/jquery.maskedinput.min.js")
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/load-image.all.min.js")
 @Scripts.Render("~/Scripts/PersonalDataScripts.js")
 @if (Model.IsAdmin)
 {
@@ -65,7 +67,7 @@
                 }
                 catch (Exception e)
                 {
-                    <img src ="../../Resources/img/avatar-default.png" id="avatar">
+                    <img src ="../../Resources/img/avatar-default.png" id="avatar" class="default-avatar">
                 }
 
                 

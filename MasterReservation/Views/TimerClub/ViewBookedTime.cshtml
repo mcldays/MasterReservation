@@ -5,6 +5,9 @@
     ViewBag.Title = "Просмотр забронированного времени";
 }
 
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+
+@Styles.Render("~/Content/themes/base/jquery-ui.min.css")
 @Styles.Render("~/Content/ViewBookedTimeStyles.css")
 
 
@@ -24,46 +27,47 @@
         }
     </div>
     <div class="cards-wrap">
-        @for(var i=0;i<(Model[0] as List<BookingModel>).Count;i++)
+        @for (var i = 0; i < (Model[0] as List<BookingModel>).Count; i++)
         {
             <div class="favorite-card">
-                @Html.HiddenFor(model=>(model[0] as List<BookingModel>)[i].PlaceId)
+                @Html.HiddenFor(model => (model[0] as List<BookingModel>)[i].PlaceId)
                 @*<img class="photo" src="~/Resources/img/default-card-img.png" onclick="document.location='@Url.Action("WorkingPlacePage",new{id = (Model[0] as List<BookingModel>)[i].PlaceId})'">*@@*</img>*@
 
                 @{
                     string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + ((Model[0] as List<BookingModel>)[i].PlaceId);
-                    string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
                     DirectoryInfo dirInfo = new DirectoryInfo(path);
-                    DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
-                    FileInfo[] files = new FileInfo[] {};
+                    FileInfo[] files = new FileInfo[] { };
+                }
 
-                    try
+                <div class="img-wrap">
+                    @try
                     {
                         files = dirInfo.GetFiles();
 
                         if (files.Length == 0)
                         {
-                            <div class="img-wrap">
-                                <img class="photo" src="~/Resources/svg/default-place.svg">
-                            </div>
-                        }
 
-                        byte[] array = File.ReadAllBytes(files[0].FullName);
-                        <div class="img-wrap">
+                            <img class="photo" src="~/Resources/svg/default-place.svg">
+
+                        }
+                        else
+                        {
+                            byte[] array = File.ReadAllBytes(files[0].FullName);
 
                             @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
                                       + Convert.ToBase64String(array) + "\" />")
-                        </div>
+                        }
                     }
+
                     catch (Exception e)
                     {
-                        <div class="img-wrap">
-                            <img onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = (Model[0] as List<BookingModel>)[i].PlaceId})'" class="photo" src="~/Resources/svg/default-place.svg">
-                        </div>
+
+                        <img class="photo" src="~/Resources/svg/default-place.svg">
+
                     }
-                }
 
 
+                </div>
                 <div class="card-description">
                     <span class="card-title" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = (Model[0] as List<BookingModel>)[i].PlaceId})'">@((Model[1] as List<string>)[i])</span>
                     <div class="record-wrap">
@@ -73,7 +77,7 @@
                                     @{
                                         string date = (Model[0] as List<BookingModel>)[i].Date.ToString("dddd, d MMMM");
                                         date = date.Substring(0, 1).ToUpper() + date.Remove(0, 1);
-            <text>@date</text>
+                                        <text>@date</text>
                                     }
                                 </span>
                                 <div class="dots-wrap">
@@ -141,29 +145,7 @@
                             <span class="small-description">
                                 Статус
                             </span>
-                            @{
-                                if ((Model[0] as List<BookingModel>)[i].Confirmed)
-                                {
-                                    <span class="small-description green-text">
-                                        Подтверждено
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="small-description red-text">
-                                        Ожидается подтверждение администратора
-                                    </span>
-                                }
-                            }
-                        </div>
-                        <button id="remove-record-btn" onclick="document.location = '@Url.Action("RemoveBooking", "BookingSlots", new {id = (Model[0] as List<BookingModel>)[i].Id})'">Отменить запись</button>
-                    </div>
-                    <div class="status-wrap">
-                        <span class="small-description">
-                            Статус
-                        </span>
-                        @{
-                            if ((Model[0] as List<BookingModel>)[i].Confirmed)
+                            @if ((Model[0] as List<BookingModel>)[i].Confirmed)
                             {
                                 <span class="small-description green-text">
                                     Подтверждено
@@ -175,6 +157,24 @@
                                     Ожидается подтверждение администратора
                                 </span>
                             }
+                        </div>
+                        <button id="remove-record-btn" class="viewDialog" value="@((Model[0] as List<BookingModel>)[i].Id)">Отменить запись</button>
+                    </div>
+                    <div class="status-wrap">
+                        <span class="small-description">
+                            Статус
+                        </span>
+                        @if ((Model[0] as List<BookingModel>)[i].Confirmed)
+                        {
+                            <span class="small-description green-text">
+                                Подтверждено
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="small-description red-text">
+                                Ожидается подтверждение администратора
+                            </span>
                         }
                     </div>
                 </div>
@@ -184,9 +184,9 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(".photo").on("click",
-            function() {
+            function () {
                 document.location = '../../TimerClub/WorkingPlacePage/' + $(this).parent().prev().val();
             });
 
@@ -207,6 +207,26 @@
         //}
         //with
 
+        
+
+        $(".viewDialog").on("click", function (e) {
+            e.preventDefault();
+            $("<div><button class='btn btn-primary btn-sm' onclick='deletebook({id})'>Да</button><button class='btn btn-secondary btn-sm' onclick='$(\".dialog\").remove();'>Нет</button></div>".replace("{id}", e.target.getAttribute("value")))
+                .addClass("dialog")
+                .appendTo("body")
+                .dialog({
+                    title: "Вы уверены?",
+                    close: function () { $(this).remove() },
+                    modal: true
+                });
+        });
+
+        
+
     });
-    
+
+    function deletebook(id) {
+        document.location = '../../BookingSlots/RemoveBooking/' + id;
+    }
+
 </script>

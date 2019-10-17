@@ -20,6 +20,7 @@
 @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
 @Scripts.Render("~/Scripts/datepicker.js")
 @Scripts.Render("~/Scripts/slick.min.js")
+@Scripts.Render("~/Scripts/load-image.all.min.js")
 @Scripts.Render("~/Scripts/FindWorkPlacesScripts.js")
 
 
@@ -43,7 +44,7 @@
                 Выберите время
             </span>
             <div id="input-time-sub-wrap">
-                <span class="time-lable">С</span>
+                <span class="time-lable">с</span>
                 @*@Html.EditorFor(model => (model[0] as DateModel).TimeFirst, new { htmlAttributes = new { @class = "input-time", value = "13:00 " } })*@
                 @*<input type="text" class="input-time">*@
                 <select data-placeholder="Время" class="input-time">
@@ -199,21 +200,23 @@
                     <div class="card-wrap">
                         <div class="photos-place">
                             @{
-                                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + ((Model[1] as List<WorkingPlaceModel>)[i]).Id;
+                                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\Thumbnails\" + ((Model[1] as List<WorkingPlaceModel>)[i]).Id;
+                                string pathFull = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"SalonPhoto\" + ((Model[1] as List<WorkingPlaceModel>)[i]).Id;
                                 string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"Resources\svg\default-place.svg";
                                 DirectoryInfo dirInfo = new DirectoryInfo(path);
+                                DirectoryInfo dirInfoFull = new DirectoryInfo(pathFull);
                                 DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
                                 FileInfo[] files = new FileInfo[] { };
 
                                 try
                                 {
-                                    files = dirInfo.GetFiles();
-
-                                    if (files.Length == 0)
+                                    try
                                     {
-                                        <div class="img-wrap">
-                                            <img src="~/Resources/svg/default-place.svg">
-                                        </div>
+                                        files = dirInfo.GetFiles();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        files = dirInfoFull.GetFiles();
                                     }
 
                                     for (int j = 0; j < files.Length; j++)
@@ -221,7 +224,7 @@
                                         byte[] array = File.ReadAllBytes(files[j].FullName);
                                         <div class="img-wrap">
 
-                                            @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                            @Html.Raw("<img class='photo-img' src=\"data:image/jpeg;base64,"
                                                       + Convert.ToBase64String(array) + "\" />")
                                         </div>
                                     }
@@ -243,40 +246,74 @@
                                 {
                                     <svg version="1.1" class="heart red-heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                    <g id="favorite">
-                                    <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+                                        <g id="favorite">
+                                            <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
 
-                                    </g>
-                                </svg>
+                                        </g>
+                                    </svg>
                                 }
                                 else
                                 {
                                     <svg version="1.1" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          width="17px" height="15px" viewBox="0 0 510 510" style="enable-background: new 0 0 510 510;" xml:space="preserve">
-                                    <g id="favorite">
-                                    <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+                                        <g id="favorite">
+                                            <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
 
-                                    </g>
-                                </svg>
+                                        </g>
+                                    </svg>
 
                                 }
                             </div>
+                            @*TODO City иногда пишет ошибку*@
                             <span class="address">@((Model[5] as List<SalonModel>)[i].City), @((Model[3] as List<string>)[i])</span>
                             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
                             <div class="tariffs-wrap">
                                 <div class="tariff-line">
-                                    <div class="tariff">1 час</div>
-                                    <div class="tariff">День</div>
-                                    <div class="tariff">15 смен</div>
-                                    <div class="tariff">Месяц</div>
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].Rate1h != 0)
+                                    {
+                                        <div class="tariff">1 час</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateDay != 0)
+                                    {
+                                        <div class="tariff">День</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth != 0)
+                                    {
+                                        <div class="tariff">15 смен</div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateMounth != 0)
+                                    {
+                                        <div class="tariff">Месяц</div>
+                                    }
                                 </div>
                                 <div class="tariff-line">
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateDay)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)</div>
-                                    <div class="tariff">@((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)</div>
+
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].Rate1h != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].Rate1h)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateDay != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateDay)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateHalfMounth)
+                                        </div>
+                                    }
+                                    @if ((Model[1] as List<WorkingPlaceModel>)[i].RateMounth != 0)
+                                    {
+                                        <div class="tariff">
+                                            @((Model[1] as List<WorkingPlaceModel>)[i].RateMounth)
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <button class="button" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = ((Model[1] as List<WorkingPlaceModel>)[i].Id)})'">Подробнее</button>
@@ -324,52 +361,68 @@
 
     //карта
 
-    var objects = [];
-    let baloons = [];
-    for (let i = 0; i < $(".address").length; i++) {
-        baloons.push($($(".address")[i]).prev().text().trim());
-    }
-    ymaps.ready(function () {
+    $(document).ready(function () {
+        let objects = [];
+        ymaps.ready(function () {
         var map = new ymaps.Map("map", {
             center: [56.846377, 53.255902],
             zoom: 10
         });
 
+
+        clusterer = new ymaps.Clusterer({
+            preset: 'islands#darkBlueClusterIcons',
+            groupByCoordinates: true,
+            clusterDisableClickZoom: true,
+            clusterHideIconOnBalloonOpen: false,
+            geoObjectHideIconOnBalloonOpen: false
+        }),
+        getPointData = function(index, baloon, adress) {
+            return {
+                balloonContentBody: [
+                    '<address>',
+                    'Адрес: ' + adress,
+                    '</address>',
+                    '<button class=\'button-map\' onclick=\'document.location = "../../TimerClub/WorkingPlacePage/{id}"\'> Подробнее</button >'
+                    .replace('{id}', index),
+                ].join(''),
+                clusterCaption: '<strong>' + baloon + '</strong>'
+            };
+        },
+        getPointOptions = function() {
+            return {
+                preset: 'islands#darkBlueIcon'
+            };
+        };
+
+        
         for (let i = 0; i < $(".address").length; i++) {
             let myGeocoder = ymaps.geocode($(".address")[i].innerText);
             myGeocoder.then(function (res) {
                 let coords = res.geoObjects.get(0).geometry.getCoordinates();
+                
+                let baloon = $($(".address")[i]).parent().parent().parent().find(".card-offers").val().slice(0,-1);
 
-                let baloon = baloons[i];
                 let adress = $(".address")[i].innerText;
-                let id = $($(".address")[i]).parent().parent().find(".card-id").val();
 
-                //var invCoords = [coords[1], coords[0]];
-                //map.geoObjects.add(res.geoObjects);
-                let myGeoObject = new ymaps.GeoObject({
-                    geometry: {
-                        type: "Point",
-                        coordinates: coords
-                    },
-                    properties: {
-                        //balloonContentBody: baloon
-                        balloonContentBody: [
-                            '<address>',
-                            '<strong>' + baloon + '</strong>',
-                            '<br/>',
-                            'Адрес: ' + adress,
-                            '<br/>',
-                            '<button class=\'button\' onclick=\'document.location = "../../TimerClub/WorkingPlacePage/{id}"\'> Подробнее</button >'.replace('{id}', id),
-                            '</address>'
-                        ].join('')
-                    }
-                });
+                let id = $($(".address")[i]).parent().parent().parent().find(".card-id").val();
 
-                objects.push(myGeoObject);
-                map.geoObjects.add(myGeoObject);
+                let geoObject = new ymaps.Placemark(coords, getPointData(id, baloon, adress), getPointOptions());
+
+                objects.push(geoObject);
+                clusterer.add(geoObject);
+                
             });
-        }
+        };
+        map.geoObjects.add(clusterer);
+
+        //map.setBounds(clusterer.getBounds(), {
+        //    checkZoomRange: true
+        //});
+
     });
+
+    let deletedObjects = [];
 
     monthA = 'Января,Февраля,Марта,Апреля,Мая,Июня,Июля,Августа,Сентября,Октября,Ноября,Декабря'.split(',');
     $("#send-filter-data").on("click", function () {
@@ -467,34 +520,75 @@
             }
 
             var result = ymaps.geoQuery(objects);
-
+            
+            let gObjcts = clusterer.getGeoObjects();
             if (!offersInclude || !cityInclude || !typeInclude || !adCondInclude || !ajaxSalonsInclude) {
                 $(place).slideUp(300);
-
-                for (let i = 0; i < result.getLength(); i++) {
-                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
-                        result.get(i).options.set('visible', false);
+                
+                for (let i = 0; i < gObjcts.length; i++) {
+                    if (gObjcts[i].properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        //gObjcts[i].options.set('visible', false);
+                        deletedObjects.push(gObjcts[i]);
+                        clusterer.remove(gObjcts[i]);
                     }
                 }
 
             } else {
                 $(place).slideDown(300);
 
-                for (let i = 0; i < result.getLength(); i++) {
-                    if (result.get(i).properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
-                        result.get(i).options.set('visible', true);
+                for (let i = 0; i < deletedObjects.length; i++) {
+                    if (deletedObjects[i].properties.get('balloonContentBody').split("WorkingPlacePage/")[1].split("\"\'>")[0] == $(place).find($(".card-id")).val()) {
+                        //rgObjcts[i].options.set('visible', true);
+                        clusterer.add(deletedObjects[i]);
                     }
                 }
             }
         }
 
 
-    });
+        });
+        //function srcToFile(src, fileName, mimeType) {
+        //    return (fetch(src)
+        //        .then(function (res) { return res.arrayBuffer(); })
+        //        .then(function (buf) { return new File([buf], fileName, { type: mimeType }); })
+        //    );
+        //}
+        //let cards = $(".card");
+        //for (let card of cards) {
+        //    if (card.getElementsByClassName("default-img").length == 0) {
+        //        console.log($(card));
+        //        for (let photoImg of $(card).find(".photo-img")) {
+        //            let parent = photoImg.getParentNode;
+        //            console.log(parent);
+        //            let file = srcToFile(photoImg.src, "foto.jpg", "image/jpeg").then(function(res) {
+        //                loadImage(
+        //                    res,
+        //                    function (img) {
+        //                        //photoImg.remove();
+        //                        img.classList.add("photo-img");
+        //                        console.log(" ---- " + parent);
+        //                        parent.appendChild(img);
+        //                    },
+        //                    {
+        //                        orientation: true,
+        //                        canvas: false
+        //                    }
+        //                );
+        //            });
+        //        }
+                
+        //    }
+        //}
+        
+
+
+
 
     $("#city-field").val("@(Model[6] as string)");
     $(".input-time").chosen({ width: "90px"});
     $(".chosen-select1").chosen({width: "100%"});
     $(".chosen-select2").chosen({width: "100%"});
+    });
 
 
     </script>

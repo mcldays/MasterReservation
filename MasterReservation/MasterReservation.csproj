@@ -131,6 +131,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="XmpCore, Version=5.1.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XmpCore.5.1.3.1\lib\net35\XmpCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -323,7 +326,6 @@
     <Compile Include="Models\ResidentModel.cs" />
     <Compile Include="Models\TimeSlotModel.cs" />
     <Compile Include="Models\WorkingPlaceModel.cs" />
-    <Compile Include="Modules\DbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GetData.cs" />
     <Compile Include="Utilities\RequestCity.cs" />
@@ -344,6 +346,7 @@
     <Content Include="Content\HeaderStyles.css" />
     <Content Include="Content\SalonManageStyles.css" />
     <Content Include="Content\SalonPlacesStyles.css" />
+    <Content Include="Content\ShowBookedResidentsStyles.css" />
     <Content Include="Content\ViewFavoritesStyles.css" />
     <Content Include="Content\ViewBookedTimeStyles.css" />
     <Content Include="Content\WorkingPlacePageStyles.css" />
@@ -477,6 +480,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\FindWorkPlacesScripts.js" />
     <Content Include="Scripts\HeaderScripts.js" />
+    <Content Include="Scripts\load-image.all.min.js" />
     <Content Include="Scripts\SalonManageScripts.js" />
     <Content Include="Scripts\WorkingPlacePageScripts.js" />
     <Content Include="Scripts\PersonalDataScripts.js" />
@@ -491,7 +495,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

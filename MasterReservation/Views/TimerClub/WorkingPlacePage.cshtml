@@ -168,10 +168,7 @@
                     <g id="favorite">
                     <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
 								C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z" />
-
-
-
-                        </g>
+                    </g>
                     </svg>
                 }
                 <button class="show-map-btn blue-button">
@@ -184,16 +181,41 @@
             <span class="tariffs-title">Тарифы на аренду рабочего места</span>
             <div class="tariffs-wrap">
                 <div class="tariff-line bold-line">
-                    <div class="tariff">1 час</div>
-                    <div class="tariff">День</div>
-                    <div class="tariff">15 смен</div>
-                    <div class="tariff">Месяц</div>
+                    @if ((Model[0] as WorkingPlaceModel).Rate1h != 0)
+                    {
+                        <div class="tariff">1 час</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateDay != 0)
+                    {
+                        <div class="tariff">День</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateHalfMounth != 0)
+                    {
+                        <div class="tariff">15 смен</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateMounth != 0)
+                    {
+                        <div class="tariff">Месяц</div>
+                    }
+                        
                 </div>
                 <div class="tariff-line">
-                    <div class="tariff" id="rate1h">@((Model[0] as WorkingPlaceModel).Rate1h) р</div>
-                    <div class="tariff" id="rateday">@((Model[0] as WorkingPlaceModel).RateDay) р</div>
-                    <div class="tariff" id="ratehalfmounth">@((Model[0] as WorkingPlaceModel).RateHalfMounth) р</div>
-                    <div class="tariff" id="ratemounth">@((Model[0] as WorkingPlaceModel).RateMounth) р</div>
+                    @if ((Model[0] as WorkingPlaceModel).Rate1h != 0)
+                    {
+                        <div class="tariff" id="rate1h">@((Model[0] as WorkingPlaceModel).Rate1h) р</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateDay != 0)
+                    {
+                        <div class="tariff" id="rateday">@((Model[0] as WorkingPlaceModel).RateDay) р</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateHalfMounth != 0)
+                    {
+                        <div class="tariff" id="ratehalfmounth">@((Model[0] as WorkingPlaceModel).RateHalfMounth) р</div>
+                    }
+                    @if ((Model[0] as WorkingPlaceModel).RateMounth != 0)
+                    {
+                        <div class="tariff" id="ratemounth">@((Model[0] as WorkingPlaceModel).RateMounth) р</div>
+                    }
                 </div>
             </div>
         </div>

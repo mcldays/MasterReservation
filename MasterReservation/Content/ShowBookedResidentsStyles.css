@@ -1,0 +1,264 @@
+﻿.sub-title {
+    color: #414141;
+    font-family: "Open Sans";
+    font-size: 12px;
+    margin: 12px 0px 0px 0;
+    display: block;
+}
+
+.datepicker {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    width: 220px;
+}
+
+.datepicker--nav {
+    background: #0a9ad1;
+    color: white;
+    height: 32px;
+}
+
+.datepicker--nav-title:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-title i {
+    color: white;
+}
+
+.datepicker--nav-action:hover {
+    background: #0da6e0;
+}
+
+.datepicker--nav-action path {
+    stroke: #ffffff;
+}
+
+.datepicker--day-name {
+    color: #0a9ad1;
+}
+
+.datepicker--days-names {
+    margin: 0px;
+}
+
+.datepicker--cell {
+    border-radius: 0px;
+    height: 20px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-wrap {
+    flex: 1 0 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e1e1e1;
+}
+
+.center-wrap {
+    height: 100%;
+    display: flex;
+    width: calc(100% - 270px - 197px);
+    align-items: center;
+}
+
+.right-wrap {
+    display: flex;
+    flex-direction: column;
+    padding-top: 11px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 197px;
+    height: 500px;
+    /*flex-grow: 1;*/
+    background-color: #e1e1e1;
+}
+
+.slider-places {
+    height: 100%;
+    width: calc(100% - 40px);
+}
+
+.slider-card {
+    height: 100%;
+    width: calc(33% - 40px);
+}
+
+.time-table {
+    width: 100%;
+}
+
+.time-table tr {
+    height: 30px;
+}
+
+    .time-table td {
+        border: 2px solid #dbcfcf;
+        padding: 0px 10px;
+        color: white;
+        position: relative;
+    }
+
+.booked-slot {
+    background-color: limegreen;
+}
+
+.times {
+    display: flex;
+    flex-direction: column;
+    margin-top: 88px;
+    width: 40px;
+}
+
+.span-time {
+    margin-top: 9.9px;
+    font-size: 14px;
+    color: #6a6969;
+    text-align: center;
+}
+
+.card-head {
+    display: flex;
+}
+
+.head-title-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.slick-prev {
+    left: -32px;
+    top: 52px;
+}
+
+.slick-next {
+    right: 0px;
+    top: 52px;
+}
+
+    .slick-prev:before,
+    .slick-next:before{
+        color: #574e4e;
+    }
+
+.all-places {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-width: 245px;
+}
+
+    .all-places img {
+        width: 100px;
+        margin: 6px auto;
+    }
+
+.delete-record {
+    float: right;
+    width: 14px;
+    position: absolute;
+    top: 7px;
+    right: 8px;
+}
+
+.delete-record:hover {
+    cursor: pointer;
+}
+
+.dialog {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dialog .btn {
+    width: 40%;
+    height: 40px;
+}
+
+.head-title {
+    line-height: 1.2;
+    font-size: 10px;
+}
+
+.slick-track {
+    margin: unset;
+}
+
+.date-title {
+    display: flex;
+    align-items: center;
+    height: 30px;
+
+}
+
+.center-photo {
+    width: 100px;
+}
+
+.table-for-week .times {
+    margin-top: 10px;
+}
+
+.slick-prev, 
+.slick-next{
+    top: 0px;
+}
+
+
+
+@media (max-width: 1199px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .span-time {
+        margin-top: 8.9px;
+    }
+
+    .all-places img {
+        width: 100%;
+    }
+
+    .center-wrap {
+        margin: 0 auto;
+        width: 90% !important;
+    }
+
+    .all-places {
+        overflow-y: unset;
+        height: 100%;
+        margin: auto;
+
+    }
+
+    .right-wrap {
+        margin: 0 auto 80px auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .left-wrap {
+        flex: 0;
+        padding-bottom: 20px;
+    }
+
+    .slick-prev, .slick-next {
+        top: 54px;
+    }
+
+    .slick-next {
+        right: -22px;
+    }
+    .slick-prev {
+        left: -22px !important;
+    }
+}

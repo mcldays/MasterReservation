@@ -77,7 +77,7 @@ namespace MasterReservation.Controllers
                 }
                 int fullDayCount = Int32.Parse(times[1].Split(':')[0]) - Int32.Parse(times[0].Split(':')[0]);
                 double total;
-                if (timesCount >= fullDayCount)
+                if (timesCount >= fullDayCount && place.RateDay != 0)
                 {
                     total = place.RateDay;
                 }

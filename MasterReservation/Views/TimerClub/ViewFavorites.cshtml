@@ -20,71 +20,92 @@
         {
              foreach (var model in Model)
              {
-        <div class="favorite-card">
-            @*<img class="photo" src="~/Resources/img/default-card-img.png">*@
+                <div class="favorite-card">
+                    <div class="img-wrap">
+                        @{
+                            string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (model.PlaceId);
+                            DirectoryInfo dirInfo = new DirectoryInfo(path);
+                            FileInfo[] files = new FileInfo[] { };
 
-            @{
-                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\SalonPhoto\" + (model.PlaceId);
-                string pathDefault = HostingEnvironment.ApplicationHost.GetPhysicalPath() + @"\Resources\svg\default-place.svg";
-                DirectoryInfo dirInfo = new DirectoryInfo(path);
-                DirectoryInfo dirInfoDefault = new DirectoryInfo(pathDefault);
-                FileInfo[] files = new FileInfo[] { };
+                            try
+                            {
+                                files = dirInfo.GetFiles();
 
-                try
-                {
-                    files = dirInfo.GetFiles();
+                                if (files.Length == 0)
+                                {
 
-                    if (files.Length == 0)
-                    {
-                        <div class="img-wrap">
-                            <img class="photo" src="~/Resources/svg/default-place.svg">
+                                    <img class="photo" src="~/Resources/svg/default-place.svg">
+
+                                }
+
+                                byte[] array = File.ReadAllBytes(files[0].FullName);
+
+
+                                @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
+                                          + Convert.ToBase64String(array) + "\" />")
+
+                            }
+                            catch (Exception e)
+                            {
+                            
+                                <img class="photo" src="~/Resources/svg/default-place.svg">
+
+                            }
+                        }
+                    </div>
+                    <div class="card-description">
+                        <span class="card-title">@(model.SalonTitle)</span>
+                        <span class="adress">@(model.SalonAdress)</span>
+                        <div class="table-layout">
+                            <div class="gray-wrap">
+                                <span class="tariffs-title">Тарифы на аренду рабочего места</span>
+                                <table class="table-wrap">
+                                    <tr class="first-line">
+                                        @if (model.Rate1h != 0)
+                                        {
+                                            <th class="bold-text">Час</th>
+                                        }
+                                        @if (model.Rateday != 0)
+                                        {
+                                            <th class="bold-text">День</th>
+                                        }
+                                        @if (model.RateHalfMounth != 0)
+                                        {
+                                            <th class="bold-text">15 смен</th>
+                                        }
+                                        @if (model.RateMounth != 0)
+                                        {
+                                            <th class="bold-text">Месяц</th>
+                                        }
+                                    </tr>
+                                    <tr class="second-line">
+                                        @if (model.Rate1h != 0)
+                                        {
+                                            <td class="bold-text">@(model.Rate1h)р</td>
+                                        }
+                                        @if (model.Rateday != 0)
+                                        {
+                                            <td class="bold-text">@(model.Rateday)р</td>
+                                        }
+                                        @if (model.RateHalfMounth != 0)
+                                        {
+                                            <td class="bold-text">@(model.RateHalfMounth)р</td>
+                                        }
+                                        @if (model.RateMounth != 0)
+                                        {
+                                            <td class="bold-text">@(model.RateMounth)р</td>
+                                        }
+                                    </tr>
+                                </table>
+                            </div>
+                            <button class="detail-btn" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">Подробнее</button>
+
                         </div>
-                    }
-
-                    byte[] array = File.ReadAllBytes(files[0].FullName);
-                    <div class="img-wrap">
-
-                        @Html.Raw("<img class='photo' src=\"data:image/jpeg;base64,"
-                                  + Convert.ToBase64String(array) + "\" />")
                     </div>
-                }
-                catch (Exception e)
-                {
-                    <div class="img-wrap">
-                        <img class="photo" src="~/Resources/svg/default-place.svg">
-                    </div>
-                }
-            }
-
-            <div class="card-description">
-                <span class="card-title">@(model.SalonTitle)</span>
-                <span class="adress">@(model.SalonAdress)</span>
-                <div class="table-layout">
-                    <div class="gray-wrap">
-                        <span class="tariffs-title">Тарифы на аренду рабочего места</span>
-                        <table class="table-wrap">
-                            <tr class="first-line">
-                                <th class="bold-text">Час</th>
-                                <th class="bold-text">День</th>
-                                <th class="bold-text">15 смен</th>
-                                <th class="bold-text">Месяц</th>
-                            </tr>
-                            <tr class="second-line">
-                                <td class="bold-text">@(model.Rate1h)р</td>
-                                <td class="bold-text">@(model.Rateday)р</td>
-                                <td class="bold-text">@(model.RateHalfMounth)р</td>
-                                <td class="bold-text">@(model.RateMounth)р</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <button class="detail-btn" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">Подробнее</button>
-
+                    <button class="detail-btn btn-mobile" style="display: none;" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">
+                        <img style="transform: rotate(270deg);" src="~/Resources/svg/down-arrow-white.svg" alt="Alternate Text" />
+                    </button>
                 </div>
-            </div>
-            <button class="detail-btn btn-mobile" style="display: none;" onclick="document.location = '@Url.Action("WorkingPlacePage", new {id = model.PlaceId})'">
-                <img style="transform: rotate(270deg);" src="~/Resources/svg/down-arrow-white.svg" alt="Alternate Text" />
-            </button>
-        </div>
             }
         }
         else
