@@ -96,7 +96,7 @@
 
                     @while (date != DateTime.Today.AddDays(14))
                     {
-
+                        int iUser = 0;
                         dayOfWeek = (int)date.DayOfWeek;
                         List<int> usedTimes = new List<int>();
                         <table class="time-table time-@titleArr[dayOfWeek]" value="@date.ToString("dd-MM-yyyy")">
@@ -104,7 +104,7 @@
                             {
                                 var overlaps = bookings.Where(t => t.PlaceId == places[k].Id && t.Date == date);
                                 List<List<string>> bookedHours = new List<List<string>>();
-                                int iUser = 0;
+                                
                                 foreach (var overlap in overlaps)
                                 {
                                     foreach (var overlap2 in overlap.Times.Split(';'))
@@ -117,6 +117,9 @@
                                     }
 
                                 }
+
+                                bookedHours.Sort((x, y) => Int32.Parse(x[0]).CompareTo(Int32.Parse(y[0])));
+
                                 if (!bookedHours.Any())
                                 {
                                     <tr>
@@ -138,14 +141,16 @@
                                         while (true)
                                         {
 
-                                            if (findedBooking.Contains((j+adder).ToString()))
+                                            if (findedBooking.Contains((j+adder).ToString()) && bookedHours.Find(t=>t[0] == (j+adder).ToString())[2] == bookedHours.Find(t=>t[0] == j.ToString())[2])
                                             {
                                                 usedTimes.Add(j+adder);
                                                 rowspan++;
                                                 adder++;
+                                                
                                             }
                                             else
                                             {
+
                                                 break;
                                             }
                                         }
@@ -164,24 +169,28 @@
                                             </tr>
                                         }
                                         
+
                                     }
-                                    
-                                        if (rowspan == 0)
-                                        {
-                                            <tr>
-                                                <td></td>
-                                            </tr>
-                                        }
-                                        else
-                                        {
-                                            rowspan--;
-                                            while (rowspan != 0)
-                                            {
-                                                <tr></tr>
-                                            rowspan--;
-                                        }
+
+                                    if (rowspan == 0)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        
                                     }
-                                    iUser++;
+                                    else
+                                    {
+                                        rowspan--;
+                                        while (rowspan != 0)
+                                        {
+                                            <tr></tr>
+                                            rowspan--;
+                                            iUser++;
+                                        }
+                                        iUser++;
+                                    }
+
 
                                 }
 
@@ -470,8 +479,9 @@
 
     }
 
-    $(".viewDialog").on("click", function (e) {
+    $(document).on("click", ".viewDialog", function (e) {
         e.preventDefault();
+        
         $("<div><button class='btn btn-primary btn-sm' onclick='deletebook({id})'>Да</button><button class='btn btn-secondary btn-sm' onclick='$(\".dialog\").remove();'>Нет</button></div>".replace("{id}", e.target.getAttribute("value")))
             .addClass("dialog")
             .appendTo("body")
