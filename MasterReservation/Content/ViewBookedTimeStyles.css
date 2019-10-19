@@ -103,7 +103,7 @@ img.photo {
 
 #background-overlay {
     position: fixed;
-    background-image: url(../Resources/img/keyboard_back.png);
+    background-image: url(../Resources/img/background.png);
     background-repeat: no-repeat;
     background-position: 0px -225px;
     background-size: cover;

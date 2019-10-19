@@ -39,7 +39,8 @@ body {
     display: flex;
     align-items: center;
     margin-left: 2%;
-    max-width: 38%;
+    
+    max-width: 34%;
 }
 
 .head-logo {
@@ -49,6 +50,7 @@ body {
     width: 40%;
     margin-right: 16%;
     cursor: pointer;
+    max-height: 38px;
 }
 
 
@@ -322,12 +324,13 @@ hr {
     .city-wrap {
         margin-left: 0px;
         display: flex;
-        margin-left: 17px;
+        margin-left: 10px;
+        max-width: 41%;
     }
     .head-logo {
         margin-right: 0px;
         position: relative;
-        max-height: 48px;
+        max-height: 38px;
         width: 100%;
     }
     .mobile-head-title {

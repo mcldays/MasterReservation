@@ -1,6 +1,6 @@
 ﻿body {
     height: 100%;
-    background-image: url(../Resources/img/keyboard_back.png);
+    background-image: url(../Resources/img/background.png);
     background-repeat: no-repeat;
     background-position: 0 -255px;
     display: flex;
