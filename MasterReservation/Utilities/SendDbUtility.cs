@@ -164,9 +164,9 @@ namespace MasterReservation.Utilities
             {
                 using (UserContext dbUse = new UserContext())
                 {
-                    var hashPass = GetData.GetHash(Password);
+                    //var hashPass = GetData.GetHash(Password);
                     SalonModel user =
-                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == hashPass);
+                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
 
                     if (user == null) return false;
                     return true;
