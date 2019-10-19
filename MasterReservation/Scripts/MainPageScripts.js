@@ -67,7 +67,7 @@
 
 
     // нажатие на аватар
-    $("#photo img").on("click", function () {
+    $(document).on("click", "#photo #pic", function () {
         $("#photo input").click();
     });
 
@@ -150,22 +150,20 @@
         var tgt = evt.target || window.event.srcElement,
             files = tgt.files;
 
-        // FileReader support
-        if (FileReader && files && files.length) {
-            var fr = new FileReader();
-            fr.onload = function () {
-                document.getElementById("pic").src = fr.result;
+        let loadingImage = loadImage(
+            files[0],
+            function(img) {
+                document.getElementById("pic").remove();
+                img.id = "pic";
+                document.getElementById("photo").appendChild(img);
+            },
+            {
+                orientation: true
             }
-            fr.readAsDataURL(files[0]);
-        }
-
-        // Not supported
-        else {
-            // fallback -- perhaps submit the input to an iframe and temporarily store
-            // them on the server until the user's session ends.
-        }
+        );
     }
 
-    
+
+
 
 });

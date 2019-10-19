@@ -41,7 +41,7 @@ namespace MasterReservation.Utilities
                         Offers = model.Offers,
                         Experience = model.Expirience,
                         Awards = model.Awards,
-                        Password = model.Password,
+                        Password = GetData.GetHash(model.Password),
                         IsAdmin = false
                     });
                     DbUse.SaveChanges();
@@ -143,8 +143,9 @@ namespace MasterReservation.Utilities
             {
                 using (UserContext dbUse = new UserContext())
                 {
+                    var hashPass = GetData.GetHash(Password);
                     ResidentModel user =
-                        dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == Password);
+                        dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email && t.Password == hashPass);
                 
                     if (user == null) return false;
                     return true;
@@ -163,8 +164,9 @@ namespace MasterReservation.Utilities
             {
                 using (UserContext dbUse = new UserContext())
                 {
+                    var hashPass = GetData.GetHash(Password);
                     SalonModel user =
-                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == Password);
+                        dbUse.SalonModels.FirstOrDefault(t => t.Email == Email && t.AdminPass == hashPass);
 
                     if (user == null) return false;
                     return true;
@@ -185,7 +187,7 @@ namespace MasterReservation.Utilities
                 {
                     ResidentModel user = dbUse.ResidentModels.FirstOrDefault(t => t.Email == Email);
                     if (user == null) return false;
-                    user.Password = newPass;
+                    user.Password = GetData.GetHash(newPass);
                     dbUse.ResidentModels.AddOrUpdate(user);
                     dbUse.SaveChanges();
                     return true;
@@ -404,6 +406,7 @@ namespace MasterReservation.Utilities
                     dbUse.TimeSlotModels.RemoveRange(dbUse.TimeSlotModels.Where(t => t.PlaceId == id));
                     dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.PlaceId == id));
                     dbUse.SaveChanges();
+                    RemovePictures(id);
                 }
                 catch (Exception e)
                 {
@@ -419,6 +422,7 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
+                    model.AdminPass = GetData.GetHash(model.AdminPass);
                     dbUse.SalonModels.Add(model);
                     dbUse.SaveChanges();
                 }
@@ -436,10 +440,12 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
+                    var places = GetWorkingPlaces(salonId);
+                    foreach (var place in places)
+                    {
+                        RemoveWorkingPlace(place.Id);
+                    }
                     dbUse.SalonModels.Remove(dbUse.SalonModels.Where(t => t.Id == salonId).FirstOrDefault());
-                    dbUse.WorkingPlaceModels.RemoveRange(dbUse.WorkingPlaceModels.Where(t => t.SalonId == salonId));
-                    dbUse.TimeSlotModels.RemoveRange(dbUse.TimeSlotModels.Where(t => t.SalonId == salonId));
-                    dbUse.BookingModels.RemoveRange(dbUse.BookingModels.Where(t => t.SalonId == salonId));
                     dbUse.SaveChanges();
                 }
                 catch (Exception e)
@@ -983,6 +989,33 @@ namespace MasterReservation.Utilities
             }
         }
 
+        public static bool RemovePictures(int placeId)
+        {
+            try
+            {
+                string path = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\SalonPhoto\{placeId}";
+                string pathThumbnails = HostingEnvironment.ApplicationHost.GetPhysicalPath() + $@"\SalonPhoto\Thumbnails\{placeId}";
+
+                DirectoryInfo dir = new DirectoryInfo(path);
+                DirectoryInfo dirThumbnails = new DirectoryInfo(pathThumbnails);
+
+                foreach (FileInfo file in dir.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (FileInfo file in dirThumbnails.GetFiles())
+                {
+                    file.Delete();
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public static bool CreatePicture(byte[] picture, int id)
         {
             try
@@ -1083,11 +1116,4 @@ namespace MasterReservation.Utilities
         }
     }
 
-
-    // TODO 1) Все данные салона красоты 
-    // TODO 2) Лист моделей рабочих мест салона 
-    // TODO 3) Лист моделей тайм слотов все тайм слоты 
-    // TODO 4) Лист модели Booking Model 
-    // TODO 5) Модель AdminSalonBooking Поля: лист стрингов с режимом работы для каждого дня,
-    // TODO айди рабочего места(чтобы картинки доставать), 3 поле лист id, имя, фамилия, забронированное время резидента
 }

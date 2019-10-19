@@ -54,7 +54,6 @@ img.photo {
     position: fixed;
     background-image: url(../Resources/img/background.png);
     background-repeat: no-repeat;
-    background-position: 0px -225px;
     background-size: cover;
     top: 0;
     left: 0;
