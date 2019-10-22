@@ -422,7 +422,6 @@ namespace MasterReservation.Utilities
             {
                 try
                 {
-                    model.AdminPass = GetData.GetHash(model.AdminPass);
                     dbUse.SalonModels.Add(model);
                     dbUse.SaveChanges();
                 }
