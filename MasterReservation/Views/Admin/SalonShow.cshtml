@@ -127,9 +127,9 @@
                 var subVal = $(this).val().split('-');
                 var val1 = subVal[0].split(':');
                 var val2 = subVal[1].split(':');
-                if ( val1[0]*1 > 23) val1[0] = '23';
+                if ( val1[0]*1 > 24) val1[0] = '24';
                 val1[1] = '00';
-                if (val2[0] * 1 > 23) val2[0] = '23';
+                if (val2[0] * 1 > 24) val2[0] = '24';
                 val2[1] = '00';
                 $(this).val( val1.join(':') + "-" + val2.join(':') );
                 $(this).next(':input').focus();
